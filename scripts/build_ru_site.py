@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import html
+import json
 import re
 from collections import defaultdict
 from pathlib import Path
@@ -11,6 +12,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 SCREENS_MD = ROOT / "_inputs/plan/screens.md"
 SHOTS_DIR = ROOT / "_inputs/shots"
+FRAMES_JSON = ROOT / "tools/render-screens/frames.json"
+_SCREEN_ASSETS: dict[str, list[str]] | None = None
 
 NAV = [
     ("index.html", "Главная"),
@@ -138,29 +141,84 @@ def add_extra_screens(rows: list[dict]) -> None:
 PNG_RE = re.compile(r"`([\w.-]+\.png)`")
 
 
-def pick_shot_file(shots_raw: str, sid: str) -> tuple[str, bool, str]:
-    """Return (relative src, file_exists, caption note)."""
-    files = PNG_RE.findall(shots_raw)
-    preferred = None
-    for name in files:
+def load_screen_assets() -> dict[str, list[str]]:
+    global _SCREEN_ASSETS
+    if _SCREEN_ASSETS is not None:
+        return _SCREEN_ASSETS
+    _SCREEN_ASSETS = {}
+    if not FRAMES_JSON.is_file():
+        return _SCREEN_ASSETS
+    data = json.loads(FRAMES_JSON.read_text(encoding="utf-8"))
+    order: dict[str, list[str]] = defaultdict(list)
+    for frame in data.get("frames", []):
+        sid = frame.get("screenId")
+        file_name = frame.get("file")
+        if sid and file_name and file_name not in order[sid]:
+            order[sid].append(file_name)
+    _SCREEN_ASSETS = dict(order)
+    return _SCREEN_ASSETS
+
+
+def asset_files_for(sid: str, page_slug: str | None = None) -> list[str]:
+    files = list(load_screen_assets().get(sid, []))
+    if sid == "install" and page_slug == "mi-gestor":
+        files.sort(key=lambda x: (0 if x.startswith("gestor") else 1, x))
+    elif sid == "install":
+        files.sort(key=lambda x: (0 if x.startswith("servicios") else 1, x))
+    return files
+
+
+def pick_shot_file(
+    shots_raw: str, sid: str, page_slug: str | None = None
+) -> tuple[str, bool, str]:
+    """Return (relative src, file_exists, caption note). Prefer iOS in _inputs/shots, then assets/screens/."""
+    listed = PNG_RE.findall(shots_raw)
+
+    for name in listed:
+        if not name.startswith("ios-"):
+            continue
+        path = f"_inputs/shots/{name}"
+        if (ROOT / path).is_file():
+            return path, True, "Кадр приложения iOS, демонстрационные данные."
+
+    for name in asset_files_for(sid, page_slug):
+        path = f"assets/screens/{name}"
+        if (ROOT / path).is_file():
+            return (
+                path,
+                True,
+                "Кадр прототипа приложения (тёмная тема), демонстрационные данные.",
+            )
+
+    for name in listed:
+        if name.startswith(("brandbook-", "proto-")):
+            path = f"_inputs/shots/{name}"
+            if (ROOT / path).is_file():
+                return path, True, "Кадр приложения, демонстрационные данные."
+
+    for name in listed:
+        path = f"_inputs/shots/{name}"
+        if (ROOT / path).is_file():
+            return path, True, "Кадр приложения, демонстрационные данные."
+
+    legacy = f"assets/screens/{sid}.png"
+    if (ROOT / legacy).is_file():
+        return legacy, True, "Кадр прототипа приложения, демонстрационные данные."
+
+    candidates: list[str] = []
+    for name in listed:
         if name.startswith("ios-"):
-            preferred = name
-            break
-    if not preferred and files:
-        for name in files:
-            if name.startswith("brandbook-"):
-                preferred = name
-                break
-    if not preferred and files:
-        preferred = files[0]
-    if preferred:
-        path = f"_inputs/shots/{preferred}"
-        exists = (ROOT / path).is_file()
-        cap = "Кадр приложения, демонстрационные данные."
-        return path, exists, cap
-    path = f"assets/screens/{sid}.png"
-    exists = (ROOT / path).is_file()
-    return path, exists, "Место под кадр — файл появится после съёмки в ветке assistant/site-screens."
+            candidates.append(f"_inputs/shots/{name}")
+    candidates.extend(f"assets/screens/{n}" for n in asset_files_for(sid, page_slug))
+    candidates.append(legacy)
+
+    for path in candidates:
+        if (ROOT / path).is_file():
+            return path, True, "Кадр приложения, демонстрационные данные."
+
+    fallback = candidates[0] if candidates else legacy
+    missing = "Место под кадр: ожидается файл в _inputs/shots или assets/screens."
+    return fallback, False, missing
 
 
 def prose_what(what: str, func: str, sid: str) -> str:
@@ -214,8 +272,8 @@ def render_shot(src: str, exists: bool, alt: str, cap: str, depth: int) -> str:
 </figure>"""
 
 
-def render_screen_block(screen: dict, depth: int) -> str:
-    src, exists, cap = pick_shot_file(screen["shots_raw"], screen["id"])
+def render_screen_block(screen: dict, depth: int, page_slug: str | None = None) -> str:
+    src, exists, cap = pick_shot_file(screen["shots_raw"], screen["id"], page_slug)
     anchor = screen["id"]
     return f"""<article class="screen-block" id="{html.escape(anchor)}">
 <header>
@@ -437,9 +495,9 @@ def build_vozmozhnosti(screens_by_page: dict, functions: dict) -> str:
 """
 
 
-def build_topic_page(title: str, lead: str, screens: list[dict], depth_path: str) -> str:
+def build_topic_page(title: str, lead: str, screens: list[dict], page_slug: str) -> str:
     depth = 1
-    blocks = "".join(render_screen_block(s, depth) for s in screens)
+    blocks = "".join(render_screen_block(s, depth, page_slug) for s in screens)
     toc = "".join(
         f'<li><a href="#{html.escape(s["id"])}">{html.escape(s["title"])}</a></li>' for s in screens
     )
@@ -579,12 +637,8 @@ def build_privacidad_intro() -> str:
 
 
 def shot_available_for_screen(screen: dict) -> bool:
-    src, exists, _ = pick_shot_file(screen["shots_raw"], screen["id"])
-    if exists:
-        return True
-    if PNG_RE.findall(screen["shots_raw"]):
-        return False  # named but file missing
-    return False
+    _, exists, _ = pick_shot_file(screen["shots_raw"], screen["id"])
+    return exists
 
 
 def main() -> None:
@@ -634,12 +688,9 @@ def main() -> None:
 
     # Report
     func_no_shot = []
-    func_no_named = []
     for func, flist in sorted(functions.items()):
         if not any(shot_available_for_screen(s) for s in flist):
             func_no_shot.append(func)
-        if not any(PNG_RE.findall(s["shots_raw"]) for s in flist):
-            func_no_named.append(func)
     report = ROOT / "scripts" / "site_report.txt"
     report.write_text(
         "\n".join(
@@ -647,11 +698,8 @@ def main() -> None:
                 f"screens_total={len(screens)}",
                 f"functions_total={len(functions)}",
                 f"functions_without_committed_shot={len(func_no_shot)}",
-                f"functions_without_named_shot_in_materials={len(func_no_named)}",
-                "functions_missing_committed_shots:",
+                "functions_missing_any_committed_shot:",
                 *func_no_shot,
-                "functions_without_named_shot:",
-                *func_no_named,
             ]
         ),
         encoding="utf-8",
