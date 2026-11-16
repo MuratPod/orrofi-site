@@ -1,0 +1,12 @@
+{
+  "name": "orrofi-render-screens",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "render": "node render.mjs",
+    "render:check": "node render.mjs --check-only"
+  },
+  "dependencies": {
+    "playwright": "^1.49.1"
+  }
+}

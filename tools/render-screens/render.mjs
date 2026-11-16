@@ -1,0 +1,1060 @@
+#!/usr/bin/env node
+/**
+ * Render OrroFi prototype screens for the marketing site.
+ * Screenshots #phone only (prototype chrome stays outside the crop).
+ */
+import { existsSync, readFileSync, writeFileSync, mkdirSync } from 'node:fs';
+import { dirname, join, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { pathToFileURL } from 'node:url';
+import { chromium } from 'playwright';
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+const ROOT = resolve(__dirname, '../..');
+const OUT_DIR = join(ROOT, 'assets/screens');
+const CONFIG_PATH = join(__dirname, 'frames.json');
+const DRAWN_DIR = join(__dirname, 'drawn');
+
+const cfg = JSON.parse(readFileSync(CONFIG_PATH, 'utf8'));
+const ICON_URL =
+  cfg.appIconUrl ||
+  'https://muratpod.github.io/orrofi-preview/icons/ios/AppIcon-60.png';
+
+const PHONE_LAYOUT_CSS = `
+  html, body { overflow: hidden !important; margin: 0 !important; }
+  body > .top, body > .mapbtn, body > button.mapbtn, body > button[data-go="all"] {
+    display: none !important;
+    visibility: hidden !important;
+    height: 0 !important;
+    pointer-events: none !important;
+  }
+  body > .stage {
+    position: fixed !important;
+    inset: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    overflow: hidden !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #13254A !important;
+  }
+  #pw {
+    width: 430px !important;
+    height: 932px !important;
+    margin: 0 !important;
+    overflow: hidden !important;
+    flex-shrink: 0 !important;
+  }
+  #phone.phone, #phone {
+    position: relative !important;
+    left: 0 !important;
+    top: 0 !important;
+    transform: none !important;
+    width: 430px !important;
+    height: 932px !important;
+    max-height: 932px !important;
+    margin: 0 !important;
+    overflow: hidden !important;
+    display: flex !important;
+    flex-direction: column !important;
+    box-sizing: border-box !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+  }
+  #phone #screen, #phone .in {
+    display: flex !important;
+    flex-direction: column !important;
+    flex: 1 1 auto !important;
+    min-height: 0 !important;
+    height: 100% !important;
+    max-height: 100% !important;
+    overflow: hidden !important;
+  }
+  #phone .sc:not([aria-hidden="true"]) {
+    flex: 1 1 auto !important;
+    min-height: 0 !important;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+  }
+  #phone .tabs {
+    flex-shrink: 0 !important;
+    padding-top: 2px !important;
+    padding-bottom: 0 !important;
+    margin-bottom: 0 !important;
+    box-sizing: border-box !important;
+    min-height: 0 !important;
+  }
+  #phone .tabs button {
+    line-height: 1 !important;
+    padding-top: 4px !important;
+    padding-bottom: 12px !important;
+    gap: 2px !important;
+  }
+  #phone .tabs button span {
+    display: block !important;
+    font-size: 10px !important;
+    line-height: 1.05 !important;
+    margin-top: 1px !important;
+    margin-bottom: 2px !important;
+    max-height: 12px !important;
+    overflow: visible !important;
+  }
+  #phone .hb {
+    display: block !important;
+    flex-shrink: 0 !important;
+    width: 120px !important;
+    height: 5px !important;
+    margin: 0 auto 8px !important;
+    border-radius: 99px !important;
+    opacity: 1 !important;
+  }
+  #phone .sb { flex-shrink: 0 !important; }
+  #phone .gate .gate-btn:not([disabled]) { opacity: 1 !important; }
+`;
+
+/** Entry / redirect-only ids — use concrete screens instead (see frames.json). */
+const REDIRECT_GUARD_IDS = new Set([
+  'net-entry',
+  'del-entry',
+  'rst-entry',
+  'net-00',
+  'del-16a',
+  'rst-sms',
+  'launch',
+]);
+
+/** Pantallas retiradas por Security: no capturar ni mapear. */
+const SECURITY_SKIP_IDS = new Set(['net-6', 'net-6b', 'net-9b', 'net-sh-delcopy']);
+
+function mergeFlags(frameFlags = {}) {
+  return { ...cfg.defaultFlags, ...frameFlags };
+}
+
+function buildIndexMd(results, skipped) {
+  const ok = results.filter((r) => r.status === 'ok');
+  const lines = [
+    '# Кадры OrroFi (prototipo público)',
+    '',
+    'Автоматически снято с https://muratpod.github.io/orrofi-proto/ — idioma **es**, tema **Oscuro · HUD**, элемент `#phone` 430×932 (@2x antes de optimize).',
+    '',
+    '| Archivo | ID pantalla | Función | Título (ES) | Descripción (RU) |',
+    '| --- | --- | --- | --- | --- |',
+  ];
+  for (const r of ok) {
+    const f =
+      cfg.frames.find((x) => x.file === r.file && x.screenId === r.screenId) ||
+      cfg.frames.find((x) => x.file === r.file);
+    if (!f) continue;
+    lines.push(
+      `| \`${r.file}\` | \`${f.screenId}\` | ${f.function} | ${f.titleEs} | ${f.descRu} |`,
+    );
+  }
+  lines.push('', '## No incluidos en assets', '');
+  for (const s of skipped) {
+    lines.push(`- **${s.screenId}** (${s.function}): ${s.reason}`);
+  }
+  const failed = results.filter((r) => r.status !== 'ok');
+  if (failed.length) {
+    lines.push('', '## Fallos de render', '');
+    for (const r of failed) {
+      lines.push(`- **${r.file}** (\`${r.screenId}\`): ${r.reason}`);
+    }
+  }
+  return lines.join('\n') + '\n';
+}
+
+function selectedFrames() {
+  const idx = process.argv.indexOf('--only');
+  if (idx === -1 || !process.argv[idx + 1]) return cfg.frames;
+  const want = new Set(
+    process.argv[idx + 1]
+      .split(',')
+      .map((s) => s.trim())
+      .filter(Boolean),
+  );
+  return cfg.frames.filter((f) => want.has(f.screenId) || want.has(f.file));
+}
+
+function mergeIndexMd(results) {
+  const path = join(OUT_DIR, 'index.md');
+  let text = '';
+  try {
+    text = readFileSync(path, 'utf8');
+  } catch {
+    text = '';
+  }
+  if (!text.includes('| Archivo |')) {
+    writeFileSync(path, buildIndexMd(results, [...(cfg.skipped || [])]));
+    return;
+  }
+  const rows = [];
+  for (const r of results.filter((x) => x.status === 'ok')) {
+    const f =
+      cfg.frames.find((x) => x.screenId === r.screenId && x.file === r.file) ||
+      cfg.frames.find((x) => x.file === r.file);
+    if (!f) continue;
+    const row = `| \`${r.file}\` | \`${f.screenId}\` | ${f.function} | ${f.titleEs} | ${f.descRu} |`;
+    if (!text.includes(`| \`${r.file}\` | \`${f.screenId}\` |`) && !rows.includes(row)) rows.push(row);
+  }
+  if (!rows.length) return;
+  const marker = '\n## No incluidos';
+  const at = text.indexOf(marker);
+  text =
+    at === -1
+      ? text.trimEnd() + '\n' + rows.join('\n') + '\n'
+      : text.slice(0, at) + rows.join('\n') + '\n' + text.slice(at);
+  writeFileSync(path, text);
+}
+
+async function layoutPhone(page) {
+  await page.addStyleTag({ content: PHONE_LAYOUT_CSS }).catch(() => {});
+  await page.evaluate(() => {
+    document.querySelectorAll('body > .top, body > .mapbtn, body > button.mapbtn').forEach((e) =>
+      e.remove(),
+    );
+    document.querySelectorAll('body > button[data-go="all"]').forEach((e) => e.remove());
+    const pw = document.getElementById('pw');
+    const ph = document.getElementById('phone');
+    if (pw) {
+      pw.style.width = '430px';
+      pw.style.height = '932px';
+      pw.style.margin = '0';
+      pw.style.overflow = 'hidden';
+    }
+    if (ph) {
+      ph.style.transform = 'none';
+      ph.style.position = 'relative';
+      ph.style.left = '0';
+      ph.style.top = '0';
+      ph.style.width = '430px';
+      ph.style.height = '932px';
+      ph.style.maxHeight = '932px';
+      ph.style.margin = '0';
+      ph.style.overflow = 'hidden';
+      ph.style.boxShadow = 'none';
+      ph.style.borderRadius = '0';
+    }
+  });
+}
+
+async function applyState(page, flags) {
+  await page.evaluate(
+    ({ flags }) => {
+      const KEY = 'orrofi-proto';
+      const O = window.OrroProto;
+      const st = {
+        theme: 'dark',
+        lang: 'es',
+        flags: { ...window.OrroData.flags, ...flags },
+      };
+      localStorage.setItem(KEY, JSON.stringify(st));
+      sessionStorage.removeItem('orrofi-proto-sess');
+      if (O) {
+        Object.assign(O.state, st);
+        Object.assign(O.state.flags, st.flags);
+        document.documentElement.setAttribute('data-theme', 'dark');
+        document.documentElement.lang = 'es';
+      }
+    },
+    { flags },
+  );
+}
+
+async function protoGo(page, screenId, { blockNestedGo = false } = {}) {
+  await page.evaluate(
+    ({ screenId, blockNestedGo }) => {
+      const O = window.OrroProto;
+      if (!O?.listing) {
+        O.go(screenId, true);
+        return;
+      }
+      const screens = O.listing().screens;
+      const def = screens[screenId];
+      if (!blockNestedGo || !def?.render) {
+        O.go(screenId, true);
+        return;
+      }
+      const orig = def.render;
+      def.render = function (ctx) {
+        const child = { ...ctx, go() {} };
+        return orig.call(this, child);
+      };
+      try {
+        O.go(screenId, true);
+      } finally {
+        def.render = orig;
+      }
+    },
+    { screenId, blockNestedGo: blockNestedGo || REDIRECT_GUARD_IDS.has(screenId) },
+  );
+}
+
+async function runPreSetup(page, setup) {
+  if (setup === 'rst-reset-faceid') {
+    await protoGo(page, 'rst-17b');
+    await page.waitForSelector('#phone [data-screen="rst-17b"]', { timeout: 10000 });
+    await page.locator('#phone label.chk.c-opt').first().click();
+    await page.locator('#phone button[data-go="rst-17c"]').click();
+    await page.waitForSelector('#phone [data-screen="rst-17c"]', { timeout: 8000 });
+    await page.locator('#phone button[data-go="rst-sh-bio-c"]').click();
+    await page.waitForSelector('#phone .sheet:not([hidden])', { timeout: 8000 });
+    await page.evaluate(() => {
+      const phone = document.getElementById('phone');
+      const sc =
+        phone?.querySelector('.sc[aria-hidden="true"]') || phone?.querySelector('.sc');
+      if (!sc) return;
+      sc.removeAttribute('aria-hidden');
+      sc.hidden = false;
+      const input = sc.querySelector('label.chk.c-opt input[type="radio"]');
+      if (input) {
+        input.checked = true;
+        input.classList.add('c-o2');
+        input.dispatchEvent(new Event('change', { bubbles: true }));
+      }
+      const btn = sc.querySelector('button[data-go="rst-17c"]');
+      if (btn) {
+        btn.disabled = false;
+        btn.removeAttribute('disabled');
+        btn.removeAttribute('aria-disabled');
+        btn.classList.remove('d');
+      }
+    });
+    await page.waitForTimeout(200);
+    return;
+  }
+  if (setup === 'net-sh-bio-sheet') {
+    await protoGo(page, 'net-sh-bio');
+    await page.waitForSelector('#phone [data-screen="net-sh-bio"] .sheet', { timeout: 8000 });
+    await page.waitForTimeout(200);
+    return;
+  }
+  if (setup === 'net-8-wifi') {
+    await protoGo(page, 'net-8');
+    await page.waitForTimeout(150);
+    const bio = page
+      .locator('.sheet [data-b="bio-ok"], .sheet .btn')
+      .filter({ hasText: 'Confirmar' });
+    if (await bio.count()) {
+      await bio.first().click();
+      await page.waitForTimeout(200);
+    }
+    await protoGo(page, 'net-8');
+    return;
+  }
+}
+
+/** Fictional street: never publish the prototype's sample address. */
+function literalReplacementMap() {
+  const rules = cfg.placeholderSanitize || {};
+  return {
+    'Carrer de Mar 12': 'Calle Ejemplo 1',
+    ...(rules.literalReplacements || {}),
+  };
+}
+
+async function applyLiteralReplacements(page) {
+  const map = literalReplacementMap();
+  await page.evaluate((map) => {
+    const phone = document.getElementById('phone');
+    if (!phone) return;
+    const keys = Object.keys(map).sort((a, b) => b.length - a.length);
+    const tokenRe = /servidores|copia cifrada|copias de la clave|separada|aislad|Carrer de Mar/i;
+
+    const applyMap = (text) => {
+      let out = text;
+      for (const key of keys) {
+        if (out.includes(key)) out = out.split(key).join(map[key]);
+      }
+      return out.replace(/Carrer de Mar 12/g, 'Calle Ejemplo 1').replace(/Carrer de Mar/g, 'Calle Ejemplo 1');
+    };
+
+    /** Drop clauses that promise a server copy, guest isolation, or the sample address. */
+    const scrub = (text) => {
+      let out = applyMap(text);
+      if (!tokenRe.test(out)) return out;
+      const sentences = out.split(/(?<=[.!?;])\s+/);
+      const kept = [];
+      for (const sent of sentences) {
+        if (!tokenRe.test(sent)) {
+          kept.push(sent);
+          continue;
+        }
+        const clauses = sent.split(/,\s*/);
+        const keptC = clauses.filter((c) => !tokenRe.test(c));
+        if (!keptC.length) continue;
+        let joined = keptC.join(', ');
+        const end = sent.match(/[.!?]$/);
+        if (end && !/[.!?]$/.test(joined)) joined += end[0];
+        kept.push(joined);
+      }
+      return kept.join(' ').replace(/\s{2,}/g, ' ').replace(/\s+,/g, ',').trim();
+    };
+
+    phone.querySelectorAll('input, textarea').forEach((el) => {
+      if (typeof el.value === 'string' && el.value) el.value = scrub(el.value);
+    });
+    phone.querySelectorAll('[placeholder], [aria-label], [title], [alt]').forEach((el) => {
+      for (const attr of ['placeholder', 'aria-label', 'title', 'alt']) {
+        const v = el.getAttribute(attr);
+        if (!v || !tokenRe.test(v)) continue;
+        const next = scrub(v);
+        if (!next || tokenRe.test(next)) el.removeAttribute(attr);
+        else el.setAttribute(attr, next);
+      }
+    });
+
+    const walker = document.createTreeWalker(phone, NodeFilter.SHOW_TEXT);
+    const nodes = [];
+    while (walker.nextNode()) nodes.push(walker.currentNode);
+    for (const node of nodes) {
+      const next = scrub(node.textContent);
+      if (next !== node.textContent) node.textContent = next;
+    }
+
+    const hideSel = 'p, li, .cap, .note, .dis, label, small, h1, h2, h3, button, span';
+    phone.querySelectorAll(hideSel).forEach((el) => {
+      if (!tokenRe.test(el.textContent || '')) return;
+      if (el.querySelector(hideSel)) return;
+      el.style.display = 'none';
+      el.setAttribute('data-scrubbed', '1');
+    });
+  }, map);
+}
+
+async function sanitizePlaceholders(page, mode) {
+  const rules = cfg.placeholderSanitize;
+  await applyLiteralReplacements(page);
+  await page.evaluate(({ rules, mode }) => {
+    const phone = document.getElementById('phone');
+    if (!phone || !rules) return;
+
+    phone.querySelectorAll(rules.legalBlockSelector || '.b-dp').forEach((el) => {
+      const p = document.createElement('p');
+      p.className = 'sec2';
+      p.textContent = rules.legalBlockText;
+      el.replaceChildren(p);
+    });
+
+    if (mode === 'orderMovil') {
+      phone.querySelectorAll('.cd .sec2').forEach((p) => {
+        if (
+          /^Responsable:/i.test(p.textContent.trim()) ||
+          (p.closest('.b-dp') && /\[DIRECCIÓN\]|\[EMAIL\]|\[TELÉFONO\]/i.test(p.textContent))
+        ) {
+          p.style.display = 'none';
+        }
+      });
+      const orderMap = {
+        ...(rules.orderMovilReplacements || {}),
+        '[RESPONSABLE]': 'OrroFi',
+        '[CONTACTO RECLAMACIONES]': 'atención en la app',
+      };
+      const walker = document.createTreeWalker(phone, NodeFilter.SHOW_TEXT);
+      const nodes = [];
+      while (walker.nextNode()) nodes.push(walker.currentNode);
+      for (const node of nodes) {
+        let t = node.textContent;
+        Object.keys(orderMap)
+          .sort((a, b) => b.length - a.length)
+          .forEach((k) => {
+            t = t.split(k).join(orderMap[k]);
+          });
+        t = t.replace(/\[[^\]]+\]/g, (m) => orderMap[m] || '');
+        node.textContent = t;
+      }
+      return;
+    }
+
+    const exact = rules.exactReplacements || {};
+    const fallback = rules.defaultBracketReplacement || 'Ver condiciones';
+    const bracketRe = /\[[^\]]+\]/g;
+
+    function replaceBrackets(text) {
+      const lead = (text.match(/^\s*/) || [''])[0];
+      const trail = (text.match(/\s*$/) || [''])[0];
+      let out = text.trim();
+      if (!out) return text;
+      Object.keys(exact)
+        .sort((a, b) => b.length - a.length)
+        .forEach((key) => {
+          out = out.split(key).join(exact[key]);
+        });
+      out = out.replace(bracketRe, (m) => exact[m] || fallback);
+      return lead + out + trail;
+    }
+
+    const walker = document.createTreeWalker(phone, NodeFilter.SHOW_TEXT);
+    const nodes = [];
+    while (walker.nextNode()) nodes.push(walker.currentNode);
+    for (const node of nodes) {
+      if (bracketRe.test(node.textContent)) {
+        node.textContent = replaceBrackets(node.textContent);
+      }
+    }
+  }, { rules, mode });
+}
+
+async function scrubSecurityCopy(page, frame) {
+  await page.evaluate(({ screenId }) => {
+    const phone = document.getElementById('phone');
+    if (!phone) return;
+    const addrFrom = 'Carrer de Mar 12';
+    const addrTo = 'Calle Ejemplo 1';
+
+    phone.querySelectorAll('input, textarea').forEach((el) => {
+      if (el.value && el.value.includes(addrFrom)) el.value = el.value.split(addrFrom).join(addrTo);
+    });
+
+    const textNodes = [];
+    const walker = document.createTreeWalker(phone, NodeFilter.SHOW_TEXT);
+    while (walker.nextNode()) textNodes.push(walker.currentNode);
+    for (const node of textNodes) {
+      const parent = node.parentElement;
+      if (!parent || parent.closest('.tabs, .sb')) continue;
+      let t = node.textContent.split(addrFrom).join(addrTo);
+      if (/separada de tu red de casa/i.test(t)) t = 'Activa';
+      if (/Redes separadas/i.test(t)) t = t.replace(/Redes separadas/gi, 'Dos bandas');
+      if (t !== node.textContent) node.textContent = t;
+    }
+
+    const again = [];
+    const walker2 = document.createTreeWalker(phone, NodeFilter.SHOW_TEXT);
+    while (walker2.nextNode()) again.push(walker2.currentNode);
+    for (const node of again) {
+      if (!node.parentElement || node.parentElement.closest('.tabs, .sb')) continue;
+      if (!/separad|aislad|servidores|copia cifrada|Carrer de Mar/i.test(node.textContent)) continue;
+      let t = node.textContent.split(addrFrom).join(addrTo);
+      t = t.replace(/separada de tu red de casa/gi, '');
+      t = t.replace(/Redes separadas/gi, 'Dos bandas');
+      t = t.replace(/\bseparadas\b/gi, 'dos bandas');
+      if (/aislad|servidores|copia cifrada|Carrer de Mar|\bseparada\b/i.test(t)) t = '';
+      node.textContent = t;
+    }
+
+    const killers = /copia cifrada|nuestros servidores|recuperarla en otro dispositivo|aislad|Carrer de Mar|\bseparada\b/i;
+    const els = [...phone.querySelectorAll('p, li, .cap, .note, .sec2, .dis, span, div')];
+    els.sort((a, b) => a.querySelectorAll('*').length - b.querySelectorAll('*').length);
+    for (const el of els) {
+      if (!el.isConnected || el.closest('.tabs, .sb')) continue;
+      if (el.querySelector('button, input, .h2, .nb, .tabs')) continue;
+      const t = (el.innerText || '').trim();
+      if (!t) {
+        if (el.matches('p, li, .cap, .note, .cd, .sec2')) el.remove();
+        continue;
+      }
+      if (screenId === 'net-9' && t === 'Activa') continue;
+      if (killers.test(t)) el.remove();
+    }
+  }, { screenId: frame.screenId || '' });
+}
+
+async function securityLeak(page) {
+  return page.evaluate(() => {
+    const phone = document.getElementById('phone');
+    if (!phone) return '';
+    const inputs = [...phone.querySelectorAll('input, textarea')].map((el) => el.value || '').join('\n');
+    return `${phone.innerText || ''}\n${inputs}`;
+  });
+}
+
+async function prepareMarketingShot(page, frame) {
+  await scrubSecurityCopy(page, frame);
+  await applyLiteralReplacements(page);
+  await page.evaluate(
+    ({ frame, iconUrl }) => {
+      const phone = document.getElementById('phone');
+      if (!phone) return;
+
+      phone.querySelectorAll('.c-demos').forEach((e) => e.remove());
+
+      phone.querySelectorAll('.cap').forEach((cap) => {
+        if (cap.textContent.trim() === 'DEMO') {
+          const chips = cap.nextElementSibling;
+          if (chips && chips.classList.contains('chips')) chips.remove();
+          cap.remove();
+        }
+      });
+
+      phone.querySelectorAll('.chips').forEach((chips) => {
+        if (/DEMO/i.test(chips.textContent)) chips.remove();
+      });
+
+      phone.querySelectorAll('button.chip, .chip').forEach((chip) => {
+        if (/DEMO/i.test(chip.textContent)) chip.remove();
+      });
+
+      const reProv = /Provisional · lema sin decidir/i;
+      phone.querySelectorAll('.pill, .cap, p, span, h1, h2, h3').forEach((el) => {
+        if (reProv.test(el.textContent) && el.textContent.trim().length < 80) el.remove();
+      });
+      phone.querySelectorAll('div').forEach((el) => {
+        if (el.closest('.sheet') || el.querySelector('.sheet, .sc, .lockwrap')) return;
+        const t = el.textContent.trim();
+        if (t === 'Provisional · lema sin decidir' || (reProv.test(t) && t.length < 60)) el.remove();
+      });
+
+      phone.querySelectorAll('.dis').forEach((d) => {
+        if (/\[RESPONSABLE\]|\[EMAIL PRIVACIDAD\]|Responsable:\s*\[/i.test(d.textContent)) {
+          d.textContent = 'Consulta nuestra política de privacidad en la app.';
+        }
+      });
+
+      if (frame.screenId === 'sh-export' || frame.hideResponsable) {
+        phone.querySelectorAll('.dis, .sec2, p, .foot, .legal').forEach((el) => {
+          if (/Responsable:|responsable del tratamiento/i.test(el.textContent)) {
+            el.style.display = 'none';
+          }
+        });
+      }
+
+      phone.querySelectorAll('.pushc .pi').forEach((pi) => {
+        pi.textContent = '';
+        pi.style.display = 'grid';
+        pi.style.placeItems = 'center';
+        pi.style.background = `center/cover no-repeat url(${iconUrl})`;
+        pi.style.color = 'transparent';
+        pi.style.fontSize = '0';
+        pi.style.lineHeight = '0';
+        pi.style.overflow = 'hidden';
+      });
+
+      if (frame.hideTabs) {
+        phone.querySelectorAll('.tabs').forEach((t) => (t.style.display = 'none'));
+      }
+
+    },
+    { frame, iconUrl: ICON_URL },
+  );
+
+  await page.evaluate(
+    ({ frame }) => {
+      const phone = document.getElementById('phone');
+      if (!phone) return;
+      const sheet = phone.querySelector('.sheet:not([hidden])');
+      let sc = phone.querySelector('.sc:not([aria-hidden="true"])');
+      if (frame.scrollSheet && sheet) sc = sheet;
+      else if (!sc && sheet) sc = sheet;
+      if (!sc) return;
+      if (typeof frame.scrollY === 'number') {
+        sc.scrollTop = frame.scrollY;
+        return;
+      }
+      if (frame.scrollToText) {
+        const needle = frame.scrollToText;
+        const nodes = [...sc.querySelectorAll('p, li, h2, h3, div, span, .sec2')];
+        const el =
+          nodes.find((e) => e.textContent.trim().startsWith(needle)) ||
+          nodes.find((e) => e.childElementCount === 0 && e.textContent.includes(needle)) ||
+          nodes.find((e) => e.textContent.includes(needle));
+        if (el) {
+          const pad = frame.scrollPadding ?? 56;
+          const top = el.getBoundingClientRect().top - sc.getBoundingClientRect().top + sc.scrollTop;
+          sc.scrollTop = Math.max(0, top - pad);
+        }
+        return;
+      }
+      if (frame.scrollEnd) {
+        const pad = frame.scrollEndPadding ?? 100;
+        sc.scrollTop = Math.max(0, sc.scrollHeight - sc.clientHeight - pad);
+      }
+    },
+    { frame },
+  );
+
+  await page.evaluate(async (iconUrl) => {
+    const imgs = [...document.querySelectorAll('#phone .pushc .pi')];
+    await Promise.all(
+      imgs.map(
+        () =>
+          new Promise((resolve) => {
+            const img = new Image();
+            img.onload = () => resolve();
+            img.onerror = () => resolve();
+            img.src = iconUrl;
+          }),
+      ),
+    );
+  }, ICON_URL);
+}
+
+/** Replace the example street and drop claim sentences before the screenshot. */
+async function scrubClaimText(page) {
+  await page.evaluate(() => {
+    const phone = document.getElementById('phone');
+    if (!phone) return;
+    const addressFrom = 'Carrer de Mar 12';
+    const addressShort = 'Carrer de Mar';
+    const addressTo = 'Calle Ejemplo 1';
+    const hideRe = /servidores|copia cifrada|separada|aislad/i;
+
+    function applyAddress(value) {
+      return String(value).split(addressFrom).join(addressTo).split(addressShort).join(addressTo);
+    }
+
+    function hideBlock(el) {
+      if (!el || el === phone) return;
+      const block =
+        el.closest(
+          'p, li, label, button, .note, .dis, .sec2, .b, .opt, .cap, h1, h2, h3, .h2, .cd, .row, .fm',
+        ) || el;
+      const shell =
+        block === phone ||
+        block.id === 'phone' ||
+        block.classList.contains('sc') ||
+        block.classList.contains('in') ||
+        block.classList.contains('sheet') ||
+        block.classList.contains('lockwrap') ||
+        block.classList.contains('tabs');
+      (shell ? el : block).style.display = 'none';
+    }
+
+    const nodes = [];
+    const walker = document.createTreeWalker(phone, NodeFilter.SHOW_TEXT);
+    while (walker.nextNode()) nodes.push(walker.currentNode);
+    for (const node of nodes) {
+      if (!node.textContent) continue;
+      if (node.textContent.includes(addressShort)) node.textContent = applyAddress(node.textContent);
+      if (hideRe.test(node.textContent)) hideBlock(node.parentElement);
+    }
+
+    phone.querySelectorAll('input, textarea').forEach((el) => {
+      const raw = `${el.value || ''} ${el.getAttribute('placeholder') || ''} ${el.getAttribute('aria-label') || ''}`;
+      if (raw.includes(addressShort) && typeof el.value === 'string') {
+        el.value = applyAddress(el.value);
+        el.setAttribute('value', el.value);
+        const placeholder = el.getAttribute('placeholder');
+        if (placeholder && placeholder.includes(addressShort)) {
+          el.setAttribute('placeholder', applyAddress(placeholder));
+        }
+      }
+      const after = `${el.value || ''} ${el.getAttribute('placeholder') || ''} ${el.getAttribute('aria-label') || ''}`;
+      if (hideRe.test(after) || /Carrer de Mar/i.test(after)) hideBlock(el);
+    });
+  });
+}
+
+function collectVisibleText(page) {
+  return page.evaluate(() => {
+    const phone = document.getElementById('phone');
+    if (!phone) return '';
+    let base = '';
+    const sheet = phone.querySelector('.sheet:not([hidden])');
+    if (sheet && sheet.getAttribute('aria-hidden') !== 'true') {
+      base = sheet.innerText?.trim() || '';
+    } else {
+      const lock = phone.querySelector('.lockwrap');
+      if (lock && lock.offsetParent !== null) base = lock.innerText || '';
+      else {
+        const sc = phone.querySelector('.sc:not([aria-hidden="true"])');
+        base = (sc && sc.innerText) || phone.innerText || '';
+      }
+    }
+    const fields = [...phone.querySelectorAll('input, textarea')]
+      .filter((el) => el.offsetParent !== null)
+      .map((el) => el.value || '')
+      .filter(Boolean);
+    return [base, ...fields].join('\n');
+  });
+}
+
+async function bootPrototype(page) {
+  await page.goto(cfg.prototypeUrl, { waitUntil: 'networkidle' });
+  await page.waitForFunction(
+    () => window.OrroProto && window.OrroProto.listing && window.OrroData,
+    { timeout: 30000 },
+  );
+  await layoutPhone(page);
+}
+
+async function renderProtoFrame(page, frame) {
+  const flags = mergeFlags(frame.flags);
+  await applyState(page, flags);
+  await layoutPhone(page);
+
+  for (const act of frame.preActions || []) {
+    if (act.setup) await runPreSetup(page, act.setup);
+  }
+
+  const skipFinalGo = (frame.preActions || []).some(
+    (a) =>
+      (a.setup === 'rst-reset-faceid' && frame.screenId === 'rst-sh-bio-c') ||
+      (a.setup === 'net-8-wifi' && frame.screenId === 'net-8') ||
+      (a.setup === 'net-sh-bio-sheet' && frame.screenId === 'net-sh-bio'),
+  );
+  const targetId = frame.goto || frame.screenId;
+  if (!skipFinalGo) await protoGo(page, targetId);
+
+  await page
+    .waitForSelector(
+      `#phone [data-screen="${targetId}"], #phone [data-screen="${frame.screenId}"], #phone .sheet:not([hidden])`,
+      { timeout: 12000 },
+    )
+    .catch(() => {});
+
+  if (frame.clicks?.length) {
+    for (const sel of frame.clicks) {
+      const loc = page.locator(`#phone ${sel}`).first();
+      await loc.click({ timeout: 5000 });
+    }
+    await page.waitForTimeout(150);
+  }
+
+  if (frame.sanitizePlaceholders) {
+    const mode = frame.sanitizePlaceholders === true ? 'default' : frame.sanitizePlaceholders;
+    await sanitizePlaceholders(page, mode);
+  } else {
+    await applyLiteralReplacements(page);
+  }
+
+  if (frame.fills?.length) {
+    await page.evaluate((fills) => {
+      const phone = document.getElementById('phone');
+      if (!phone) return;
+      for (const fill of fills) {
+        const el = phone.querySelector(fill.selector);
+        if (!el) continue;
+        if (fill.check) {
+          el.checked = true;
+          el.dispatchEvent(new Event('change', { bubbles: true }));
+          const gateBtn = el.closest('.gate')?.querySelector('.gate-btn');
+          if (gateBtn) {
+            gateBtn.disabled = false;
+            gateBtn.setAttribute('aria-disabled', 'false');
+          }
+        }
+        if (fill.value != null) {
+          el.value = fill.value;
+          el.dispatchEvent(new Event('input', { bubbles: true }));
+        }
+      }
+    }, frame.fills);
+  }
+
+  const waitMs = frame.waitMs ?? 350;
+  if (waitMs > 0) await page.waitForTimeout(waitMs);
+
+  await prepareMarketingShot(page, frame);
+  await scrubClaimText(page);
+
+  const text = await collectVisibleText(page);
+
+  const badUi = [
+    /Oscuro/i,
+    /Claro · Tech/i,
+    /\bMapa\b/,
+    /DEMO/,
+    /\[[^\]]+\]/,
+    /Provisional · lema/i,
+    /Carrer de Mar/i,
+  ];
+  for (const re of badUi) {
+    if (re.test(text)) {
+      return { status: 'blocked', reason: `UI marketing: ${re}` };
+    }
+  }
+  for (const pat of cfg.forbiddenPatterns) {
+    if (new RegExp(pat, 'i').test(text)) {
+      return { status: 'blocked', reason: `Texto prohibido: /${pat}/` };
+    }
+  }
+  if (!text.trim()) return { status: 'empty', reason: 'Pantalla en blanco' };
+  if (frame.expectText && !text.includes(frame.expectText)) {
+    return { status: 'blocked', reason: `No se ve el texto esperado: ${frame.expectText}` };
+  }
+  const domText = await page.evaluate(() => document.getElementById('phone')?.innerText || '');
+  const glueRes = [ /:[A-Za-záéíóú]/, /\.[A-Z]/ ];
+  for (const re of glueRes) {
+    const m = domText.match(re);
+    if (m) {
+      const at = m.index || 0;
+      const snippet = domText.slice(Math.max(0, at - 24), at + 28).replace(/\s+/g, ' ');
+      return { status: 'blocked', reason: `Texto pegado ${re}: ${snippet}` };
+    }
+  }
+  const leaked = (await securityLeak(page)).toLowerCase();
+  for (const needle of ['servidores', 'copia cifrada', 'separada', 'aislad', 'carrer de mar']) {
+    const at = leaked.indexOf(needle);
+    if (at !== -1) {
+      const snippet = leaked.slice(Math.max(0, at - 40), at + needle.length + 40).replace(/\s+/g, ' ');
+      return { status: 'blocked', reason: `DOM contiene «${needle}»: ${snippet}` };
+    }
+  }
+
+  const fullText = await page.evaluate(() => {
+    const phone = document.getElementById('phone');
+    if (!phone) return '';
+    const typed = [...phone.querySelectorAll('input, textarea')]
+      .map((el) => el.value || '')
+      .join('\n');
+    return `${phone.innerText || ''}\n${typed}`;
+  });
+  const claimRe = /servidores|copia cifrada|separada|aislad|Carrer de Mar/i;
+  if (claimRe.test(fullText) || claimRe.test(text)) {
+    return {
+      status: 'blocked',
+      reason: 'Promesa de copia de claves/ajustes en servidor o de red aislada',
+    };
+  }
+
+  await layoutPhone(page);
+  await page.evaluate(() => {
+    document.querySelectorAll('body > .top, body > .mapbtn, body > button.mapbtn').forEach((e) =>
+      e.remove(),
+    );
+  });
+  await scrubClaimText(page);
+
+  const fit = await page.evaluate(() => {
+    const phone = document.getElementById('phone');
+    if (!phone) return '';
+    const bits = [];
+    for (const sel of ['.sheet', '.sc:not([aria-hidden="true"])', '.lockwrap']) {
+      const el = phone.querySelector(sel);
+      if (!el) continue;
+      const overflow = el.scrollHeight - el.clientHeight;
+      if (overflow > 12) bits.push(`${sel}:${overflow}`);
+    }
+    const label = phone.querySelector('.tabs button span');
+    if (label) {
+      const gap = Math.round(phone.getBoundingClientRect().bottom - label.getBoundingClientRect().bottom);
+      bits.push(`tabPad:${gap}`);
+    }
+    return bits.join(' ');
+  });
+  if (fit) console.log(`  layout ${frame.screenId} ${fit}`);
+
+  const phone = page.locator('#phone');
+  const outPath = join(OUT_DIR, frame.file);
+  await phone.screenshot({ path: outPath, type: 'png', animations: 'disabled' });
+  return { status: 'ok', file: frame.file, screenId: frame.screenId, text };
+}
+
+async function renderDrawnFrame(page, frame) {
+  const htmlPath = join(DRAWN_DIR, frame.drawnHtml);
+  const url = pathToFileURL(htmlPath).href;
+  await page.goto(url, { waitUntil: 'networkidle' });
+  await page.waitForTimeout(200);
+  const phone = page.locator('#phone');
+  const outPath = join(OUT_DIR, frame.file);
+  await phone.screenshot({ path: outPath, type: 'png', animations: 'disabled' });
+  return { status: 'ok', file: frame.file, screenId: frame.screenId || 'drawn' };
+}
+
+async function renderOne(page, frame, protoReady) {
+  if (frame.drawnHtml) return renderDrawnFrame(page, frame);
+  if (!protoReady) {
+    await bootPrototype(page);
+    protoReady = true;
+  }
+  return renderProtoFrame(page, frame);
+}
+
+async function main() {
+  const onlyEq = process.argv.find((a) => a.startsWith('--only='));
+  const onlyIdx = process.argv.indexOf('--only');
+  const onlyRaw = onlyEq
+    ? onlyEq.slice('--only='.length)
+    : onlyIdx !== -1
+      ? process.argv[onlyIdx + 1] || ''
+      : '';
+  const fromArg = onlyRaw.split(',');
+  const fromEnv = (process.env.RENDER_ONLY || '').split(',');
+  const only = new Set(
+    [...fromArg, ...fromEnv].map((s) => s.trim()).filter(Boolean),
+  );
+  mkdirSync(OUT_DIR, { recursive: true });
+  let browser;
+  try {
+    browser = await chromium.launch({ headless: true });
+  } catch {
+    browser = await chromium.launch({ headless: true, channel: 'chrome' });
+  }
+  const context = await browser.newContext({
+    viewport: cfg.viewport,
+    deviceScaleFactor: cfg.deviceScaleFactor,
+    locale: 'es-ES',
+  });
+  await context.addInitScript(() => {
+    localStorage.setItem('orrofi-proto', JSON.stringify({ theme: 'dark', lang: 'es' }));
+    sessionStorage.removeItem('orrofi-proto-sess');
+  });
+  const page = await context.newPage();
+  let protoReady = false;
+
+  const frames = only.size
+    ? cfg.frames.filter((f) => only.has(f.screenId) || only.has(f.file))
+    : cfg.frames;
+
+  const results = [];
+  for (const frame of frames) {
+    if (SECURITY_SKIP_IDS.has(frame.screenId)) continue;
+    if (frame.aliasOf) {
+      console.log(`Alias ${frame.screenId} -> ${frame.aliasOf} (${frame.file})`);
+      results.push({ status: 'ok', file: frame.file, screenId: frame.screenId });
+      continue;
+    }
+    process.stdout.write(`Rendering ${frame.screenId || frame.drawnHtml} -> ${frame.file} ... `);
+    if (frame.skipRender) {
+      const outPath = join(OUT_DIR, frame.file);
+      if (!existsSync(outPath)) {
+        console.log('missing');
+        results.push({
+          status: 'error',
+          file: frame.file,
+          screenId: frame.screenId,
+          reason: 'skipRender sin archivo',
+        });
+      } else {
+        console.log('ok reuse');
+        results.push({ status: 'ok', file: frame.file, screenId: frame.screenId });
+      }
+      continue;
+    }
+    try {
+      if (frame.drawnHtml) {
+        const r = await renderDrawnFrame(page, frame);
+        results.push({ ...r, file: frame.file, screenId: frame.screenId });
+        console.log(r.status);
+      } else {
+        if (!protoReady) {
+          await bootPrototype(page);
+          protoReady = true;
+        }
+        const r = await renderProtoFrame(page, frame);
+        results.push({ ...r, file: frame.file, screenId: frame.screenId });
+        console.log(r.status);
+      }
+    } catch (err) {
+      console.log('error', err.message);
+      results.push({
+        status: 'error',
+        file: frame.file,
+        screenId: frame.screenId,
+        reason: err.message,
+      });
+    }
+  }
+
+  await browser.close();
+  const skipped = [...(cfg.skipped || [])];
+  if (only.size) mergeIndexMd(results);
+  else writeFileSync(join(OUT_DIR, 'index.md'), buildIndexMd(results, skipped));
+  writeFileSync(
+    join(__dirname, 'last-run.json'),
+    JSON.stringify({ results, at: new Date().toISOString() }, null, 2),
+  );
+
+  const failed = results.filter((r) => r.status !== 'ok');
+  if (failed.length) {
+    console.error(`${failed.length} frame(s) failed`);
+    process.exitCode = 1;
+  } else {
+    console.log(`OK: ${results.length} PNGs`);
+  }
+}
+
+main().catch((e) => {
+  console.error(e);
+  process.exit(1);
+});

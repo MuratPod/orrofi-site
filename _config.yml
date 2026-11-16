@@ -1,0 +1,11 @@
+# GitHub Pages: публикуем только статический сайт-визитку.
+theme: null
+exclude:
+  - scripts
+  - scripts/data/screens.md
+  - assets/screens/index.md
+  - tools
+  - .github
+  - .htmlvalidate.json
+  - .gitignore
+  - README.md

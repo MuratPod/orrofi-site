@@ -1,0 +1,7 @@
+screens_total=116
+functions_total=35
+functions_without_committed_shot=0
+functions_missing_any_committed_shot:
+
+missing_image_placeholders=0
+missing_image_paths:
