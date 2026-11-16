@@ -837,13 +837,6 @@
       "descRu": "Сообщение слишком длинное: чат дошёл до лимита."
     },
     {
-      "file": "gestor-5-voz.png",
-      "screenId": "sh-voice",
-      "function": "gestor",
-      "titleEs": "Dictado por voz",
-      "descRu": "Запрос разрешения на диктовку: голос обрабатывается на телефоне."
-    },
-    {
       "file": "gestor-6-voz-denegada.png",
       "screenId": "sh-voice-denied",
       "function": "gestor",
@@ -925,14 +918,6 @@
         "localNet": "denied"
       },
       "expectText": "red local"
-    },
-    {
-      "file": "net-sys-localnet.png",
-      "screenId": "net-sys-localnet",
-      "function": "site-mi-red",
-      "titleEs": "Red local",
-      "descRu": "Системный запрос разрешения на локальную сеть.",
-      "expectText": "Red local"
     },
     {
       "file": "net-0b.png",

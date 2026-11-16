@@ -59,7 +59,6 @@
 | `net-00.png` | `net-entry` | site-mi-red | Conectar con tu router | Вход в Mi red ведёт к подключению роутера. |
 | `net-00b.png` | `net-00b` | site-mi-red | OrroFi no puede ver tu red | Нет доступа к локальной сети: где включить разрешение. |
 | `net-00c.png` | `net-00c` | site-mi-red | Mi red sin acceso a la red local | Раздел открыт, доступ к локальной сети выключен. |
-| `net-sys-localnet.png` | `net-sys-localnet` | site-mi-red | Red local | Системный запрос разрешения на локальную сеть. |
 | `net-0b.png` | `net-0b` | site-mi-red | Contraseña del router | Ввод пароля администратора роутера. |
 | `net-0c.png` | `net-0c` | site-mi-red | Contraseña incorrecta | Пароль роутера не подошёл. |
 | `net-0d.png` | `net-0d` | site-mi-red | Router conectado | Роутер ответил и подключение готово. |
@@ -123,7 +122,6 @@
 | `familia-11-quitado.png` | `fam-15c` | familia | Teléfono quitado | Телефон больше не в сети, ключ доступа сменён. |
 | `familia-12-lista.png` | `fam-list` | familia | Familia | Телефоны дома: владелец и добавленные, кнопка пригласить. |
 | `gestor-4-limite.png` | `mgrlimit` | gestor | Límite del chat | Сообщение слишком длинное: чат дошёл до лимита. |
-| `gestor-5-voz.png` | `sh-voice` | gestor | Dictado por voz | Запрос разрешения на диктовку: голос обрабатывается на телефоне. |
 | `gestor-6-voz-denegada.png` | `sh-voice-denied` | gestor | Dictado no disponible | Микрофон или распознавание речи выключены — диктовка недоступна. |
 | `gestor-7-fuera-horario.png` | `handoffoff` | gestor | Fuera de horario | Сотрудник сейчас недоступен: можно оставить заявку. |
 | `servicios-fiber.png` | `fiber` | servicios | Fibra | Тариф и статус домашней оптики. |
