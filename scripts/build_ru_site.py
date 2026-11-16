@@ -28,6 +28,37 @@ _SCREEN_ASSETS: dict[str, list[str]] | None = None
 MISSING_IMAGES: list[str] = []
 PLACEHOLDER_SRC = "assets/screens/placeholder.svg"
 
+# Кадры с служебными заглушками, «Provisional» или бейджем DEMO — не публикуем.
+BANNED_SHOT_FILES = frozenset(
+    {
+        "ios-snapshot-privacidad-iphone-se.png",
+        "ios-pedido-privacidad-consentimiento.png",
+        "ios-login-es-dark.png",
+        "ios-login-es-light.png",
+        "ios-mi-gestor-chat.png",
+    }
+)
+
+PRICE_EXAMPLE_SCREENS = frozenset(
+    {
+        "home",
+        "billing",
+        "invoice",
+        "paymethod",
+        "fiber",
+        "mobile",
+        "radio",
+        "wifi",
+        "order",
+        "order-sum",
+        "order-date",
+        "order-done",
+        "order-movil",
+        "order-movil-ok",
+        "sh-gb",
+    }
+)
+
 PUBLISHED_PAGES = [
     "index.html",
     "vozmozhnosti/index.html",
@@ -360,37 +391,41 @@ def resolve_image(path: str) -> tuple[str, bool]:
     return path, False
 
 
+def with_price_note(sid: str, caption: str) -> str:
+    if sid in PRICE_EXAMPLE_SCREENS and "пример" not in caption and "условн" not in caption:
+        return caption.rstrip(".") + ". Цены на кадре — пример: в демонстрации они условные."
+    return caption
+
+
 def pick_shot_file(
     shots_raw: str, sid: str, page_slug: str | None = None
 ) -> tuple[str, bool, str]:
     """Return (relative PNG src, file_exists, caption). Prefer iOS in assets/screens/ios/, then proto frames."""
-    listed = PNG_RE.findall(shots_raw)
+    listed = [n for n in PNG_RE.findall(shots_raw) if n not in BANNED_SHOT_FILES]
 
     for name in listed:
         if not name.startswith("ios-"):
             continue
         path = f"assets/screens/ios/{name}"
         if resolve_image(path)[1]:
-            return path, True, ru_copy.CAPTION_DEMO
+            return path, True, with_price_note(sid, ru_copy.CAPTION_DEMO)
 
     for name in asset_files_for(sid, page_slug):
+        if name in BANNED_SHOT_FILES:
+            continue
         path = f"assets/screens/{name}"
         if resolve_image(path)[1]:
-            return (
-                path,
-                True,
-                ru_copy.CAPTION_DEMO,
-            )
+            return path, True, with_price_note(sid, ru_copy.CAPTION_DEMO)
 
     for name in listed:
         if name.startswith("brandbook-"):
             fb = BRANDBOOK_FALLBACK.get(name)
             if fb and resolve_image(fb)[1]:
-                return fb, True, ru_copy.CAPTION_DEMO
+                return fb, True, with_price_note(sid, ru_copy.CAPTION_DEMO)
 
     legacy = f"assets/screens/{sid}.png"
     if resolve_image(legacy)[1]:
-        return legacy, True, ru_copy.CAPTION_DEMO
+        return legacy, True, with_price_note(sid, ru_copy.CAPTION_DEMO)
 
     candidates: list[str] = []
     for name in listed:
@@ -403,8 +438,10 @@ def pick_shot_file(
     candidates.append(legacy)
 
     for path in candidates:
+        if Path(path).name in BANNED_SHOT_FILES:
+            continue
         if resolve_image(path)[1]:
-            return path, True, ru_copy.CAPTION_DEMO
+            return path, True, with_price_note(sid, ru_copy.CAPTION_DEMO)
 
     intended = candidates[0] if candidates else legacy
     if intended != PLACEHOLDER_SRC:
@@ -413,13 +450,14 @@ def pick_shot_file(
 
 
 SCREEN_SECOND_LINE: dict[str, str] = {
-    "billing": "Здесь видны счета и ближайший платёж.",
+    "billing": "Здесь видны счета и ближайший платёж. Цены в демонстрации условные.",
+    "home": "Суммы и тарифы на экране — пример: цены в демонстрации условные.",
     "manager": "Помощник сразу говорит, что он искусственный интеллект.",
-    "handoff": "В рабочие часы по мадридскому времени разговор можно передать человеку.",
+    "handoff": "Если нужен сотрудник, разговор можно передать человеку.",
     "net-0b": ROUTER_PASSWORD_NEUTRAL,
     "fam-14a": "Так вы убеждаетесь, что приглашаете именно свой дом, а не чужой.",
     "login": "Номер должен совпадать с договором.",
-    "rp-18a": "Так вы сообщаете о подозрительном действии в аккаунте.",
+    "rp-18a": "Так вы сообщаете о подозрительном действии.",
 }
 
 
@@ -616,7 +654,7 @@ def shell(title: str, body: str, depth: int, current: str) -> str:
 <a class="skip" href="#main">К содержанию</a>
 <header class="site-header">
 <div class="wrap topbar">
-<a class="logo" href="{home}"><img src="{logo}" alt="OrroFi" width="160" height="36"></a>
+<a class="logo" href="{home}"><img src="{logo}" alt="OrroFi" width="98" height="36"></a>
 <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="nav">Меню</button>
 <nav class="primary" id="nav" aria-label="Основное меню">
 <ul>
@@ -699,7 +737,7 @@ def build_index(depth_content: str) -> str:
 <section><div class="wrap">
 <h2>{T(ru_copy.GALLERY_TITLE)}</h2>
 <div class="gallery">
-{_gallery_shot("iOS: `ios-mi-gestor-chat.png`", "manager", "Чат Mi gestor", 0)}
+{_gallery_shot("`gestor-1-chat.png`", "manager", "Чат Mi gestor", 0)}
 {_gallery_shot("iOS: `ios-pedido-resumen.png`", "order-sum", "Сводка заказа", 0)}
 {_gallery_shot("Брендбук: `brandbook-usage-app-mi-red-430x932.png`", "net-1", "Раздел Mi red", 0)}
 {_gallery_shot("iOS: `ios-perfil-dark.png`", "profile", "Профиль", 0)}

@@ -3,5 +3,7 @@ theme: null
 exclude:
   - scripts
   - tools
+  - .github
+  - .htmlvalidate.json
   - .gitignore
   - README.md
