@@ -11,8 +11,15 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 SCREENS_MD = ROOT / "_inputs/plan/screens.md"
-SHOTS_DIR = ROOT / "_inputs/shots"
+IOS_SHOTS_DIR = ROOT / "assets" / "screens" / "ios"
 FRAMES_JSON = ROOT / "tools/render-screens/frames.json"
+
+# Брендбук в репозиторий не кладём — только замены для вёрстки.
+BRANDBOOK_FALLBACK: dict[str, str] = {
+    "brandbook-usage-splash-430x932.png": "assets/screens/ios/ios-home-es-dark.png",
+    "brandbook-usage-hero-1600x900.png": "assets/screens/ios/ios-home-es-dark.png",
+    "brandbook-usage-app-mi-red-430x932.png": "assets/screens/mi-red-1-resumen.png",
+}
 _SCREEN_ASSETS: dict[str, list[str]] | None = None
 
 NAV = [
@@ -168,22 +175,32 @@ def asset_files_for(sid: str, page_slug: str | None = None) -> list[str]:
     return files
 
 
+def resolve_image(path: str) -> tuple[str, bool]:
+    p = ROOT / path
+    if p.is_file():
+        return path, True
+    webp = path[:-4] + ".webp" if path.endswith(".png") else path
+    if (ROOT / webp).is_file():
+        return path, True
+    return path, False
+
+
 def pick_shot_file(
     shots_raw: str, sid: str, page_slug: str | None = None
 ) -> tuple[str, bool, str]:
-    """Return (relative src, file_exists, caption note). Prefer iOS in _inputs/shots, then assets/screens/."""
+    """Return (relative PNG src, file_exists, caption). Prefer iOS in assets/screens/ios/, then proto frames."""
     listed = PNG_RE.findall(shots_raw)
 
     for name in listed:
         if not name.startswith("ios-"):
             continue
-        path = f"_inputs/shots/{name}"
-        if (ROOT / path).is_file():
+        path = f"assets/screens/ios/{name}"
+        if resolve_image(path)[1]:
             return path, True, "Кадр приложения iOS, демонстрационные данные."
 
     for name in asset_files_for(sid, page_slug):
         path = f"assets/screens/{name}"
-        if (ROOT / path).is_file():
+        if resolve_image(path)[1]:
             return (
                 path,
                 True,
@@ -191,33 +208,31 @@ def pick_shot_file(
             )
 
     for name in listed:
-        if name.startswith(("brandbook-", "proto-")):
-            path = f"_inputs/shots/{name}"
-            if (ROOT / path).is_file():
-                return path, True, "Кадр приложения, демонстрационные данные."
-
-    for name in listed:
-        path = f"_inputs/shots/{name}"
-        if (ROOT / path).is_file():
-            return path, True, "Кадр приложения, демонстрационные данные."
+        if name.startswith("brandbook-"):
+            fb = BRANDBOOK_FALLBACK.get(name)
+            if fb and resolve_image(fb)[1]:
+                return fb, True, "Кадр приложения, демонстрационные данные."
 
     legacy = f"assets/screens/{sid}.png"
-    if (ROOT / legacy).is_file():
+    if resolve_image(legacy)[1]:
         return legacy, True, "Кадр прототипа приложения, демонстрационные данные."
 
     candidates: list[str] = []
     for name in listed:
         if name.startswith("ios-"):
-            candidates.append(f"_inputs/shots/{name}")
+            candidates.append(f"assets/screens/ios/{name}")
+    for name in listed:
+        if name in BRANDBOOK_FALLBACK:
+            candidates.append(BRANDBOOK_FALLBACK[name])
     candidates.extend(f"assets/screens/{n}" for n in asset_files_for(sid, page_slug))
     candidates.append(legacy)
 
     for path in candidates:
-        if (ROOT / path).is_file():
+        if resolve_image(path)[1]:
             return path, True, "Кадр приложения, демонстрационные данные."
 
     fallback = candidates[0] if candidates else legacy
-    missing = "Место под кадр: ожидается файл в _inputs/shots или assets/screens."
+    missing = "Место под кадр: ожидается файл в assets/screens/."
     return fallback, False, missing
 
 
@@ -266,8 +281,22 @@ def render_shot(src: str, exists: bool, alt: str, cap: str, depth: int) -> str:
     full_src = prefix + src
     cls = "shot" if exists else "shot missing"
     ph = prefix + "assets/screens/placeholder.svg"
+    webp_src = None
+    if src.endswith(".png") and exists and (ROOT / src).with_suffix(".webp").is_file():
+        webp_src = prefix + src[:-4] + ".webp"
+    if webp_src:
+        img_tag = (
+            f'<picture><source srcset="{html.escape(webp_src)}" type="image/webp">'
+            f'<img src="{html.escape(full_src)}" alt="{html.escape(alt)}" width="390" height="844" '
+            f'loading="lazy" decoding="async" onerror="this.onerror=null;this.src=\'{html.escape(ph)}\'"></picture>'
+        )
+    else:
+        img_tag = (
+            f'<img src="{html.escape(full_src)}" alt="{html.escape(alt)}" width="390" height="844" '
+            f'loading="lazy" decoding="async" onerror="this.onerror=null;this.src=\'{html.escape(ph)}\'">'
+        )
     return f"""<figure class="{cls}">
-<img src="{html.escape(full_src)}" alt="{html.escape(alt)}" width="390" height="844" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='{html.escape(ph)}'">
+{img_tag}
 <figcaption>{html.escape(cap)}</figcaption>
 </figure>"""
 

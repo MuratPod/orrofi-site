@@ -1,19 +1,14 @@
 screens_total=137
 functions_total=36
-functions_without_committed_shot=15
+functions_without_committed_shot=10
 functions_missing_any_committed_shot:
 Mi red: защита
 Mi red: подключение
 Wi‑Fi дома
-Аварии
 Безопасность сети
 Вход по Face ID
 Гостевой Wi‑Fi
-Запуск приложения
 Ключи на устройстве
-Обзор дома
 Оператор и договор
-Оплата
 Управление роутером
 Управление сетью
-Услуга «Фибра»
