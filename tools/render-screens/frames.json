@@ -26,6 +26,9 @@
     "#E8FF2A",
     "#D4F200"
   ],
+  "literalReplacements": {
+    "Carrer de Mar 12": "Calle Ejemplo 1"
+  },
   "placeholderSanitize": {
     "legalBlockSelector": ".b-dp",
     "legalBlockText": "Consulta nuestra política de privacidad en la app.",
@@ -265,13 +268,6 @@
       "sanitizePlaceholders": true
     },
     {
-      "file": "privacidad-red-1-borrado-solicitud.png",
-      "screenId": "del-16a",
-      "function": "privacidad-red",
-      "titleEs": "¿Borrar los datos de Mi red?",
-      "descRu": "Запрос на удаление данных «Mi red» с пояснением сроков."
-    },
-    {
       "file": "privacidad-red-2-borrado-faceid.png",
       "screenId": "del-sh-bio",
       "function": "privacidad-red",
@@ -444,13 +440,242 @@
       "function": "site-mi-red",
       "titleEs": "Pausar internet",
       "descRu": "Управление сетью: пауза интернета."
+    },
+    {
+      "file": "priv-login.png",
+      "screenId": "login",
+      "function": "privacidad",
+      "titleEs": "Entrar",
+      "descRu": "Вход по номеру телефона.",
+      "flags": { "session": false, "firstLogin": true }
+    },
+    {
+      "file": "priv-privacy.png",
+      "screenId": "privacy",
+      "function": "privacidad",
+      "titleEs": "Privacidad",
+      "descRu": "Согласия, выгрузка и удаление учётных данных.",
+      "sanitizePlaceholders": true
+    },
+    {
+      "file": "priv-privsched.png",
+      "screenId": "privsched",
+      "function": "privacidad",
+      "titleEs": "Eliminación programada",
+      "descRu": "Удаление учётных данных назначено, его ещё можно отменить."
+    },
+    {
+      "file": "priv-sh-deleteok.png",
+      "screenId": "sh-deleteok",
+      "function": "privacidad",
+      "titleEs": "¿Eliminar tus datos?",
+      "descRu": "Подтверждение удаления данных аккаунта.",
+      "flags": { "activeServices": false },
+      "sanitizePlaceholders": true
+    },
+    {
+      "file": "priv-sh-deletecode.png",
+      "screenId": "sh-deletecode",
+      "function": "privacidad",
+      "titleEs": "Eliminar · código",
+      "descRu": "Код из SMS перед удалением данных аккаунта.",
+      "sanitizePlaceholders": true
+    },
+    {
+      "file": "priv-rst-sms.png",
+      "screenId": "rst-sms",
+      "function": "privacidad-red",
+      "titleEs": "Confirma que eres tú",
+      "descRu": "SMS-код перед сбросом домашней сети."
+    },
+    {
+      "file": "priv-rst-sms.png",
+      "screenId": "rst-entry",
+      "aliasOf": "rst-sms",
+      "function": "privacidad-red",
+      "titleEs": "Restablecer (acceso)",
+      "descRu": "Вход в сброс открывает подтверждение по SMS."
+    },
+    {
+      "file": "priv-rst-17m.png",
+      "screenId": "rst-17m",
+      "function": "privacidad-red",
+      "titleEs": "Añade primero un e-mail",
+      "descRu": "Перед сбросом нужен ещё один способ связи.",
+      "flags": { "emailConfirmed": false, "secondPhone": false, "freshSms": true }
+    },
+    {
+      "file": "priv-rst-17b.png",
+      "screenId": "rst-17b",
+      "function": "privacidad-red",
+      "titleEs": "Motivo",
+      "descRu": "Причина сброса домашней сети.",
+      "clicks": ["input.c-o2"]
+    },
+    {
+      "file": "priv-rst-17c.png",
+      "screenId": "rst-17c",
+      "function": "privacidad-red",
+      "titleEs": "¿Restablecer Mi red?",
+      "descRu": "Повторное подтверждение сброса."
+    },
+    {
+      "file": "priv-rst-17d.png",
+      "screenId": "rst-17d",
+      "function": "privacidad-red",
+      "titleEs": "Sin derecho a cancelar",
+      "descRu": "Этот телефон не может отменить сброс."
+    },
+    {
+      "file": "priv-rst-17f.png",
+      "screenId": "rst-17f",
+      "function": "privacidad-red",
+      "titleEs": "Aviso sin derecho",
+      "descRu": "Уведомление о сбросе без кнопки отмены."
+    },
+    {
+      "file": "priv-rst-17g.png",
+      "screenId": "rst-17g",
+      "function": "privacidad-red",
+      "titleEs": "Avisos de resultado",
+      "descRu": "Итоги сброса: отмена, завершение, потеря доступа."
+    },
+    {
+      "file": "priv-rst-17i.png",
+      "screenId": "rst-17i",
+      "function": "privacidad-red",
+      "titleEs": "Aviso recibido",
+      "descRu": "Сигнал принят; этот телефон не отменяет сброс."
+    },
+    {
+      "file": "priv-rst-17j.png",
+      "screenId": "rst-17j",
+      "function": "privacidad-red",
+      "titleEs": "Restablecimiento en curso",
+      "descRu": "Сброс уже запрошен."
+    },
+    {
+      "file": "priv-rst-17k.png",
+      "screenId": "rst-17k",
+      "function": "privacidad-red",
+      "titleEs": "Límite de solicitudes",
+      "descRu": "Сброс нельзя просить слишком часто."
+    },
+    {
+      "file": "priv-rst-17l.png",
+      "screenId": "rst-17l",
+      "function": "privacidad-red",
+      "titleEs": "Restablecimiento cancelado",
+      "descRu": "Сброс отменён, сеть без изменений."
+    },
+    {
+      "file": "priv-rst-owner.png",
+      "screenId": "rst-owner",
+      "function": "privacidad-red",
+      "titleEs": "Restablecer: solo titular",
+      "descRu": "Сброс доступен только владельцу.",
+      "flags": { "isOwner": false }
+    },
+    {
+      "file": "priv-rst-sh-bio.png",
+      "screenId": "rst-sh-bio",
+      "function": "privacidad-red",
+      "titleEs": "Confirmar con Face ID",
+      "descRu": "Face ID, чтобы отменить сброс."
+    },
+    {
+      "file": "priv-del-16a0.png",
+      "screenId": "del-16a0",
+      "function": "privacidad-red",
+      "titleEs": "¿Añadir un e-mail antes?",
+      "descRu": "Почта для предупреждения об удалении данных сети.",
+      "flags": { "emailConfirmed": false }
+    },
+    {
+      "file": "priv-del-16b.png",
+      "screenId": "del-16b",
+      "function": "privacidad-red",
+      "titleEs": "Borrado programado",
+      "descRu": "Удаление данных сети назначено, отмена ещё открыта."
+    },
+    {
+      "file": "priv-del-16b2.png",
+      "screenId": "del-16b2",
+      "function": "privacidad-red",
+      "titleEs": "Borrado programado (sin derecho)",
+      "descRu": "Удаление назначено, с этого телефона его не отменить."
+    },
+    {
+      "file": "priv-del-16c.png",
+      "screenId": "del-16c",
+      "function": "privacidad-red",
+      "titleEs": "Borrado: información",
+      "descRu": "Сообщение о дате удаления данных сети."
+    },
+    {
+      "file": "priv-del-16d2.png",
+      "screenId": "del-16d2",
+      "function": "privacidad-red",
+      "titleEs": "Aviso inmediato (sin derecho)",
+      "descRu": "Уведомление об удалении без права отмены с этого телефона."
+    },
+    {
+      "file": "priv-del-16e.png",
+      "screenId": "del-16e",
+      "function": "privacidad-red",
+      "titleEs": "Aviso 24 h (con derecho)",
+      "descRu": "Напоминание за сутки, отмена ещё возможна."
+    },
+    {
+      "file": "priv-del-16e2.png",
+      "screenId": "del-16e2",
+      "function": "privacidad-red",
+      "titleEs": "Aviso 24 h (sin derecho)",
+      "descRu": "Напоминание за сутки без права отмены с этого телефона."
+    },
+    {
+      "file": "priv-del-16f.png",
+      "screenId": "del-16f",
+      "function": "privacidad-red",
+      "titleEs": "Datos borrados",
+      "descRu": "Данные Mi red удалены."
+    },
+    {
+      "file": "priv-del-16h.png",
+      "screenId": "del-16h",
+      "function": "privacidad-red",
+      "titleEs": "Aviso recibido",
+      "descRu": "Сигнал принят; этот телефон не отменяет удаление."
+    },
+    {
+      "file": "priv-del-owner.png",
+      "screenId": "del-owner",
+      "function": "privacidad-red",
+      "titleEs": "Borrado: solo titular",
+      "descRu": "Удалить данные сети может только владелец.",
+      "flags": { "isOwner": false }
+    },
+    {
+      "file": "priv-del-16a.png",
+      "screenId": "del-16a",
+      "function": "privacidad-red",
+      "titleEs": "¿Borrar los datos de Mi red?",
+      "descRu": "Запрос на удаление данных сети. Фраза про копию ключа убирается при съёмке."
+    },
+    {
+      "file": "priv-del-16a.png",
+      "screenId": "del-entry",
+      "aliasOf": "del-16a",
+      "function": "privacidad-red",
+      "titleEs": "Borrado (acceso)",
+      "descRu": "Вход в удаление открывает запрос del-16a."
     }
   ],
   "skipped": [
     {
-      "screenId": "privacy",
+      "screenId": "net-9b",
       "function": "export-datos",
-      "reason": "Внизу экрана виден [EMAIL PRIVACIDAD]."
+      "reason": "Кадр снят: обещание копии ключа на сервере. Экран не публикуем."
     },
     {
       "screenId": "order",

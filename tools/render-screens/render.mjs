@@ -137,7 +137,9 @@ function buildIndexMd(results, skipped) {
     '| --- | --- | --- | --- | --- |',
   ];
   for (const r of ok) {
-    const f = cfg.frames.find((x) => x.file === r.file);
+    const f =
+      cfg.frames.find((x) => x.file === r.file && x.screenId === r.screenId) ||
+      cfg.frames.find((x) => x.file === r.file);
     if (!f) continue;
     lines.push(
       `| \`${r.file}\` | \`${f.screenId}\` | ${f.function} | ${f.titleEs} | ${f.descRu} |`,
@@ -288,8 +290,87 @@ async function runPreSetup(page, setup) {
   }
 }
 
+/** Fictional street: never publish the prototype's sample address. */
+function literalReplacementMap() {
+  const rules = cfg.placeholderSanitize || {};
+  return {
+    'Carrer de Mar 12': 'Calle Ejemplo 1',
+    ...(rules.literalReplacements || {}),
+  };
+}
+
+async function applyLiteralReplacements(page) {
+  const map = literalReplacementMap();
+  await page.evaluate((map) => {
+    const phone = document.getElementById('phone');
+    if (!phone) return;
+    const keys = Object.keys(map).sort((a, b) => b.length - a.length);
+    const tokenRe = /servidores|copia cifrada|copias de la clave|separada|aislad|Carrer de Mar/i;
+
+    const applyMap = (text) => {
+      let out = text;
+      for (const key of keys) {
+        if (out.includes(key)) out = out.split(key).join(map[key]);
+      }
+      return out.replace(/Carrer de Mar 12/g, 'Calle Ejemplo 1').replace(/Carrer de Mar/g, 'Calle Ejemplo 1');
+    };
+
+    /** Drop clauses that promise a server copy, guest isolation, or the sample address. */
+    const scrub = (text) => {
+      let out = applyMap(text);
+      if (!tokenRe.test(out)) return out;
+      const sentences = out.split(/(?<=[.!?;])\s+/);
+      const kept = [];
+      for (const sent of sentences) {
+        if (!tokenRe.test(sent)) {
+          kept.push(sent);
+          continue;
+        }
+        const clauses = sent.split(/,\s*/);
+        const keptC = clauses.filter((c) => !tokenRe.test(c));
+        if (!keptC.length) continue;
+        let joined = keptC.join(', ');
+        const end = sent.match(/[.!?]$/);
+        if (end && !/[.!?]$/.test(joined)) joined += end[0];
+        kept.push(joined);
+      }
+      return kept.join(' ').replace(/\s{2,}/g, ' ').replace(/\s+,/g, ',').trim();
+    };
+
+    phone.querySelectorAll('input, textarea').forEach((el) => {
+      if (typeof el.value === 'string' && el.value) el.value = scrub(el.value);
+    });
+    phone.querySelectorAll('[placeholder], [aria-label], [title], [alt]').forEach((el) => {
+      for (const attr of ['placeholder', 'aria-label', 'title', 'alt']) {
+        const v = el.getAttribute(attr);
+        if (!v || !tokenRe.test(v)) continue;
+        const next = scrub(v);
+        if (!next || tokenRe.test(next)) el.removeAttribute(attr);
+        else el.setAttribute(attr, next);
+      }
+    });
+
+    const walker = document.createTreeWalker(phone, NodeFilter.SHOW_TEXT);
+    const nodes = [];
+    while (walker.nextNode()) nodes.push(walker.currentNode);
+    for (const node of nodes) {
+      const next = scrub(node.textContent);
+      if (next !== node.textContent) node.textContent = next;
+    }
+
+    const hideSel = 'p, li, .cap, .note, .dis, label, small, h1, h2, h3, button, span';
+    phone.querySelectorAll(hideSel).forEach((el) => {
+      if (!tokenRe.test(el.textContent || '')) return;
+      if (el.querySelector(hideSel)) return;
+      el.style.display = 'none';
+      el.setAttribute('data-scrubbed', '1');
+    });
+  }, map);
+}
+
 async function sanitizePlaceholders(page, mode) {
   const rules = cfg.placeholderSanitize;
+  await applyLiteralReplacements(page);
   await page.evaluate(({ rules, mode }) => {
     const phone = document.getElementById('phone');
     if (!phone || !rules) return;
@@ -358,6 +439,7 @@ async function sanitizePlaceholders(page, mode) {
 }
 
 async function prepareMarketingShot(page, frame) {
+  await applyLiteralReplacements(page);
   await page.evaluate(
     ({ frame, iconUrl }) => {
       const phone = document.getElementById('phone');
@@ -484,7 +566,12 @@ function collectVisibleText(page) {
     const lock = phone.querySelector('.lockwrap');
     if (lock && lock.offsetParent !== null) return lock.innerText;
     const sc = phone.querySelector('.sc:not([aria-hidden="true"])');
-    return (sc && sc.innerText) || phone.innerText || '';
+    const typed = [...phone.querySelectorAll('input, textarea')]
+      .map((el) => el.value || '')
+      .filter(Boolean)
+      .join('\n');
+    const body = (sc && sc.innerText) || phone.innerText || '';
+    return typed ? `${body}\n${typed}` : body;
   });
 }
 
@@ -519,9 +606,19 @@ async function renderProtoFrame(page, frame) {
     })
     .catch(() => {});
 
+  if (frame.clicks?.length) {
+    for (const sel of frame.clicks) {
+      const loc = page.locator(`#phone ${sel}`).first();
+      await loc.click({ timeout: 5000 });
+    }
+    await page.waitForTimeout(150);
+  }
+
   if (frame.sanitizePlaceholders) {
     const mode = frame.sanitizePlaceholders === true ? 'default' : frame.sanitizePlaceholders;
     await sanitizePlaceholders(page, mode);
+  } else {
+    await applyLiteralReplacements(page);
   }
 
   const waitMs = frame.waitMs ?? 350;
@@ -531,7 +628,15 @@ async function renderProtoFrame(page, frame) {
 
   const text = await collectVisibleText(page);
 
-  const badUi = [/Oscuro/i, /Claro · Tech/i, /\bMapa\b/, /DEMO/, /\[[^\]]+\]/, /Provisional · lema/i];
+  const badUi = [
+    /Oscuro/i,
+    /Claro · Tech/i,
+    /\bMapa\b/,
+    /DEMO/,
+    /\[[^\]]+\]/,
+    /Provisional · lema/i,
+    /Carrer de Mar/i,
+  ];
   for (const re of badUi) {
     if (re.test(text)) {
       return { status: 'blocked', reason: `UI marketing: ${re}` };
@@ -544,6 +649,22 @@ async function renderProtoFrame(page, frame) {
   }
   if (!text.trim()) return { status: 'empty', reason: 'Pantalla en blanco' };
 
+  const fullText = await page.evaluate(() => {
+    const phone = document.getElementById('phone');
+    if (!phone) return '';
+    const typed = [...phone.querySelectorAll('input, textarea')]
+      .map((el) => el.value || '')
+      .join('\n');
+    return `${phone.innerText || ''}\n${typed}`;
+  });
+  const claimRe = /servidores|copia cifrada|separada|aislad|Carrer de Mar/i;
+  if (claimRe.test(fullText) || claimRe.test(text)) {
+    return {
+      status: 'blocked',
+      reason: 'Promesa de copia de claves/ajustes en servidor o de red aislada',
+    };
+  }
+
   await layoutPhone(page);
   await page.evaluate(() => {
     document.querySelectorAll('body > .top, body > .mapbtn, body > button.mapbtn').forEach((e) =>
@@ -551,10 +672,29 @@ async function renderProtoFrame(page, frame) {
     );
   });
 
+  const fit = await page.evaluate(() => {
+    const phone = document.getElementById('phone');
+    if (!phone) return '';
+    const bits = [];
+    for (const sel of ['.sheet', '.sc:not([aria-hidden="true"])', '.lockwrap']) {
+      const el = phone.querySelector(sel);
+      if (!el) continue;
+      const overflow = el.scrollHeight - el.clientHeight;
+      if (overflow > 12) bits.push(`${sel}:${overflow}`);
+    }
+    const label = phone.querySelector('.tabs button span');
+    if (label) {
+      const gap = Math.round(phone.getBoundingClientRect().bottom - label.getBoundingClientRect().bottom);
+      bits.push(`tabPad:${gap}`);
+    }
+    return bits.join(' ');
+  });
+  if (fit) console.log(`  layout ${frame.screenId} ${fit}`);
+
   const phone = page.locator('#phone');
   const outPath = join(OUT_DIR, frame.file);
   await phone.screenshot({ path: outPath, type: 'png', animations: 'disabled' });
-  return { status: 'ok', file: frame.file, screenId: frame.screenId };
+  return { status: 'ok', file: frame.file, screenId: frame.screenId, text };
 }
 
 async function renderDrawnFrame(page, frame) {
@@ -578,6 +718,8 @@ async function renderOne(page, frame, protoReady) {
 }
 
 async function main() {
+  const onlyArg = process.argv.find((a) => a.startsWith('--only='));
+  const only = onlyArg ? new Set(onlyArg.slice('--only='.length).split(',').filter(Boolean)) : null;
   mkdirSync(OUT_DIR, { recursive: true });
   const browser = await chromium.launch({ headless: true });
   const context = await browser.newContext({
@@ -594,6 +736,12 @@ async function main() {
 
   const results = [];
   for (const frame of cfg.frames) {
+    if (only && frame.screenId && !only.has(frame.screenId)) continue;
+    if (frame.aliasOf) {
+      console.log(`Alias ${frame.screenId} -> ${frame.aliasOf} (${frame.file})`);
+      results.push({ status: 'ok', file: frame.file, screenId: frame.screenId });
+      continue;
+    }
     process.stdout.write(`Rendering ${frame.screenId || frame.drawnHtml} -> ${frame.file} ... `);
     try {
       if (frame.drawnHtml) {
@@ -621,8 +769,17 @@ async function main() {
   }
 
   await browser.close();
+  let indexResults = results;
+  if (only) {
+    const byKey = new Map(results.map((r) => [`${r.screenId}|${r.file}`, r]));
+    indexResults = cfg.frames.map((frame) => {
+      const hit = byKey.get(`${frame.screenId}|${frame.file}`);
+      if (hit) return hit;
+      return { status: 'ok', file: frame.file, screenId: frame.screenId };
+    });
+  }
   const skipped = [...(cfg.skipped || [])];
-  writeFileSync(join(OUT_DIR, 'index.md'), buildIndexMd(results, skipped));
+  writeFileSync(join(OUT_DIR, 'index.md'), buildIndexMd(indexResults, skipped));
   writeFileSync(
     join(__dirname, 'last-run.json'),
     JSON.stringify({ results, at: new Date().toISOString() }, null, 2),

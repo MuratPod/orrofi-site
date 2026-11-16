@@ -31,7 +31,6 @@
 | `familia-1-qr.png` | `fam-13a` | familia | Emparejar por QR | На новом телефоне показывается QR для привязки к семейной сети. |
 | `familia-2-cotejo.png` | `fam-14a` | familia | Código de verificación | Сверка шестизначного кода между двумя телефонами. |
 | `export-datos.png` | `sh-export` | export-datos | Descargar mis datos | Запрос выгрузки персональных данных на e-mail. |
-| `privacidad-red-1-borrado-solicitud.png` | `del-16a` | privacidad-red | ¿Borrar los datos de Mi red? | Запрос на удаление данных «Mi red» с пояснением сроков. |
 | `privacidad-red-2-borrado-faceid.png` | `del-sh-bio` | privacidad-red | Confirmar con Face ID | Подтверждение отмены удаления через Face ID. |
 | `privacidad-red-3-borrado-aviso.png` | `del-16d` | privacidad-red | Aviso de borrado | Push-уведомление о запланированном удалении данных сети. |
 | `privacidad-red-4-borrado-cancelado.png` | `del-16g` | privacidad-red | Borrado cancelado | Результат отмены удаления данных Mi red. |
@@ -56,8 +55,39 @@
 | `net-12b.png` | `net-12b` | site-mi-red | Tu operador firmado | Оператор и договор. |
 | `net-7.png` | `net-7` | site-mi-red | Historial y reinicio | Управление роутером. |
 | `net-1e.png` | `net-1e` | site-mi-red | Pausar internet | Управление сетью: пауза интернета. |
+| `priv-login.png` | `login` | privacidad | Entrar | Вход по номеру телефона. |
+| `priv-privacy.png` | `privacy` | privacidad | Privacidad | Согласия, выгрузка и удаление учётных данных. |
+| `priv-privsched.png` | `privsched` | privacidad | Eliminación programada | Удаление учётных данных назначено, его ещё можно отменить. |
+| `priv-sh-deleteok.png` | `sh-deleteok` | privacidad | ¿Eliminar tus datos? | Подтверждение удаления данных аккаунта. |
+| `priv-sh-deletecode.png` | `sh-deletecode` | privacidad | Eliminar · código | Код из SMS перед удалением данных аккаунта. |
+| `priv-rst-sms.png` | `rst-sms` | privacidad-red | Confirma que eres tú | SMS-код перед сбросом домашней сети. |
+| `priv-rst-sms.png` | `rst-entry` | privacidad-red | Restablecer (acceso) | Вход в сброс открывает подтверждение по SMS. |
+| `priv-rst-17m.png` | `rst-17m` | privacidad-red | Añade primero un e-mail | Перед сбросом нужен ещё один способ связи. |
+| `priv-rst-17b.png` | `rst-17b` | privacidad-red | Motivo | Причина сброса домашней сети. |
+| `priv-rst-17c.png` | `rst-17c` | privacidad-red | ¿Restablecer Mi red? | Повторное подтверждение сброса. |
+| `priv-rst-17d.png` | `rst-17d` | privacidad-red | Sin derecho a cancelar | Этот телефон не может отменить сброс. |
+| `priv-rst-17f.png` | `rst-17f` | privacidad-red | Aviso sin derecho | Уведомление о сбросе без кнопки отмены. |
+| `priv-rst-17g.png` | `rst-17g` | privacidad-red | Avisos de resultado | Итоги сброса: отмена, завершение, потеря доступа. |
+| `priv-rst-17i.png` | `rst-17i` | privacidad-red | Aviso recibido | Сигнал принят; этот телефон не отменяет сброс. |
+| `priv-rst-17j.png` | `rst-17j` | privacidad-red | Restablecimiento en curso | Сброс уже запрошен. |
+| `priv-rst-17k.png` | `rst-17k` | privacidad-red | Límite de solicitudes | Сброс нельзя просить слишком часто. |
+| `priv-rst-17l.png` | `rst-17l` | privacidad-red | Restablecimiento cancelado | Сброс отменён, сеть без изменений. |
+| `priv-rst-owner.png` | `rst-owner` | privacidad-red | Restablecer: solo titular | Сброс доступен только владельцу. |
+| `priv-rst-sh-bio.png` | `rst-sh-bio` | privacidad-red | Confirmar con Face ID | Face ID, чтобы отменить сброс. |
+| `priv-del-16a0.png` | `del-16a0` | privacidad-red | ¿Añadir un e-mail antes? | Почта для предупреждения об удалении данных сети. |
+| `priv-del-16b.png` | `del-16b` | privacidad-red | Borrado programado | Удаление данных сети назначено, отмена ещё открыта. |
+| `priv-del-16b2.png` | `del-16b2` | privacidad-red | Borrado programado (sin derecho) | Удаление назначено, с этого телефона его не отменить. |
+| `priv-del-16c.png` | `del-16c` | privacidad-red | Borrado: información | Сообщение о дате удаления данных сети. |
+| `priv-del-16d2.png` | `del-16d2` | privacidad-red | Aviso inmediato (sin derecho) | Уведомление об удалении без права отмены с этого телефона. |
+| `priv-del-16e.png` | `del-16e` | privacidad-red | Aviso 24 h (con derecho) | Напоминание за сутки, отмена ещё возможна. |
+| `priv-del-16e2.png` | `del-16e2` | privacidad-red | Aviso 24 h (sin derecho) | Напоминание за сутки без права отмены с этого телефона. |
+| `priv-del-16f.png` | `del-16f` | privacidad-red | Datos borrados | Данные Mi red удалены. |
+| `priv-del-16h.png` | `del-16h` | privacidad-red | Aviso recibido | Сигнал принят; этот телефон не отменяет удаление. |
+| `priv-del-owner.png` | `del-owner` | privacidad-red | Borrado: solo titular | Удалить данные сети может только владелец. |
+| `priv-del-16a.png` | `del-16a` | privacidad-red | ¿Borrar los datos de Mi red? | Запрос на удаление данных сети. Фраза про копию ключа убирается при съёмке. |
+| `priv-del-16a.png` | `del-entry` | privacidad-red | Borrado (acceso) | Вход в удаление открывает запрос del-16a. |
 
 ## No incluidos en assets
 
-- **privacy** (export-datos): Внизу экрана виден [EMAIL PRIVACIDAD].
+- **net-9b** (export-datos): Кадр снят: обещание копии ключа на сервере. Экран не публикуем.
 - **order** (servicios): Экран «Contratar» содержит TRIS-плейсхолдеры; для визита используются install/sh-cita.
