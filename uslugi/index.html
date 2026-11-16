@@ -4,6 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="OrroFi — домашний интернет и домашняя сеть в одном приложении. Сайт-визитка на русском языке.">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self'; style-src 'self'; script-src 'self'; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <title>Услуги и подключение · OrroFi</title>
 <link rel="icon" type="image/png" href="../icons/ios/AppIcon-60.png">
 <link rel="stylesheet" href="../assets/css/site.css">
@@ -16,7 +18,7 @@
 <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="nav">Меню</button>
 <nav class="primary" id="nav" aria-label="Основное">
 <ul>
-<li><a href="../">Главная</a></li><li><a href="../vozmozhnosti/index.html">Возможности</a></li><li><a href="../uslugi/index.html" aria-current="page">Услуги</a></li><li><a href="../mi-gestor/index.html">Mi gestor</a></li><li><a href="../mi-red/index.html">Mi red</a></li><li><a href="../familia/index.html">Семья</a></li><li><a href="../facturas/index.html">Счета</a></li><li><a href="../ajustes/index.html">Настройки</a></li><li><a href="../instrukcii/index.html">Инструкции</a></li><li><a href="../privacidad/index.html">Безопасность</a></li><li><a href="../faq/index.html">FAQ</a></li><li><a href="../contacto/index.html">Контакты</a></li>
+<li><a href="../">Главная</a></li><li><a href="../vozmozhnosti/index.html">Возможности</a></li><li><a href="../uslugi/index.html" aria-current="page">Услуги</a></li><li><a href="../mi-gestor/index.html">Mi gestor</a></li><li><a href="../mi-red/index.html">Mi red</a></li><li><a href="../familia/index.html">Семья</a></li><li><a href="../facturas/index.html">Счета</a></li><li><a href="../ajustes/index.html">Настройки</a></li><li><a href="../instrukcii/index.html">Инструкции</a></li><li><a href="../privacidad/index.html">Безопасность</a></li><li><a href="../faq/index.html">Вопросы и ответы</a></li><li><a href="../contacto/index.html">Контакты</a></li>
 </ul>
 </nav>
 </div>
@@ -27,6 +29,7 @@
 <h1>Услуги и подключение</h1>
 <p class="lead">Фибра, радио, мобильная связь, Wi‑Fi, заказ, аварии, визит мастера и подключение нового клиента.</p>
 </div></section>
+
 <section><div class="wrap">
 <nav aria-label="Экраны на странице"><h2>Содержание</h2><ul class="toc"><li><a href="#outage">Авария</a></li><li><a href="#install">Установка</a></li><li><a href="#sh-cita">Смена визита</a></li><li><a href="#order">Заказать услугу</a></li><li><a href="#order-date">Дата визита</a></li><li><a href="#order-done">Заказ отправлен</a></li><li><a href="#order-movil">Заказ мобильной</a></li><li><a href="#order-movil-ok">Мобильная заказана</a></li><li><a href="#order-sum">Сводка заказа</a></li><li><a href="#launch">Первый запуск</a></li><li><a href="#home">Начало</a></li><li><a href="#onb">Новый клиент</a></li><li><a href="#onb2">Заявка</a></li><li><a href="#onb3">Заявка отправлена</a></li><li><a href="#onbnone">Нет покрытия</a></li><li><a href="#stoffline">Нет сети</a></li><li><a href="#wifi">Wi‑Fi (услуга)</a></li><li><a href="#mobile">Мобильная</a></li><li><a href="#sh-gb">Добавить данные</a></li><li><a href="#sh-pinpuk">PIN и PUK</a></li><li><a href="#radio">Радио</a></li><li><a href="#fiber">Фибра</a></li></ul></nav>
 </div></section>
@@ -48,7 +51,7 @@
 </dl>
 </div>
 <figure class="shot">
-<picture><source srcset="../assets/screens/ios/ios-averia-outage.webp" type="image/webp"><img src="../assets/screens/ios/ios-averia-outage.png" alt="Экран OrroFi: Авария" width="390" height="844" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='../assets/screens/placeholder.svg'"></picture>
+<picture><source srcset="../assets/screens/ios/ios-averia-outage.webp" type="image/webp"><img class="shot-img" src="../assets/screens/ios/ios-averia-outage.png" alt="Экран OrroFi: Авария" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg"></picture>
 <figcaption>Кадр приложения iOS, демонстрационные данные.</figcaption>
 </figure>
 </article><article class="screen-block" id="install">
@@ -69,7 +72,7 @@
 </dl>
 </div>
 <figure class="shot">
-<picture><source srcset="../assets/screens/servicios-6-install.webp" type="image/webp"><img src="../assets/screens/servicios-6-install.png" alt="Экран OrroFi: Установка" width="390" height="844" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='../assets/screens/placeholder.svg'"></picture>
+<picture><source srcset="../assets/screens/servicios-6-install.webp" type="image/webp"><img class="shot-img" src="../assets/screens/servicios-6-install.png" alt="Экран OrroFi: Установка" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg"></picture>
 <figcaption>Кадр прототипа приложения (тёмная тема), демонстрационные данные.</figcaption>
 </figure>
 </article><article class="screen-block" id="sh-cita">
@@ -90,7 +93,7 @@
 </dl>
 </div>
 <figure class="shot">
-<picture><source srcset="../assets/screens/ios/ios-instalacion-cambiar-horario.webp" type="image/webp"><img src="../assets/screens/ios/ios-instalacion-cambiar-horario.png" alt="Экран OrroFi: Смена визита" width="390" height="844" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='../assets/screens/placeholder.svg'"></picture>
+<picture><source srcset="../assets/screens/ios/ios-instalacion-cambiar-horario.webp" type="image/webp"><img class="shot-img" src="../assets/screens/ios/ios-instalacion-cambiar-horario.png" alt="Экран OrroFi: Смена визита" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg"></picture>
 <figcaption>Кадр приложения iOS, демонстрационные данные.</figcaption>
 </figure>
 </article><article class="screen-block" id="order">
@@ -111,7 +114,7 @@
 </dl>
 </div>
 <figure class="shot">
-<picture><source srcset="../assets/screens/ios/ios-contratar-fibra.webp" type="image/webp"><img src="../assets/screens/ios/ios-contratar-fibra.png" alt="Экран OrroFi: Заказать услугу" width="390" height="844" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='../assets/screens/placeholder.svg'"></picture>
+<picture><source srcset="../assets/screens/ios/ios-contratar-fibra.webp" type="image/webp"><img class="shot-img" src="../assets/screens/ios/ios-contratar-fibra.png" alt="Экран OrroFi: Заказать услугу" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg"></picture>
 <figcaption>Кадр приложения iOS, демонстрационные данные.</figcaption>
 </figure>
 </article><article class="screen-block" id="order-date">
@@ -131,9 +134,9 @@
 <dd><ol><li>Откройте приложение OrroFi на iPhone.</li><li>Дойдите до экрана «Выбор окна визита мастера».</li><li>Прочитайте пояснение и подтвердите действие, если приложение просит согласие или Face ID.</li></ol></dd>
 </dl>
 </div>
-<figure class="shot missing">
-<img src="../assets/screens/order-date.png" alt="Экран OrroFi: Дата визита" width="390" height="844" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='../assets/screens/placeholder.svg'">
-<figcaption>Место под кадр: ожидается файл в assets/screens/.</figcaption>
+<figure class="shot shot-placeholder">
+<img class="shot-img" src="../assets/screens/placeholder.svg" alt="Экран OrroFi: Дата визита" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg">
+<figcaption>Место под кадр: файл появится после съёмки (см. site_report.txt).</figcaption>
 </figure>
 </article><article class="screen-block" id="order-done">
 <header>
@@ -153,7 +156,7 @@
 </dl>
 </div>
 <figure class="shot">
-<picture><source srcset="../assets/screens/ios/ios-pedido-enviado.webp" type="image/webp"><img src="../assets/screens/ios/ios-pedido-enviado.png" alt="Экран OrroFi: Заказ отправлен" width="390" height="844" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='../assets/screens/placeholder.svg'"></picture>
+<picture><source srcset="../assets/screens/ios/ios-pedido-enviado.webp" type="image/webp"><img class="shot-img" src="../assets/screens/ios/ios-pedido-enviado.png" alt="Экран OrroFi: Заказ отправлен" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg"></picture>
 <figcaption>Кадр приложения iOS, демонстрационные данные.</figcaption>
 </figure>
 </article><article class="screen-block" id="order-movil">
@@ -174,7 +177,7 @@
 </dl>
 </div>
 <figure class="shot">
-<picture><source srcset="../assets/screens/servicios-3a-order-movil.webp" type="image/webp"><img src="../assets/screens/servicios-3a-order-movil.png" alt="Экран OrroFi: Заказ мобильной" width="390" height="844" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='../assets/screens/placeholder.svg'"></picture>
+<picture><source srcset="../assets/screens/servicios-3a-order-movil.webp" type="image/webp"><img class="shot-img" src="../assets/screens/servicios-3a-order-movil.png" alt="Экран OrroFi: Заказ мобильной" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg"></picture>
 <figcaption>Кадр прототипа приложения (тёмная тема), демонстрационные данные.</figcaption>
 </figure>
 </article><article class="screen-block" id="order-movil-ok">
@@ -195,7 +198,7 @@
 </dl>
 </div>
 <figure class="shot">
-<picture><source srcset="../assets/screens/servicios-3-order-movil-ok.webp" type="image/webp"><img src="../assets/screens/servicios-3-order-movil-ok.png" alt="Экран OrroFi: Мобильная заказана" width="390" height="844" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='../assets/screens/placeholder.svg'"></picture>
+<picture><source srcset="../assets/screens/servicios-3-order-movil-ok.webp" type="image/webp"><img class="shot-img" src="../assets/screens/servicios-3-order-movil-ok.png" alt="Экран OrroFi: Мобильная заказана" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg"></picture>
 <figcaption>Кадр прототипа приложения (тёмная тема), демонстрационные данные.</figcaption>
 </figure>
 </article><article class="screen-block" id="order-sum">
@@ -216,7 +219,7 @@
 </dl>
 </div>
 <figure class="shot">
-<picture><source srcset="../assets/screens/ios/ios-pedido-resumen.webp" type="image/webp"><img src="../assets/screens/ios/ios-pedido-resumen.png" alt="Экран OrroFi: Сводка заказа" width="390" height="844" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='../assets/screens/placeholder.svg'"></picture>
+<picture><source srcset="../assets/screens/ios/ios-pedido-resumen.webp" type="image/webp"><img class="shot-img" src="../assets/screens/ios/ios-pedido-resumen.png" alt="Экран OrroFi: Сводка заказа" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg"></picture>
 <figcaption>Кадр приложения iOS, демонстрационные данные.</figcaption>
 </figure>
 </article><article class="screen-block" id="launch">
@@ -237,7 +240,7 @@
 </dl>
 </div>
 <figure class="shot">
-<picture><source srcset="../assets/screens/ios/ios-home-es-dark.webp" type="image/webp"><img src="../assets/screens/ios/ios-home-es-dark.png" alt="Экран OrroFi: Первый запуск" width="390" height="844" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='../assets/screens/placeholder.svg'"></picture>
+<picture><source srcset="../assets/screens/ios/ios-home-es-dark.webp" type="image/webp"><img class="shot-img" src="../assets/screens/ios/ios-home-es-dark.png" alt="Экран OrroFi: Первый запуск" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg"></picture>
 <figcaption>Кадр приложения, демонстрационные данные.</figcaption>
 </figure>
 </article><article class="screen-block" id="home">
@@ -258,7 +261,7 @@
 </dl>
 </div>
 <figure class="shot">
-<picture><source srcset="../assets/screens/ios/ios-home-es-dark.webp" type="image/webp"><img src="../assets/screens/ios/ios-home-es-dark.png" alt="Экран OrroFi: Начало" width="390" height="844" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='../assets/screens/placeholder.svg'"></picture>
+<picture><source srcset="../assets/screens/ios/ios-home-es-dark.webp" type="image/webp"><img class="shot-img" src="../assets/screens/ios/ios-home-es-dark.png" alt="Экран OrroFi: Начало" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg"></picture>
 <figcaption>Кадр приложения iOS, демонстрационные данные.</figcaption>
 </figure>
 </article><article class="screen-block" id="onb">
@@ -279,7 +282,7 @@
 </dl>
 </div>
 <figure class="shot">
-<picture><source srcset="../assets/screens/login-5-onb.webp" type="image/webp"><img src="../assets/screens/login-5-onb.png" alt="Экран OrroFi: Новый клиент" width="390" height="844" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='../assets/screens/placeholder.svg'"></picture>
+<picture><source srcset="../assets/screens/login-5-onb.webp" type="image/webp"><img class="shot-img" src="../assets/screens/login-5-onb.png" alt="Экран OrroFi: Новый клиент" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg"></picture>
 <figcaption>Кадр прототипа приложения (тёмная тема), демонстрационные данные.</figcaption>
 </figure>
 </article><article class="screen-block" id="onb2">
@@ -300,7 +303,7 @@
 </dl>
 </div>
 <figure class="shot">
-<picture><source srcset="../assets/screens/login-7-onb2.webp" type="image/webp"><img src="../assets/screens/login-7-onb2.png" alt="Экран OrroFi: Заявка" width="390" height="844" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='../assets/screens/placeholder.svg'"></picture>
+<picture><source srcset="../assets/screens/login-7-onb2.webp" type="image/webp"><img class="shot-img" src="../assets/screens/login-7-onb2.png" alt="Экран OrroFi: Заявка" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg"></picture>
 <figcaption>Кадр прототипа приложения (тёмная тема), демонстрационные данные.</figcaption>
 </figure>
 </article><article class="screen-block" id="onb3">
@@ -321,7 +324,7 @@
 </dl>
 </div>
 <figure class="shot">
-<picture><source srcset="../assets/screens/login-8-onb3.webp" type="image/webp"><img src="../assets/screens/login-8-onb3.png" alt="Экран OrroFi: Заявка отправлена" width="390" height="844" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='../assets/screens/placeholder.svg'"></picture>
+<picture><source srcset="../assets/screens/login-8-onb3.webp" type="image/webp"><img class="shot-img" src="../assets/screens/login-8-onb3.png" alt="Экран OrroFi: Заявка отправлена" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg"></picture>
 <figcaption>Кадр прототипа приложения (тёмная тема), демонстрационные данные.</figcaption>
 </figure>
 </article><article class="screen-block" id="onbnone">
@@ -342,7 +345,7 @@
 </dl>
 </div>
 <figure class="shot">
-<picture><source srcset="../assets/screens/login-6-onbnone.webp" type="image/webp"><img src="../assets/screens/login-6-onbnone.png" alt="Экран OrroFi: Нет покрытия" width="390" height="844" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='../assets/screens/placeholder.svg'"></picture>
+<picture><source srcset="../assets/screens/login-6-onbnone.webp" type="image/webp"><img class="shot-img" src="../assets/screens/login-6-onbnone.png" alt="Экран OrroFi: Нет покрытия" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg"></picture>
 <figcaption>Кадр прототипа приложения (тёмная тема), демонстрационные данные.</figcaption>
 </figure>
 </article><article class="screen-block" id="stoffline">
@@ -363,7 +366,7 @@
 </dl>
 </div>
 <figure class="shot">
-<picture><source srcset="../assets/screens/extras-3-stoffline.webp" type="image/webp"><img src="../assets/screens/extras-3-stoffline.png" alt="Экран OrroFi: Нет сети" width="390" height="844" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='../assets/screens/placeholder.svg'"></picture>
+<picture><source srcset="../assets/screens/extras-3-stoffline.webp" type="image/webp"><img class="shot-img" src="../assets/screens/extras-3-stoffline.png" alt="Экран OrroFi: Нет сети" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg"></picture>
 <figcaption>Кадр прототипа приложения (тёмная тема), демонстрационные данные.</figcaption>
 </figure>
 </article><article class="screen-block" id="wifi">
@@ -384,7 +387,7 @@
 </dl>
 </div>
 <figure class="shot">
-<picture><source srcset="../assets/screens/servicios-5-wifi.webp" type="image/webp"><img src="../assets/screens/servicios-5-wifi.png" alt="Экран OrroFi: Wi‑Fi (услуга)" width="390" height="844" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='../assets/screens/placeholder.svg'"></picture>
+<picture><source srcset="../assets/screens/servicios-5-wifi.webp" type="image/webp"><img class="shot-img" src="../assets/screens/servicios-5-wifi.png" alt="Экран OrroFi: Wi‑Fi (услуга)" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg"></picture>
 <figcaption>Кадр прототипа приложения (тёмная тема), демонстрационные данные.</figcaption>
 </figure>
 </article><article class="screen-block" id="mobile">
@@ -405,7 +408,7 @@
 </dl>
 </div>
 <figure class="shot">
-<picture><source srcset="../assets/screens/servicios-2-movil.webp" type="image/webp"><img src="../assets/screens/servicios-2-movil.png" alt="Экран OrroFi: Мобильная" width="390" height="844" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='../assets/screens/placeholder.svg'"></picture>
+<picture><source srcset="../assets/screens/servicios-2-movil.webp" type="image/webp"><img class="shot-img" src="../assets/screens/servicios-2-movil.png" alt="Экран OrroFi: Мобильная" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg"></picture>
 <figcaption>Кадр прототипа приложения (тёмная тема), демонстрационные данные.</figcaption>
 </figure>
 </article><article class="screen-block" id="sh-gb">
@@ -425,9 +428,9 @@
 <dd><ol><li>Откройте приложение OrroFi на iPhone.</li><li>Дойдите до экрана «Докупка пакета трафика».</li><li>Прочитайте пояснение и подтвердите действие, если приложение просит согласие или Face ID.</li></ol></dd>
 </dl>
 </div>
-<figure class="shot missing">
-<img src="../assets/screens/sh-gb.png" alt="Экран OrroFi: Добавить данные" width="390" height="844" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='../assets/screens/placeholder.svg'">
-<figcaption>Место под кадр: ожидается файл в assets/screens/.</figcaption>
+<figure class="shot shot-placeholder">
+<img class="shot-img" src="../assets/screens/placeholder.svg" alt="Экран OrroFi: Добавить данные" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg">
+<figcaption>Место под кадр: файл появится после съёмки (см. site_report.txt).</figcaption>
 </figure>
 </article><article class="screen-block" id="sh-pinpuk">
 <header>
@@ -447,7 +450,7 @@
 </dl>
 </div>
 <figure class="shot">
-<picture><source srcset="../assets/screens/servicios-4-pinpuk.webp" type="image/webp"><img src="../assets/screens/servicios-4-pinpuk.png" alt="Экран OrroFi: PIN и PUK" width="390" height="844" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='../assets/screens/placeholder.svg'"></picture>
+<picture><source srcset="../assets/screens/servicios-4-pinpuk.webp" type="image/webp"><img class="shot-img" src="../assets/screens/servicios-4-pinpuk.png" alt="Экран OrroFi: PIN и PUK" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg"></picture>
 <figcaption>Кадр прототипа приложения (тёмная тема), демонстрационные данные.</figcaption>
 </figure>
 </article><article class="screen-block" id="radio">
@@ -468,7 +471,7 @@
 </dl>
 </div>
 <figure class="shot">
-<picture><source srcset="../assets/screens/servicios-1-radio.webp" type="image/webp"><img src="../assets/screens/servicios-1-radio.png" alt="Экран OrroFi: Радио" width="390" height="844" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='../assets/screens/placeholder.svg'"></picture>
+<picture><source srcset="../assets/screens/servicios-1-radio.webp" type="image/webp"><img class="shot-img" src="../assets/screens/servicios-1-radio.png" alt="Экран OrroFi: Радио" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg"></picture>
 <figcaption>Кадр прототипа приложения (тёмная тема), демонстрационные данные.</figcaption>
 </figure>
 </article><article class="screen-block" id="fiber">
@@ -489,17 +492,20 @@
 </dl>
 </div>
 <figure class="shot">
-<picture><source srcset="../assets/screens/ios/ios-contratar-fibra.webp" type="image/webp"><img src="../assets/screens/ios/ios-contratar-fibra.png" alt="Экран OrroFi: Фибра" width="390" height="844" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='../assets/screens/placeholder.svg'"></picture>
+<picture><source srcset="../assets/screens/ios/ios-contratar-fibra.webp" type="image/webp"><img class="shot-img" src="../assets/screens/ios/ios-contratar-fibra.png" alt="Экран OrroFi: Фибра" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg"></picture>
 <figcaption>Кадр приложения iOS, демонстрационные данные.</figcaption>
 </figure>
 </article></div></section>
 
+
 </main>
 <footer class="site-footer">
 <div class="wrap">
-<p><strong>PADELADA WORLD SL</strong> (NIF B05783238) · услугу оказывает правообладатель бренда OrroFi.</p>
+<p><strong>OrroFi — бренд PADELADA WORLD SL</strong> (NIF B05783238).</p>
+<p>Сайт не использует cookies и счётчики посещений.</p>
 <p>
 <a href="../privacidad/index.html">Безопасность и приватность</a>
+<a href="../privacidad/index.html#sitio-privacidad">Приватность этого сайта</a>
 <a href="../contacto/index.html">Контакты</a>
 <a href="mailto:privacidad@orrofi.es">privacidad@orrofi.es</a>
 </p>

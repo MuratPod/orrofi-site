@@ -4,6 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="OrroFi — домашний интернет и домашняя сеть в одном приложении. Сайт-визитка на русском языке.">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self'; style-src 'self'; script-src 'self'; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <title>Настройки · OrroFi</title>
 <link rel="icon" type="image/png" href="../icons/ios/AppIcon-60.png">
 <link rel="stylesheet" href="../assets/css/site.css">
@@ -16,7 +18,7 @@
 <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="nav">Меню</button>
 <nav class="primary" id="nav" aria-label="Основное">
 <ul>
-<li><a href="../">Главная</a></li><li><a href="../vozmozhnosti/index.html">Возможности</a></li><li><a href="../uslugi/index.html">Услуги</a></li><li><a href="../mi-gestor/index.html">Mi gestor</a></li><li><a href="../mi-red/index.html">Mi red</a></li><li><a href="../familia/index.html">Семья</a></li><li><a href="../facturas/index.html">Счета</a></li><li><a href="../ajustes/index.html" aria-current="page">Настройки</a></li><li><a href="../instrukcii/index.html">Инструкции</a></li><li><a href="../privacidad/index.html">Безопасность</a></li><li><a href="../faq/index.html">FAQ</a></li><li><a href="../contacto/index.html">Контакты</a></li>
+<li><a href="../">Главная</a></li><li><a href="../vozmozhnosti/index.html">Возможности</a></li><li><a href="../uslugi/index.html">Услуги</a></li><li><a href="../mi-gestor/index.html">Mi gestor</a></li><li><a href="../mi-red/index.html">Mi red</a></li><li><a href="../familia/index.html">Семья</a></li><li><a href="../facturas/index.html">Счета</a></li><li><a href="../ajustes/index.html" aria-current="page">Настройки</a></li><li><a href="../instrukcii/index.html">Инструкции</a></li><li><a href="../privacidad/index.html">Безопасность</a></li><li><a href="../faq/index.html">Вопросы и ответы</a></li><li><a href="../contacto/index.html">Контакты</a></li>
 </ul>
 </nav>
 </div>
@@ -27,6 +29,7 @@
 <h1>Настройки</h1>
 <p class="lead">Профиль, тема, язык, Face ID и уведомления.</p>
 </div></section>
+
 <section><div class="wrap">
 <nav aria-label="Экраны на странице"><h2>Содержание</h2><ul class="toc"><li><a href="#notifset">Уведомления (настройки)</a></li><li><a href="#profile">Профиль</a></li><li><a href="#sh-faceid">Face ID</a></li><li><a href="#sh-logout">Выход</a></li><li><a href="#notif">Уведомления</a></li><li><a href="#push-why">Разрешение на уведомления</a></li></ul></nav>
 </div></section>
@@ -48,7 +51,7 @@
 </dl>
 </div>
 <figure class="shot">
-<picture><source srcset="../assets/screens/extras-notifset.webp" type="image/webp"><img src="../assets/screens/extras-notifset.png" alt="Экран OrroFi: Уведомления (настройки)" width="390" height="844" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='../assets/screens/placeholder.svg'"></picture>
+<picture><source srcset="../assets/screens/extras-notifset.webp" type="image/webp"><img class="shot-img" src="../assets/screens/extras-notifset.png" alt="Экран OrroFi: Уведомления (настройки)" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg"></picture>
 <figcaption>Кадр прототипа приложения (тёмная тема), демонстрационные данные.</figcaption>
 </figure>
 </article><article class="screen-block" id="profile">
@@ -69,7 +72,7 @@
 </dl>
 </div>
 <figure class="shot">
-<picture><source srcset="../assets/screens/ios/ios-perfil-dark.webp" type="image/webp"><img src="../assets/screens/ios/ios-perfil-dark.png" alt="Экран OrroFi: Профиль" width="390" height="844" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='../assets/screens/placeholder.svg'"></picture>
+<picture><source srcset="../assets/screens/ios/ios-perfil-dark.webp" type="image/webp"><img class="shot-img" src="../assets/screens/ios/ios-perfil-dark.png" alt="Экран OrroFi: Профиль" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg"></picture>
 <figcaption>Кадр приложения iOS, демонстрационные данные.</figcaption>
 </figure>
 </article><article class="screen-block" id="sh-faceid">
@@ -90,7 +93,7 @@
 </dl>
 </div>
 <figure class="shot">
-<picture><source srcset="../assets/screens/extras-sh-faceid.webp" type="image/webp"><img src="../assets/screens/extras-sh-faceid.png" alt="Экран OrroFi: Face ID" width="390" height="844" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='../assets/screens/placeholder.svg'"></picture>
+<picture><source srcset="../assets/screens/extras-sh-faceid.webp" type="image/webp"><img class="shot-img" src="../assets/screens/extras-sh-faceid.png" alt="Экран OrroFi: Face ID" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg"></picture>
 <figcaption>Кадр прототипа приложения (тёмная тема), демонстрационные данные.</figcaption>
 </figure>
 </article><article class="screen-block" id="sh-logout">
@@ -111,7 +114,7 @@
 </dl>
 </div>
 <figure class="shot">
-<picture><source srcset="../assets/screens/extras-sh-logout.webp" type="image/webp"><img src="../assets/screens/extras-sh-logout.png" alt="Экран OrroFi: Выход" width="390" height="844" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='../assets/screens/placeholder.svg'"></picture>
+<picture><source srcset="../assets/screens/extras-sh-logout.webp" type="image/webp"><img class="shot-img" src="../assets/screens/extras-sh-logout.png" alt="Экран OrroFi: Выход" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg"></picture>
 <figcaption>Кадр прототипа приложения (тёмная тема), демонстрационные данные.</figcaption>
 </figure>
 </article><article class="screen-block" id="notif">
@@ -132,7 +135,7 @@
 </dl>
 </div>
 <figure class="shot">
-<picture><source srcset="../assets/screens/ios/ios-avisos.webp" type="image/webp"><img src="../assets/screens/ios/ios-avisos.png" alt="Экран OrroFi: Уведомления" width="390" height="844" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='../assets/screens/placeholder.svg'"></picture>
+<picture><source srcset="../assets/screens/ios/ios-avisos.webp" type="image/webp"><img class="shot-img" src="../assets/screens/ios/ios-avisos.png" alt="Экран OrroFi: Уведомления" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg"></picture>
 <figcaption>Кадр приложения iOS, демонстрационные данные.</figcaption>
 </figure>
 </article><article class="screen-block" id="push-why">
@@ -153,17 +156,20 @@
 </dl>
 </div>
 <figure class="shot">
-<picture><source srcset="../assets/screens/extras-push-why.webp" type="image/webp"><img src="../assets/screens/extras-push-why.png" alt="Экран OrroFi: Разрешение на уведомления" width="390" height="844" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='../assets/screens/placeholder.svg'"></picture>
+<picture><source srcset="../assets/screens/extras-push-why.webp" type="image/webp"><img class="shot-img" src="../assets/screens/extras-push-why.png" alt="Экран OrroFi: Разрешение на уведомления" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg"></picture>
 <figcaption>Кадр прототипа приложения (тёмная тема), демонстрационные данные.</figcaption>
 </figure>
 </article></div></section>
 
+
 </main>
 <footer class="site-footer">
 <div class="wrap">
-<p><strong>PADELADA WORLD SL</strong> (NIF B05783238) · услугу оказывает правообладатель бренда OrroFi.</p>
+<p><strong>OrroFi — бренд PADELADA WORLD SL</strong> (NIF B05783238).</p>
+<p>Сайт не использует cookies и счётчики посещений.</p>
 <p>
 <a href="../privacidad/index.html">Безопасность и приватность</a>
+<a href="../privacidad/index.html#sitio-privacidad">Приватность этого сайта</a>
 <a href="../contacto/index.html">Контакты</a>
 <a href="mailto:privacidad@orrofi.es">privacidad@orrofi.es</a>
 </p>

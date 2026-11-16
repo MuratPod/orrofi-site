@@ -4,6 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="OrroFi — домашний интернет и домашняя сеть в одном приложении. Сайт-визитка на русском языке.">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self'; style-src 'self'; script-src 'self'; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <title>Главная · OrroFi</title>
 <link rel="icon" type="image/png" href="icons/ios/AppIcon-60.png">
 <link rel="stylesheet" href="assets/css/site.css">
@@ -16,7 +18,7 @@
 <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="nav">Меню</button>
 <nav class="primary" id="nav" aria-label="Основное">
 <ul>
-<li><a href="index.html" aria-current="page">Главная</a></li><li><a href="vozmozhnosti/index.html">Возможности</a></li><li><a href="uslugi/index.html">Услуги</a></li><li><a href="mi-gestor/index.html">Mi gestor</a></li><li><a href="mi-red/index.html">Mi red</a></li><li><a href="familia/index.html">Семья</a></li><li><a href="facturas/index.html">Счета</a></li><li><a href="ajustes/index.html">Настройки</a></li><li><a href="instrukcii/index.html">Инструкции</a></li><li><a href="privacidad/index.html">Безопасность</a></li><li><a href="faq/index.html">FAQ</a></li><li><a href="contacto/index.html">Контакты</a></li>
+<li><a href="index.html" aria-current="page">Главная</a></li><li><a href="vozmozhnosti/index.html">Возможности</a></li><li><a href="uslugi/index.html">Услуги</a></li><li><a href="mi-gestor/index.html">Mi gestor</a></li><li><a href="mi-red/index.html">Mi red</a></li><li><a href="familia/index.html">Семья</a></li><li><a href="facturas/index.html">Счета</a></li><li><a href="ajustes/index.html">Настройки</a></li><li><a href="instrukcii/index.html">Инструкции</a></li><li><a href="privacidad/index.html">Безопасность</a></li><li><a href="faq/index.html">Вопросы и ответы</a></li><li><a href="contacto/index.html">Контакты</a></li>
 </ul>
 </nav>
 </div>
@@ -24,9 +26,9 @@
 <main id="main">
 
 <section class="hero"><div class="wrap">
-<p class="tag" style="font-weight:800;color:var(--accent);text-transform:uppercase;font-size:14px">Приложение OrroFi</p>
+<p class="tag hero-tag">Приложение OrroFi</p>
 <h1>Весь домашний интернет и домашняя сеть — в одном приложении</h1>
-<p class="lead">OrroFi помогает видеть услуги, счета и аварии, общаться с умным помощником <strong>Mi gestor</strong> и управлять домашней сетью в разделе <strong>Mi red</strong> — без лишних звонков и без раскрытия пароля роутера.</p>
+<p class="lead">OrroFi помогает видеть услуги, счета и аварии, общаться с умным помощником <strong>Mi gestor</strong> и управлять домашней сетью в разделе <strong>Mi red</strong> — без лишних звонков.</p>
 <div class="hero-actions">
 <a class="btn btn-primary" href="vozmozhnosti/">Возможности</a>
 <a class="btn btn-secondary" href="instrukcii/">Как начать</a>
@@ -34,7 +36,7 @@
 </div></section>
 <section><div class="wrap">
 <div class="gallery"><figure class="shot">
-<picture><source srcset="assets/screens/ios/ios-home-es-dark.webp" type="image/webp"><img src="assets/screens/ios/ios-home-es-dark.png" alt="Главный экран OrroFi" width="390" height="844" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='assets/screens/placeholder.svg'"></picture>
+<picture><source srcset="assets/screens/ios/ios-home-es-dark.webp" type="image/webp"><img class="shot-img" src="assets/screens/ios/ios-home-es-dark.png" alt="Главный экран OrroFi" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="assets/screens/placeholder.svg"></picture>
 <figcaption>Кадр приложения iOS, демонстрационные данные.</figcaption>
 </figure></div>
 </div></section>
@@ -45,7 +47,7 @@
 <p>Скорость, статус линий, заказ подключения и честные экраны аварии или визита мастера.</p>
 <p><a href="uslugi/">Услуги и подключение</a></p></div>
 <div class="card"><p class="tag">Помощник</p><h3>Mi gestor</h3>
-<p>ИИ сразу представляется, отвечает кратко и при необходимости передаёт разговор человеку в рабочие часы.</p>
+<p>ИИ сразу представляется, отвечает кратко и при необходимости подключает сотрудника.</p>
 <p><a href="mi-gestor/">Подробнее о Mi gestor</a></p></div>
 <div class="card"><p class="tag">Дом</p><h3>Mi red и семья</h3>
 <p>Устройства в сети, пауза интернета, гостевой Wi‑Fi и безопасное добавление телефона близких по QR.</p>
@@ -56,19 +58,19 @@
 <h2>Кадры приложения</h2>
 <div class="gallery">
 <figure class="shot">
-<picture><source srcset="assets/screens/ios/ios-mi-gestor-chat.webp" type="image/webp"><img src="assets/screens/ios/ios-mi-gestor-chat.png" alt="Чат Mi gestor" width="390" height="844" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='assets/screens/placeholder.svg'"></picture>
+<picture><source srcset="assets/screens/ios/ios-mi-gestor-chat.webp" type="image/webp"><img class="shot-img" src="assets/screens/ios/ios-mi-gestor-chat.png" alt="Чат Mi gestor" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="assets/screens/placeholder.svg"></picture>
 <figcaption>Кадр приложения iOS, демонстрационные данные.</figcaption>
 </figure>
 <figure class="shot">
-<picture><source srcset="assets/screens/ios/ios-pedido-resumen.webp" type="image/webp"><img src="assets/screens/ios/ios-pedido-resumen.png" alt="Сводка заказа" width="390" height="844" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='assets/screens/placeholder.svg'"></picture>
+<picture><source srcset="assets/screens/ios/ios-pedido-resumen.webp" type="image/webp"><img class="shot-img" src="assets/screens/ios/ios-pedido-resumen.png" alt="Сводка заказа" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="assets/screens/placeholder.svg"></picture>
 <figcaption>Кадр приложения iOS, демонстрационные данные.</figcaption>
 </figure>
 <figure class="shot">
-<picture><source srcset="assets/screens/mi-red-1-resumen.webp" type="image/webp"><img src="assets/screens/mi-red-1-resumen.png" alt="Раздел Mi red" width="390" height="844" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='assets/screens/placeholder.svg'"></picture>
+<picture><source srcset="assets/screens/mi-red-1-resumen.webp" type="image/webp"><img class="shot-img" src="assets/screens/mi-red-1-resumen.png" alt="Раздел Mi red" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="assets/screens/placeholder.svg"></picture>
 <figcaption>Кадр прототипа приложения (тёмная тема), демонстрационные данные.</figcaption>
 </figure>
 <figure class="shot">
-<picture><source srcset="assets/screens/ios/ios-perfil-dark.webp" type="image/webp"><img src="assets/screens/ios/ios-perfil-dark.png" alt="Профиль" width="390" height="844" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='assets/screens/placeholder.svg'"></picture>
+<picture><source srcset="assets/screens/ios/ios-perfil-dark.webp" type="image/webp"><img class="shot-img" src="assets/screens/ios/ios-perfil-dark.png" alt="Профиль" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="assets/screens/placeholder.svg"></picture>
 <figcaption>Кадр приложения iOS, демонстрационные данные.</figcaption>
 </figure>
 </div>
@@ -82,9 +84,11 @@
 </main>
 <footer class="site-footer">
 <div class="wrap">
-<p><strong>PADELADA WORLD SL</strong> (NIF B05783238) · услугу оказывает правообладатель бренда OrroFi.</p>
+<p><strong>OrroFi — бренд PADELADA WORLD SL</strong> (NIF B05783238).</p>
+<p>Сайт не использует cookies и счётчики посещений.</p>
 <p>
 <a href="privacidad/index.html">Безопасность и приватность</a>
+<a href="privacidad/index.html#sitio-privacidad">Приватность этого сайта</a>
 <a href="contacto/index.html">Контакты</a>
 <a href="mailto:privacidad@orrofi.es">privacidad@orrofi.es</a>
 </p>

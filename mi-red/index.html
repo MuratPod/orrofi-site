@@ -4,6 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="OrroFi — домашний интернет и домашняя сеть в одном приложении. Сайт-визитка на русском языке.">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self'; style-src 'self'; script-src 'self'; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <title>Mi red · OrroFi</title>
 <link rel="icon" type="image/png" href="../icons/ios/AppIcon-60.png">
 <link rel="stylesheet" href="../assets/css/site.css">
@@ -16,7 +18,7 @@
 <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="nav">Меню</button>
 <nav class="primary" id="nav" aria-label="Основное">
 <ul>
-<li><a href="../">Главная</a></li><li><a href="../vozmozhnosti/index.html">Возможности</a></li><li><a href="../uslugi/index.html">Услуги</a></li><li><a href="../mi-gestor/index.html">Mi gestor</a></li><li><a href="../mi-red/index.html" aria-current="page">Mi red</a></li><li><a href="../familia/index.html">Семья</a></li><li><a href="../facturas/index.html">Счета</a></li><li><a href="../ajustes/index.html">Настройки</a></li><li><a href="../instrukcii/index.html">Инструкции</a></li><li><a href="../privacidad/index.html">Безопасность</a></li><li><a href="../faq/index.html">FAQ</a></li><li><a href="../contacto/index.html">Контакты</a></li>
+<li><a href="../">Главная</a></li><li><a href="../vozmozhnosti/index.html">Возможности</a></li><li><a href="../uslugi/index.html">Услуги</a></li><li><a href="../mi-gestor/index.html">Mi gestor</a></li><li><a href="../mi-red/index.html" aria-current="page">Mi red</a></li><li><a href="../familia/index.html">Семья</a></li><li><a href="../facturas/index.html">Счета</a></li><li><a href="../ajustes/index.html">Настройки</a></li><li><a href="../instrukcii/index.html">Инструкции</a></li><li><a href="../privacidad/index.html">Безопасность</a></li><li><a href="../faq/index.html">Вопросы и ответы</a></li><li><a href="../contacto/index.html">Контакты</a></li>
 </ul>
 </nav>
 </div>
@@ -27,6 +29,7 @@
 <h1>Mi red</h1>
 <p class="lead">Домашняя сеть: роутер, устройства, гости, безопасность и диагностика.</p>
 </div></section>
+
 <section><div class="wrap">
 <nav aria-label="Экраны на странице"><h2>Содержание</h2><ul class="toc"><li><a href="#net-0e">«Ваша сеть только для вас»</a></li><li><a href="#net-0f">Защитите роутер</a></li><li><a href="#net-0g">Роутер защищён</a></li><li><a href="#net-0h">Дополнительная защита</a></li><li><a href="#net-sh-mac">Что такое MAC-адрес</a></li><li><a href="#net-00">Связаться с роутером</a></li><li><a href="#net-00b">Приложение не видит сеть</a></li><li><a href="#net-00c">Mi red без доступа к локальной сети</a></li><li><a href="#net-0a">Подключите роутер</a></li><li><a href="#net-0b">Пароль роутера</a></li><li><a href="#net-0c">Неверный пароль</a></li><li><a href="#net-0d">Роутер подключён</a></li><li><a href="#net-entry">Вход в Mi red</a></li><li><a href="#net-sys-localnet">Системный запрос «Локальная сеть»</a></li><li><a href="#net-8">Wi‑Fi сети</a></li><li><a href="#net-6">Безопасность</a></li><li><a href="#net-sh-bio">Подтверждение Face ID</a></li><li><a href="#net-9">Гостевая сеть</a></li><li><a href="#net-9b">Настройки › Приватность (копия ключа)</a></li><li><a href="#net-sh-delcopy">Удалить копию</a></li><li><a href="#net-1">Mi red</a></li><li><a href="#net-1b">Идёт осмотр сети</a></li><li><a href="#net-1c">Роутер без связи</a></li><li><a href="#net-1d">Вне дома</a></li><li><a href="#net-12">Ваш оператор</a></li><li><a href="#net-12b">Оператор, подписано</a></li><li><a href="#net-4">Состояние сети</a></li><li><a href="#net-4b">Улучшение</a></li><li><a href="#net-4c">Результат</a></li><li><a href="#net-4d">Состояние вне дома</a></li><li><a href="#net-5">Канал и соседи</a></li><li><a href="#net-7">История и перезапуск</a></li><li><a href="#net-7-confirm">Подтвердить перезапуск</a></li><li><a href="#net-1e">Пауза интернета</a></li><li><a href="#net-3">Предупреждение при блокировке</a></li><li><a href="#net-2">Одно устройство</a></li><li><a href="#net-3b">Новое устройство</a></li></ul></nav>
 </div></section>
@@ -47,9 +50,9 @@
 <dd><ol><li>Откройте приложение OrroFi на iPhone.</li><li>Дойдите до экрана «Объяснение защиты».</li><li>Прочитайте пояснение и подтвердите действие, если приложение просит согласие или Face ID.</li></ol></dd>
 </dl>
 </div>
-<figure class="shot missing">
-<img src="../assets/screens/net-0e.png" alt="Экран OrroFi: «Ваша сеть только для вас»" width="390" height="844" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='../assets/screens/placeholder.svg'">
-<figcaption>Место под кадр: ожидается файл в assets/screens/.</figcaption>
+<figure class="shot shot-placeholder">
+<img class="shot-img" src="../assets/screens/placeholder.svg" alt="Экран OrroFi: «Ваша сеть только для вас»" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg">
+<figcaption>Место под кадр: файл появится после съёмки (см. site_report.txt).</figcaption>
 </figure>
 </article><article class="screen-block" id="net-0f">
 <header>
@@ -69,7 +72,7 @@
 </dl>
 </div>
 <figure class="shot">
-<picture><source srcset="../assets/screens/net-0f.webp" type="image/webp"><img src="../assets/screens/net-0f.png" alt="Экран OrroFi: Защитите роутер" width="390" height="844" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='../assets/screens/placeholder.svg'"></picture>
+<picture><source srcset="../assets/screens/net-0f.webp" type="image/webp"><img class="shot-img" src="../assets/screens/net-0f.png" alt="Экран OrroFi: Защитите роутер" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg"></picture>
 <figcaption>Кадр прототипа приложения (тёмная тема), демонстрационные данные.</figcaption>
 </figure>
 </article><article class="screen-block" id="net-0g">
@@ -89,9 +92,9 @@
 <dd><ol><li>Откройте приложение OrroFi на iPhone.</li><li>Дойдите до экрана «Готово».</li><li>Прочитайте пояснение и подтвердите действие, если приложение просит согласие или Face ID.</li></ol></dd>
 </dl>
 </div>
-<figure class="shot missing">
-<img src="../assets/screens/net-0g.png" alt="Экран OrroFi: Роутер защищён" width="390" height="844" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='../assets/screens/placeholder.svg'">
-<figcaption>Место под кадр: ожидается файл в assets/screens/.</figcaption>
+<figure class="shot shot-placeholder">
+<img class="shot-img" src="../assets/screens/placeholder.svg" alt="Экран OrroFi: Роутер защищён" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg">
+<figcaption>Место под кадр: файл появится после съёмки (см. site_report.txt).</figcaption>
 </figure>
 </article><article class="screen-block" id="net-0h">
 <header>
@@ -110,9 +113,9 @@
 <dd><ol><li>Откройте приложение OrroFi на iPhone.</li><li>Дойдите до экрана «Необязательный шаг».</li><li>Прочитайте пояснение и подтвердите действие, если приложение просит согласие или Face ID.</li></ol></dd>
 </dl>
 </div>
-<figure class="shot missing">
-<img src="../assets/screens/net-0h.png" alt="Экран OrroFi: Дополнительная защита" width="390" height="844" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='../assets/screens/placeholder.svg'">
-<figcaption>Место под кадр: ожидается файл в assets/screens/.</figcaption>
+<figure class="shot shot-placeholder">
+<img class="shot-img" src="../assets/screens/placeholder.svg" alt="Экран OrroFi: Дополнительная защита" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg">
+<figcaption>Место под кадр: файл появится после съёмки (см. site_report.txt).</figcaption>
 </figure>
 </article><article class="screen-block" id="net-sh-mac">
 <header>
@@ -131,9 +134,9 @@
 <dd><ol><li>Откройте приложение OrroFi на iPhone.</li><li>Дойдите до экрана «Справка».</li><li>Прочитайте пояснение и подтвердите действие, если приложение просит согласие или Face ID.</li></ol></dd>
 </dl>
 </div>
-<figure class="shot missing">
-<img src="../assets/screens/net-sh-mac.png" alt="Экран OrroFi: Что такое MAC-адрес" width="390" height="844" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='../assets/screens/placeholder.svg'">
-<figcaption>Место под кадр: ожидается файл в assets/screens/.</figcaption>
+<figure class="shot shot-placeholder">
+<img class="shot-img" src="../assets/screens/placeholder.svg" alt="Экран OrroFi: Что такое MAC-адрес" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg">
+<figcaption>Место под кадр: файл появится после съёмки (см. site_report.txt).</figcaption>
 </figure>
 </article><article class="screen-block" id="net-00">
 <header>
@@ -152,9 +155,9 @@
 <dd><ol><li>Откройте приложение OrroFi на iPhone.</li><li>Дойдите до экрана «Старт доступа к локальной сети».</li><li>Прочитайте пояснение и подтвердите действие, если приложение просит согласие или Face ID.</li></ol></dd>
 </dl>
 </div>
-<figure class="shot missing">
-<img src="../assets/screens/net-00.png" alt="Экран OrroFi: Связаться с роутером" width="390" height="844" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='../assets/screens/placeholder.svg'">
-<figcaption>Место под кадр: ожидается файл в assets/screens/.</figcaption>
+<figure class="shot shot-placeholder">
+<img class="shot-img" src="../assets/screens/placeholder.svg" alt="Экран OrroFi: Связаться с роутером" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg">
+<figcaption>Место под кадр: файл появится после съёмки (см. site_report.txt).</figcaption>
 </figure>
 </article><article class="screen-block" id="net-00b">
 <header>
@@ -173,9 +176,9 @@
 <dd><ol><li>Откройте приложение OrroFi на iPhone.</li><li>Дойдите до экрана «Как включить доступ в Настройках iOS».</li><li>Прочитайте пояснение и подтвердите действие, если приложение просит согласие или Face ID.</li></ol></dd>
 </dl>
 </div>
-<figure class="shot missing">
-<img src="../assets/screens/net-00b.png" alt="Экран OrroFi: Приложение не видит сеть" width="390" height="844" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='../assets/screens/placeholder.svg'">
-<figcaption>Место под кадр: ожидается файл в assets/screens/.</figcaption>
+<figure class="shot shot-placeholder">
+<img class="shot-img" src="../assets/screens/placeholder.svg" alt="Экран OrroFi: Приложение не видит сеть" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg">
+<figcaption>Место под кадр: файл появится после съёмки (см. site_report.txt).</figcaption>
 </figure>
 </article><article class="screen-block" id="net-00c">
 <header>
@@ -194,9 +197,9 @@
 <dd><ol><li>Откройте приложение OrroFi на iPhone.</li><li>Дойдите до экрана «Раздел открыт».</li><li>Прочитайте пояснение и подтвердите действие, если приложение просит согласие или Face ID.</li></ol></dd>
 </dl>
 </div>
-<figure class="shot missing">
-<img src="../assets/screens/net-00c.png" alt="Экран OrroFi: Mi red без доступа к локальной сети" width="390" height="844" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='../assets/screens/placeholder.svg'">
-<figcaption>Место под кадр: ожидается файл в assets/screens/.</figcaption>
+<figure class="shot shot-placeholder">
+<img class="shot-img" src="../assets/screens/placeholder.svg" alt="Экран OrroFi: Mi red без доступа к локальной сети" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg">
+<figcaption>Место под кадр: файл появится после съёмки (см. site_report.txt).</figcaption>
 </figure>
 </article><article class="screen-block" id="net-0a">
 <header>
@@ -216,7 +219,7 @@
 </dl>
 </div>
 <figure class="shot">
-<picture><source srcset="../assets/screens/net-0a.webp" type="image/webp"><img src="../assets/screens/net-0a.png" alt="Экран OrroFi: Подключите роутер" width="390" height="844" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='../assets/screens/placeholder.svg'"></picture>
+<picture><source srcset="../assets/screens/net-0a.webp" type="image/webp"><img class="shot-img" src="../assets/screens/net-0a.png" alt="Экран OrroFi: Подключите роутер" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg"></picture>
 <figcaption>Кадр прототипа приложения (тёмная тема), демонстрационные данные.</figcaption>
 </figure>
 </article><article class="screen-block" id="net-0b">
@@ -227,18 +230,18 @@
 <div class="screen-meta">
 <dl>
 <dt>Что делает</dt>
-<dd><p>На экране «Ввод пароля (секрет остаётся на устройстве)» собрана часть сценария «Mi red: подключение». Интерфейс приложения на испанском или английском; здесь — смысл на русском.</p></dd>
+<dd><p>На экране «Ввод пароля роутера» собрана часть сценария «Mi red: подключение». Интерфейс приложения на испанском или английском; здесь — смысл на русском.</p></dd>
 <dt>Как пользоваться</dt>
-<dd><p>Введите пароль администратора роутера. Он шифруется на iPhone и на сервер уходит только шифр, не открытый пароль.</p></dd>
+<dd><p>Введите пароль администратора роутера. Пароль защищён при передаче и хранении.</p></dd>
 <dt>Настройки</dt>
 <dd><p>Настройки Wi‑Fi, паузы и гостевой сети относятся к домашней сети и не меняют тариф услуги у оператора.</p></dd>
 <dt>Пошагово</dt>
-<dd><ol><li>Откройте приложение OrroFi на iPhone.</li><li>Дойдите до экрана «Ввод пароля (секрет остаётся на устройстве)».</li><li>Прочитайте пояснение и подтвердите действие, если приложение просит согласие или Face ID.</li></ol></dd>
+<dd><ol><li>Откройте приложение OrroFi на iPhone.</li><li>Дойдите до экрана «Ввод пароля роутера».</li><li>Прочитайте пояснение и подтвердите действие, если приложение просит согласие или Face ID.</li></ol></dd>
 </dl>
 </div>
-<figure class="shot missing">
-<img src="../assets/screens/net-0b.png" alt="Экран OrroFi: Пароль роутера" width="390" height="844" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='../assets/screens/placeholder.svg'">
-<figcaption>Место под кадр: ожидается файл в assets/screens/.</figcaption>
+<figure class="shot shot-placeholder">
+<img class="shot-img" src="../assets/screens/placeholder.svg" alt="Экран OrroFi: Пароль роутера" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg">
+<figcaption>Место под кадр: файл появится после съёмки (см. site_report.txt).</figcaption>
 </figure>
 </article><article class="screen-block" id="net-0c">
 <header>
@@ -257,9 +260,9 @@
 <dd><ol><li>Откройте приложение OrroFi на iPhone.</li><li>Дойдите до экрана «Ошибка ввода».</li><li>Прочитайте пояснение и подтвердите действие, если приложение просит согласие или Face ID.</li></ol></dd>
 </dl>
 </div>
-<figure class="shot missing">
-<img src="../assets/screens/net-0c.png" alt="Экран OrroFi: Неверный пароль" width="390" height="844" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='../assets/screens/placeholder.svg'">
-<figcaption>Место под кадр: ожидается файл в assets/screens/.</figcaption>
+<figure class="shot shot-placeholder">
+<img class="shot-img" src="../assets/screens/placeholder.svg" alt="Экран OrroFi: Неверный пароль" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg">
+<figcaption>Место под кадр: файл появится после съёмки (см. site_report.txt).</figcaption>
 </figure>
 </article><article class="screen-block" id="net-0d">
 <header>
@@ -278,9 +281,9 @@
 <dd><ol><li>Откройте приложение OrroFi на iPhone.</li><li>Дойдите до экрана «Успех».</li><li>Прочитайте пояснение и подтвердите действие, если приложение просит согласие или Face ID.</li></ol></dd>
 </dl>
 </div>
-<figure class="shot missing">
-<img src="../assets/screens/net-0d.png" alt="Экран OrroFi: Роутер подключён" width="390" height="844" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='../assets/screens/placeholder.svg'">
-<figcaption>Место под кадр: ожидается файл в assets/screens/.</figcaption>
+<figure class="shot shot-placeholder">
+<img class="shot-img" src="../assets/screens/placeholder.svg" alt="Экран OrroFi: Роутер подключён" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg">
+<figcaption>Место под кадр: файл появится после съёмки (см. site_report.txt).</figcaption>
 </figure>
 </article><article class="screen-block" id="net-entry">
 <header>
@@ -299,9 +302,9 @@
 <dd><ol><li>Откройте приложение OrroFi на iPhone.</li><li>Дойдите до экрана «Точка входа в раздел».</li><li>Прочитайте пояснение и подтвердите действие, если приложение просит согласие или Face ID.</li></ol></dd>
 </dl>
 </div>
-<figure class="shot missing">
-<img src="../assets/screens/net-entry.png" alt="Экран OrroFi: Вход в Mi red" width="390" height="844" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='../assets/screens/placeholder.svg'">
-<figcaption>Место под кадр: ожидается файл в assets/screens/.</figcaption>
+<figure class="shot shot-placeholder">
+<img class="shot-img" src="../assets/screens/placeholder.svg" alt="Экран OrroFi: Вход в Mi red" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg">
+<figcaption>Место под кадр: файл появится после съёмки (см. site_report.txt).</figcaption>
 </figure>
 </article><article class="screen-block" id="net-sys-localnet">
 <header>
@@ -311,7 +314,7 @@
 <div class="screen-meta">
 <dl>
 <dt>Что делает</dt>
-<dd><p>На экране «Объяснение, зачем iOS-разрешение. Пароль роутера шифруется на телефоне» собрана часть сценария «Mi red: подключение». Интерфейс приложения на испанском или английском; здесь — смысл на русском.</p></dd>
+<dd><p>На экране «Объяснение, зачем iOS-разрешение. Пароль защищён при передаче и хранении» собрана часть сценария «Mi red: подключение». Интерфейс приложения на испанском или английском; здесь — смысл на русском.</p></dd>
 <dt>Как пользоваться</dt>
 <dd><p>Откройте раздел «Mi red: подключение» в приложении и дойдите до экрана с идентификатором net-sys-localnet. Следуйте подсказкам на экране.</p></dd>
 <dt>Настройки</dt>
@@ -320,9 +323,9 @@
 <dd><ol><li>Откройте приложение OrroFi на iPhone.</li><li>Дойдите до экрана «Объяснение».</li><li>Прочитайте пояснение и подтвердите действие, если приложение просит согласие или Face ID.</li></ol></dd>
 </dl>
 </div>
-<figure class="shot missing">
-<img src="../assets/screens/net-sys-localnet.png" alt="Экран OrroFi: Системный запрос «Локальная сеть»" width="390" height="844" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='../assets/screens/placeholder.svg'">
-<figcaption>Место под кадр: ожидается файл в assets/screens/.</figcaption>
+<figure class="shot shot-placeholder">
+<img class="shot-img" src="../assets/screens/placeholder.svg" alt="Экран OrroFi: Системный запрос «Локальная сеть»" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg">
+<figcaption>Место под кадр: файл появится после съёмки (см. site_report.txt).</figcaption>
 </figure>
 </article><article class="screen-block" id="net-8">
 <header>
@@ -342,7 +345,7 @@
 </dl>
 </div>
 <figure class="shot">
-<picture><source srcset="../assets/screens/net-8.webp" type="image/webp"><img src="../assets/screens/net-8.png" alt="Экран OrroFi: Wi‑Fi сети" width="390" height="844" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='../assets/screens/placeholder.svg'"></picture>
+<picture><source srcset="../assets/screens/net-8.webp" type="image/webp"><img class="shot-img" src="../assets/screens/net-8.png" alt="Экран OrroFi: Wi‑Fi сети" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg"></picture>
 <figcaption>Кадр прототипа приложения (тёмная тема), демонстрационные данные.</figcaption>
 </figure>
 </article><article class="screen-block" id="net-6">
@@ -363,7 +366,7 @@
 </dl>
 </div>
 <figure class="shot">
-<picture><source srcset="../assets/screens/net-6.webp" type="image/webp"><img src="../assets/screens/net-6.png" alt="Экран OrroFi: Безопасность" width="390" height="844" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='../assets/screens/placeholder.svg'"></picture>
+<picture><source srcset="../assets/screens/net-6.webp" type="image/webp"><img class="shot-img" src="../assets/screens/net-6.png" alt="Экран OrroFi: Безопасность" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg"></picture>
 <figcaption>Кадр прототипа приложения (тёмная тема), демонстрационные данные.</figcaption>
 </figure>
 </article><article class="screen-block" id="net-sh-bio">
@@ -383,9 +386,9 @@
 <dd><ol><li>Откройте приложение OrroFi на iPhone.</li><li>Дойдите до экрана «Системное подтверждение».</li><li>Прочитайте пояснение и подтвердите действие, если приложение просит согласие или Face ID.</li></ol></dd>
 </dl>
 </div>
-<figure class="shot missing">
-<img src="../assets/screens/net-sh-bio.png" alt="Экран OrroFi: Подтверждение Face ID" width="390" height="844" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='../assets/screens/placeholder.svg'">
-<figcaption>Место под кадр: ожидается файл в assets/screens/.</figcaption>
+<figure class="shot shot-placeholder">
+<img class="shot-img" src="../assets/screens/placeholder.svg" alt="Экран OrroFi: Подтверждение Face ID" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg">
+<figcaption>Место под кадр: файл появится после съёмки (см. site_report.txt).</figcaption>
 </figure>
 </article><article class="screen-block" id="net-9">
 <header>
@@ -405,7 +408,7 @@
 </dl>
 </div>
 <figure class="shot">
-<picture><source srcset="../assets/screens/net-9.webp" type="image/webp"><img src="../assets/screens/net-9.png" alt="Экран OrroFi: Гостевая сеть" width="390" height="844" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='../assets/screens/placeholder.svg'"></picture>
+<picture><source srcset="../assets/screens/net-9.webp" type="image/webp"><img class="shot-img" src="../assets/screens/net-9.png" alt="Экран OrroFi: Гостевая сеть" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg"></picture>
 <figcaption>Кадр прототипа приложения (тёмная тема), демонстрационные данные.</figcaption>
 </figure>
 </article><article class="screen-block" id="net-9b">
@@ -426,7 +429,7 @@
 </dl>
 </div>
 <figure class="shot">
-<picture><source srcset="../assets/screens/net-9b.webp" type="image/webp"><img src="../assets/screens/net-9b.png" alt="Экран OrroFi: Настройки › Приватность (копия ключа)" width="390" height="844" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='../assets/screens/placeholder.svg'"></picture>
+<picture><source srcset="../assets/screens/net-9b.webp" type="image/webp"><img class="shot-img" src="../assets/screens/net-9b.png" alt="Экран OrroFi: Настройки › Приватность (копия ключа)" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg"></picture>
 <figcaption>Кадр прототипа приложения (тёмная тема), демонстрационные данные.</figcaption>
 </figure>
 </article><article class="screen-block" id="net-sh-delcopy">
@@ -446,9 +449,9 @@
 <dd><ol><li>Откройте приложение OrroFi на iPhone.</li><li>Дойдите до экрана «Подтверждение удаления копии».</li><li>Прочитайте пояснение и подтвердите действие, если приложение просит согласие или Face ID.</li></ol></dd>
 </dl>
 </div>
-<figure class="shot missing">
-<img src="../assets/screens/net-sh-delcopy.png" alt="Экран OrroFi: Удалить копию" width="390" height="844" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='../assets/screens/placeholder.svg'">
-<figcaption>Место под кадр: ожидается файл в assets/screens/.</figcaption>
+<figure class="shot shot-placeholder">
+<img class="shot-img" src="../assets/screens/placeholder.svg" alt="Экран OrroFi: Удалить копию" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg">
+<figcaption>Место под кадр: файл появится после съёмки (см. site_report.txt).</figcaption>
 </figure>
 </article><article class="screen-block" id="net-1">
 <header>
@@ -468,7 +471,7 @@
 </dl>
 </div>
 <figure class="shot">
-<picture><source srcset="../assets/screens/mi-red-1-resumen.webp" type="image/webp"><img src="../assets/screens/mi-red-1-resumen.png" alt="Экран OrroFi: Mi red" width="390" height="844" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='../assets/screens/placeholder.svg'"></picture>
+<picture><source srcset="../assets/screens/mi-red-1-resumen.webp" type="image/webp"><img class="shot-img" src="../assets/screens/mi-red-1-resumen.png" alt="Экран OrroFi: Mi red" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg"></picture>
 <figcaption>Кадр прототипа приложения (тёмная тема), демонстрационные данные.</figcaption>
 </figure>
 </article><article class="screen-block" id="net-1b">
@@ -488,9 +491,9 @@
 <dd><ol><li>Откройте приложение OrroFi на iPhone.</li><li>Дойдите до экрана «Состояние «смотрим сеть»».</li><li>Прочитайте пояснение и подтвердите действие, если приложение просит согласие или Face ID.</li></ol></dd>
 </dl>
 </div>
-<figure class="shot missing">
-<img src="../assets/screens/net-1b.png" alt="Экран OrroFi: Идёт осмотр сети" width="390" height="844" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='../assets/screens/placeholder.svg'">
-<figcaption>Место под кадр: ожидается файл в assets/screens/.</figcaption>
+<figure class="shot shot-placeholder">
+<img class="shot-img" src="../assets/screens/placeholder.svg" alt="Экран OrroFi: Идёт осмотр сети" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg">
+<figcaption>Место под кадр: файл появится после съёмки (см. site_report.txt).</figcaption>
 </figure>
 </article><article class="screen-block" id="net-1c">
 <header>
@@ -510,7 +513,7 @@
 </dl>
 </div>
 <figure class="shot">
-<picture><source srcset="../assets/screens/mi-red-4-sin-router.webp" type="image/webp"><img src="../assets/screens/mi-red-4-sin-router.png" alt="Экран OrroFi: Роутер без связи" width="390" height="844" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='../assets/screens/placeholder.svg'"></picture>
+<picture><source srcset="../assets/screens/mi-red-4-sin-router.webp" type="image/webp"><img class="shot-img" src="../assets/screens/mi-red-4-sin-router.png" alt="Экран OrroFi: Роутер без связи" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg"></picture>
 <figcaption>Кадр прототипа приложения (тёмная тема), демонстрационные данные.</figcaption>
 </figure>
 </article><article class="screen-block" id="net-1d">
@@ -530,9 +533,9 @@
 <dd><ol><li>Откройте приложение OrroFi на iPhone.</li><li>Дойдите до экрана «Домашняя сеть недоступна».</li><li>Прочитайте пояснение и подтвердите действие, если приложение просит согласие или Face ID.</li></ol></dd>
 </dl>
 </div>
-<figure class="shot missing">
-<img src="../assets/screens/net-1d.png" alt="Экран OrroFi: Вне дома" width="390" height="844" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='../assets/screens/placeholder.svg'">
-<figcaption>Место под кадр: ожидается файл в assets/screens/.</figcaption>
+<figure class="shot shot-placeholder">
+<img class="shot-img" src="../assets/screens/placeholder.svg" alt="Экран OrroFi: Вне дома" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg">
+<figcaption>Место под кадр: файл появится после съёмки (см. site_report.txt).</figcaption>
 </figure>
 </article><article class="screen-block" id="net-12">
 <header>
@@ -551,9 +554,9 @@
 <dd><ol><li>Откройте приложение OrroFi на iPhone.</li><li>Дойдите до экрана «Связка с оператором».</li><li>Прочитайте пояснение и подтвердите действие, если приложение просит согласие или Face ID.</li></ol></dd>
 </dl>
 </div>
-<figure class="shot missing">
-<img src="../assets/screens/net-12.png" alt="Экран OrroFi: Ваш оператор" width="390" height="844" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='../assets/screens/placeholder.svg'">
-<figcaption>Место под кадр: ожидается файл в assets/screens/.</figcaption>
+<figure class="shot shot-placeholder">
+<img class="shot-img" src="../assets/screens/placeholder.svg" alt="Экран OrroFi: Ваш оператор" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg">
+<figcaption>Место под кадр: файл появится после съёмки (см. site_report.txt).</figcaption>
 </figure>
 </article><article class="screen-block" id="net-12b">
 <header>
@@ -573,7 +576,7 @@
 </dl>
 </div>
 <figure class="shot">
-<picture><source srcset="../assets/screens/net-12b.webp" type="image/webp"><img src="../assets/screens/net-12b.png" alt="Экран OrroFi: Оператор, подписано" width="390" height="844" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='../assets/screens/placeholder.svg'"></picture>
+<picture><source srcset="../assets/screens/net-12b.webp" type="image/webp"><img class="shot-img" src="../assets/screens/net-12b.png" alt="Экран OrroFi: Оператор, подписано" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg"></picture>
 <figcaption>Кадр прототипа приложения (тёмная тема), демонстрационные данные.</figcaption>
 </figure>
 </article><article class="screen-block" id="net-4">
@@ -594,7 +597,7 @@
 </dl>
 </div>
 <figure class="shot">
-<picture><source srcset="../assets/screens/mi-red-2-estado.webp" type="image/webp"><img src="../assets/screens/mi-red-2-estado.png" alt="Экран OrroFi: Состояние сети" width="390" height="844" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='../assets/screens/placeholder.svg'"></picture>
+<picture><source srcset="../assets/screens/mi-red-2-estado.webp" type="image/webp"><img class="shot-img" src="../assets/screens/mi-red-2-estado.png" alt="Экран OrroFi: Состояние сети" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg"></picture>
 <figcaption>Кадр прототипа приложения (тёмная тема), демонстрационные данные.</figcaption>
 </figure>
 </article><article class="screen-block" id="net-4b">
@@ -614,9 +617,9 @@
 <dd><ol><li>Откройте приложение OrroFi на iPhone.</li><li>Дойдите до экрана «Идёт улучшение канала».</li><li>Прочитайте пояснение и подтвердите действие, если приложение просит согласие или Face ID.</li></ol></dd>
 </dl>
 </div>
-<figure class="shot missing">
-<img src="../assets/screens/net-4b.png" alt="Экран OrroFi: Улучшение" width="390" height="844" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='../assets/screens/placeholder.svg'">
-<figcaption>Место под кадр: ожидается файл в assets/screens/.</figcaption>
+<figure class="shot shot-placeholder">
+<img class="shot-img" src="../assets/screens/placeholder.svg" alt="Экран OrroFi: Улучшение" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg">
+<figcaption>Место под кадр: файл появится после съёмки (см. site_report.txt).</figcaption>
 </figure>
 </article><article class="screen-block" id="net-4c">
 <header>
@@ -635,9 +638,9 @@
 <dd><ol><li>Откройте приложение OrroFi на iPhone.</li><li>Дойдите до экрана «Что изменилось».</li><li>Прочитайте пояснение и подтвердите действие, если приложение просит согласие или Face ID.</li></ol></dd>
 </dl>
 </div>
-<figure class="shot missing">
-<img src="../assets/screens/net-4c.png" alt="Экран OrroFi: Результат" width="390" height="844" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='../assets/screens/placeholder.svg'">
-<figcaption>Место под кадр: ожидается файл в assets/screens/.</figcaption>
+<figure class="shot shot-placeholder">
+<img class="shot-img" src="../assets/screens/placeholder.svg" alt="Экран OrroFi: Результат" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg">
+<figcaption>Место под кадр: файл появится после съёмки (см. site_report.txt).</figcaption>
 </figure>
 </article><article class="screen-block" id="net-4d">
 <header>
@@ -656,9 +659,9 @@
 <dd><ol><li>Откройте приложение OrroFi на iPhone.</li><li>Дойдите до экрана «Диагностика недоступна вне дома».</li><li>Прочитайте пояснение и подтвердите действие, если приложение просит согласие или Face ID.</li></ol></dd>
 </dl>
 </div>
-<figure class="shot missing">
-<img src="../assets/screens/net-4d.png" alt="Экран OrroFi: Состояние вне дома" width="390" height="844" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='../assets/screens/placeholder.svg'">
-<figcaption>Место под кадр: ожидается файл в assets/screens/.</figcaption>
+<figure class="shot shot-placeholder">
+<img class="shot-img" src="../assets/screens/placeholder.svg" alt="Экран OrroFi: Состояние вне дома" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg">
+<figcaption>Место под кадр: файл появится после съёмки (см. site_report.txt).</figcaption>
 </figure>
 </article><article class="screen-block" id="net-5">
 <header>
@@ -677,9 +680,9 @@
 <dd><ol><li>Откройте приложение OrroFi на iPhone.</li><li>Дойдите до экрана «Помехи и соседние сети».</li><li>Прочитайте пояснение и подтвердите действие, если приложение просит согласие или Face ID.</li></ol></dd>
 </dl>
 </div>
-<figure class="shot missing">
-<img src="../assets/screens/net-5.png" alt="Экран OrroFi: Канал и соседи" width="390" height="844" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='../assets/screens/placeholder.svg'">
-<figcaption>Место под кадр: ожидается файл в assets/screens/.</figcaption>
+<figure class="shot shot-placeholder">
+<img class="shot-img" src="../assets/screens/placeholder.svg" alt="Экран OrroFi: Канал и соседи" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg">
+<figcaption>Место под кадр: файл появится после съёмки (см. site_report.txt).</figcaption>
 </figure>
 </article><article class="screen-block" id="net-7">
 <header>
@@ -699,7 +702,7 @@
 </dl>
 </div>
 <figure class="shot">
-<picture><source srcset="../assets/screens/net-7.webp" type="image/webp"><img src="../assets/screens/net-7.png" alt="Экран OrroFi: История и перезапуск" width="390" height="844" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='../assets/screens/placeholder.svg'"></picture>
+<picture><source srcset="../assets/screens/net-7.webp" type="image/webp"><img class="shot-img" src="../assets/screens/net-7.png" alt="Экран OrroFi: История и перезапуск" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg"></picture>
 <figcaption>Кадр прототипа приложения (тёмная тема), демонстрационные данные.</figcaption>
 </figure>
 </article><article class="screen-block" id="net-7-confirm">
@@ -719,9 +722,9 @@
 <dd><ol><li>Откройте приложение OrroFi на iPhone.</li><li>Дойдите до экрана «Сеть пропадёт примерно на 2 минуты».</li><li>Прочитайте пояснение и подтвердите действие, если приложение просит согласие или Face ID.</li></ol></dd>
 </dl>
 </div>
-<figure class="shot missing">
-<img src="../assets/screens/net-7-confirm.png" alt="Экран OrroFi: Подтвердить перезапуск" width="390" height="844" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='../assets/screens/placeholder.svg'">
-<figcaption>Место под кадр: ожидается файл в assets/screens/.</figcaption>
+<figure class="shot shot-placeholder">
+<img class="shot-img" src="../assets/screens/placeholder.svg" alt="Экран OrroFi: Подтвердить перезапуск" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg">
+<figcaption>Место под кадр: файл появится после съёмки (см. site_report.txt).</figcaption>
 </figure>
 </article><article class="screen-block" id="net-1e">
 <header>
@@ -741,7 +744,7 @@
 </dl>
 </div>
 <figure class="shot">
-<picture><source srcset="../assets/screens/net-1e.webp" type="image/webp"><img src="../assets/screens/net-1e.png" alt="Экран OrroFi: Пауза интернета" width="390" height="844" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='../assets/screens/placeholder.svg'"></picture>
+<picture><source srcset="../assets/screens/net-1e.webp" type="image/webp"><img class="shot-img" src="../assets/screens/net-1e.png" alt="Экран OrroFi: Пауза интернета" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg"></picture>
 <figcaption>Кадр прототипа приложения (тёмная тема), демонстрационные данные.</figcaption>
 </figure>
 </article><article class="screen-block" id="net-3">
@@ -761,9 +764,9 @@
 <dd><ol><li>Откройте приложение OrroFi на iPhone.</li><li>Дойдите до экрана «Пояснение».</li><li>Прочитайте пояснение и подтвердите действие, если приложение просит согласие или Face ID.</li></ol></dd>
 </dl>
 </div>
-<figure class="shot missing">
-<img src="../assets/screens/net-3.png" alt="Экран OrroFi: Предупреждение при блокировке" width="390" height="844" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='../assets/screens/placeholder.svg'">
-<figcaption>Место под кадр: ожидается файл в assets/screens/.</figcaption>
+<figure class="shot shot-placeholder">
+<img class="shot-img" src="../assets/screens/placeholder.svg" alt="Экран OrroFi: Предупреждение при блокировке" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg">
+<figcaption>Место под кадр: файл появится после съёмки (см. site_report.txt).</figcaption>
 </figure>
 </article><article class="screen-block" id="net-2">
 <header>
@@ -783,7 +786,7 @@
 </dl>
 </div>
 <figure class="shot">
-<picture><source srcset="../assets/screens/mi-red-3-dispositivo.webp" type="image/webp"><img src="../assets/screens/mi-red-3-dispositivo.png" alt="Экран OrroFi: Одно устройство" width="390" height="844" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='../assets/screens/placeholder.svg'"></picture>
+<picture><source srcset="../assets/screens/mi-red-3-dispositivo.webp" type="image/webp"><img class="shot-img" src="../assets/screens/mi-red-3-dispositivo.png" alt="Экран OrroFi: Одно устройство" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg"></picture>
 <figcaption>Кадр прототипа приложения (тёмная тема), демонстрационные данные.</figcaption>
 </figure>
 </article><article class="screen-block" id="net-3b">
@@ -803,18 +806,21 @@
 <dd><ol><li>Откройте приложение OrroFi на iPhone.</li><li>Дойдите до экрана «Появилось неизвестное устройство».</li><li>Прочитайте пояснение и подтвердите действие, если приложение просит согласие или Face ID.</li></ol></dd>
 </dl>
 </div>
-<figure class="shot missing">
-<img src="../assets/screens/net-3b.png" alt="Экран OrroFi: Новое устройство" width="390" height="844" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='../assets/screens/placeholder.svg'">
-<figcaption>Место под кадр: ожидается файл в assets/screens/.</figcaption>
+<figure class="shot shot-placeholder">
+<img class="shot-img" src="../assets/screens/placeholder.svg" alt="Экран OrroFi: Новое устройство" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg">
+<figcaption>Место под кадр: файл появится после съёмки (см. site_report.txt).</figcaption>
 </figure>
 </article></div></section>
+
 
 </main>
 <footer class="site-footer">
 <div class="wrap">
-<p><strong>PADELADA WORLD SL</strong> (NIF B05783238) · услугу оказывает правообладатель бренда OrroFi.</p>
+<p><strong>OrroFi — бренд PADELADA WORLD SL</strong> (NIF B05783238).</p>
+<p>Сайт не использует cookies и счётчики посещений.</p>
 <p>
 <a href="../privacidad/index.html">Безопасность и приватность</a>
+<a href="../privacidad/index.html#sitio-privacidad">Приватность этого сайта</a>
 <a href="../contacto/index.html">Контакты</a>
 <a href="mailto:privacidad@orrofi.es">privacidad@orrofi.es</a>
 </p>

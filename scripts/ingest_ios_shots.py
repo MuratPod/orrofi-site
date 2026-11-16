@@ -9,7 +9,9 @@ from pathlib import Path
 from PIL import Image
 
 ROOT = Path(__file__).resolve().parents[1]
-SOURCE = Path("/cursor/stores/bot/site-shots")
+SOURCE = Path(
+    __import__("os").environ.get("ORROFI_IOS_SHOTS_DIR", ROOT / "scripts" / "data" / "ios-shots-incoming")
+)
 OUT_DIR = ROOT / "assets" / "screens" / "ios"
 MAX_WIDTH = 430
 WEBP_QUALITY = 82

@@ -4,6 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="OrroFi — домашний интернет и домашняя сеть в одном приложении. Сайт-визитка на русском языке.">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self'; style-src 'self'; script-src 'self'; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <title>Счета и оплата · OrroFi</title>
 <link rel="icon" type="image/png" href="../icons/ios/AppIcon-60.png">
 <link rel="stylesheet" href="../assets/css/site.css">
@@ -16,7 +18,7 @@
 <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="nav">Меню</button>
 <nav class="primary" id="nav" aria-label="Основное">
 <ul>
-<li><a href="../">Главная</a></li><li><a href="../vozmozhnosti/index.html">Возможности</a></li><li><a href="../uslugi/index.html">Услуги</a></li><li><a href="../mi-gestor/index.html">Mi gestor</a></li><li><a href="../mi-red/index.html">Mi red</a></li><li><a href="../familia/index.html">Семья</a></li><li><a href="../facturas/index.html" aria-current="page">Счета</a></li><li><a href="../ajustes/index.html">Настройки</a></li><li><a href="../instrukcii/index.html">Инструкции</a></li><li><a href="../privacidad/index.html">Безопасность</a></li><li><a href="../faq/index.html">FAQ</a></li><li><a href="../contacto/index.html">Контакты</a></li>
+<li><a href="../">Главная</a></li><li><a href="../vozmozhnosti/index.html">Возможности</a></li><li><a href="../uslugi/index.html">Услуги</a></li><li><a href="../mi-gestor/index.html">Mi gestor</a></li><li><a href="../mi-red/index.html">Mi red</a></li><li><a href="../familia/index.html">Семья</a></li><li><a href="../facturas/index.html" aria-current="page">Счета</a></li><li><a href="../ajustes/index.html">Настройки</a></li><li><a href="../instrukcii/index.html">Инструкции</a></li><li><a href="../privacidad/index.html">Безопасность</a></li><li><a href="../faq/index.html">Вопросы и ответы</a></li><li><a href="../contacto/index.html">Контакты</a></li>
 </ul>
 </nav>
 </div>
@@ -27,6 +29,7 @@
 <h1>Счета и оплата</h1>
 <p class="lead">Список счетов, карточка и SEPA.</p>
 </div></section>
+
 <section><div class="wrap">
 <nav aria-label="Экраны на странице"><h2>Содержание</h2><ul class="toc"><li><a href="#paymethod">Способ оплаты</a></li><li><a href="#sterror">Ошибка загрузки</a></li><li><a href="#billing">Счета</a></li><li><a href="#invoice">Один счёт</a></li></ul></nav>
 </div></section>
@@ -48,7 +51,7 @@
 </dl>
 </div>
 <figure class="shot">
-<picture><source srcset="../assets/screens/ios/ios-metodo-de-pago.webp" type="image/webp"><img src="../assets/screens/ios/ios-metodo-de-pago.png" alt="Экран OrroFi: Способ оплаты" width="390" height="844" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='../assets/screens/placeholder.svg'"></picture>
+<picture><source srcset="../assets/screens/ios/ios-metodo-de-pago.webp" type="image/webp"><img class="shot-img" src="../assets/screens/ios/ios-metodo-de-pago.png" alt="Экран OrroFi: Способ оплаты" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg"></picture>
 <figcaption>Кадр приложения iOS, демонстрационные данные.</figcaption>
 </figure>
 </article><article class="screen-block" id="sterror">
@@ -69,7 +72,7 @@
 </dl>
 </div>
 <figure class="shot">
-<picture><source srcset="../assets/screens/extras-2-sterror.webp" type="image/webp"><img src="../assets/screens/extras-2-sterror.png" alt="Экран OrroFi: Ошибка загрузки" width="390" height="844" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='../assets/screens/placeholder.svg'"></picture>
+<picture><source srcset="../assets/screens/extras-2-sterror.webp" type="image/webp"><img class="shot-img" src="../assets/screens/extras-2-sterror.png" alt="Экран OrroFi: Ошибка загрузки" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg"></picture>
 <figcaption>Кадр прототипа приложения (тёмная тема), демонстрационные данные.</figcaption>
 </figure>
 </article><article class="screen-block" id="billing">
@@ -89,9 +92,9 @@
 <dd><ol><li>Откройте приложение OrroFi на iPhone.</li><li>Дойдите до экрана «Список счетов».</li><li>Прочитайте пояснение и подтвердите действие, если приложение просит согласие или Face ID.</li></ol></dd>
 </dl>
 </div>
-<figure class="shot missing">
-<img src="../assets/screens/billing.png" alt="Экран OrroFi: Счета" width="390" height="844" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='../assets/screens/placeholder.svg'">
-<figcaption>Место под кадр: ожидается файл в assets/screens/.</figcaption>
+<figure class="shot shot-placeholder">
+<img class="shot-img" src="../assets/screens/placeholder.svg" alt="Экран OrroFi: Счета" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg">
+<figcaption>Место под кадр: файл появится после съёмки (см. site_report.txt).</figcaption>
 </figure>
 </article><article class="screen-block" id="invoice">
 <header>
@@ -111,17 +114,20 @@
 </dl>
 </div>
 <figure class="shot">
-<picture><source srcset="../assets/screens/factura.webp" type="image/webp"><img src="../assets/screens/factura.png" alt="Экран OrroFi: Один счёт" width="390" height="844" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='../assets/screens/placeholder.svg'"></picture>
+<picture><source srcset="../assets/screens/factura.webp" type="image/webp"><img class="shot-img" src="../assets/screens/factura.png" alt="Экран OrroFi: Один счёт" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg"></picture>
 <figcaption>Кадр прототипа приложения (тёмная тема), демонстрационные данные.</figcaption>
 </figure>
 </article></div></section>
 
+
 </main>
 <footer class="site-footer">
 <div class="wrap">
-<p><strong>PADELADA WORLD SL</strong> (NIF B05783238) · услугу оказывает правообладатель бренда OrroFi.</p>
+<p><strong>OrroFi — бренд PADELADA WORLD SL</strong> (NIF B05783238).</p>
+<p>Сайт не использует cookies и счётчики посещений.</p>
 <p>
 <a href="../privacidad/index.html">Безопасность и приватность</a>
+<a href="../privacidad/index.html#sitio-privacidad">Приватность этого сайта</a>
 <a href="../contacto/index.html">Контакты</a>
 <a href="mailto:privacidad@orrofi.es">privacidad@orrofi.es</a>
 </p>

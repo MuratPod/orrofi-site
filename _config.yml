@@ -1,0 +1,7 @@
+# GitHub Pages: публикуем только статический сайт-визитку.
+theme: null
+exclude:
+  - scripts
+  - tools
+  - .gitignore
+  - README.md

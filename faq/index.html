@@ -4,7 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="OrroFi — домашний интернет и домашняя сеть в одном приложении. Сайт-визитка на русском языке.">
-<title>FAQ · OrroFi</title>
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self'; style-src 'self'; script-src 'self'; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Вопросы и ответы · OrroFi</title>
 <link rel="icon" type="image/png" href="../icons/ios/AppIcon-60.png">
 <link rel="stylesheet" href="../assets/css/site.css">
 </head>
@@ -16,7 +18,7 @@
 <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="nav">Меню</button>
 <nav class="primary" id="nav" aria-label="Основное">
 <ul>
-<li><a href="../">Главная</a></li><li><a href="../vozmozhnosti/index.html">Возможности</a></li><li><a href="../uslugi/index.html">Услуги</a></li><li><a href="../mi-gestor/index.html">Mi gestor</a></li><li><a href="../mi-red/index.html">Mi red</a></li><li><a href="../familia/index.html">Семья</a></li><li><a href="../facturas/index.html">Счета</a></li><li><a href="../ajustes/index.html">Настройки</a></li><li><a href="../instrukcii/index.html">Инструкции</a></li><li><a href="../privacidad/index.html">Безопасность</a></li><li><a href="../faq/index.html" aria-current="page">FAQ</a></li><li><a href="../contacto/index.html">Контакты</a></li>
+<li><a href="../">Главная</a></li><li><a href="../vozmozhnosti/index.html">Возможности</a></li><li><a href="../uslugi/index.html">Услуги</a></li><li><a href="../mi-gestor/index.html">Mi gestor</a></li><li><a href="../mi-red/index.html">Mi red</a></li><li><a href="../familia/index.html">Семья</a></li><li><a href="../facturas/index.html">Счета</a></li><li><a href="../ajustes/index.html">Настройки</a></li><li><a href="../instrukcii/index.html">Инструкции</a></li><li><a href="../privacidad/index.html">Безопасность</a></li><li><a href="../faq/index.html" aria-current="page">Вопросы и ответы</a></li><li><a href="../contacto/index.html">Контакты</a></li>
 </ul>
 </nav>
 </div>
@@ -27,14 +29,16 @@
 <h1>Вопросы и ответы</h1>
 <p class="lead">Кратко о сомнениях, которые чаще всего возникают у будущих пользователей.</p>
 </div></section>
-<section><div class="wrap faq"><details><summary>Это уже готовое приложение или только макет?</summary><p>Это собранное демо-приложение OrroFi с фиктивными данными. Дизайн и сценарии утверждены; живая услуга и магазин — следующий этап.</p></details><details><summary>На каких языках говорит приложение?</summary><p>Интерфейс — испанский и английский. Этот сайт-визитка — на русском.</p></details><details><summary>Нужен ли аккаунт, если я ещё не клиент?</summary><p>Есть сценарий проверки покрытия и заявки для нового адреса. Без покрытия приложение честно сообщит об этом.</p></details><details><summary>Видит ли OrroFi пароль моего роутера?</summary><p>Нет в открытом виде. Пароль шифруется на iPhone; на сервер уходит только шифр.</p></details><details><summary>Что видят гости Wi‑Fi?</summary><p>Гостевая сеть пускает в интернет, но изолирует гостей от ваших устройств.</p></details><details><summary>Можно ли добавить телефон мужа или жены?</summary><p>Да, по QR и сверке шести цифр, только с согласия владельца.</p></details><details><summary>Что, если я не просил удалить сеть?</summary><p>Используйте сигнал «Я этого не делал» — заявку примут в службу безопасности.</p></details><details><summary>Когда появится в магазине приложений?</summary><p>Планируется закрытая бета на iOS. Точную дату публикации мы не называем, пока её не утвердят.</p></details><details><summary>Есть ли версия для Android?</summary><p>Сейчас эталон — iOS. Android в объём этой визитки не входит.</p></details></div></section>
+<section><div class="wrap faq"><details><summary>Это уже готовое приложение или только макет?</summary><p>Это собранное демо-приложение OrroFi с фиктивными данными. Дизайн и сценарии утверждены; живая услуга и магазин — следующий этап.</p></details><details><summary>На каких языках говорит приложение?</summary><p>Интерфейс — испанский и английский. Этот сайт-визитка — на русском.</p></details><details><summary>Нужен ли аккаунт, если я ещё не клиент?</summary><p>Есть сценарий проверки покрытия и заявки для нового адреса. Без покрытия приложение честно сообщит об этом.</p></details><details><summary>Видит ли OrroFi пароль моего роутера?</summary><p>Пароль защищён при передаче и хранении.</p></details><details><summary>Что видят гости Wi‑Fi?</summary><p>Гостевая сеть пускает в интернет и отделена от домашней.</p></details><details><summary>Можно ли добавить телефон мужа или жены?</summary><p>Да, по QR и сверке шести цифр, только с согласия владельца.</p></details><details><summary>Что, если я не просил удалить сеть?</summary><p>Используйте сигнал «Я этого не делал» — заявку примут в поддержку.</p></details><details><summary>Когда появится в магазине приложений?</summary><p>Планируется закрытая бета на iOS. Точную дату публикации мы не называем, пока её не утвердят.</p></details><details><summary>Есть ли версия для Android?</summary><p>Сейчас эталон — iOS. Android в объём этой визитки не входит.</p></details></div></section>
 
 </main>
 <footer class="site-footer">
 <div class="wrap">
-<p><strong>PADELADA WORLD SL</strong> (NIF B05783238) · услугу оказывает правообладатель бренда OrroFi.</p>
+<p><strong>OrroFi — бренд PADELADA WORLD SL</strong> (NIF B05783238).</p>
+<p>Сайт не использует cookies и счётчики посещений.</p>
 <p>
 <a href="../privacidad/index.html">Безопасность и приватность</a>
+<a href="../privacidad/index.html#sitio-privacidad">Приватность этого сайта</a>
 <a href="../contacto/index.html">Контакты</a>
 <a href="mailto:privacidad@orrofi.es">privacidad@orrofi.es</a>
 </p>
