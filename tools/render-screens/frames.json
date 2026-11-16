@@ -1,0 +1,370 @@
+{
+  "prototypeUrl": "https://muratpod.github.io/orrofi-proto/",
+  "viewport": { "width": 430, "height": 932 },
+  "deviceScaleFactor": 2,
+  "defaultFlags": {
+    "session": true,
+    "firstLogin": false,
+    "routerLinked": true,
+    "localNet": "granted",
+    "atHome": true,
+    "isOwner": true,
+    "emailConfirmed": true,
+    "canCancel": true,
+    "humanHours": true,
+    "faceid": true,
+    "outage": true
+  },
+  "forbiddenPatterns": [
+    "\\[EMAIL PRIVACIDAD\\]",
+    "\\[URL POLÍTICA\\]",
+    "\\[OPERADOR SOCIO",
+    "\\[RESPONSABLE\\]",
+    "\\[TELÉFONO GRATUITO\\]",
+    "GhoFi",
+    "#E8FF2A",
+    "#D4F200"
+  ],
+  "frames": [
+    {
+      "file": "login-1-login-code.png",
+      "screenId": "login-code",
+      "function": "login",
+      "titleEs": "Código SMS",
+      "descRu": "Ввод шестизначного SMS-кода для входа в приложение.",
+      "flags": { "session": false, "firstLogin": true },
+      "waitMs": 800
+    },
+    {
+      "file": "login-2-loginerr.png",
+      "screenId": "loginerr",
+      "function": "login",
+      "titleEs": "Código incorrecto",
+      "descRu": "Ошибка неверного кода с подсказкой об оставшихся попытках.",
+      "flags": { "session": false }
+    },
+    {
+      "file": "login-3-loginexp.png",
+      "screenId": "loginexp",
+      "function": "login",
+      "titleEs": "Código caducado",
+      "descRu": "Сообщение о просроченном SMS-коде и кнопка повторной отправки.",
+      "flags": { "session": false }
+    },
+    {
+      "file": "login-4-sh-nocode.png",
+      "screenId": "sh-nocode",
+      "function": "login",
+      "titleEs": "¿No recibes el código?",
+      "descRu": "Подсказки, если SMS с кодом не приходит.",
+      "flags": { "session": false }
+    },
+    {
+      "file": "login-5-onb.png",
+      "screenId": "onb",
+      "function": "login",
+      "titleEs": "Cliente nuevo · cobertura",
+      "descRu": "Онбординг нового клиента: проверка адреса и доступная связь.",
+      "flags": { "session": false }
+    },
+    {
+      "file": "login-6-onbnone.png",
+      "screenId": "onbnone",
+      "function": "login",
+      "titleEs": "Sin cobertura",
+      "descRu": "Адрес пока вне зоны покрытия — можно оставить заявку.",
+      "flags": { "session": false }
+    },
+    {
+      "file": "login-8-onb3.png",
+      "screenId": "onb3",
+      "function": "login",
+      "titleEs": "Solicitud enviada",
+      "descRu": "Подтверждение отправки заявки и контакт с менеджером.",
+      "flags": { "session": false }
+    },
+    {
+      "file": "servicios-1-radio.png",
+      "screenId": "radio",
+      "function": "servicios",
+      "titleEs": "Internet radio",
+      "descRu": "Страница радиоканала (фиксированный беспроводной доступ) с уровнем сигнала."
+    },
+    {
+      "file": "servicios-2-movil.png",
+      "screenId": "mobile",
+      "function": "servicios",
+      "titleEs": "Líneas móviles",
+      "descRu": "Обзор мобильных линий и остатка трафика."
+    },
+    {
+      "file": "servicios-3-order-movil-ok.png",
+      "screenId": "order-movil-ok",
+      "function": "servicios",
+      "titleEs": "Línea móvil contratada",
+      "descRu": "Успешное оформление новой мобильной линии."
+    },
+    {
+      "file": "servicios-4-pinpuk.png",
+      "screenId": "sh-pinpuk",
+      "function": "servicios",
+      "titleEs": "PIN y PUK",
+      "descRu": "Показ PIN/PUK после подтверждения Face ID (демо-данные).",
+      "preActions": [{ "click": "[data-reveal='pp']" }],
+      "waitMs": 400
+    },
+    {
+      "file": "servicios-5-wifi.png",
+      "screenId": "wifi",
+      "function": "servicios",
+      "titleEs": "Wi‑Fi",
+      "descRu": "Сводка домашней Wi‑Fi сети OrroFi."
+    },
+    {
+      "file": "servicios-6-install.png",
+      "screenId": "install",
+      "function": "servicios",
+      "titleEs": "Instalación de fibra",
+      "descRu": "Статус монтажа и дата визита техника."
+    },
+    {
+      "file": "servicios-7-cambiar-cita.png",
+      "screenId": "sh-cita",
+      "function": "servicios",
+      "titleEs": "Cambiar cita",
+      "descRu": "Выбор нового окна для визита установщика."
+    },
+    {
+      "file": "factura.png",
+      "screenId": "invoice",
+      "function": "factura",
+      "titleEs": "Detalle de factura",
+      "descRu": "Карточка счёта с разбивкой по услугам и итогом."
+    },
+    {
+      "file": "gestor-1-chat.png",
+      "screenId": "manager",
+      "function": "gestor",
+      "titleEs": "Mi gestor",
+      "descRu": "Чат с ИИ-менеджером и быстрые действия."
+    },
+    {
+      "file": "gestor-2-handoff.png",
+      "screenId": "handoff",
+      "function": "gestor",
+      "titleEs": "Hablar con una persona",
+      "descRu": "Передача разговора живому специалисту в рабочее время."
+    },
+    {
+      "file": "gestor-3-tickets.png",
+      "screenId": "tickets",
+      "function": "gestor",
+      "titleEs": "Mis tickets",
+      "descRu": "Список открытых обращений в поддержку."
+    },
+    {
+      "file": "gestor-4-ticket-instalacion.png",
+      "screenId": "install",
+      "function": "gestor",
+      "titleEs": "Ticket instalación",
+      "descRu": "Деталь заявки на установку (открытый тикет #4790)."
+    },
+    {
+      "file": "mi-red-1-resumen.png",
+      "screenId": "net-1",
+      "function": "mi-red",
+      "titleEs": "Mi red",
+      "descRu": "Обзор домашней сети: устройства, оценка Wi‑Fi и статистика."
+    },
+    {
+      "file": "mi-red-2-estado.png",
+      "screenId": "net-4",
+      "function": "mi-red",
+      "titleEs": "Estado de la red",
+      "descRu": "Оценка качества сети и четыре фактора, из которых она складывается."
+    },
+    {
+      "file": "mi-red-3-dispositivo.png",
+      "screenId": "net-2",
+      "function": "mi-red",
+      "titleEs": "Dispositivo",
+      "descRu": "Карточка отдельного устройства в сети."
+    },
+    {
+      "file": "mi-red-4-sin-router.png",
+      "screenId": "net-1c",
+      "function": "mi-red",
+      "titleEs": "Router sin conexión",
+      "descRu": "Пустое/офлайн-состояние, когда роутер недоступен."
+    },
+    {
+      "file": "familia-1-qr.png",
+      "screenId": "fam-13a",
+      "function": "familia",
+      "titleEs": "Emparejar por QR",
+      "descRu": "На новом телефоне показывается QR для привязки к семейной сети.",
+      "waitMs": 500
+    },
+    {
+      "file": "familia-2-cotejo.png",
+      "screenId": "fam-14a",
+      "function": "familia",
+      "titleEs": "Código de verificación",
+      "descRu": "Сверка шестизначного кода между двумя телефонами."
+    },
+    {
+      "file": "export-datos.png",
+      "screenId": "sh-export",
+      "function": "export-datos",
+      "titleEs": "Descargar mis datos",
+      "descRu": "Запрос выгрузки персональных данных на e-mail."
+    },
+    {
+      "file": "privacidad-red-1-borrado-solicitud.png",
+      "screenId": "del-16a",
+      "function": "privacidad-red",
+      "titleEs": "¿Borrar los datos de Mi red?",
+      "descRu": "Запрос на удаление данных «Mi red» с пояснением сроков."
+    },
+    {
+      "file": "privacidad-red-2-borrado-faceid.png",
+      "screenId": "del-sh-bio",
+      "function": "privacidad-red",
+      "titleEs": "Confirmar con Face ID",
+      "descRu": "Подтверждение отмены удаления через Face ID."
+    },
+    {
+      "file": "privacidad-red-3-borrado-aviso.png",
+      "screenId": "del-16d",
+      "function": "privacidad-red",
+      "titleEs": "Aviso de borrado",
+      "descRu": "Push-уведомление о запланированном удалении данных сети."
+    },
+    {
+      "file": "privacidad-red-4-borrado-cancelado.png",
+      "screenId": "del-16g",
+      "function": "privacidad-red",
+      "titleEs": "Borrado cancelado",
+      "descRu": "Результат отмены удаления данных Mi red."
+    },
+    {
+      "file": "privacidad-red-5-restablecer-solicitud.png",
+      "screenId": "rst-17a",
+      "function": "privacidad-red",
+      "titleEs": "Restablecer Mi red",
+      "descRu": "Запрос сброса домашней сети с отложенным выполнением."
+    },
+    {
+      "file": "privacidad-red-6-restablecer-faceid.png",
+      "screenId": "rst-sh-bio-c",
+      "function": "privacidad-red",
+      "titleEs": "Face ID · restablecer",
+      "descRu": "Подтверждение Face ID перед сбросом Mi red."
+    },
+    {
+      "file": "privacidad-red-7-restablecer-programado.png",
+      "screenId": "rst-17h",
+      "function": "privacidad-red",
+      "titleEs": "Restablecimiento programado",
+      "descRu": "Сброс запланирован; можно отменить до даты выполнения.",
+      "flags": { "resetActive": true }
+    },
+    {
+      "file": "privacidad-red-8-restablecer-aviso.png",
+      "screenId": "rst-17e",
+      "function": "privacidad-red",
+      "titleEs": "Aviso 24 h · restablecer",
+      "descRu": "Напоминание за сутки до автоматического сброса сети."
+    },
+    {
+      "file": "nolo-1-alerta.png",
+      "screenId": "rp-18a",
+      "function": "no-lo-he-hecho-yo",
+      "titleEs": "¿Algo que no has hecho tú?",
+      "descRu": "Предупреждение о подозрительной активности в аккаунте."
+    },
+    {
+      "file": "nolo-2-aviso-recibido.png",
+      "screenId": "rp-18b",
+      "function": "no-lo-he-hecho-yo",
+      "titleEs": "Aviso recibido",
+      "descRu": "Подтверждение отправки сообщения «это был не я»."
+    },
+    {
+      "file": "extras-1-stempty.png",
+      "screenId": "stempty",
+      "function": "extras",
+      "titleEs": "Tickets vacíos",
+      "descRu": "Пустой список тикетов поддержки."
+    },
+    {
+      "file": "extras-2-sterror.png",
+      "screenId": "sterror",
+      "function": "extras",
+      "titleEs": "Error de carga",
+      "descRu": "Состояние ошибки при загрузке раздела."
+    },
+    {
+      "file": "extras-3-stoffline.png",
+      "screenId": "stoffline",
+      "function": "extras",
+      "titleEs": "Sin conexión",
+      "descRu": "Главный экран без интернета с кэшированными данными."
+    },
+    {
+      "file": "extras-push-why.png",
+      "screenId": "push-why",
+      "function": "extras",
+      "titleEs": "Activar avisos",
+      "descRu": "Запрос разрешения на push о счетах, авариях и визитах."
+    },
+    {
+      "file": "extras-notifset.png",
+      "screenId": "notifset",
+      "function": "extras",
+      "titleEs": "Notificaciones",
+      "descRu": "Настройки типов push-уведомлений."
+    },
+    {
+      "file": "extras-sh-faceid.png",
+      "screenId": "sh-faceid",
+      "function": "extras",
+      "titleEs": "Face ID",
+      "descRu": "Включение или отключение Face ID для входа."
+    },
+    {
+      "file": "extras-sh-logout.png",
+      "screenId": "sh-logout",
+      "function": "extras",
+      "titleEs": "Cerrar sesión",
+      "descRu": "Подтверждение выхода из аккаунта."
+    }
+  ],
+  "skipped": [
+    {
+      "screenId": "onb2",
+      "function": "login",
+      "reason": "Блок «Protección de datos» содержит [RESPONSABLE], [EMAIL PRIVACIDAD], [URL POLÍTICA], [OPERADOR SOCIO]."
+    },
+    {
+      "screenId": "order-movil",
+      "function": "servicios",
+      "reason": "На экране юридические плейсхолдеры [PRINCIPALES SERVICIOS] и [ENLACE] в блоке TRIS."
+    },
+    {
+      "screenId": "privacy",
+      "function": "export-datos",
+      "reason": "Внизу экрана виден [EMAIL PRIVACIDAD]."
+    },
+    {
+      "screenId": "net-9b",
+      "function": "export-datos",
+      "reason": "Действие «Descargar» — только toast; отдельный экран не открывается."
+    },
+    {
+      "screenId": "order",
+      "function": "servicios",
+      "reason": "Экран «Contratar» содержит TRIS-плейсхолдеры; для визита используются install/sh-cita."
+    }
+  ]
+}
