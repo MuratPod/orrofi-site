@@ -10,18 +10,27 @@ from __future__ import annotations
 import re
 
 # Дословные фразы, которые уже утверждены. Типографика их не трогает.
-ROUTER_PASSWORD_NEUTRAL = "Пароль защищён при передаче и хранении."
+ROUTER_PASSWORD_NEUTRAL = (
+    "Пароль хранится на телефоне в зашифрованном виде и открывается только после Face ID "
+    "или кода телефона. В открытом виде на наши серверы он не отправляется."
+)
+WIFI_PASSWORD_SHOW = (
+    "Пароль Wi‑Fi показывается только после Face ID, и приложение его не сохраняет."
+)
 RETENTION_PHRASE = (
     "История переписки хранится в течение срока, указанного в политике конфиденциальности."
 )
-GUEST_SPLIT = "Гостевая сеть отделена от домашней."
-GUEST_FAQ = "Гостевая сеть пускает в интернет и отделена от домашней."
+GUEST_SPLIT = (
+    "Гости получают отдельную сеть Wi‑Fi роутера со своим паролем. "
+    "Отделение от домашних устройств зависит от модели и настроек роутера."
+)
+GUEST_FAQ = GUEST_SPLIT
 
 _FROZEN = (
     ROUTER_PASSWORD_NEUTRAL,
+    WIFI_PASSWORD_SHOW,
     RETENTION_PHRASE,
     GUEST_SPLIT,
-    GUEST_FAQ,
     "OrroFi — бренд PADELADA WORLD SL.",
     "Ответственный за обработку персональных данных (responsable del tratamiento)",
 )
@@ -464,7 +473,7 @@ BLURBS: dict[str, list[str]] = {
     ],
     "net-8": [
         "Имя домашнего Wi‑Fi и пароль, который открывается после Face ID.",
-        ROUTER_PASSWORD_NEUTRAL,
+        WIFI_PASSWORD_SHOW,
     ],
     "net-sh-bio": [
         "Система узнаёт вас по лицу, прежде чем показать то, что не стоит оставлять на виду.",

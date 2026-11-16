@@ -1,7 +1,8 @@
-screens_total=137
-functions_total=36
-functions_without_committed_shot=0
+screens_total=134
+functions_total=35
+functions_without_committed_shot=1
 functions_missing_any_committed_shot:
+Безопасность сети
 
 missing_image_placeholders=110
 missing_image_paths:
@@ -24,7 +25,6 @@ net-0d: assets/screens/net-0d.png
 net-entry: assets/screens/net-entry.png
 net-sys-localnet: assets/screens/net-sys-localnet.png
 net-sh-bio: assets/screens/net-sh-bio.png
-net-sh-delcopy: assets/screens/net-sh-delcopy.png
 net-1b: assets/screens/net-1b.png
 net-1d: assets/screens/net-1d.png
 net-12: assets/screens/net-12.png
@@ -110,6 +110,7 @@ net-0e: assets/screens/net-0e.png
 net-00: assets/screens/net-00.png
 net-00b: assets/screens/net-00b.png
 net-00c: assets/screens/net-00c.png
+net-sh-bio: assets/screens/net-sh-bio.png
 login: assets/screens/login.png
 net-12: assets/screens/net-12.png
 privacy: assets/screens/privacy.png

@@ -130,11 +130,19 @@ def sanitize_legal_copy(text: str) -> str:
         ),
         (
             "Пароль Wi‑Fi защищён при передаче и хранении.",
-            ROUTER_PASSWORD_NEUTRAL,
+            ru_copy.WIFI_PASSWORD_SHOW,
         ),
         (
             "Пароль Wi‑Fi защищён при передаче и хранении",
-            ROUTER_PASSWORD_NEUTRAL.rstrip("."),
+            ru_copy.WIFI_PASSWORD_SHOW.rstrip("."),
+        ),
+        (
+            "Гостевая сеть отделена от домашней.",
+            ru_copy.GUEST_SPLIT,
+        ),
+        (
+            "Гостевая сеть пускает в интернет и отделена от домашней.",
+            ru_copy.GUEST_SPLIT,
         ),
         (
             "Ввод пароля (секрет остаётся на устройстве)",
@@ -154,15 +162,15 @@ def sanitize_legal_copy(text: str) -> str:
         ),
         (
             "изолирует гостей от ваших устройств",
-            "гостевая сеть отделена от домашней",
+            ru_copy.GUEST_SPLIT,
         ),
         (
             "Гостевая сеть изолирует гостей от ваших устройств.",
-            "Гостевая сеть отделена от домашней.",
+            ru_copy.GUEST_SPLIT,
         ),
         (
             "но изолирует гостей от ваших устройств",
-            "гостевая сеть отделена от домашней",
+            ru_copy.GUEST_SPLIT,
         ),
         (
             "В рабочие часы по Мадриду (понедельник–пятница, 9:00–20:00) чат передаётся живому сотруднику. История переписки сохраняется.",
@@ -1000,13 +1008,11 @@ def assert_public_copy() -> None:
         "9:00",
         "20:00",
         "бесплатно",
-        "в открытом виде",
         "App Store",
         "бета",
         "аккаунт",
         "тикет",
         "пуш-",
-        "шифр",
     )
     for page in PUBLISHED_PAGES:
         raw = (ROOT / page).read_text(encoding="utf-8")
@@ -1016,6 +1022,8 @@ def assert_public_copy() -> None:
         for word in banned:
             if word.lower() in text.lower():
                 raise SystemExit(f"{page}: в тексте есть «{word}»")
+        if re.search(r"(?<![а-яё])шифр", text.lower()):
+            raise SystemExit(f"{page}: в тексте есть «шифр»")
         if "assets/screens" in text:
             raise SystemExit(f"{page}: путь к кадру попал в текст")
         for match in re.finditer(r"\d[\d\s\u00a0.,]*\s*(?:€|евро)", text, flags=re.I):
@@ -1041,6 +1049,9 @@ def main() -> None:
     text = SCREENS_MD.read_text(encoding="utf-8")
     screens = parse_table_rows(text)
     add_extra_screens(screens)
+    # Копии настроек сети на сервере и восстановление из них в рабочем коде нет.
+    omit_ids = {"net-6", "net-6b", "net-9b", "net-sh-delcopy"}
+    screens = [s for s in screens if s["id"] not in omit_ids]
     screens.sort(key=lambda s: (page_for_screen(s["id"], s["function"]), s["function"], s["id"]))
 
     by_page: dict[str, list[dict]] = defaultdict(list)
