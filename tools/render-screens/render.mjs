@@ -472,19 +472,83 @@ async function prepareMarketingShot(page, frame) {
   }, ICON_URL);
 }
 
+/** Replace the example street and drop claim sentences before the screenshot. */
+async function scrubClaimText(page) {
+  await page.evaluate(() => {
+    const phone = document.getElementById('phone');
+    if (!phone) return;
+    const addressFrom = 'Carrer de Mar 12';
+    const addressShort = 'Carrer de Mar';
+    const addressTo = 'Calle Ejemplo 1';
+    const hideRe = /servidores|copia cifrada|separada|aislad/i;
+
+    function applyAddress(value) {
+      return String(value).split(addressFrom).join(addressTo).split(addressShort).join(addressTo);
+    }
+
+    function hideBlock(el) {
+      if (!el || el === phone) return;
+      const block =
+        el.closest(
+          'p, li, label, button, .note, .dis, .sec2, .b, .opt, .cap, h1, h2, h3, .h2, .cd, .row, .fm',
+        ) || el;
+      const shell =
+        block === phone ||
+        block.id === 'phone' ||
+        block.classList.contains('sc') ||
+        block.classList.contains('in') ||
+        block.classList.contains('sheet') ||
+        block.classList.contains('lockwrap') ||
+        block.classList.contains('tabs');
+      (shell ? el : block).style.display = 'none';
+    }
+
+    const nodes = [];
+    const walker = document.createTreeWalker(phone, NodeFilter.SHOW_TEXT);
+    while (walker.nextNode()) nodes.push(walker.currentNode);
+    for (const node of nodes) {
+      if (!node.textContent) continue;
+      if (node.textContent.includes(addressShort)) node.textContent = applyAddress(node.textContent);
+      if (hideRe.test(node.textContent)) hideBlock(node.parentElement);
+    }
+
+    phone.querySelectorAll('input, textarea').forEach((el) => {
+      const raw = `${el.value || ''} ${el.getAttribute('placeholder') || ''} ${el.getAttribute('aria-label') || ''}`;
+      if (raw.includes(addressShort) && typeof el.value === 'string') {
+        el.value = applyAddress(el.value);
+        el.setAttribute('value', el.value);
+        const placeholder = el.getAttribute('placeholder');
+        if (placeholder && placeholder.includes(addressShort)) {
+          el.setAttribute('placeholder', applyAddress(placeholder));
+        }
+      }
+      const after = `${el.value || ''} ${el.getAttribute('placeholder') || ''} ${el.getAttribute('aria-label') || ''}`;
+      if (hideRe.test(after) || /Carrer de Mar/i.test(after)) hideBlock(el);
+    });
+  });
+}
+
 function collectVisibleText(page) {
   return page.evaluate(() => {
     const phone = document.getElementById('phone');
     if (!phone) return '';
+    let base = '';
     const sheet = phone.querySelector('.sheet:not([hidden])');
     if (sheet && sheet.getAttribute('aria-hidden') !== 'true') {
-      const t = sheet.innerText?.trim();
-      if (t) return t;
+      base = sheet.innerText?.trim() || '';
+    } else {
+      const lock = phone.querySelector('.lockwrap');
+      if (lock && lock.offsetParent !== null) base = lock.innerText || '';
+      else {
+        const sc = phone.querySelector('.sc:not([aria-hidden="true"])');
+        base = (sc && sc.innerText) || phone.innerText || '';
+      }
     }
-    const lock = phone.querySelector('.lockwrap');
-    if (lock && lock.offsetParent !== null) return lock.innerText;
-    const sc = phone.querySelector('.sc:not([aria-hidden="true"])');
-    return (sc && sc.innerText) || phone.innerText || '';
+    const fields = [...phone.querySelectorAll('input, textarea')]
+      .filter((el) => el.offsetParent !== null)
+      .map((el) => el.value || '')
+      .filter(Boolean);
+    return [base, ...fields].join('\n');
   });
 }
 
@@ -528,6 +592,7 @@ async function renderProtoFrame(page, frame) {
   if (waitMs > 0) await page.waitForTimeout(waitMs);
 
   await prepareMarketingShot(page, frame);
+  await scrubClaimText(page);
 
   const text = await collectVisibleText(page);
 
@@ -550,6 +615,7 @@ async function renderProtoFrame(page, frame) {
       e.remove(),
     );
   });
+  await scrubClaimText(page);
 
   const phone = page.locator('#phone');
   const outPath = join(OUT_DIR, frame.file);
@@ -592,8 +658,18 @@ async function main() {
   const page = await context.newPage();
   let protoReady = false;
 
+  const only = new Set(
+    (process.env.RENDER_ONLY || '')
+      .split(',')
+      .map((s) => s.trim())
+      .filter(Boolean),
+  );
+  const frames = only.size
+    ? cfg.frames.filter((f) => only.has(f.screenId) || only.has(f.file))
+    : cfg.frames;
+
   const results = [];
-  for (const frame of cfg.frames) {
+  for (const frame of frames) {
     process.stdout.write(`Rendering ${frame.screenId || frame.drawnHtml} -> ${frame.file} ... `);
     try {
       if (frame.drawnHtml) {
@@ -622,7 +698,9 @@ async function main() {
 
   await browser.close();
   const skipped = [...(cfg.skipped || [])];
-  writeFileSync(join(OUT_DIR, 'index.md'), buildIndexMd(results, skipped));
+  if (!only.size) {
+    writeFileSync(join(OUT_DIR, 'index.md'), buildIndexMd(results, skipped));
+  }
   writeFileSync(
     join(__dirname, 'last-run.json'),
     JSON.stringify({ results, at: new Date().toISOString() }, null, 2),

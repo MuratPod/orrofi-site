@@ -4,14 +4,8 @@ functions_without_committed_shot=1
 functions_missing_any_committed_shot:
 Безопасность сети
 
-missing_image_placeholders=110
+missing_image_placeholders=92
 missing_image_paths:
-order-date: assets/screens/order-date.png
-sh-gb: assets/screens/sh-gb.png
-mgrlimit: assets/screens/mgrlimit.png
-sh-voice: assets/screens/sh-voice.png
-sh-voice-denied: assets/screens/sh-voice-denied.png
-handoffoff: assets/screens/handoffoff.png
 net-0e: assets/screens/net-0e.png
 net-0g: assets/screens/net-0g.png
 net-0h: assets/screens/net-0h.png
@@ -35,17 +29,6 @@ net-5: assets/screens/net-5.png
 net-7-confirm: assets/screens/net-7-confirm.png
 net-3: assets/screens/net-3.png
 net-3b: assets/screens/net-3b.png
-fam-13a2: assets/screens/fam-13a2.png
-fam-13b: assets/screens/fam-13b.png
-fam-13c: assets/screens/fam-13c.png
-fam-13d: assets/screens/fam-13d.png
-fam-13e: assets/screens/fam-13e.png
-fam-14b: assets/screens/fam-14b.png
-fam-15: assets/screens/fam-15.png
-fam-15b: assets/screens/fam-15b.png
-fam-15c: assets/screens/fam-15c.png
-fam-list: assets/screens/fam-list.png
-billing: assets/screens/billing.png
 login: assets/screens/login.png
 privacy: assets/screens/privacy.png
 privsched: assets/screens/privsched.png
@@ -115,4 +98,3 @@ login: assets/screens/login.png
 net-12: assets/screens/net-12.png
 privacy: assets/screens/privacy.png
 privsched: assets/screens/privsched.png
-billing: assets/screens/billing.png

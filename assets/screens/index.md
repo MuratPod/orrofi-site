@@ -56,8 +56,27 @@
 | `net-12b.png` | `net-12b` | site-mi-red | Tu operador firmado | Оператор и договор. |
 | `net-7.png` | `net-7` | site-mi-red | Historial y reinicio | Управление роутером. |
 | `net-1e.png` | `net-1e` | site-mi-red | Pausar internet | Управление сетью: пауза интернета. |
+| `servicios-8-order-date.png` | `order-date` | servicios | Fecha de instalación | Выбор окна визита техника при заказе оптики. |
+| `servicios-9-sh-gb.png` | `sh-gb` | servicios | Añadir datos | Докупка разового пакета трафика с подтверждением Face ID. |
+| `facturas-1-billing.png` | `billing` | factura | Facturas | Список счетов, ближайший платёж и способ оплаты. |
+| `familia-3-qr-oculto.png` | `fam-13a2` | familia | QR oculto | Код приглашения скрыт, потому что экран записывают или делают снимок. |
+| `familia-4-escanea.png` | `fam-13b` | familia | Escanear código | Домашний телефон сканирует QR нового телефона. |
+| `familia-5-anadir.png` | `fam-13c` | familia | ¿Añadir este teléfono? | Владелец подтверждает, что новый телефон можно пустить в сеть. |
+| `familia-6-anadido.png` | `fam-13d` | familia | Teléfono añadido | Телефон принят в семейную сеть. |
+| `familia-7-no-coincide.png` | `fam-13e` | familia | El código no coincide | Код не сошёлся — приглашение отменено. |
+| `familia-8-invitacion-anulada.png` | `fam-14b` | familia | Invitación anulada | Шесть цифр не совпали, приглашение погашено. |
+| `familia-9-aviso.png` | `fam-15` | familia | Aviso: teléfono añadido | Уведомление владельцу: в доме появился новый телефон. |
+| `familia-10-quitar.png` | `fam-15b` | familia | ¿Quitar este teléfono? | Подтверждение удаления телефона из семейной сети. |
+| `familia-11-quitado.png` | `fam-15c` | familia | Teléfono quitado | Телефон больше не в сети, ключ доступа сменён. |
+| `familia-12-lista.png` | `fam-list` | familia | Familia | Телефоны дома: владелец и добавленные, кнопка пригласить. |
+| `gestor-4-limite.png` | `mgrlimit` | gestor | Límite del chat | Сообщение слишком длинное: чат дошёл до лимита. |
+| `gestor-5-voz.png` | `sh-voice` | gestor | Dictado por voz | Запрос разрешения на диктовку: голос обрабатывается на телефоне. |
+| `gestor-6-voz-denegada.png` | `sh-voice-denied` | gestor | Dictado no disponible | Микрофон или распознавание речи выключены — диктовка недоступна. |
+| `gestor-7-fuera-horario.png` | `handoffoff` | gestor | Fuera de horario | Сотрудник сейчас недоступен: можно оставить заявку. |
+| `servicios-fiber.png` | `fiber` | servicios | Fibra | Тариф и статус домашней оптики. |
+| `servicios-order.png` | `order` | servicios | Contratar | Начало заказа: адрес-пример и выбранный тариф оптики. |
+| `servicios-order-sum.png` | `order-sum` | servicios | Resumen del pedido | Сводка заказа: адрес-пример, тариф и окно визита. |
 
 ## No incluidos en assets
 
 - **privacy** (export-datos): Внизу экрана виден [EMAIL PRIVACIDAD].
-- **order** (servicios): Экран «Contratar» содержит TRIS-плейсхолдеры; для визита используются install/sh-cita.

@@ -39,6 +39,10 @@ BANNED_SHOT_FILES = frozenset(
     }
 )
 
+# На странице услуг iOS-кадр этих экранов показывает адрес, который нельзя публиковать.
+# Берём прототип: при съёмке адрес заменяется на «Calle Ejemplo 1».
+USLUGI_PROTO_FIRST = frozenset({"fiber", "order", "order-sum"})
+
 PRICE_EXAMPLE_SCREENS = frozenset(
     {
         "home",
@@ -410,13 +414,15 @@ def pick_shot_file(
 ) -> tuple[str, bool, str]:
     """Return (relative PNG src, file_exists, caption). Prefer iOS in assets/screens/ios/, then proto frames."""
     listed = [n for n in PNG_RE.findall(shots_raw) if n not in BANNED_SHOT_FILES]
+    skip_ios = page_slug == "uslugi" and sid in USLUGI_PROTO_FIRST
 
-    for name in listed:
-        if not name.startswith("ios-"):
-            continue
-        path = f"assets/screens/ios/{name}"
-        if resolve_image(path)[1]:
-            return path, True, with_price_note(sid, ru_copy.CAPTION_DEMO)
+    if not skip_ios:
+        for name in listed:
+            if not name.startswith("ios-"):
+                continue
+            path = f"assets/screens/ios/{name}"
+            if resolve_image(path)[1]:
+                return path, True, with_price_note(sid, ru_copy.CAPTION_DEMO)
 
     for name in asset_files_for(sid, page_slug):
         if name in BANNED_SHOT_FILES:
