@@ -55,6 +55,29 @@
 | `net-12b.png` | `net-12b` | site-mi-red | Tu operador firmado | Оператор и договор. |
 | `net-7.png` | `net-7` | site-mi-red | Historial y reinicio | Управление роутером. |
 | `net-1e.png` | `net-1e` | site-mi-red | Pausar internet | Управление сетью: пауза интернета. |
+| `net-00.png` | `net-00` | site-mi-red | Conectar con tu router | Запрос доступа к роутеру в локальной сети дома. |
+| `net-00.png` | `net-entry` | site-mi-red | Conectar con tu router | Вход в Mi red ведёт к подключению роутера. |
+| `net-00b.png` | `net-00b` | site-mi-red | OrroFi no puede ver tu red | Нет доступа к локальной сети: где включить разрешение. |
+| `net-00c.png` | `net-00c` | site-mi-red | Mi red sin acceso a la red local | Раздел открыт, доступ к локальной сети выключен. |
+| `net-sys-localnet.png` | `net-sys-localnet` | site-mi-red | Red local | Системный запрос разрешения на локальную сеть. |
+| `net-0b.png` | `net-0b` | site-mi-red | Contraseña del router | Ввод пароля администратора роутера. |
+| `net-0c.png` | `net-0c` | site-mi-red | Contraseña incorrecta | Пароль роутера не подошёл. |
+| `net-0d.png` | `net-0d` | site-mi-red | Router conectado | Роутер ответил и подключение готово. |
+| `net-0e.png` | `net-0e` | site-mi-red | Tu red, solo para ti | Почему сеть остаётся только у владельца. |
+| `net-sh-mac.png` | `net-sh-mac` | site-mi-red | ¿Qué es la dirección MAC? | Справка: что такое MAC-адрес. |
+| `net-0g.png` | `net-0g` | site-mi-red | Router protegido | Пароль администратора роутера уже сменён. |
+| `net-0h.png` | `net-0h` | site-mi-red | Refuerzo opcional | Необязательные шаги WPS и WPA3. |
+| `net-sh-bio.png` | `net-sh-bio` | site-mi-red | Confirma con Face ID | Подтверждение Face ID перед показом пароля Wi‑Fi. |
+| `net-1b.png` | `net-1b` | site-mi-red | Mirando tu red | Сеть ещё собирается. |
+| `net-1d.png` | `net-1d` | site-mi-red | Fuera de casa | Домашняя сеть недоступна вне дома. |
+| `net-12.png` | `net-12` | site-mi-red | Tu operador | Согласие связать Mi red с оператором. |
+| `net-4b.png` | `net-4b` | site-mi-red | Mejorando | Идёт попытка улучшить канал Wi‑Fi. |
+| `net-4c.png` | `net-4c` | site-mi-red | Resultado | Результат улучшения канала. |
+| `net-4d.png` | `net-4d` | site-mi-red | Fuera de casa | Диагностику нельзя запустить вне дома. |
+| `net-5.png` | `net-5` | site-mi-red | Canal y vecinos | Канал Wi‑Fi и соседские сети. |
+| `net-7-confirm.png` | `net-7-confirm` | site-mi-red | Confirmar reinicio | Подтверждение перезапуска роутера. |
+| `net-3.png` | `net-3` | site-mi-red | Aviso en bloqueo | Уведомление о новом устройстве до блокировки. |
+| `net-3b.png` | `net-3b` | site-mi-red | Nuevo dispositivo | В сети появилось незнакомое устройство. |
 | `priv-login.png` | `login` | privacidad | Entrar | Вход по номеру телефона. |
 | `priv-privacy.png` | `privacy` | privacidad | Privacidad | Согласия, выгрузка и удаление учётных данных. |
 | `priv-privsched.png` | `privsched` | privacidad | Eliminación programada | Удаление учётных данных назначено, его ещё можно отменить. |

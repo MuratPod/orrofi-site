@@ -3,7 +3,7 @@
  * Render OrroFi prototype screens for the marketing site.
  * Screenshots #phone only (prototype chrome stays outside the crop).
  */
-import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
+import { existsSync, readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { pathToFileURL } from 'node:url';
@@ -110,6 +110,7 @@ const PHONE_LAYOUT_CSS = `
     opacity: 1 !important;
   }
   #phone .sb { flex-shrink: 0 !important; }
+  #phone .gate .gate-btn:not([disabled]) { opacity: 1 !important; }
 `;
 
 /** Entry / redirect-only ids — use concrete screens instead (see frames.json). */
@@ -121,6 +122,9 @@ const REDIRECT_GUARD_IDS = new Set([
   'del-16a',
   'rst-sms',
 ]);
+
+/** Pantallas retiradas por Security: no capturar ni mapear. */
+const SECURITY_SKIP_IDS = new Set(['net-6', 'net-6b', 'net-9b', 'net-sh-delcopy']);
 
 function mergeFlags(frameFlags = {}) {
   return { ...cfg.defaultFlags, ...frameFlags };
@@ -157,6 +161,49 @@ function buildIndexMd(results, skipped) {
     }
   }
   return lines.join('\n') + '\n';
+}
+
+function selectedFrames() {
+  const idx = process.argv.indexOf('--only');
+  if (idx === -1 || !process.argv[idx + 1]) return cfg.frames;
+  const want = new Set(
+    process.argv[idx + 1]
+      .split(',')
+      .map((s) => s.trim())
+      .filter(Boolean),
+  );
+  return cfg.frames.filter((f) => want.has(f.screenId) || want.has(f.file));
+}
+
+function mergeIndexMd(results) {
+  const path = join(OUT_DIR, 'index.md');
+  let text = '';
+  try {
+    text = readFileSync(path, 'utf8');
+  } catch {
+    text = '';
+  }
+  if (!text.includes('| Archivo |')) {
+    writeFileSync(path, buildIndexMd(results, [...(cfg.skipped || [])]));
+    return;
+  }
+  const rows = [];
+  for (const r of results.filter((x) => x.status === 'ok')) {
+    const f =
+      cfg.frames.find((x) => x.screenId === r.screenId && x.file === r.file) ||
+      cfg.frames.find((x) => x.file === r.file);
+    if (!f) continue;
+    const row = `| \`${r.file}\` | \`${f.screenId}\` | ${f.function} | ${f.titleEs} | ${f.descRu} |`;
+    if (!text.includes(`| \`${r.file}\` | \`${f.screenId}\` |`) && !rows.includes(row)) rows.push(row);
+  }
+  if (!rows.length) return;
+  const marker = '\n## No incluidos';
+  const at = text.indexOf(marker);
+  text =
+    at === -1
+      ? text.trimEnd() + '\n' + rows.join('\n') + '\n'
+      : text.slice(0, at) + rows.join('\n') + '\n' + text.slice(at);
+  writeFileSync(path, text);
 }
 
 async function layoutPhone(page) {
@@ -272,6 +319,12 @@ async function runPreSetup(page, setup) {
         btn.classList.remove('d');
       }
     });
+    await page.waitForTimeout(200);
+    return;
+  }
+  if (setup === 'net-sh-bio-sheet') {
+    await protoGo(page, 'net-sh-bio');
+    await page.waitForSelector('#phone [data-screen="net-sh-bio"] .sheet', { timeout: 8000 });
     await page.waitForTimeout(200);
     return;
   }
@@ -438,7 +491,71 @@ async function sanitizePlaceholders(page, mode) {
   }, { rules, mode });
 }
 
+async function scrubSecurityCopy(page, frame) {
+  await page.evaluate(({ screenId }) => {
+    const phone = document.getElementById('phone');
+    if (!phone) return;
+    const addrFrom = 'Carrer de Mar 12';
+    const addrTo = 'Calle Ejemplo 1';
+
+    phone.querySelectorAll('input, textarea').forEach((el) => {
+      if (el.value && el.value.includes(addrFrom)) el.value = el.value.split(addrFrom).join(addrTo);
+    });
+
+    const textNodes = [];
+    const walker = document.createTreeWalker(phone, NodeFilter.SHOW_TEXT);
+    while (walker.nextNode()) textNodes.push(walker.currentNode);
+    for (const node of textNodes) {
+      const parent = node.parentElement;
+      if (!parent || parent.closest('.tabs, .sb')) continue;
+      let t = node.textContent.split(addrFrom).join(addrTo);
+      if (/separada de tu red de casa/i.test(t)) t = 'Activa';
+      if (/Redes separadas/i.test(t)) t = t.replace(/Redes separadas/gi, 'Dos bandas');
+      if (t !== node.textContent) node.textContent = t;
+    }
+
+    const again = [];
+    const walker2 = document.createTreeWalker(phone, NodeFilter.SHOW_TEXT);
+    while (walker2.nextNode()) again.push(walker2.currentNode);
+    for (const node of again) {
+      if (!node.parentElement || node.parentElement.closest('.tabs, .sb')) continue;
+      if (!/separad|aislad|servidores|copia cifrada|Carrer de Mar/i.test(node.textContent)) continue;
+      let t = node.textContent.split(addrFrom).join(addrTo);
+      t = t.replace(/separada de tu red de casa/gi, '');
+      t = t.replace(/Redes separadas/gi, 'Dos bandas');
+      t = t.replace(/\bseparadas\b/gi, 'dos bandas');
+      if (/aislad|servidores|copia cifrada|Carrer de Mar|\bseparada\b/i.test(t)) t = '';
+      node.textContent = t;
+    }
+
+    const killers = /copia cifrada|nuestros servidores|recuperarla en otro dispositivo|aislad|Carrer de Mar|\bseparada\b/i;
+    const els = [...phone.querySelectorAll('p, li, .cap, .note, .sec2, .dis, span, div')];
+    els.sort((a, b) => a.querySelectorAll('*').length - b.querySelectorAll('*').length);
+    for (const el of els) {
+      if (!el.isConnected || el.closest('.tabs, .sb')) continue;
+      if (el.querySelector('button, input, .h2, .nb, .tabs')) continue;
+      const t = (el.innerText || '').trim();
+      if (!t) {
+        if (el.matches('p, li, .cap, .note, .cd, .sec2')) el.remove();
+        continue;
+      }
+      if (screenId === 'net-9' && t === 'Activa') continue;
+      if (killers.test(t)) el.remove();
+    }
+  }, { screenId: frame.screenId || '' });
+}
+
+async function securityLeak(page) {
+  return page.evaluate(() => {
+    const phone = document.getElementById('phone');
+    if (!phone) return '';
+    const inputs = [...phone.querySelectorAll('input, textarea')].map((el) => el.value || '').join('\n');
+    return `${phone.innerText || ''}\n${inputs}`;
+  });
+}
+
 async function prepareMarketingShot(page, frame) {
+  await scrubSecurityCopy(page, frame);
   await applyLiteralReplacements(page);
   await page.evaluate(
     ({ frame, iconUrl }) => {
@@ -510,7 +627,10 @@ async function prepareMarketingShot(page, frame) {
     ({ frame }) => {
       const phone = document.getElementById('phone');
       if (!phone) return;
-      const sc = phone.querySelector('.sc:not([aria-hidden="true"])');
+      const sheet = phone.querySelector('.sheet:not([hidden])');
+      let sc = phone.querySelector('.sc:not([aria-hidden="true"])');
+      if (frame.scrollSheet && sheet) sc = sheet;
+      else if (!sc && sheet) sc = sheet;
       if (!sc) return;
       if (typeof frame.scrollY === 'number') {
         sc.scrollTop = frame.scrollY;
@@ -655,14 +775,17 @@ async function renderProtoFrame(page, frame) {
   const skipFinalGo = (frame.preActions || []).some(
     (a) =>
       (a.setup === 'rst-reset-faceid' && frame.screenId === 'rst-sh-bio-c') ||
-      (a.setup === 'net-8-wifi' && frame.screenId === 'net-8'),
+      (a.setup === 'net-8-wifi' && frame.screenId === 'net-8') ||
+      (a.setup === 'net-sh-bio-sheet' && frame.screenId === 'net-sh-bio'),
   );
-  if (!skipFinalGo) await protoGo(page, frame.screenId);
+  const targetId = frame.goto || frame.screenId;
+  if (!skipFinalGo) await protoGo(page, targetId);
 
   await page
-    .waitForSelector(`#phone [data-screen="${frame.screenId}"], #phone .sheet:not([hidden])`, {
-      timeout: 12000,
-    })
+    .waitForSelector(
+      `#phone [data-screen="${targetId}"], #phone [data-screen="${frame.screenId}"], #phone .sheet:not([hidden])`,
+      { timeout: 12000 },
+    )
     .catch(() => {});
 
   if (frame.clicks?.length) {
@@ -678,6 +801,30 @@ async function renderProtoFrame(page, frame) {
     await sanitizePlaceholders(page, mode);
   } else {
     await applyLiteralReplacements(page);
+  }
+
+  if (frame.fills?.length) {
+    await page.evaluate((fills) => {
+      const phone = document.getElementById('phone');
+      if (!phone) return;
+      for (const fill of fills) {
+        const el = phone.querySelector(fill.selector);
+        if (!el) continue;
+        if (fill.check) {
+          el.checked = true;
+          el.dispatchEvent(new Event('change', { bubbles: true }));
+          const gateBtn = el.closest('.gate')?.querySelector('.gate-btn');
+          if (gateBtn) {
+            gateBtn.disabled = false;
+            gateBtn.setAttribute('aria-disabled', 'false');
+          }
+        }
+        if (fill.value != null) {
+          el.value = fill.value;
+          el.dispatchEvent(new Event('input', { bubbles: true }));
+        }
+      }
+    }, frame.fills);
   }
 
   const waitMs = frame.waitMs ?? 350;
@@ -708,6 +855,17 @@ async function renderProtoFrame(page, frame) {
     }
   }
   if (!text.trim()) return { status: 'empty', reason: 'Pantalla en blanco' };
+  if (frame.expectText && !text.includes(frame.expectText)) {
+    return { status: 'blocked', reason: `No se ve el texto esperado: ${frame.expectText}` };
+  }
+  const leaked = (await securityLeak(page)).toLowerCase();
+  for (const needle of ['servidores', 'copia cifrada', 'separada', 'aislad', 'carrer de mar']) {
+    const at = leaked.indexOf(needle);
+    if (at !== -1) {
+      const snippet = leaked.slice(Math.max(0, at - 40), at + needle.length + 40).replace(/\s+/g, ' ');
+      return { status: 'blocked', reason: `DOM contiene «${needle}»: ${snippet}` };
+    }
+  }
 
   const fullText = await page.evaluate(() => {
     const phone = document.getElementById('phone');
@@ -786,7 +944,12 @@ async function main() {
     [...fromArg, ...fromEnv].map((s) => s.trim()).filter(Boolean),
   );
   mkdirSync(OUT_DIR, { recursive: true });
-  const browser = await chromium.launch({ headless: true });
+  let browser;
+  try {
+    browser = await chromium.launch({ headless: true });
+  } catch {
+    browser = await chromium.launch({ headless: true, channel: 'chrome' });
+  }
   const context = await browser.newContext({
     viewport: cfg.viewport,
     deviceScaleFactor: cfg.deviceScaleFactor,
@@ -805,12 +968,29 @@ async function main() {
 
   const results = [];
   for (const frame of frames) {
+    if (SECURITY_SKIP_IDS.has(frame.screenId)) continue;
     if (frame.aliasOf) {
       console.log(`Alias ${frame.screenId} -> ${frame.aliasOf} (${frame.file})`);
       results.push({ status: 'ok', file: frame.file, screenId: frame.screenId });
       continue;
     }
     process.stdout.write(`Rendering ${frame.screenId || frame.drawnHtml} -> ${frame.file} ... `);
+    if (frame.skipRender) {
+      const outPath = join(OUT_DIR, frame.file);
+      if (!existsSync(outPath)) {
+        console.log('missing');
+        results.push({
+          status: 'error',
+          file: frame.file,
+          screenId: frame.screenId,
+          reason: 'skipRender sin archivo',
+        });
+      } else {
+        console.log('ok reuse');
+        results.push({ status: 'ok', file: frame.file, screenId: frame.screenId });
+      }
+      continue;
+    }
     try {
       if (frame.drawnHtml) {
         const r = await renderDrawnFrame(page, frame);
@@ -838,9 +1018,8 @@ async function main() {
 
   await browser.close();
   const skipped = [...(cfg.skipped || [])];
-  if (!only.size) {
-    writeFileSync(join(OUT_DIR, 'index.md'), buildIndexMd(results, skipped));
-  }
+  if (only.size) mergeIndexMd(results);
+  else writeFileSync(join(OUT_DIR, 'index.md'), buildIndexMd(results, skipped));
   writeFileSync(
     join(__dirname, 'last-run.json'),
     JSON.stringify({ results, at: new Date().toISOString() }, null, 2),

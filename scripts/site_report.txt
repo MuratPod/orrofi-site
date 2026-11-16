@@ -1,37 +1,7 @@
 screens_total=134
 functions_total=35
-functions_without_committed_shot=1
+functions_without_committed_shot=0
 functions_missing_any_committed_shot:
-Безопасность сети
 
-missing_image_placeholders=29
+missing_image_placeholders=0
 missing_image_paths:
-net-0e: assets/screens/net-0e.png
-net-0g: assets/screens/net-0g.png
-net-0h: assets/screens/net-0h.png
-net-sh-mac: assets/screens/net-sh-mac.png
-net-00: assets/screens/net-00.png
-net-00b: assets/screens/net-00b.png
-net-00c: assets/screens/net-00c.png
-net-0b: assets/screens/net-0b.png
-net-0c: assets/screens/net-0c.png
-net-0d: assets/screens/net-0d.png
-net-entry: assets/screens/net-entry.png
-net-sys-localnet: assets/screens/net-sys-localnet.png
-net-sh-bio: assets/screens/net-sh-bio.png
-net-1b: assets/screens/net-1b.png
-net-1d: assets/screens/net-1d.png
-net-12: assets/screens/net-12.png
-net-4b: assets/screens/net-4b.png
-net-4c: assets/screens/net-4c.png
-net-4d: assets/screens/net-4d.png
-net-5: assets/screens/net-5.png
-net-7-confirm: assets/screens/net-7-confirm.png
-net-3: assets/screens/net-3.png
-net-3b: assets/screens/net-3b.png
-net-0e: assets/screens/net-0e.png
-net-00: assets/screens/net-00.png
-net-00b: assets/screens/net-00b.png
-net-00c: assets/screens/net-00c.png
-net-sh-bio: assets/screens/net-sh-bio.png
-net-12: assets/screens/net-12.png
