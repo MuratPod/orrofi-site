@@ -1,0 +1,25 @@
+name: site-check
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Rebuild HTML and validate links
+        run: python3 scripts/build_ru_site.py
+      - name: HTML matches the generator
+        run: git diff --exit-code
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: html-validate
+        run: npx --yes html-validate@9 "**/*.html"

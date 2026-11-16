@@ -24,6 +24,37 @@ _SCREEN_ASSETS: dict[str, list[str]] | None = None
 MISSING_IMAGES: list[str] = []
 PLACEHOLDER_SRC = "assets/screens/placeholder.svg"
 
+# Кадры с служебными заглушками, «Provisional» или бейджем DEMO — не публикуем.
+BANNED_SHOT_FILES = frozenset(
+    {
+        "ios-snapshot-privacidad-iphone-se.png",
+        "ios-pedido-privacidad-consentimiento.png",
+        "ios-login-es-dark.png",
+        "ios-login-es-light.png",
+        "ios-mi-gestor-chat.png",
+    }
+)
+
+PRICE_EXAMPLE_SCREENS = frozenset(
+    {
+        "home",
+        "billing",
+        "invoice",
+        "paymethod",
+        "fiber",
+        "mobile",
+        "radio",
+        "wifi",
+        "order",
+        "order-sum",
+        "order-date",
+        "order-done",
+        "order-movil",
+        "order-movil-ok",
+        "sh-gb",
+    }
+)
+
 PUBLISHED_PAGES = [
     "index.html",
     "vozmozhnosti/index.html",
@@ -62,8 +93,6 @@ SITE_PRIVACY_TEXT = (
 )
 
 FOOTER_COOKIES_LINE = "Сайт не использует cookies и счётчики посещений."
-
-HOLA_EMAIL = "hola@orrofi.es"
 
 META_DESCRIPTIONS: dict[str, str] = {
     "index.html": (
@@ -376,37 +405,41 @@ def resolve_image(path: str) -> tuple[str, bool]:
     return path, False
 
 
+def with_price_note(sid: str, caption: str) -> str:
+    if sid in PRICE_EXAMPLE_SCREENS and "условн" not in caption:
+        return caption.rstrip(".") + ". Цены в демонстрации условные."
+    return caption
+
+
 def pick_shot_file(
     shots_raw: str, sid: str, page_slug: str | None = None
 ) -> tuple[str, bool, str]:
     """Return (relative PNG src, file_exists, caption). Prefer iOS in assets/screens/ios/, then proto frames."""
-    listed = PNG_RE.findall(shots_raw)
+    listed = [n for n in PNG_RE.findall(shots_raw) if n not in BANNED_SHOT_FILES]
 
     for name in listed:
         if not name.startswith("ios-"):
             continue
         path = f"assets/screens/ios/{name}"
         if resolve_image(path)[1]:
-            return path, True, "Демонстрационные данные на кадре."
+            return path, True, with_price_note(sid, "Демонстрационные данные на кадре.")
 
     for name in asset_files_for(sid, page_slug):
+        if name in BANNED_SHOT_FILES:
+            continue
         path = f"assets/screens/{name}"
         if resolve_image(path)[1]:
-            return (
-                path,
-                True,
-                "Демонстрационные данные на кадре.",
-            )
+            return path, True, with_price_note(sid, "Демонстрационные данные на кадре.")
 
     for name in listed:
         if name.startswith("brandbook-"):
             fb = BRANDBOOK_FALLBACK.get(name)
             if fb and resolve_image(fb)[1]:
-                return fb, True, "Демонстрационные данные на кадре."
+                return fb, True, with_price_note(sid, "Демонстрационные данные на кадре.")
 
     legacy = f"assets/screens/{sid}.png"
     if resolve_image(legacy)[1]:
-        return legacy, True, "Демонстрационные данные на кадре."
+        return legacy, True, with_price_note(sid, "Демонстрационные данные на кадре.")
 
     candidates: list[str] = []
     for name in listed:
@@ -419,8 +452,10 @@ def pick_shot_file(
     candidates.append(legacy)
 
     for path in candidates:
+        if Path(path).name in BANNED_SHOT_FILES:
+            continue
         if resolve_image(path)[1]:
-            return path, True, "Демонстрационные данные на кадре."
+            return path, True, with_price_note(sid, "Демонстрационные данные на кадре.")
 
     intended = candidates[0] if candidates else legacy
     if intended != PLACEHOLDER_SRC:
@@ -429,7 +464,8 @@ def pick_shot_file(
 
 
 SCREEN_SECOND_LINE: dict[str, str] = {
-    "billing": "Здесь видны счета и ближайший платёж.",
+    "billing": "Здесь видны счета и ближайший платёж. Цены в демонстрации условные.",
+    "home": "Суммы и тарифы на экране — пример: цены в демонстрации условные.",
     "manager": "Помощник сразу говорит, что он искусственный интеллект.",
     "handoff": "В рабочие часы по мадридскому времени разговор можно передать человеку.",
     "net-0b": ROUTER_PASSWORD_NEUTRAL,
@@ -655,7 +691,6 @@ def shell(title: str, body: str, depth: int, current: str) -> str:
 <a href="{rel_href(f'privacidad/index.html#{SITE_PRIVACY_ANCHOR}', depth)}">Приватность этого сайта</a>
 <a href="{rel_href('contacto/index.html', depth)}">Контакты</a>
 <a href="mailto:{html.escape(LEGAL_OWNER['email_privacy'])}">{html.escape(LEGAL_OWNER['email_privacy'])}</a>
-<a href="mailto:{html.escape(HOLA_EMAIL)}">{html.escape(HOLA_EMAIL)}</a>
 </p>
 <p class="badge-demo">На кадрах — демонстрационные данные. Живая услуга и публикация в магазине приложений ещё впереди.</p>
 </div>
@@ -711,7 +746,7 @@ def build_index(depth_content: str) -> str:
 <section><div class="wrap">
 <h2>Кадры приложения</h2>
 <div class="gallery">
-{_gallery_shot("iOS: `ios-mi-gestor-chat.png`", "manager", "Чат Mi gestor", 0)}
+{_gallery_shot("`gestor-1-chat.png`", "manager", "Чат Mi gestor", 0)}
 {_gallery_shot("iOS: `ios-pedido-resumen.png`", "order-sum", "Сводка заказа", 0)}
 {_gallery_shot("Брендбук: `brandbook-usage-app-mi-red-430x932.png`", "net-1", "Раздел Mi red", 0)}
 {_gallery_shot("iOS: `ios-perfil-dark.png`", "profile", "Профиль", 0)}
@@ -941,8 +976,7 @@ def build_contacto() -> str:
 <h2>OrroFi</h2>
 <p>OrroFi — бренд {html.escape(o['short_name'])}. Ответственный за обработку персональных данных (responsable del tratamiento): {html.escape(o['legal_name'])}, NIF {html.escape(o['nif'])}.</p>
 <p><strong>По вопросам персональных данных:</strong> <a href="mailto:{html.escape(o['email_privacy'])}">{html.escape(o['email_privacy'])}</a></p>
-<p><strong>Общие вопросы:</strong> <a href="mailto:{html.escape(HOLA_EMAIL)}">{html.escape(HOLA_EMAIL)}</a></p>
-<p>Юридический адрес и политика конфиденциальности появятся здесь, когда будут готовы. О политике этого сайта — в разделе <a href="../privacidad/index.html#{SITE_PRIVACY_ANCHOR}">«Приватность на этом сайте»</a>.</p>
+<p>Политика конфиденциальности приложения появится здесь, когда будет готова. О политике этого сайта — в разделе <a href="../privacidad/index.html#{SITE_PRIVACY_ANCHOR}">«Приватность на этом сайте»</a>.</p>
 </div>
 </div></section>
 """
