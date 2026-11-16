@@ -25,6 +25,22 @@
     "#E8FF2A",
     "#D4F200"
   ],
+  "placeholderSanitize": {
+    "legalBlockSelector": ".b-dp",
+    "legalBlockText": "Consulta nuestra política de privacidad en la app.",
+    "defaultBracketReplacement": "Ver condiciones",
+    "exactReplacements": {
+      "[RESPONSABLE]": "el responsable del tratamiento",
+      "[EMAIL PRIVACIDAD]": "la sección de privacidad en la app",
+      "[URL POLÍTICA]": "la política de privacidad en la app",
+      "[OPERADOR SOCIO / ninguno]": "proveedores autorizados, si corresponde",
+      "[TELÉFONO GRATUITO]": "atención en la app",
+      "[PRINCIPALES SERVICIOS: p. ej. facturas y app accesibles, atención por texto, tarifas especiales]. Más detalles en [ENLACE].": "Servicios de accesibilidad y atención disponibles en la app.",
+      "[MAIN SERVICES]. More details at [LINK].": "Servicios de accesibilidad y atención disponibles en la app.",
+      "[ENLACE]": "Ver condiciones",
+      "[LINK]": "Ver condiciones"
+    }
+  },
   "frames": [
     {
       "file": "login-1-login-code.png",
@@ -76,6 +92,15 @@
       "flags": { "session": false }
     },
     {
+      "file": "login-7-onb2.png",
+      "screenId": "onb2",
+      "function": "login",
+      "titleEs": "Solicitud de alta",
+      "descRu": "Форма заявки на подключение с согласиями.",
+      "flags": { "session": false },
+      "sanitizePlaceholders": true
+    },
+    {
       "file": "login-8-onb3.png",
       "screenId": "onb3",
       "function": "login",
@@ -96,6 +121,14 @@
       "function": "servicios",
       "titleEs": "Líneas móviles",
       "descRu": "Обзор мобильных линий и остатка трафика."
+    },
+    {
+      "file": "servicios-3a-order-movil.png",
+      "screenId": "order-movil",
+      "function": "servicios",
+      "titleEs": "Contratar línea móvil",
+      "descRu": "Оформление мобильной линии с резюме договора и согласиями.",
+      "sanitizePlaceholders": true
     },
     {
       "file": "servicios-3-order-movil-ok.png",
@@ -161,13 +194,6 @@
       "function": "gestor",
       "titleEs": "Mis tickets",
       "descRu": "Список открытых обращений в поддержку."
-    },
-    {
-      "file": "gestor-4-ticket-instalacion.png",
-      "screenId": "install",
-      "function": "gestor",
-      "titleEs": "Ticket instalación",
-      "descRu": "Деталь заявки на установку (открытый тикет #4790)."
     },
     {
       "file": "mi-red-1-resumen.png",
@@ -341,16 +367,6 @@
     }
   ],
   "skipped": [
-    {
-      "screenId": "onb2",
-      "function": "login",
-      "reason": "Блок «Protección de datos» содержит [RESPONSABLE], [EMAIL PRIVACIDAD], [URL POLÍTICA], [OPERADOR SOCIO]."
-    },
-    {
-      "screenId": "order-movil",
-      "function": "servicios",
-      "reason": "На экране юридические плейсхолдеры [PRINCIPALES SERVICIOS] и [ENLACE] в блоке TRIS."
-    },
     {
       "screenId": "privacy",
       "function": "export-datos",

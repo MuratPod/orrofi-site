@@ -10,9 +10,11 @@
 | `login-4-sh-nocode.png` | `sh-nocode` | login | ¿No recibes el código? | Подсказки, если SMS с кодом не приходит. |
 | `login-5-onb.png` | `onb` | login | Cliente nuevo · cobertura | Онбординг нового клиента: проверка адреса и доступная связь. |
 | `login-6-onbnone.png` | `onbnone` | login | Sin cobertura | Адрес пока вне зоны покрытия — можно оставить заявку. |
+| `login-7-onb2.png` | `onb2` | login | Solicitud de alta | Форма заявки на подключение с согласиями. |
 | `login-8-onb3.png` | `onb3` | login | Solicitud enviada | Подтверждение отправки заявки и контакт с менеджером. |
 | `servicios-1-radio.png` | `radio` | servicios | Internet radio | Страница радиоканала (фиксированный беспроводной доступ) с уровнем сигнала. |
 | `servicios-2-movil.png` | `mobile` | servicios | Líneas móviles | Обзор мобильных линий и остатка трафика. |
+| `servicios-3a-order-movil.png` | `order-movil` | servicios | Contratar línea móvil | Оформление мобильной линии с резюме договора и согласиями. |
 | `servicios-3-order-movil-ok.png` | `order-movil-ok` | servicios | Línea móvil contratada | Успешное оформление новой мобильной линии. |
 | `servicios-4-pinpuk.png` | `sh-pinpuk` | servicios | PIN y PUK | Показ PIN/PUK после подтверждения Face ID (демо-данные). |
 | `servicios-5-wifi.png` | `wifi` | servicios | Wi‑Fi | Сводка домашней Wi‑Fi сети OrroFi. |
@@ -22,7 +24,6 @@
 | `gestor-1-chat.png` | `manager` | gestor | Mi gestor | Чат с ИИ-менеджером и быстрые действия. |
 | `gestor-2-handoff.png` | `handoff` | gestor | Hablar con una persona | Передача разговора живому специалисту в рабочее время. |
 | `gestor-3-tickets.png` | `tickets` | gestor | Mis tickets | Список открытых обращений в поддержку. |
-| `gestor-4-ticket-instalacion.png` | `install` | gestor | Ticket instalación | Деталь заявки на установку (открытый тикет #4790). |
 | `mi-red-1-resumen.png` | `net-1` | mi-red | Mi red | Обзор домашней сети: устройства, оценка Wi‑Fi и статистика. |
 | `mi-red-2-estado.png` | `net-4` | mi-red | Estado de la red | Оценка качества сети и четыре фактора, из которых она складывается. |
 | `mi-red-3-dispositivo.png` | `net-2` | mi-red | Dispositivo | Карточка отдельного устройства в сети. |
@@ -50,8 +51,6 @@
 
 ## No incluidos en assets
 
-- **onb2** (login): Блок «Protección de datos» содержит [RESPONSABLE], [EMAIL PRIVACIDAD], [URL POLÍTICA], [OPERADOR SOCIO].
-- **order-movil** (servicios): На экране юридические плейсхолдеры [PRINCIPALES SERVICIOS] и [ENLACE] в блоке TRIS.
 - **privacy** (export-datos): Внизу экрана виден [EMAIL PRIVACIDAD].
 - **net-9b** (export-datos): Действие «Descargar» — только toast; отдельный экран не открывается.
 - **order** (servicios): Экран «Contratar» содержит TRIS-плейсхолдеры; для визита используются install/sh-cita.

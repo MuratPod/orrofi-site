@@ -64,6 +64,56 @@ function buildIndexMd(results, skipped) {
   return lines.join('\n') + '\n';
 }
 
+async function sanitizePlaceholders(page, rules) {
+  await page.evaluate((rules) => {
+    const phone = document.getElementById('phone');
+    if (!phone || !rules) return;
+
+    phone.querySelectorAll(rules.legalBlockSelector || '.b-dp').forEach((el) => {
+      const p = document.createElement('p');
+      p.className = 'sec2';
+      p.textContent = rules.legalBlockText;
+      el.replaceChildren(p);
+    });
+
+    const exact = rules.exactReplacements || {};
+    const fallback = rules.defaultBracketReplacement || 'Ver condiciones';
+    const bracketRe = /\[[^\]]+\]/g;
+
+    function replaceBrackets(text) {
+      let out = text;
+      const keys = Object.keys(exact).sort((a, b) => b.length - a.length);
+      for (const key of keys) {
+        out = out.split(key).join(exact[key]);
+      }
+      out = out.replace(bracketRe, (m) => exact[m] || fallback);
+      out = out.replace(/(?:Ver condiciones)(?:\s*·\s*Ver condiciones)+/g, 'Consulta los detalles en la app.');
+      out = out.replace(/\s*·\s*·\s*/g, ' · ');
+      out = out.replace(/\s{2,}/g, ' ');
+      return out.trim();
+    }
+
+    const walker = document.createTreeWalker(phone, NodeFilter.SHOW_TEXT);
+    const nodes = [];
+    while (walker.nextNode()) nodes.push(walker.currentNode);
+    for (const node of nodes) {
+      if (bracketRe.test(node.textContent)) {
+        node.textContent = replaceBrackets(node.textContent);
+      }
+    }
+
+    let rounds = 0;
+    while (rounds < 3 && /\[[^\]]+\]/.test(phone.innerText)) {
+      for (const node of nodes) {
+        if (bracketRe.test(node.textContent)) {
+          node.textContent = replaceBrackets(node.textContent);
+        }
+      }
+      rounds++;
+    }
+  }, rules);
+}
+
 async function applyState(page, flags, theme, lang) {
   await page.evaluate(
     ({ flags, theme, lang }) => {
@@ -99,6 +149,10 @@ async function renderOne(page, frame) {
     }
   }
 
+  if (frame.sanitizePlaceholders) {
+    await sanitizePlaceholders(page, cfg.placeholderSanitize);
+  }
+
   const waitMs = frame.waitMs ?? 350;
   if (waitMs > 0) await page.waitForTimeout(waitMs);
 
@@ -131,6 +185,9 @@ async function renderOne(page, frame) {
   const sc = active || document.querySelector('.sc:not([aria-hidden="true"])') || document.querySelector('#phone .sc');
     return (sc && sc.innerText) || document.getElementById('phone').innerText;
   });
+  if (frame.sanitizePlaceholders && /\[[^\]]+\]/.test(text)) {
+    return { status: 'blocked', reason: 'Quedan marcadores [...] tras sanitizar' };
+  }
   for (const pat of cfg.forbiddenPatterns) {
     const re = new RegExp(pat, 'i');
     if (re.test(text)) {
@@ -140,7 +197,7 @@ async function renderOne(page, frame) {
   if (!text.trim()) {
     return { status: 'empty', reason: 'Pantalla en blanco' };
   }
-  if (!/OrroFi|Código|Mi |Servicios|Fibra|Factura|Tickets|Wi|red|SMS|gestor|Perfil|Instalación|Borrar|Restablecer|Familia|Móvil|Radio|Entrar|Avisos|Solicitud|Cliente|Introduce|Descargar|Privacidad|Face ID|Cerrar/i.test(text)) {
+  if (!/OrroFi|Código|Mi |Servicios|Fibra|Factura|Tickets|Wi|red|SMS|gestor|Perfil|Instalación|Borrar|Restablecer|Familia|Móvil|Radio|Entrar|Avisos|Solicitud|Cliente|Introduce|Descargar|Privacidad|Face ID|Cerrar|Contratar|Tarifa|Línea|Nombre|Teléfono|política/i.test(text)) {
     return { status: 'suspicious', reason: 'No se detectó texto UI esperado en español' };
   }
 
