@@ -1,14 +1,4 @@
 screens_total=137
 functions_total=36
-functions_without_committed_shot=10
+functions_without_committed_shot=0
 functions_missing_any_committed_shot:
-Mi red: защита
-Mi red: подключение
-Wi‑Fi дома
-Безопасность сети
-Вход по Face ID
-Гостевой Wi‑Fi
-Ключи на устройстве
-Оператор и договор
-Управление роутером
-Управление сетью
