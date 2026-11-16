@@ -22,6 +22,92 @@ BRANDBOOK_FALLBACK: dict[str, str] = {
 }
 _SCREEN_ASSETS: dict[str, list[str]] | None = None
 
+# Сведения LSSI / контакты (единый источник).
+LEGAL_OWNER = {
+    "legal_name": "PADELADA WORLD, S.L. (Sociedad Unipersonal)",
+    "short_name": "PADELADA WORLD SL",
+    "nif": "B05783238",
+    "address": "Calle Josep Pla, 8, Esc. 1, Pta. 1, 17252 Calonge i Sant Antoni (Girona), España",
+    "registry": "Registro Mercantil de Girona, hoja GI-80156, inscripción 1.ª",
+    "email_privacy": "privacidad@orrofi.es",
+}
+
+SITE_PRIVACY_ANCHOR = "sitio-privacidad"
+
+SITE_PRIVACY_TEXT = (
+    "Сайт не собирает данные через формы и не использует cookies. "
+    "Хостинг GitHub Pages (GitHub, Inc., США) технически получает IP-адрес и сведения "
+    "о браузере при открытии страниц. Если вы пишете нам на privacidad@orrofi.es, "
+    "PADELADA WORLD SL использует ваше письмо только для ответа (ст. 6(1)(f) RGPD) "
+    "и хранит его, пока нужно для ответа. Вы вправе получить доступ к данным, "
+    "исправить, удалить или ограничить их, возразить против обработки и подать жалобу "
+    "в AEPD (aepd.es). Полная политика конфиденциальности приложения появится до его запуска."
+)
+
+FOOTER_COOKIES_LINE = "Сайт не использует cookies и счётчики посещений."
+
+
+def sanitize_legal_copy(text: str) -> str:
+    """Смягчение формулировок по ревью Legal (не меняем материалы в _inputs)."""
+    rules = [
+        (
+            "Нет в открытом виде. Пароль шифруется на iPhone; на сервер уходит только шифр.",
+            "Пароль Wi‑Fi защищён при передаче и хранении.",
+        ),
+        (
+            "Пароль шифруется на iPhone; на сервер уходит только шифр, не открытый пароль.",
+            "Пароль Wi‑Fi защищён при передаче и хранении.",
+        ),
+        (
+            "Он шифруется на iPhone и на сервер уходит только шифр, не открытый пароль.",
+            "Пароль Wi‑Fi защищён при передаче и хранении.",
+        ),
+        (
+            "Пароль роутера шифруется на телефоне",
+            "Пароль Wi‑Fi защищён при передаче и хранении",
+        ),
+        (
+            "изолирует гостей от ваших устройств",
+            "гостевая сеть отделена от домашней",
+        ),
+        (
+            "Гостевая сеть изолирует гостей от ваших устройств.",
+            "Гостевая сеть отделена от домашней.",
+        ),
+        (
+            "но изолирует гостей от ваших устройств",
+            "гостевая сеть отделена от домашней",
+        ),
+        (
+            "В рабочие часы по Мадриду (понедельник–пятница, 9:00–20:00) чат передаётся живому сотруднику. История переписки сохраняется.",
+            "При необходимости к разговору подключится сотрудник. "
+            "История переписки хранится в течение срока, указанного в политике конфиденциальности.",
+        ),
+        (
+            "Нажмите «Hablar con una persona» в рабочие часы по Мадриду.",
+            "Нажмите «Hablar con una persona», если нужен сотрудник.",
+        ),
+        (
+            "Вне часов оставьте заявку — приложение честно скажет, когда ответят.",
+            "Если сотрудник недоступен, оставьте заявку в чате.",
+        ),
+        (
+            "Введите пароль роутера — он останется зашифрованным на телефоне.",
+            "Введите пароль роутера. Пароль Wi‑Fi защищён при передаче и хранении.",
+        ),
+        (
+            "Передача живому сотруднику в часы Пн–Пт 9:00–20:00 (Europe/Madrid)",
+            "Передача разговора сотруднику",
+        ),
+        (
+            "заявку примут в службу безопасности",
+            "заявку примут в поддержку",
+        ),
+    ]
+    for old, new in rules:
+        text = text.replace(old, new)
+    return text
+
 NAV = [
     ("index.html", "Главная"),
     ("vozmozhnosti/index.html", "Возможности"),
@@ -237,7 +323,7 @@ def pick_shot_file(
 
 
 def prose_what(what: str, func: str, sid: str) -> str:
-    base = what.rstrip(".")
+    base = sanitize_legal_copy(what.rstrip("."))
     return (
         f"<p>На экране «{html.escape(base)}» собрана часть сценария «{html.escape(func)}». "
         f"Интерфейс приложения на испанском или английском; здесь — смысл на русском.</p>"
@@ -250,11 +336,18 @@ def prose_usage(what: str, func: str, sid: str) -> str:
         "login-code": "Введите пятизначный код из SMS. Код действует пять минут. Если ошиблись — останутся попытки до блокировки.",
         "loginlock": "После пяти неверных кодов вход блокируется на 15 минут. Подождите или свяжитесь с поддержкой через Mi gestor.",
         "manager": "Напишите вопрос обычным текстом или выберите быстрый ответ. Помощник сразу представится как ИИ. Длинные сообщения обрезаются лимитом в 2000 знаков.",
-        "handoff": "В рабочие часы по Мадриду (понедельник–пятница, 9:00–20:00) чат передаётся живому сотруднику. История переписки сохраняется.",
-        "net-0b": "Введите пароль администратора роутера. Он шифруется на iPhone и на сервер уходит только шифр, не открытый пароль.",
+        "handoff": (
+            "При необходимости к разговору подключится сотрудник. "
+            "История переписки хранится в течение срока, указанного в политике конфиденциальности."
+        ),
+        "net-0b": "Введите пароль администратора роутера. Пароль Wi‑Fi защищён при передаче и хранении.",
         "fam-14a": "Сверьте шесть цифр с тем, что показывает второй телефон. Так вы убеждаетесь, что приглашаете именно свой дом, а не чужой.",
     }
-    text = hints.get(sid, f"Откройте раздел «{func}» в приложении и дойдите до экрана с идентификатором {sid}. Следуйте подсказкам на экране.")
+    text = hints.get(
+        sid,
+        f"Откройте раздел «{func}» в приложении и дойдите до экрана с идентификатором {sid}. Следуйте подсказкам на экране.",
+    )
+    text = sanitize_legal_copy(text)
     return f"<p>{html.escape(text)}</p>"
 
 
@@ -267,9 +360,10 @@ def prose_settings(func: str, sid: str) -> str:
 
 
 def prose_steps(what: str, sid: str) -> str:
+    what_clean = sanitize_legal_copy(what.split(",")[0])
     steps = [
         "Откройте приложение OrroFi на iPhone.",
-        f"Дойдите до экрана «{what.split(',')[0]}».",
+        f"Дойдите до экрана «{what_clean}».",
         "Прочитайте пояснение и подтвердите действие, если приложение просит согласие или Face ID.",
     ]
     items = "".join(f"<li>{html.escape(s)}</li>" for s in steps)
@@ -417,11 +511,13 @@ def shell(title: str, body: str, depth: int, current: str) -> str:
 </main>
 <footer class="site-footer">
 <div class="wrap">
-<p><strong>PADELADA WORLD SL</strong> (NIF B05783238) · услугу оказывает правообладатель бренда OrroFi.</p>
+<p><strong>OrroFi — бренд {html.escape(LEGAL_OWNER["short_name"])}</strong> (NIF {html.escape(LEGAL_OWNER["nif"])}).</p>
+<p>{html.escape(FOOTER_COOKIES_LINE)}</p>
 <p>
 <a href="{rel_href('privacidad/index.html', depth)}">Безопасность и приватность</a>
+<a href="{rel_href(f'privacidad/index.html#{SITE_PRIVACY_ANCHOR}', depth)}">Приватность этого сайта</a>
 <a href="{rel_href('contacto/index.html', depth)}">Контакты</a>
-<a href="mailto:privacidad@orrofi.es">privacidad@orrofi.es</a>
+<a href="mailto:{html.escape(LEGAL_OWNER['email_privacy'])}">{html.escape(LEGAL_OWNER['email_privacy'])}</a>
 </p>
 <p class="badge-demo">Демонстрационные данные на кадрах приложения. Живая услуга и публикация в магазине — отдельный этап.</p>
 </div>
@@ -451,7 +547,7 @@ def build_index(depth_content: str) -> str:
 <section class="hero"><div class="wrap">
 <p class="tag" style="font-weight:800;color:var(--accent);text-transform:uppercase;font-size:14px">Приложение OrroFi</p>
 <h1>Весь домашний интернет и домашняя сеть — в одном приложении</h1>
-<p class="lead">OrroFi помогает видеть услуги, счета и аварии, общаться с умным помощником <strong>Mi gestor</strong> и управлять домашней сетью в разделе <strong>Mi red</strong> — без лишних звонков и без раскрытия пароля роутера.</p>
+<p class="lead">OrroFi помогает видеть услуги, счета и аварии, общаться с умным помощником <strong>Mi gestor</strong> и управлять домашней сетью в разделе <strong>Mi red</strong> — без лишних звонков и с заботой о защите пароля Wi‑Fi.</p>
 <div class="hero-actions">
 <a class="btn btn-primary" href="vozmozhnosti/">Возможности</a>
 <a class="btn btn-secondary" href="instrukcii/">Как начать</a>
@@ -467,7 +563,7 @@ def build_index(depth_content: str) -> str:
 <p>Скорость, статус линий, заказ подключения и честные экраны аварии или визита мастера.</p>
 <p><a href="uslugi/">Услуги и подключение</a></p></div>
 <div class="card"><p class="tag">Помощник</p><h3>Mi gestor</h3>
-<p>ИИ сразу представляется, отвечает кратко и при необходимости передаёт разговор человеку в рабочие часы.</p>
+<p>ИИ сразу представляется, отвечает кратко и при необходимости подключает сотрудника.</p>
 <p><a href="mi-gestor/">Подробнее о Mi gestor</a></p></div>
 <div class="card"><p class="tag">Дом</p><h3>Mi red и семья</h3>
 <p>Устройства в сети, пауза интернета, гостевой Wi‑Fi и безопасное добавление телефона близких по QR.</p>
@@ -524,21 +620,27 @@ def build_vozmozhnosti(screens_by_page: dict, functions: dict) -> str:
 """
 
 
-def build_topic_page(title: str, lead: str, screens: list[dict], page_slug: str) -> str:
+def build_topic_screens(screens: list[dict], page_slug: str) -> str:
     depth = 1
     blocks = "".join(render_screen_block(s, depth, page_slug) for s in screens)
     toc = "".join(
         f'<li><a href="#{html.escape(s["id"])}">{html.escape(s["title"])}</a></li>' for s in screens
     )
     return f"""
-<section class="hero"><div class="wrap">
-<h1>{html.escape(title)}</h1>
-<p class="lead">{lead}</p>
-</div></section>
 <section><div class="wrap">
 <nav aria-label="Экраны на странице"><h2>Содержание</h2><ul class="toc">{toc}</ul></nav>
 </div></section>
 <section><div class="wrap">{blocks}</div></section>
+"""
+
+
+def build_topic_page(title: str, lead: str, screens: list[dict], page_slug: str) -> str:
+    return f"""
+<section class="hero"><div class="wrap">
+<h1>{html.escape(title)}</h1>
+<p class="lead">{lead}</p>
+</div></section>
+{build_topic_screens(screens, page_slug)}
 """
 
 
@@ -582,7 +684,7 @@ INSTRUKCII = [
     ]),
     ("Пауза интернета, гости, перезагрузка", "mi-red/index.html#net-1e", [
         "Пауза временно отключает интернет для выбранных устройств.",
-        "Гостевая сеть изолирует гостей от ваших устройств.",
+        "Гостевая сеть отделена от домашней.",
         "Перезапуск роутера занимает около двух минут — приложение предупредит.",
     ]),
     ("Выгрузка и удаление аккаунта", "privacidad/index.html#privacy", [
@@ -600,7 +702,7 @@ INSTRUKCII = [
 def build_instrukcii() -> str:
     items = []
     for title, link, steps in INSTRUKCII:
-        sl = "".join(f"<li>{html.escape(s)}</li>" for s in steps)
+        sl = "".join(f"<li>{html.escape(sanitize_legal_copy(s))}</li>" for s in steps)
         items.append(
             f'<li><h3>{html.escape(title)}</h3><ol>{sl}</ol><p><a href="../{html.escape(link)}">Связанные экраны</a></p></li>'
         )
@@ -617,10 +719,10 @@ FAQ = [
     ("Это уже готовое приложение или только макет?", "Это собранное демо-приложение OrroFi с фиктивными данными. Дизайн и сценарии утверждены; живая услуга и магазин — следующий этап."),
     ("На каких языках говорит приложение?", "Интерфейс — испанский и английский. Этот сайт-визитка — на русском."),
     ("Нужен ли аккаунт, если я ещё не клиент?", "Есть сценарий проверки покрытия и заявки для нового адреса. Без покрытия приложение честно сообщит об этом."),
-    ("Видит ли OrroFi пароль моего роутера?", "Нет в открытом виде. Пароль шифруется на iPhone; на сервер уходит только шифр."),
-    ("Что видят гости Wi‑Fi?", "Гостевая сеть пускает в интернет, но изолирует гостей от ваших устройств."),
+    ("Видит ли OrroFi пароль моего роутера?", "Пароль Wi‑Fi защищён при передаче и хранении."),
+    ("Что видят гости Wi‑Fi?", "Гостевая сеть пускает в интернет и отделена от домашней."),
     ("Можно ли добавить телефон мужа или жены?", "Да, по QR и сверке шести цифр, только с согласия владельца."),
-    ("Что, если я не просил удалить сеть?", "Используйте сигнал «Я этого не делал» — заявку примут в службу безопасности."),
+    ("Что, если я не просил удалить сеть?", "Используйте сигнал «Я этого не делал» — заявку примут в поддержку."),
     ("Когда появится в магазине приложений?", "Планируется закрытая бета на iOS. Точную дату публикации мы не называем, пока её не утвердят."),
     ("Есть ли версия для Android?", "Сейчас эталон — iOS. Android в объём этой визитки не входит."),
 ]
@@ -629,7 +731,10 @@ FAQ = [
 def build_faq() -> str:
     items = []
     for q, a in FAQ:
-        items.append(f"<details><summary>{html.escape(q)}</summary><p>{html.escape(a)}</p></details>")
+        items.append(
+            f"<details><summary>{html.escape(q)}</summary>"
+            f"<p>{html.escape(sanitize_legal_copy(a))}</p></details>"
+        )
     return f"""
 <section class="hero"><div class="wrap">
 <h1>Вопросы и ответы</h1>
@@ -639,29 +744,60 @@ def build_faq() -> str:
 """
 
 
+def lssi_owner_ru() -> str:
+    o = LEGAL_OWNER
+    return (
+        f"Владелец: {o['legal_name']}. NIF: {o['nif']}. "
+        f"Адрес: {o['address']}. Регистрация: {o['registry']}. "
+        f"Почта: {o['email_privacy']}."
+    )
+
+
+def lssi_owner_es() -> str:
+    o = LEGAL_OWNER
+    return (
+        f"Titular: {o['legal_name']} · NIF {o['nif']} · "
+        f"Domicilio: {o['address']} · Inscrita en el {o['registry']} · {o['email_privacy']}"
+    )
+
+
 def build_contacto() -> str:
-    return """
+    o = LEGAL_OWNER
+    return f"""
 <section class="hero"><div class="wrap">
 <h1>Контакты и сведения о компании</h1>
-<p class="lead">Кто оказывает услугу и как связаться по вопросам данных.</p>
+<p class="lead">Как связаться по вопросам данных и где узнать о владельце сайта.</p>
 </div></section>
 <section><div class="wrap">
 <div class="card">
-<h2>PADELADA WORLD SL</h2>
-<p>NIF B05783238. Правообладатель бренда OrroFi и оператор обработки персональных данных в описанной модели.</p>
-<p><strong>Почта по приватности:</strong> <a href="mailto:privacidad@orrofi.es">privacidad@orrofi.es</a></p>
-<p><strong>Общие вопросы:</strong> адрес <a href="mailto:hola@orrofi.es">hola@orrofi.es</a> может быть опубликован для клиентов после отдельного решения руководства — на этой визитке мы не выдаём его за единственный канал поддержки.</p>
-<p>Юридический адрес, бесплатная телефонная линия и полный текст политики конфиденциальности появятся здесь, когда их предоставит служба Legal. Мы не выдумываем номера и обещания.</p>
-<p>Полная политика конфиденциальности будет связана со страницей «Безопасность», как только появится утверждённый URL.</p>
+<h2 id="lssi">Сведения о владельце сайта (ст. 10 LSSI)</h2>
+<p>{html.escape(lssi_owner_ru())}</p>
+<p lang="es">{html.escape(lssi_owner_es())}</p>
+</div>
+<div class="card">
+<h2>OrroFi</h2>
+<p>OrroFi — бренд {html.escape(o['short_name'])}. Ответственный за обработку персональных данных (responsable del tratamiento): {html.escape(o['legal_name'])}, NIF {html.escape(o['nif'])}.</p>
+<p><strong>Почта по приватности:</strong> <a href="mailto:{html.escape(o['email_privacy'])}">{html.escape(o['email_privacy'])}</a></p>
+<p>Полный текст политики конфиденциальности приложения и условия услуги появятся здесь до запуска услуги. О политике этого сайта — в разделе <a href="../privacidad/index.html#{SITE_PRIVACY_ANCHOR}">«Приватность на этом сайте»</a>.</p>
 </div>
 </div></section>
 """
 
 
 def build_privacidad_intro() -> str:
-    return """
+    o = LEGAL_OWNER
+    return f"""
 <p class="lead">Здесь собраны экраны входа, приватности, удаления данных Mi red, сброса сети и сигнала о подозрительных действиях.</p>
-<p>Контакт по данным: <a href="mailto:privacidad@orrofi.es">privacidad@orrofi.es</a>. Вы вправе обратиться в испанское агентство AEPD.</p>
+<p>Контакт по данным: <a href="mailto:{html.escape(o['email_privacy'])}">{html.escape(o['email_privacy'])}</a>. Вы вправе обратиться в испанское агентство AEPD.</p>
+"""
+
+
+def build_site_privacy_section() -> str:
+    return f"""
+<section id="{SITE_PRIVACY_ANCHOR}"><div class="wrap">
+<h2>Приватность на этом сайте</h2>
+<p>{html.escape(SITE_PRIVACY_TEXT)}</p>
+</div></section>
 """
 
 
@@ -708,7 +844,12 @@ def main() -> None:
     for slug, (title, lead, current) in page_meta.items():
         body = build_topic_page(title, lead if isinstance(lead, str) else str(lead), by_page[slug], slug)
         if slug == "privacidad":
-            body = build_topic_page(title, build_privacidad_intro(), by_page[slug], slug)
+            body = (
+                f'<section class="hero"><div class="wrap"><h1>{html.escape(title)}</h1>'
+                f"{build_privacidad_intro()}</div></section>"
+                + build_site_privacy_section()
+                + build_topic_screens(by_page[slug], slug)
+            )
         write_page(f"{slug}/index.html", title, body, current)
 
     write_page("instrukcii/index.html", "Инструкции", build_instrukcii(), "instrukcii/index.html")
