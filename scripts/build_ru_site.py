@@ -63,6 +63,29 @@ SITE_PRIVACY_TEXT = (
 
 FOOTER_COOKIES_LINE = "Сайт не использует cookies и счётчики посещений."
 
+HOLA_EMAIL = "hola@orrofi.es"
+
+META_DESCRIPTIONS: dict[str, str] = {
+    "index.html": (
+        "OrroFi — домашний интернет, Wi‑Fi и устройства в одном приложении: "
+        "видно, кто в сети, почему тормозит связь и что со счетами."
+    ),
+    "vozmozhnosti/index.html": "Всё, что умеет OrroFi: разделы приложения, кадры и короткие пояснения.",
+    "uslugi/index.html": (
+        "Оптика, радиодоступ, мобильная связь и Wi‑Fi: заказ, сбои, визит мастера и подключение нового дома."
+    ),
+    "mi-gestor/index.html": "Помощник OrroFi: короткие ответы, голос, разговор с человеком и заявки.",
+    "mi-red/index.html": "Домашняя сеть: роутер, устройства, гости, безопасность и перезапуск.",
+    "familia/index.html": "Как добавить телефон близких в домашнюю сеть — по QR и сверке кода.",
+    "facturas/index.html": "Счета, подробности платежа и банковское поручение SEPA.",
+    "ajustes/index.html": "Профиль, тема, язык, вход по Face ID и уведомления.",
+    "instrukcii/index.html": "Короткие шаги по демонстрации OrroFi.",
+    "privacidad/index.html": "Вход, данные, удаление и сброс домашней сети, сигнал о чужих действиях.",
+    "faq/index.html": "Короткие ответы на частые вопросы об OrroFi.",
+    "contacto/index.html": "Кто стоит за OrroFi и как нам написать.",
+}
+META_DEFAULT = "OrroFi — домашний интернет и Wi‑Fi в одном приложении."
+
 ROUTER_PASSWORD_NEUTRAL = "Пароль защищён при передаче и хранении."
 
 CSP_POLICY = (
@@ -160,14 +183,14 @@ NAV = [
     ("index.html", "Главная"),
     ("vozmozhnosti/index.html", "Возможности"),
     ("uslugi/index.html", "Услуги"),
-    ("mi-gestor/index.html", "Mi gestor"),
-    ("mi-red/index.html", "Mi red"),
+    ("mi-gestor/index.html", "Помощник (Mi gestor)"),
+    ("mi-red/index.html", "Сеть (Mi red)"),
     ("familia/index.html", "Семья"),
     ("facturas/index.html", "Счета"),
     ("ajustes/index.html", "Настройки"),
     ("instrukcii/index.html", "Инструкции"),
     ("privacidad/index.html", "Безопасность"),
-    ("faq/index.html", "Вопросы и ответы"),
+    ("faq/index.html", "Вопросы"),
     ("contacto/index.html", "Контакты"),
 ]
 
@@ -200,15 +223,46 @@ DEL_TITLES = {
     "del-16g": "Данные сети стёрты",
     "del-16h": "Итог удаления",
 }
-RST_TITLES = {sid: f"Сброс Mi red — {sid}" for sid in RST_IDS}
-RST_TITLES.update({
-    "rst-entry": "Сброс Mi red — вход",
+RST_TITLES = {
+    "rst-entry": "Сброс домашней сети — вход",
     "rst-owner": "Сброс доступен только владельцу",
     "rst-sms": "Подтверждение по SMS",
     "rst-17m": "Причина сброса",
+    "rst-17a": "Запрос на сброс сети",
+    "rst-17b": "Что изменится после сброса",
+    "rst-17c": "Подтверждение намерения",
+    "rst-17d": "Код из SMS",
+    "rst-17e": "Сброс запланирован",
+    "rst-17f": "Письмо участникам сети",
+    "rst-17g": "Напоминание перед сбросом",
+    "rst-17h": "Отмена сброса",
+    "rst-17i": "Сброс отменён",
+    "rst-17j": "Слишком частые сбросы",
+    "rst-17k": "Сброс выполняется",
+    "rst-17l": "Сеть сброшена",
     "rst-sh-bio": "Face ID для сброса",
     "rst-sh-bio-c": "Повтор Face ID при сбросе",
-})
+}
+RST_WHAT = {
+    "rst-entry": "Начало цепочки сброса домашней сети Mi red.",
+    "rst-owner": "Если вы не владелец, сброс недоступен — так защищают чужую сеть.",
+    "rst-sms": "Подтверждение по SMS, что сброс запрашивает именно владелец.",
+    "rst-17m": "Выберите причину: смена роутера, продажа дома или другое.",
+    "rst-17a": "Приложение просит подтвердить, что вы хотите сбросить сеть.",
+    "rst-17b": "Кратко объясняет, какие данные Wi‑Fi и устройств исчезнут.",
+    "rst-17c": "Повторное подтверждение перед серьёзным шагом.",
+    "rst-17d": "Ввод одноразового кода из SMS.",
+    "rst-17e": "Сброс назначен на время; до него можно передумать.",
+    "rst-17f": "Участникам сети уходит письмо о предстоящем сбросе.",
+    "rst-17g": "Напоминание, что сброс скоро начнётся.",
+    "rst-17h": "Владелец отменяет сброс, пока это возможно.",
+    "rst-17i": "Сброс снят, сеть работает как раньше.",
+    "rst-17j": "Если сбросов слишком много подряд, приложение попросит подождать.",
+    "rst-17k": "Идёт сброс: подождите, не закрывая экран.",
+    "rst-17l": "Сеть сброшена; дальше — заново подключить роутер и устройства.",
+    "rst-sh-bio": "Система просит Face ID, чтобы никто другой не сбросил сеть.",
+    "rst-sh-bio-c": "Повтор Face ID, если первое подтверждение не прошло.",
+}
 RP_TITLES = {
     "rp-18a": "«Вы видели то, чего не делали?»",
     "rp-18b": "Сигнал принят",
@@ -261,7 +315,10 @@ def add_extra_screens(rows: list[dict]) -> None:
                 {
                     "title": RST_TITLES.get(sid, sid),
                     "id": sid,
-                    "what": "Шаг сброса домашней сети: подтверждения, лимит не чаще трёх раз за 30 дней, уведомления участникам.",
+                    "what": RST_WHAT.get(
+                        sid,
+                        "Шаг сброса домашней сети: подтверждения, ограничение частоты и уведомления участникам.",
+                    ),
                     "function": "Сброс Mi red",
                     "shots_raw": "Нет",
                 }
@@ -330,7 +387,7 @@ def pick_shot_file(
             continue
         path = f"assets/screens/ios/{name}"
         if resolve_image(path)[1]:
-            return path, True, "Кадр приложения iOS, демонстрационные данные."
+            return path, True, "Демонстрационные данные на кадре."
 
     for name in asset_files_for(sid, page_slug):
         path = f"assets/screens/{name}"
@@ -338,18 +395,18 @@ def pick_shot_file(
             return (
                 path,
                 True,
-                "Кадр прототипа приложения (тёмная тема), демонстрационные данные.",
+                "Демонстрационные данные на кадре.",
             )
 
     for name in listed:
         if name.startswith("brandbook-"):
             fb = BRANDBOOK_FALLBACK.get(name)
             if fb and resolve_image(fb)[1]:
-                return fb, True, "Кадр приложения, демонстрационные данные."
+                return fb, True, "Демонстрационные данные на кадре."
 
     legacy = f"assets/screens/{sid}.png"
     if resolve_image(legacy)[1]:
-        return legacy, True, "Кадр прототипа приложения, демонстрационные данные."
+        return legacy, True, "Демонстрационные данные на кадре."
 
     candidates: list[str] = []
     for name in listed:
@@ -363,61 +420,86 @@ def pick_shot_file(
 
     for path in candidates:
         if resolve_image(path)[1]:
-            return path, True, "Кадр приложения, демонстрационные данные."
+            return path, True, "Демонстрационные данные на кадре."
 
     intended = candidates[0] if candidates else legacy
     if intended != PLACEHOLDER_SRC:
         MISSING_IMAGES.append(f"{sid}: {intended}")
-    cap = "Место под кадр: файл появится после съёмки (см. site_report.txt)."
-    return PLACEHOLDER_SRC, True, cap
+    return PLACEHOLDER_SRC, True, "Кадр появится позже."
 
 
-def prose_what(what: str, func: str, sid: str) -> str:
-    base = sanitize_legal_copy(what.rstrip("."))
-    return (
-        f"<p>На экране «{html.escape(base)}» собрана часть сценария «{html.escape(func)}». "
-        f"Интерфейс приложения на испанском или английском; здесь — смысл на русском.</p>"
-    )
+SCREEN_SECOND_LINE: dict[str, str] = {
+    "billing": "Здесь видны счета и ближайший платёж.",
+    "manager": "Помощник сразу говорит, что он искусственный интеллект.",
+    "handoff": "В рабочие часы по мадридскому времени разговор можно передать человеку.",
+    "net-0b": ROUTER_PASSWORD_NEUTRAL,
+    "fam-14a": "Так вы убеждаетесь, что приглашаете именно свой дом, а не чужой.",
+    "login": "Номер должен совпадать с договором.",
+    "rp-18a": "Так вы сообщаете о подозрительном действии в аккаунте.",
+}
 
 
-def prose_usage(what: str, func: str, sid: str) -> str:
-    hints = {
-        "login": "Укажите номер телефона, привязанный к договору, и запросите код. SMS приходит в течение минуты; повторная отправка доступна через 60 секунд.",
-        "login-code": "Введите пятизначный код из SMS. Код действует пять минут. Если ошиблись — останутся попытки до блокировки.",
-        "loginlock": "После пяти неверных кодов вход блокируется на 15 минут. Подождите или свяжитесь с поддержкой через Mi gestor.",
-        "manager": "Напишите вопрос обычным текстом или выберите быстрый ответ. Помощник сразу представится как ИИ. Длинные сообщения обрезаются лимитом в 2000 знаков.",
-        "handoff": (
-            "При необходимости к разговору подключится сотрудник. "
-            "История переписки хранится в течение срока, указанного в политике конфиденциальности."
+def polish_display_text(text: str) -> str:
+    text = sanitize_legal_copy(text.strip())
+    pairs = [
+        ("IVA 21 % включён, всегда евро", "суммы в евро; на демонстрации налог IVA включён в сумму"),
+        ("IVA 21 % уже включён", "налог IVA уже включён в сумму"),
+        ("IVA 21 % включён", "налог IVA включён в сумму"),
+        (", всегда евро", ""),
+        ("всегда евро", "суммы в евро"),
+        ("домашней фибры", "домашней оптики"),
+        ("домашней фибре", "домашней оптике"),
+        ("Услуга «Фибра»", "Услуга «Оптика» (Fibra)"),
+        ("Услуга «Радио»", "Услуга «Радиодоступ»"),
+        ("Лента извещений", "Лента уведомлений"),
+        ("Лента извещений", "Лента уведомлений"),
+        ("Какие извещения", "Какие уведомления"),
+        ("Извещение:", "Уведомление:"),
+        ("извещений", "уведомлений"),
+        ("извещения", "уведомления"),
+        ("пуш-извещения", "push-уведомления"),
+        ("лимит в 2000 знаков", "длинные сообщения приложение сократит"),
+        ("лимит 2000 знаков", "длинные сообщения приложение сократит"),
+        (
+            "таймер повторной отправки (60 с), код живёт 5 мин",
+            "таймер повторной отправки; код из SMS действует недолго",
         ),
-        "net-0b": f"Введите пароль администратора роутера. {ROUTER_PASSWORD_NEUTRAL}",
-        "fam-14a": "Сверьте шесть цифр с тем, что показывает второй телефон. Так вы убеждаетесь, что приглашаете именно свой дом, а не чужой.",
-    }
-    text = hints.get(
-        sid,
-        f"Откройте раздел «{func}» в приложении и дойдите до экрана с идентификатором {sid}. Следуйте подсказкам на экране.",
-    )
-    text = sanitize_legal_copy(text)
-    return f"<p>{html.escape(text)}</p>"
-
-
-def prose_settings(func: str, sid: str) -> str:
-    if "Настройки" in func or sid in ("notifset", "sh-faceid", "profile", "push-why"):
-        return "<p>Здесь меняются параметры, которые сохраняются в профиле на этом телефоне: тема, язык, биометрия, типы уведомлений.</p>"
-    if sid.startswith("net-") or func.startswith("Mi red"):
-        return "<p>Настройки Wi‑Fi, паузы и гостевой сети относятся к домашней сети и не меняют тариф услуги у оператора.</p>"
-    return "<p>Отдельного экрана настроек у этого шага нет: значения подтянуты из договора или предыдущих шагов мастера.</p>"
-
-
-def prose_steps(what: str, sid: str) -> str:
-    what_clean = sanitize_legal_copy(what.split(",")[0])
-    steps = [
-        "Откройте приложение OrroFi на iPhone.",
-        f"Дойдите до экрана «{what_clean}».",
-        "Прочитайте пояснение и подтвердите действие, если приложение просит согласие или Face ID.",
+        ("Блок на 15 минут после 5 неверных попыток", "Вход на время закрывается после нескольких неверных кодов"),
+        ("ИИ-помощник", "Помощник"),
+        ("тикеты", "заявки"),
+        ("Тикеты", "Заявки"),
+        ("биометрия", "вход по лицу или отпечатку"),
+        ("Фибра", "Оптика"),
+        ("фибры", "оптики"),
+        ("— радио,", "— радиодоступ,"),
+        ("радио, мобильная", "радиодоступ, мобильная"),
     ]
-    items = "".join(f"<li>{html.escape(s)}</li>" for s in steps)
-    return f"<ol>{items}</ol>"
+    for old, new in pairs:
+        text = text.replace(old, new)
+    text = re.sub(r"«\s*«+", "«", text)
+    text = re.sub(r"»\s*»+", "»", text)
+    return text
+
+
+def screen_copy_html(screen: dict) -> str:
+    title = polish_display_text(screen["title"])
+    what = polish_display_text(screen["what"])
+    func = polish_display_text(screen["function"])
+    sid = screen["id"]
+    lines: list[str] = []
+    primary = what if what else f"{title} — раздел «{func}»."
+    lines.append(primary.rstrip("."))
+    extra = SCREEN_SECOND_LINE.get(sid)
+    if extra:
+        lines.append(sanitize_legal_copy(extra.rstrip(".")))
+    unique: list[str] = []
+    for line in lines:
+        cleaned = line.strip().rstrip(".")
+        if cleaned and cleaned not in unique:
+            unique.append(cleaned)
+    unique = unique[:2]
+    paras = "".join(f"<p>{html.escape(line)}.</p>" for line in unique)
+    return f'<div class="screen-copy">{paras}</div>'
 
 
 def render_shot(src: str, exists: bool, alt: str, cap: str, depth: int) -> str:
@@ -455,24 +537,13 @@ def render_shot(src: str, exists: bool, alt: str, cap: str, depth: int) -> str:
 def render_screen_block(screen: dict, depth: int, page_slug: str | None = None) -> str:
     src, exists, cap = pick_shot_file(screen["shots_raw"], screen["id"], page_slug)
     anchor = screen["id"]
+    title = polish_display_text(screen["title"])
     return f"""<article class="screen-block" id="{html.escape(anchor)}">
 <header>
-<h3>{html.escape(screen['title'])}</h3>
-<p class="screen-id">Экран <code>{html.escape(screen['id'])}</code> · {html.escape(screen['function'])}</p>
+<h3>{html.escape(title)}</h3>
 </header>
-<div class="screen-meta">
-<dl>
-<dt>Что делает</dt>
-<dd>{prose_what(screen['what'], screen['function'], screen['id'])}</dd>
-<dt>Как пользоваться</dt>
-<dd>{prose_usage(screen['what'], screen['function'], screen['id'])}</dd>
-<dt>Настройки</dt>
-<dd>{prose_settings(screen['function'], screen['id'])}</dd>
-<dt>Пошагово</dt>
-<dd>{prose_steps(screen['what'], screen['id'])}</dd>
-</dl>
-</div>
-{render_shot(src, exists, f"Экран OrroFi: {screen['title']}", cap, depth)}
+{screen_copy_html(screen)}
+{render_shot(src, exists, f"Экран OrroFi: {title}", cap, depth)}
 </article>"""
 
 
@@ -528,7 +599,14 @@ def rel_href(target: str, depth: int) -> str:
     return prefix + target
 
 
+def document_title(page_title: str) -> str:
+    if page_title.startswith("OrroFi —"):
+        return page_title
+    return f"{page_title} · OrroFi"
+
+
 def shell(title: str, body: str, depth: int, current: str) -> str:
+    meta_desc = META_DESCRIPTIONS.get(current, META_DEFAULT)
     nav_links = []
     for href, label in NAV:
         nav_links.append(
@@ -545,10 +623,10 @@ def shell(title: str, body: str, depth: int, current: str) -> str:
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="OrroFi — домашний интернет и домашняя сеть в одном приложении. Сайт-визитка на русском языке.">
+<meta name="description" content="{html.escape(meta_desc)}">
 <meta http-equiv="Content-Security-Policy" content="{CSP_POLICY}">
 <meta name="referrer" content="strict-origin-when-cross-origin">
-<title>{html.escape(title)} · OrroFi</title>
+<title>{html.escape(document_title(title))}</title>
 <link rel="icon" type="image/png" href="{rel_href('icons/ios/AppIcon-60.png', depth)}">
 <link rel="stylesheet" href="{css}">
 </head>
@@ -558,7 +636,7 @@ def shell(title: str, body: str, depth: int, current: str) -> str:
 <div class="wrap topbar">
 <a class="logo" href="{home}"><img src="{logo}" alt="OrroFi" width="160" height="36"></a>
 <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="nav">Меню</button>
-<nav class="primary" id="nav" aria-label="Основное">
+<nav class="primary" id="nav" aria-label="Основное меню">
 <ul>
 {''.join(nav_links)}
 </ul>
@@ -570,15 +648,16 @@ def shell(title: str, body: str, depth: int, current: str) -> str:
 </main>
 <footer class="site-footer">
 <div class="wrap">
-<p><strong>OrroFi — бренд {html.escape(LEGAL_OWNER["short_name"])}</strong> (NIF {html.escape(LEGAL_OWNER["nif"])}).</p>
+<p><strong>OrroFi</strong> · {html.escape(LEGAL_OWNER["short_name"])} (NIF {html.escape(LEGAL_OWNER["nif"])}), правообладатель бренда OrroFi.</p>
 <p>{html.escape(FOOTER_COOKIES_LINE)}</p>
 <p>
 <a href="{rel_href('privacidad/index.html', depth)}">Безопасность и приватность</a>
 <a href="{rel_href(f'privacidad/index.html#{SITE_PRIVACY_ANCHOR}', depth)}">Приватность этого сайта</a>
 <a href="{rel_href('contacto/index.html', depth)}">Контакты</a>
 <a href="mailto:{html.escape(LEGAL_OWNER['email_privacy'])}">{html.escape(LEGAL_OWNER['email_privacy'])}</a>
+<a href="mailto:{html.escape(HOLA_EMAIL)}">{html.escape(HOLA_EMAIL)}</a>
 </p>
-<p class="badge-demo">Демонстрационные данные на кадрах приложения. Живая услуга и публикация в магазине — отдельный этап.</p>
+<p class="badge-demo">На кадрах — демонстрационные данные. Живая услуга и публикация в магазине приложений ещё впереди.</p>
 </div>
 </footer>
 <script src="{js}" defer></script>
@@ -606,7 +685,7 @@ def build_index(depth_content: str) -> str:
 <section class="hero"><div class="wrap">
 <p class="tag hero-tag">Приложение OrroFi</p>
 <h1>Весь домашний интернет и домашняя сеть — в одном приложении</h1>
-<p class="lead">OrroFi помогает видеть услуги, счета и аварии, общаться с умным помощником <strong>Mi gestor</strong> и управлять домашней сетью в разделе <strong>Mi red</strong> — без лишних звонков.</p>
+<p class="lead">OrroFi помогает следить за услугами, счетами и сбоями, писать помощнику <strong>Mi gestor</strong> и управлять домашней сетью в разделе <strong>Mi red</strong> — чаще без звонка в поддержку. Пароль роутера в открытом виде мы не забираем.</p>
 <div class="hero-actions">
 <a class="btn btn-primary" href="vozmozhnosti/">Возможности</a>
 <a class="btn btn-secondary" href="instrukcii/">Как начать</a>
@@ -616,16 +695,16 @@ def build_index(depth_content: str) -> str:
 <div class="gallery">{shot}</div>
 </div></section>
 <section><div class="wrap">
-<h2>Три опоры</h2>
+<h2>На чём держится OrroFi</h2>
 <div class="grid-3">
-<div class="card"><p class="tag">Услуги</p><h3>Фибра, радио, мобильная связь и Wi‑Fi</h3>
-<p>Скорость, статус линий, заказ подключения и честные экраны аварии или визита мастера.</p>
+<div class="card"><p class="tag">Услуги</p><h3>Оптика, радиодоступ, мобильная связь и Wi‑Fi</h3>
+<p>Скорость и состояние связи, заказ подключения, сбой и визит мастера — без прикрас.</p>
 <p><a href="uslugi/">Услуги и подключение</a></p></div>
 <div class="card"><p class="tag">Помощник</p><h3>Mi gestor</h3>
-<p>ИИ сразу представляется, отвечает кратко и при необходимости подключает сотрудника.</p>
+<p>Помощник сразу говорит, что он искусственный интеллект, отвечает коротко и в рабочие часы может передать разговор человеку.</p>
 <p><a href="mi-gestor/">Подробнее о Mi gestor</a></p></div>
 <div class="card"><p class="tag">Дом</p><h3>Mi red и семья</h3>
-<p>Устройства в сети, пауза интернета, гостевой Wi‑Fi и безопасное добавление телефона близких по QR.</p>
+<p>Устройства в сети, пауза интернета, гостевой Wi‑Fi и добавление телефона близких по QR и сверке кода.</p>
 <p><a href="mi-red/">Mi red</a> · <a href="familia/">Семья</a></p></div>
 </div>
 </div></section>
@@ -640,7 +719,7 @@ def build_index(depth_content: str) -> str:
 </div></section>
 <section><div class="wrap status-banner">
 <h2>Честный статус</h2>
-<p>Сейчас вы видите <strong>готовое демо-приложение</strong> OrroFi с фиктивными данными. Боевой биллинг, операторская связь и облако ещё не подключены; публикация в App Store — следующий шаг после закрытой беты. Мы не обещаем того, чего в живой услуге пока нет.</p>
+<p>Сейчас это демонстрация OrroFi с вымышленными данными. Живые счета, связь с оператором и публикация в App Store ещё впереди — после закрытой беты. Мы не обещаем того, чего пока нет.</p>
 </div></section>
 {depth_content}
 """
@@ -651,19 +730,17 @@ def build_vozmozhnosti(
 ) -> str:
     cards = []
     links = [
-        ("uslugi/index.html", "uslugi", "Вход, услуги, заказ, аварии", "Фибра, радио, мобильная связь, Wi‑Fi, визит мастера."),
-        ("mi-gestor/index.html", "mi-gestor", "Mi gestor", "Чат с ИИ, голосовой ввод, передача человеку, тикеты."),
+        ("uslugi/index.html", "uslugi", "Вход, услуги, заказ, сбои", "Оптика, радиодоступ, мобильная связь, Wi‑Fi, визит мастера."),
+        ("mi-gestor/index.html", "mi-gestor", "Mi gestor", "Чат с помощником, голос, разговор с человеком, заявки."),
         ("mi-red/index.html", "mi-red", "Mi red", "Роутер, устройства, гости, безопасность, перезапуск."),
         ("familia/index.html", "familia", "Семья", "QR, сверка кода, добавление и удаление телефона."),
-        ("facturas/index.html", "facturas", "Счета и оплата", "Список счетов, карточка, SEPA."),
-        ("ajustes/index.html", "ajustes", "Настройки", "Тема, язык ES/EN, Face ID, уведомления."),
+        ("facturas/index.html", "facturas", "Счета и оплата", "Счета, подробности платежа и SEPA."),
+        ("ajustes/index.html", "ajustes", "Настройки", "Тема, язык (испанский и английский), вход по Face ID, уведомления."),
         ("privacidad/index.html", "privacidad", "Безопасность и приватность", "Вход, защита данных, выгрузка и удаление."),
     ]
-    for page_href, slug, title, desc in links:
-        count = len(screens_by_page.get(slug, []))
+    for page_href, _slug, title, desc in links:
         cards.append(
             f'<div class="card"><h3>{html.escape(title)}</h3><p>{html.escape(desc)}</p>'
-            f"<p>На сайте описано экранов: <strong>{count}</strong>.</p>"
             f'<p><a href="{rel_href(page_href, depth)}">Подробнее</a></p></div>'
         )
     toc = []
@@ -672,15 +749,17 @@ def build_vozmozhnosti(
         screen = flist[0]
         page = page_for_screen(screen["id"], func)
         href = rel_href(f"{page}/index.html#{screen['id']}", depth)
-        toc.append(f'<li><a href="{html.escape(href)}">{html.escape(func)}</a></li>')
+        toc.append(
+            f'<li><a href="{html.escape(href)}">{html.escape(polish_display_text(func))}</a></li>'
+        )
     return f"""
 <section class="hero"><div class="wrap">
 <h1>Возможности OrroFi</h1>
-<p class="lead">Полное оглавление приложения: каждая функция разобрана на отдельных страницах со скриншотами и пошаговыми пояснениями.</p>
+<p class="lead">Всё, что умеет OrroFi: разделы приложения, кадры и короткие пояснения.</p>
 </div></section>
 <section><div class="wrap"><h2>Разделы сайта</h2><div class="grid-3">{''.join(cards)}</div></div></section>
 <section><div class="wrap"><h2>Функции по алфавиту</h2><ul class="toc">{''.join(toc)}</ul>
-<p class="note">Всего функций в карте приложения: <strong>{len(functions)}</strong>. Каждая перечислена хотя бы на одной тематической странице.</p>
+<p class="note">Ниже — все возможности, о которых рассказывает этот сайт.</p>
 </div></section>
 """
 
@@ -689,7 +768,8 @@ def build_topic_screens(screens: list[dict], page_slug: str) -> str:
     depth = 1
     blocks = "".join(render_screen_block(s, depth, page_slug) for s in screens)
     toc = "".join(
-        f'<li><a href="#{html.escape(s["id"])}">{html.escape(s["title"])}</a></li>' for s in screens
+        f'<li><a href="#{html.escape(s["id"])}">{html.escape(polish_display_text(s["title"]))}</a></li>'
+        for s in screens
     )
     return f"""
 <section><div class="wrap">
@@ -712,15 +792,14 @@ def build_topic_page(title: str, lead: str, screens: list[dict], page_slug: str)
 INSTRUKCII = [
     ("Вход по телефону и SMS", "privacidad/index.html#login", [
         "Откройте OrroFi и введите номер телефона, привязанный к договору.",
-        "Запросите код. SMS действует пять минут; повторная отправка — через 60 секунд.",
+        "Запросите код. Код из SMS действует недолго; если ошибиться несколько раз, вход на время закрывается.",
         "Если код не приходит — откройте подсказку «Не приходит код» и проверьте сеть.",
-        "После пяти ошибок вход блокируется на 15 минут.",
     ]),
     ("Заказ услуги и визит мастера", "uslugi/index.html#order-sum", [
-        "На главной выберите услугу или раздел «Contratar».",
+        "На главной выберите услугу или «Оформить» («Contratar»).",
         "Укажите тариф, дату визита и проверьте адрес в сводке.",
         "Подтвердите согласия на обработку данных.",
-        "Чтобы перенести визит — откройте установку и отправьте заявку; её подтверждает человек.",
+        "Чтобы перенести визит, откройте экран визита мастера и отправьте заявку; её подтвердит человек.",
     ]),
     ("Что делать при аварии", "uslugi/index.html#outage", [
         "На главной появится карточка аварии со статусом.",
@@ -728,19 +807,19 @@ INSTRUKCII = [
         "Задайте вопрос Mi gestor, если нужны подробности.",
     ]),
     ("Счета и способ оплаты", "facturas/index.html", [
-        "Откройте список счетов: суммы в евро, IVA 21 % уже включён.",
-        "Откройте карточку счёта для деталей (в демо PDF может отсутствовать).",
-        "Проверьте SEPA в способе оплаты.",
+        "Откройте список счетов: суммы в евро; в демонстрации налог IVA уже включён в сумму.",
+        "Откройте карточку счёта для деталей (в демонстрации PDF может отсутствовать).",
+        "В способе оплаты проверьте банковское поручение SEPA.",
     ]),
     ("Mi gestor и живой сотрудник", "mi-gestor/index.html#manager", [
-        "Напишите вопрос; помощник представится как ИИ.",
-        "Нажмите «Hablar con una persona», если нужен сотрудник.",
+        "Напишите вопрос; помощник сразу говорит, что он искусственный интеллект.",
+        "Нажмите «Поговорить с человеком» («Hablar con una persona») в рабочие часы по мадридскому времени.",
         "Если сотрудник недоступен, оставьте заявку в чате.",
     ]),
     ("Включить Mi red", "mi-red/index.html#net-0b", [
-        "В профиле откройте Mi red и разрешите доступ к локальной сети iOS.",
+        "В профиле откройте Mi red и разрешите доступ к локальной сети.",
         f"Введите пароль роутера. {ROUTER_PASSWORD_NEUTRAL}",
-        "Дождитесь списка устройств и оценки канала.",
+        "Дождитесь списка устройств и оценки качества сети.",
     ]),
     ("Добавить телефон семьи", "familia/index.html#fam-13a", [
         "На новом телефоне откройте приглашение с QR.",
@@ -750,7 +829,7 @@ INSTRUKCII = [
     ("Пауза интернета, гости, перезагрузка", "mi-red/index.html#net-1e", [
         "Пауза временно отключает интернет для выбранных устройств.",
         "Гостевая сеть отделена от домашней.",
-        "Перезапуск роутера занимает около двух минут — приложение предупредит.",
+        "Приложение предупредит, что перезапуск займёт некоторое время.",
     ]),
     ("Выгрузка и удаление аккаунта", "privacidad/index.html#privacy", [
         "В приватности запросите выгрузку данных на почту.",
@@ -759,7 +838,7 @@ INSTRUKCII = [
     ("Удаление или сброс Mi red", "privacidad/index.html#del-entry", [
         "Только владелец может удалить данные сети или сбросить её.",
         "Подтвердите Face ID и дождитесь писем с возможностью отмены.",
-        "Если видите чужие действия — подайте сигнал «Я этого не делал».",
+        "Если видите чужие действия — откройте «Вы видели то, чего не делали?».",
     ]),
 ]
 
@@ -770,27 +849,45 @@ def build_instrukcii() -> str:
         sl = "".join(f"<li>{html.escape(sanitize_legal_copy(s))}</li>" for s in steps)
         items.append(
             f'<li><h2 class="step-title">{html.escape(title)}</h2><ol>{sl}</ol>'
-            f'<p><a href="../{html.escape(link)}">Связанные экраны</a></p></li>'
+            f'<p><a href="../{html.escape(link)}">Смотреть кадры</a></p></li>'
         )
     return f"""
 <section class="hero"><div class="wrap">
 <h1>Инструкции</h1>
-<p class="lead">Короткие практические руководства — не реклама, а порядок действий в демо-приложении.</p>
+<p class="lead">Короткие шаги по демонстрации OrroFi.</p>
 </div></section>
 <section><div class="wrap"><ol class="steps">{''.join(items)}</ol></div></section>
 """
 
 
 FAQ = [
-    ("Это уже готовое приложение или только макет?", "Это собранное демо-приложение OrroFi с фиктивными данными. Дизайн и сценарии утверждены; живая услуга и магазин — следующий этап."),
-    ("На каких языках говорит приложение?", "Интерфейс — испанский и английский. Этот сайт-визитка — на русском."),
-    ("Нужен ли аккаунт, если я ещё не клиент?", "Есть сценарий проверки покрытия и заявки для нового адреса. Без покрытия приложение честно сообщит об этом."),
+    (
+        "Это уже готовое приложение или только макет?",
+        "Это демонстрация OrroFi с вымышленными данными. Живая услуга и публикация в магазине приложений ещё впереди.",
+    ),
+    (
+        "На каких языках говорит приложение?",
+        "Само приложение — на испанском и английском. Этот сайт — на русском.",
+    ),
+    (
+        "Нужен ли аккаунт, если я ещё не клиент?",
+        "Можно проверить покрытие и оставить заявку на новый адрес. Если покрытия нет, приложение об этом скажет прямо.",
+    ),
     ("Видит ли OrroFi пароль моего роутера?", ROUTER_PASSWORD_NEUTRAL),
     ("Что видят гости Wi‑Fi?", "Гостевая сеть пускает в интернет и отделена от домашней."),
     ("Можно ли добавить телефон мужа или жены?", "Да, по QR и сверке шести цифр, только с согласия владельца."),
-    ("Что, если я не просил удалить сеть?", "Используйте сигнал «Я этого не делал» — заявку примут в поддержку."),
-    ("Когда появится в магазине приложений?", "Планируется закрытая бета на iOS. Точную дату публикации мы не называем, пока её не утвердят."),
-    ("Есть ли версия для Android?", "Сейчас эталон — iOS. Android в объём этой визитки не входит."),
+    (
+        "Что, если я не просил удалить сеть?",
+        "Нажмите «Вы видели то, чего не делали?» — мы разберёмся.",
+    ),
+    (
+        "Когда появится в магазине приложений?",
+        "Планируется закрытая бета на iOS. Точную дату публикации мы не называем, пока её не утвердят.",
+    ),
+    (
+        "Есть ли версия для Android?",
+        "Пока образец приложения — iOS. Про Android расскажем отдельно, когда будет что показать.",
+    ),
 ]
 
 
@@ -804,7 +901,7 @@ def build_faq() -> str:
     return f"""
 <section class="hero"><div class="wrap">
 <h1>Вопросы и ответы</h1>
-<p class="lead">Кратко о сомнениях, которые чаще всего возникают у будущих пользователей.</p>
+<p class="lead">Короткие ответы на частые вопросы.</p>
 </div></section>
 <section><div class="wrap faq">{''.join(items)}</div></section>
 """
@@ -831,8 +928,8 @@ def build_contacto() -> str:
     o = LEGAL_OWNER
     return f"""
 <section class="hero"><div class="wrap">
-<h1>Контакты и сведения о компании</h1>
-<p class="lead">Как связаться по вопросам данных и где узнать о владельце сайта.</p>
+<h1>Контакты</h1>
+<p class="lead">Кто стоит за OrroFi и как нам написать.</p>
 </div></section>
 <section><div class="wrap">
 <div class="card">
@@ -843,8 +940,9 @@ def build_contacto() -> str:
 <div class="card">
 <h2>OrroFi</h2>
 <p>OrroFi — бренд {html.escape(o['short_name'])}. Ответственный за обработку персональных данных (responsable del tratamiento): {html.escape(o['legal_name'])}, NIF {html.escape(o['nif'])}.</p>
-<p><strong>Почта по приватности:</strong> <a href="mailto:{html.escape(o['email_privacy'])}">{html.escape(o['email_privacy'])}</a></p>
-<p>Полный текст политики конфиденциальности приложения и условия услуги появятся здесь до запуска услуги. О политике этого сайта — в разделе <a href="../privacidad/index.html#{SITE_PRIVACY_ANCHOR}">«Приватность на этом сайте»</a>.</p>
+<p><strong>По вопросам персональных данных:</strong> <a href="mailto:{html.escape(o['email_privacy'])}">{html.escape(o['email_privacy'])}</a></p>
+<p><strong>Общие вопросы:</strong> <a href="mailto:{html.escape(HOLA_EMAIL)}">{html.escape(HOLA_EMAIL)}</a></p>
+<p>Юридический адрес и политика конфиденциальности появятся здесь, когда будут готовы. О политике этого сайта — в разделе <a href="../privacidad/index.html#{SITE_PRIVACY_ANCHOR}">«Приватность на этом сайте»</a>.</p>
 </div>
 </div></section>
 """
@@ -853,8 +951,8 @@ def build_contacto() -> str:
 def build_privacidad_intro() -> str:
     o = LEGAL_OWNER
     return f"""
-<p class="lead">Здесь собраны экраны входа, приватности, удаления данных Mi red, сброса сети и сигнала о подозрительных действиях.</p>
-<p>Контакт по данным: <a href="mailto:{html.escape(o['email_privacy'])}">{html.escape(o['email_privacy'])}</a>. Вы вправе обратиться в испанское агентство AEPD.</p>
+<p class="lead">Вход, данные, удаление и сброс домашней сети, сигнал, если в аккаунте произошло что-то чужое.</p>
+<p>По вопросам данных: <a href="mailto:{html.escape(o['email_privacy'])}">{html.escape(o['email_privacy'])}</a>. При необходимости можно обратиться в испанское агентство по защите данных (AEPD).</p>
 """
 
 
@@ -962,18 +1060,43 @@ def main() -> None:
     page_meta = {
         "uslugi": (
             "Услуги и подключение",
-            "Фибра, радио, мобильная связь, Wi‑Fi, заказ, аварии, визит мастера и подключение нового клиента.",
+            "Оптика, радиодоступ, мобильная связь и Wi‑Fi: заказ, сбои, визит мастера и подключение нового дома.",
             "uslugi/index.html",
         ),
-        "mi-gestor": ("Mi gestor", "Умный помощник, лимиты чата, голос, передача человеку и тикеты.", "mi-gestor/index.html"),
-        "mi-red": ("Mi red", "Домашняя сеть: роутер, устройства, гости, безопасность и диагностика.", "mi-red/index.html"),
-        "familia": ("Семья", "Безопасное добавление телефона близких в домашнюю сеть.", "familia/index.html"),
-        "facturas": ("Счета и оплата", "Список счетов, карточка и SEPA.", "facturas/index.html"),
-        "ajustes": ("Настройки", "Профиль, тема, язык, Face ID и уведомления.", "ajustes/index.html"),
+        "mi-gestor": (
+            "Mi gestor",
+            "Помощник: короткие ответы, голос, разговор с человеком и заявки.",
+            "mi-gestor/index.html",
+        ),
+        "mi-red": (
+            "Mi red",
+            "Домашняя сеть: роутер, устройства, гости, безопасность и диагностика.",
+            "mi-red/index.html",
+        ),
+        "familia": (
+            "Семья",
+            "Как добавить телефон близких в домашнюю сеть — по QR и сверке кода.",
+            "familia/index.html",
+        ),
+        "facturas": (
+            "Счета и оплата",
+            "Счета, подробности платежа и банковское поручение SEPA.",
+            "facturas/index.html",
+        ),
+        "ajustes": (
+            "Настройки",
+            "Профиль, тема, язык (испанский и английский), вход по Face ID и уведомления.",
+            "ajustes/index.html",
+        ),
         "privacidad": ("Безопасность и приватность", build_privacidad_intro(), "privacidad/index.html"),
     }
 
-    write_page("index.html", "Главная", build_index(""), "index.html")
+    write_page(
+        "index.html",
+        "OrroFi — домашний интернет в одном приложении",
+        build_index(""),
+        "index.html",
+    )
     write_page(
         "vozmozhnosti/index.html",
         "Возможности",

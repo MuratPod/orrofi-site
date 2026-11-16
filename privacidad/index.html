@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="OrroFi — домашний интернет и домашняя сеть в одном приложении. Сайт-визитка на русском языке.">
+<meta name="description" content="Вход, данные, удаление и сброс домашней сети, сигнал о чужих действиях.">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self'; style-src 'self'; script-src 'self'; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <title>Безопасность и приватность · OrroFi</title>
@@ -16,17 +16,17 @@
 <div class="wrap topbar">
 <a class="logo" href="../"><img src="../logo/lockup-h-dark.svg" alt="OrroFi" width="160" height="36"></a>
 <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="nav">Меню</button>
-<nav class="primary" id="nav" aria-label="Основное">
+<nav class="primary" id="nav" aria-label="Основное меню">
 <ul>
-<li><a href="../">Главная</a></li><li><a href="../vozmozhnosti/index.html">Возможности</a></li><li><a href="../uslugi/index.html">Услуги</a></li><li><a href="../mi-gestor/index.html">Mi gestor</a></li><li><a href="../mi-red/index.html">Mi red</a></li><li><a href="../familia/index.html">Семья</a></li><li><a href="../facturas/index.html">Счета</a></li><li><a href="../ajustes/index.html">Настройки</a></li><li><a href="../instrukcii/index.html">Инструкции</a></li><li><a href="../privacidad/index.html" aria-current="page">Безопасность</a></li><li><a href="../faq/index.html">Вопросы и ответы</a></li><li><a href="../contacto/index.html">Контакты</a></li>
+<li><a href="../">Главная</a></li><li><a href="../vozmozhnosti/index.html">Возможности</a></li><li><a href="../uslugi/index.html">Услуги</a></li><li><a href="../mi-gestor/index.html">Помощник (Mi gestor)</a></li><li><a href="../mi-red/index.html">Сеть (Mi red)</a></li><li><a href="../familia/index.html">Семья</a></li><li><a href="../facturas/index.html">Счета</a></li><li><a href="../ajustes/index.html">Настройки</a></li><li><a href="../instrukcii/index.html">Инструкции</a></li><li><a href="../privacidad/index.html" aria-current="page">Безопасность</a></li><li><a href="../faq/index.html">Вопросы</a></li><li><a href="../contacto/index.html">Контакты</a></li>
 </ul>
 </nav>
 </div>
 </header>
 <main id="main">
 <section class="hero"><div class="wrap"><h1>Безопасность и приватность</h1>
-<p class="lead">Здесь собраны экраны входа, приватности, удаления данных Mi red, сброса сети и сигнала о подозрительных действиях.</p>
-<p>Контакт по данным: <a href="mailto:privacidad@orrofi.es">privacidad@orrofi.es</a>. Вы вправе обратиться в испанское агентство AEPD.</p>
+<p class="lead">Вход, данные, удаление и сброс домашней сети, сигнал, если в аккаунте произошло что-то чужое.</p>
+<p>По вопросам данных: <a href="mailto:privacidad@orrofi.es">privacidad@orrofi.es</a>. При необходимости можно обратиться в испанское агентство по защите данных (AEPD).</p>
 </div></section>
 <section id="sitio-privacidad"><div class="wrap">
 <h2>Приватность на этом сайте</h2>
@@ -34,1030 +34,455 @@
 </div></section>
 
 <section><div class="wrap">
-<nav aria-label="Экраны на странице"><h2>Содержание</h2><ul class="toc"><li><a href="#sh-faceid-open">Face ID при открытии</a></li><li><a href="#login">Вход</a></li><li><a href="#login-code">Код SMS</a></li><li><a href="#loginerr">Неверный код</a></li><li><a href="#loginexp">Код истёк</a></li><li><a href="#loginlock">Доступ заблокирован</a></li><li><a href="#sh-nocode">Не приходит код</a></li><li><a href="#privacy">Приватность</a></li><li><a href="#privsched">Удаление запланировано</a></li><li><a href="#sh-delete">Удаление запрещено</a></li><li><a href="#sh-deletecode">Код удаления</a></li><li><a href="#sh-deleteok">Подтверждение удаления</a></li><li><a href="#sh-export">Скачать мои данные</a></li><li><a href="#rst-17a">Сброс Mi red — rst-17a</a></li><li><a href="#rst-17b">Сброс Mi red — rst-17b</a></li><li><a href="#rst-17c">Сброс Mi red — rst-17c</a></li><li><a href="#rst-17d">Сброс Mi red — rst-17d</a></li><li><a href="#rst-17e">Сброс Mi red — rst-17e</a></li><li><a href="#rst-17f">Сброс Mi red — rst-17f</a></li><li><a href="#rst-17g">Сброс Mi red — rst-17g</a></li><li><a href="#rst-17h">Сброс Mi red — rst-17h</a></li><li><a href="#rst-17i">Сброс Mi red — rst-17i</a></li><li><a href="#rst-17j">Сброс Mi red — rst-17j</a></li><li><a href="#rst-17k">Сброс Mi red — rst-17k</a></li><li><a href="#rst-17l">Сброс Mi red — rst-17l</a></li><li><a href="#rst-17m">Причина сброса</a></li><li><a href="#rst-entry">Сброс Mi red — вход</a></li><li><a href="#rst-owner">Сброс доступен только владельцу</a></li><li><a href="#rst-sh-bio">Face ID для сброса</a></li><li><a href="#rst-sh-bio-c">Повтор Face ID при сбросе</a></li><li><a href="#rst-sms">Подтверждение по SMS</a></li><li><a href="#rp-18a">«Вы видели то, чего не делали?»</a></li><li><a href="#rp-18b">Сигнал принят</a></li><li><a href="#del-16a">Запрос на удаление данных сети</a></li><li><a href="#del-16a0">Почта перед удалением</a></li><li><a href="#del-16b">Подтверждение намерения</a></li><li><a href="#del-16b2">Повторное подтверждение</a></li><li><a href="#del-16c">Проверка Face ID</a></li><li><a href="#del-16d">Письмо сразу после запроса</a></li><li><a href="#del-16d2">Напоминание за 24 часа</a></li><li><a href="#del-16e">Отмена удаления</a></li><li><a href="#del-16e2">Отмена невозможна</a></li><li><a href="#del-16f">Удаление выполнено</a></li><li><a href="#del-16g">Данные сети стёрты</a></li><li><a href="#del-16h">Итог удаления</a></li><li><a href="#del-entry">Удаление данных Mi red — вход</a></li><li><a href="#del-owner">Только владелец может удалить данные сети</a></li><li><a href="#del-sh-bio">Системное подтверждение Face ID</a></li></ul></nav>
+<nav aria-label="Экраны на странице"><h2>Содержание</h2><ul class="toc"><li><a href="#sh-faceid-open">Face ID при открытии</a></li><li><a href="#login">Вход</a></li><li><a href="#login-code">Код SMS</a></li><li><a href="#loginerr">Неверный код</a></li><li><a href="#loginexp">Код истёк</a></li><li><a href="#loginlock">Доступ заблокирован</a></li><li><a href="#sh-nocode">Не приходит код</a></li><li><a href="#privacy">Приватность</a></li><li><a href="#privsched">Удаление запланировано</a></li><li><a href="#sh-delete">Удаление запрещено</a></li><li><a href="#sh-deletecode">Код удаления</a></li><li><a href="#sh-deleteok">Подтверждение удаления</a></li><li><a href="#sh-export">Скачать мои данные</a></li><li><a href="#rst-17a">Запрос на сброс сети</a></li><li><a href="#rst-17b">Что изменится после сброса</a></li><li><a href="#rst-17c">Подтверждение намерения</a></li><li><a href="#rst-17d">Код из SMS</a></li><li><a href="#rst-17e">Сброс запланирован</a></li><li><a href="#rst-17f">Письмо участникам сети</a></li><li><a href="#rst-17g">Напоминание перед сбросом</a></li><li><a href="#rst-17h">Отмена сброса</a></li><li><a href="#rst-17i">Сброс отменён</a></li><li><a href="#rst-17j">Слишком частые сбросы</a></li><li><a href="#rst-17k">Сброс выполняется</a></li><li><a href="#rst-17l">Сеть сброшена</a></li><li><a href="#rst-17m">Причина сброса</a></li><li><a href="#rst-entry">Сброс домашней сети — вход</a></li><li><a href="#rst-owner">Сброс доступен только владельцу</a></li><li><a href="#rst-sh-bio">Face ID для сброса</a></li><li><a href="#rst-sh-bio-c">Повтор Face ID при сбросе</a></li><li><a href="#rst-sms">Подтверждение по SMS</a></li><li><a href="#rp-18a">«Вы видели то, чего не делали?»</a></li><li><a href="#rp-18b">Сигнал принят</a></li><li><a href="#del-16a">Запрос на удаление данных сети</a></li><li><a href="#del-16a0">Почта перед удалением</a></li><li><a href="#del-16b">Подтверждение намерения</a></li><li><a href="#del-16b2">Повторное подтверждение</a></li><li><a href="#del-16c">Проверка Face ID</a></li><li><a href="#del-16d">Письмо сразу после запроса</a></li><li><a href="#del-16d2">Напоминание за 24 часа</a></li><li><a href="#del-16e">Отмена удаления</a></li><li><a href="#del-16e2">Отмена невозможна</a></li><li><a href="#del-16f">Удаление выполнено</a></li><li><a href="#del-16g">Данные сети стёрты</a></li><li><a href="#del-16h">Итог удаления</a></li><li><a href="#del-entry">Удаление данных Mi red — вход</a></li><li><a href="#del-owner">Только владелец может удалить данные сети</a></li><li><a href="#del-sh-bio">Системное подтверждение Face ID</a></li></ul></nav>
 </div></section>
 <section><div class="wrap"><article class="screen-block" id="sh-faceid-open">
 <header>
 <h3>Face ID при открытии</h3>
-<p class="screen-id">Экран <code>sh-faceid-open</code> · Вход по Face ID</p>
 </header>
-<div class="screen-meta">
-<dl>
-<dt>Что делает</dt>
-<dd><p>На экране «Системный запрос Face ID, если включена защита входа» собрана часть сценария «Вход по Face ID». Интерфейс приложения на испанском или английском; здесь — смысл на русском.</p></dd>
-<dt>Как пользоваться</dt>
-<dd><p>Откройте раздел «Вход по Face ID» в приложении и дойдите до экрана с идентификатором sh-faceid-open. Следуйте подсказкам на экране.</p></dd>
-<dt>Настройки</dt>
-<dd><p>Отдельного экрана настроек у этого шага нет: значения подтянуты из договора или предыдущих шагов мастера.</p></dd>
-<dt>Пошагово</dt>
-<dd><ol><li>Откройте приложение OrroFi на iPhone.</li><li>Дойдите до экрана «Системный запрос Face ID».</li><li>Прочитайте пояснение и подтвердите действие, если приложение просит согласие или Face ID.</li></ol></dd>
-</dl>
-</div>
+<div class="screen-copy"><p>Системный запрос Face ID, если включена защита входа.</p></div>
 <figure class="shot shot-placeholder">
 <img class="shot-img" src="../assets/screens/placeholder.svg" alt="Экран OrroFi: Face ID при открытии" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg">
-<figcaption>Место под кадр: файл появится после съёмки (см. site_report.txt).</figcaption>
+<figcaption>Кадр появится позже.</figcaption>
 </figure>
 </article><article class="screen-block" id="login">
 <header>
 <h3>Вход</h3>
-<p class="screen-id">Экран <code>login</code> · Вход по SMS</p>
 </header>
-<div class="screen-meta">
-<dl>
-<dt>Что делает</dt>
-<dd><p>На экране «Ввод телефона и запрос SMS» собрана часть сценария «Вход по SMS». Интерфейс приложения на испанском или английском; здесь — смысл на русском.</p></dd>
-<dt>Как пользоваться</dt>
-<dd><p>Укажите номер телефона, привязанный к договору, и запросите код. SMS приходит в течение минуты; повторная отправка доступна через 60 секунд.</p></dd>
-<dt>Настройки</dt>
-<dd><p>Отдельного экрана настроек у этого шага нет: значения подтянуты из договора или предыдущих шагов мастера.</p></dd>
-<dt>Пошагово</dt>
-<dd><ol><li>Откройте приложение OrroFi на iPhone.</li><li>Дойдите до экрана «Ввод телефона и запрос SMS».</li><li>Прочитайте пояснение и подтвердите действие, если приложение просит согласие или Face ID.</li></ol></dd>
-</dl>
-</div>
+<div class="screen-copy"><p>Ввод телефона и запрос SMS.</p><p>Номер должен совпадать с договором.</p></div>
 <figure class="shot">
 <picture><source srcset="../assets/screens/ios/ios-login-es-dark.webp" type="image/webp"><img class="shot-img" src="../assets/screens/ios/ios-login-es-dark.png" alt="Экран OrroFi: Вход" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg"></picture>
-<figcaption>Кадр приложения iOS, демонстрационные данные.</figcaption>
+<figcaption>Демонстрационные данные на кадре.</figcaption>
 </figure>
 </article><article class="screen-block" id="login-code">
 <header>
 <h3>Код SMS</h3>
-<p class="screen-id">Экран <code>login-code</code> · Вход по SMS</p>
 </header>
-<div class="screen-meta">
-<dl>
-<dt>Что делает</dt>
-<dd><p>На экране «Ввод кода, таймер повторной отправки (60 с), код живёт 5 мин» собрана часть сценария «Вход по SMS». Интерфейс приложения на испанском или английском; здесь — смысл на русском.</p></dd>
-<dt>Как пользоваться</dt>
-<dd><p>Введите пятизначный код из SMS. Код действует пять минут. Если ошиблись — останутся попытки до блокировки.</p></dd>
-<dt>Настройки</dt>
-<dd><p>Отдельного экрана настроек у этого шага нет: значения подтянуты из договора или предыдущих шагов мастера.</p></dd>
-<dt>Пошагово</dt>
-<dd><ol><li>Откройте приложение OrroFi на iPhone.</li><li>Дойдите до экрана «Ввод кода».</li><li>Прочитайте пояснение и подтвердите действие, если приложение просит согласие или Face ID.</li></ol></dd>
-</dl>
-</div>
+<div class="screen-copy"><p>Ввод кода, таймер повторной отправки; код из SMS действует недолго.</p></div>
 <figure class="shot">
 <picture><source srcset="../assets/screens/login-1-login-code.webp" type="image/webp"><img class="shot-img" src="../assets/screens/login-1-login-code.png" alt="Экран OrroFi: Код SMS" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg"></picture>
-<figcaption>Кадр прототипа приложения (тёмная тема), демонстрационные данные.</figcaption>
+<figcaption>Демонстрационные данные на кадре.</figcaption>
 </figure>
 </article><article class="screen-block" id="loginerr">
 <header>
 <h3>Неверный код</h3>
-<p class="screen-id">Экран <code>loginerr</code> · Вход по SMS</p>
 </header>
-<div class="screen-meta">
-<dl>
-<dt>Что делает</dt>
-<dd><p>На экране «Сообщение об ошибке, оставшиеся попытки (всего 5)» собрана часть сценария «Вход по SMS». Интерфейс приложения на испанском или английском; здесь — смысл на русском.</p></dd>
-<dt>Как пользоваться</dt>
-<dd><p>Откройте раздел «Вход по SMS» в приложении и дойдите до экрана с идентификатором loginerr. Следуйте подсказкам на экране.</p></dd>
-<dt>Настройки</dt>
-<dd><p>Отдельного экрана настроек у этого шага нет: значения подтянуты из договора или предыдущих шагов мастера.</p></dd>
-<dt>Пошагово</dt>
-<dd><ol><li>Откройте приложение OrroFi на iPhone.</li><li>Дойдите до экрана «Сообщение об ошибке».</li><li>Прочитайте пояснение и подтвердите действие, если приложение просит согласие или Face ID.</li></ol></dd>
-</dl>
-</div>
+<div class="screen-copy"><p>Сообщение об ошибке, оставшиеся попытки (всего 5).</p></div>
 <figure class="shot">
 <picture><source srcset="../assets/screens/login-2-loginerr.webp" type="image/webp"><img class="shot-img" src="../assets/screens/login-2-loginerr.png" alt="Экран OrroFi: Неверный код" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg"></picture>
-<figcaption>Кадр прототипа приложения (тёмная тема), демонстрационные данные.</figcaption>
+<figcaption>Демонстрационные данные на кадре.</figcaption>
 </figure>
 </article><article class="screen-block" id="loginexp">
 <header>
 <h3>Код истёк</h3>
-<p class="screen-id">Экран <code>loginexp</code> · Вход по SMS</p>
 </header>
-<div class="screen-meta">
-<dl>
-<dt>Что делает</dt>
-<dd><p>На экране «Код просрочен, запросить новый» собрана часть сценария «Вход по SMS». Интерфейс приложения на испанском или английском; здесь — смысл на русском.</p></dd>
-<dt>Как пользоваться</dt>
-<dd><p>Откройте раздел «Вход по SMS» в приложении и дойдите до экрана с идентификатором loginexp. Следуйте подсказкам на экране.</p></dd>
-<dt>Настройки</dt>
-<dd><p>Отдельного экрана настроек у этого шага нет: значения подтянуты из договора или предыдущих шагов мастера.</p></dd>
-<dt>Пошагово</dt>
-<dd><ol><li>Откройте приложение OrroFi на iPhone.</li><li>Дойдите до экрана «Код просрочен».</li><li>Прочитайте пояснение и подтвердите действие, если приложение просит согласие или Face ID.</li></ol></dd>
-</dl>
-</div>
+<div class="screen-copy"><p>Код просрочен, запросить новый.</p></div>
 <figure class="shot">
 <picture><source srcset="../assets/screens/login-3-loginexp.webp" type="image/webp"><img class="shot-img" src="../assets/screens/login-3-loginexp.png" alt="Экран OrroFi: Код истёк" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg"></picture>
-<figcaption>Кадр прототипа приложения (тёмная тема), демонстрационные данные.</figcaption>
+<figcaption>Демонстрационные данные на кадре.</figcaption>
 </figure>
 </article><article class="screen-block" id="loginlock">
 <header>
 <h3>Доступ заблокирован</h3>
-<p class="screen-id">Экран <code>loginlock</code> · Вход по SMS</p>
 </header>
-<div class="screen-meta">
-<dl>
-<dt>Что делает</dt>
-<dd><p>На экране «Блок на 15 минут после 5 неверных попыток» собрана часть сценария «Вход по SMS». Интерфейс приложения на испанском или английском; здесь — смысл на русском.</p></dd>
-<dt>Как пользоваться</dt>
-<dd><p>После пяти неверных кодов вход блокируется на 15 минут. Подождите или свяжитесь с поддержкой через Mi gestor.</p></dd>
-<dt>Настройки</dt>
-<dd><p>Отдельного экрана настроек у этого шага нет: значения подтянуты из договора или предыдущих шагов мастера.</p></dd>
-<dt>Пошагово</dt>
-<dd><ol><li>Откройте приложение OrroFi на iPhone.</li><li>Дойдите до экрана «Блок на 15 минут после 5 неверных попыток».</li><li>Прочитайте пояснение и подтвердите действие, если приложение просит согласие или Face ID.</li></ol></dd>
-</dl>
-</div>
+<div class="screen-copy"><p>Вход на время закрывается после нескольких неверных кодов.</p></div>
 <figure class="shot">
 <picture><source srcset="../assets/screens/ios/ios-acceso-bloqueado-otp.webp" type="image/webp"><img class="shot-img" src="../assets/screens/ios/ios-acceso-bloqueado-otp.png" alt="Экран OrroFi: Доступ заблокирован" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg"></picture>
-<figcaption>Кадр приложения iOS, демонстрационные данные.</figcaption>
+<figcaption>Демонстрационные данные на кадре.</figcaption>
 </figure>
 </article><article class="screen-block" id="sh-nocode">
 <header>
 <h3>Не приходит код</h3>
-<p class="screen-id">Экран <code>sh-nocode</code> · Вход по SMS</p>
 </header>
-<div class="screen-meta">
-<dl>
-<dt>Что делает</dt>
-<dd><p>На экране «Подсказка, что делать, если SMS нет» собрана часть сценария «Вход по SMS». Интерфейс приложения на испанском или английском; здесь — смысл на русском.</p></dd>
-<dt>Как пользоваться</dt>
-<dd><p>Откройте раздел «Вход по SMS» в приложении и дойдите до экрана с идентификатором sh-nocode. Следуйте подсказкам на экране.</p></dd>
-<dt>Настройки</dt>
-<dd><p>Отдельного экрана настроек у этого шага нет: значения подтянуты из договора или предыдущих шагов мастера.</p></dd>
-<dt>Пошагово</dt>
-<dd><ol><li>Откройте приложение OrroFi на iPhone.</li><li>Дойдите до экрана «Подсказка».</li><li>Прочитайте пояснение и подтвердите действие, если приложение просит согласие или Face ID.</li></ol></dd>
-</dl>
-</div>
+<div class="screen-copy"><p>Подсказка, что делать, если SMS нет.</p></div>
 <figure class="shot">
 <picture><source srcset="../assets/screens/login-4-sh-nocode.webp" type="image/webp"><img class="shot-img" src="../assets/screens/login-4-sh-nocode.png" alt="Экран OrroFi: Не приходит код" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg"></picture>
-<figcaption>Кадр прототипа приложения (тёмная тема), демонстрационные данные.</figcaption>
+<figcaption>Демонстрационные данные на кадре.</figcaption>
 </figure>
 </article><article class="screen-block" id="privacy">
 <header>
 <h3>Приватность</h3>
-<p class="screen-id">Экран <code>privacy</code> · Приватность</p>
 </header>
-<div class="screen-meta">
-<dl>
-<dt>Что делает</dt>
-<dd><p>На экране «Согласия, выгрузка данных, удаление аккаунта» собрана часть сценария «Приватность». Интерфейс приложения на испанском или английском; здесь — смысл на русском.</p></dd>
-<dt>Как пользоваться</dt>
-<dd><p>Откройте раздел «Приватность» в приложении и дойдите до экрана с идентификатором privacy. Следуйте подсказкам на экране.</p></dd>
-<dt>Настройки</dt>
-<dd><p>Отдельного экрана настроек у этого шага нет: значения подтянуты из договора или предыдущих шагов мастера.</p></dd>
-<dt>Пошагово</dt>
-<dd><ol><li>Откройте приложение OrroFi на iPhone.</li><li>Дойдите до экрана «Согласия».</li><li>Прочитайте пояснение и подтвердите действие, если приложение просит согласие или Face ID.</li></ol></dd>
-</dl>
-</div>
+<div class="screen-copy"><p>Согласия, выгрузка данных, удаление аккаунта.</p></div>
 <figure class="shot">
 <picture><source srcset="../assets/screens/ios/ios-snapshot-privacidad-iphone-se.webp" type="image/webp"><img class="shot-img" src="../assets/screens/ios/ios-snapshot-privacidad-iphone-se.png" alt="Экран OrroFi: Приватность" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg"></picture>
-<figcaption>Кадр приложения iOS, демонстрационные данные.</figcaption>
+<figcaption>Демонстрационные данные на кадре.</figcaption>
 </figure>
 </article><article class="screen-block" id="privsched">
 <header>
 <h3>Удаление запланировано</h3>
-<p class="screen-id">Экран <code>privsched</code> · Приватность</p>
 </header>
-<div class="screen-meta">
-<dl>
-<dt>Что делает</dt>
-<dd><p>На экране «Отложенное удаление» собрана часть сценария «Приватность». Интерфейс приложения на испанском или английском; здесь — смысл на русском.</p></dd>
-<dt>Как пользоваться</dt>
-<dd><p>Откройте раздел «Приватность» в приложении и дойдите до экрана с идентификатором privsched. Следуйте подсказкам на экране.</p></dd>
-<dt>Настройки</dt>
-<dd><p>Отдельного экрана настроек у этого шага нет: значения подтянуты из договора или предыдущих шагов мастера.</p></dd>
-<dt>Пошагово</dt>
-<dd><ol><li>Откройте приложение OrroFi на iPhone.</li><li>Дойдите до экрана «Отложенное удаление».</li><li>Прочитайте пояснение и подтвердите действие, если приложение просит согласие или Face ID.</li></ol></dd>
-</dl>
-</div>
+<div class="screen-copy"><p>Отложенное удаление.</p></div>
 <figure class="shot shot-placeholder">
 <img class="shot-img" src="../assets/screens/placeholder.svg" alt="Экран OrroFi: Удаление запланировано" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg">
-<figcaption>Место под кадр: файл появится после съёмки (см. site_report.txt).</figcaption>
+<figcaption>Кадр появится позже.</figcaption>
 </figure>
 </article><article class="screen-block" id="sh-delete">
 <header>
 <h3>Удаление запрещено</h3>
-<p class="screen-id">Экран <code>sh-delete</code> · Приватность</p>
 </header>
-<div class="screen-meta">
-<dl>
-<dt>Что делает</dt>
-<dd><p>На экране «Нельзя удалить аккаунт, пока действуют договоры» собрана часть сценария «Приватность». Интерфейс приложения на испанском или английском; здесь — смысл на русском.</p></dd>
-<dt>Как пользоваться</dt>
-<dd><p>Откройте раздел «Приватность» в приложении и дойдите до экрана с идентификатором sh-delete. Следуйте подсказкам на экране.</p></dd>
-<dt>Настройки</dt>
-<dd><p>Отдельного экрана настроек у этого шага нет: значения подтянуты из договора или предыдущих шагов мастера.</p></dd>
-<dt>Пошагово</dt>
-<dd><ol><li>Откройте приложение OrroFi на iPhone.</li><li>Дойдите до экрана «Нельзя удалить аккаунт».</li><li>Прочитайте пояснение и подтвердите действие, если приложение просит согласие или Face ID.</li></ol></dd>
-</dl>
-</div>
+<div class="screen-copy"><p>Нельзя удалить аккаунт, пока действуют договоры.</p></div>
 <figure class="shot">
 <picture><source srcset="../assets/screens/ios/ios-privacidad-eliminar-cuenta.webp" type="image/webp"><img class="shot-img" src="../assets/screens/ios/ios-privacidad-eliminar-cuenta.png" alt="Экран OrroFi: Удаление запрещено" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg"></picture>
-<figcaption>Кадр приложения iOS, демонстрационные данные.</figcaption>
+<figcaption>Демонстрационные данные на кадре.</figcaption>
 </figure>
 </article><article class="screen-block" id="sh-deletecode">
 <header>
 <h3>Код удаления</h3>
-<p class="screen-id">Экран <code>sh-deletecode</code> · Приватность</p>
 </header>
-<div class="screen-meta">
-<dl>
-<dt>Что делает</dt>
-<dd><p>На экране «Подтверждение кодом» собрана часть сценария «Приватность». Интерфейс приложения на испанском или английском; здесь — смысл на русском.</p></dd>
-<dt>Как пользоваться</dt>
-<dd><p>Откройте раздел «Приватность» в приложении и дойдите до экрана с идентификатором sh-deletecode. Следуйте подсказкам на экране.</p></dd>
-<dt>Настройки</dt>
-<dd><p>Отдельного экрана настроек у этого шага нет: значения подтянуты из договора или предыдущих шагов мастера.</p></dd>
-<dt>Пошагово</dt>
-<dd><ol><li>Откройте приложение OrroFi на iPhone.</li><li>Дойдите до экрана «Подтверждение кодом».</li><li>Прочитайте пояснение и подтвердите действие, если приложение просит согласие или Face ID.</li></ol></dd>
-</dl>
-</div>
+<div class="screen-copy"><p>Подтверждение кодом.</p></div>
 <figure class="shot shot-placeholder">
 <img class="shot-img" src="../assets/screens/placeholder.svg" alt="Экран OrroFi: Код удаления" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg">
-<figcaption>Место под кадр: файл появится после съёмки (см. site_report.txt).</figcaption>
+<figcaption>Кадр появится позже.</figcaption>
 </figure>
 </article><article class="screen-block" id="sh-deleteok">
 <header>
 <h3>Подтверждение удаления</h3>
-<p class="screen-id">Экран <code>sh-deleteok</code> · Приватность</p>
 </header>
-<div class="screen-meta">
-<dl>
-<dt>Что делает</dt>
-<dd><p>На экране ««Удалить ваши данные?»» собрана часть сценария «Приватность». Интерфейс приложения на испанском или английском; здесь — смысл на русском.</p></dd>
-<dt>Как пользоваться</dt>
-<dd><p>Откройте раздел «Приватность» в приложении и дойдите до экрана с идентификатором sh-deleteok. Следуйте подсказкам на экране.</p></dd>
-<dt>Настройки</dt>
-<dd><p>Отдельного экрана настроек у этого шага нет: значения подтянуты из договора или предыдущих шагов мастера.</p></dd>
-<dt>Пошагово</dt>
-<dd><ol><li>Откройте приложение OrroFi на iPhone.</li><li>Дойдите до экрана ««Удалить ваши данные?»».</li><li>Прочитайте пояснение и подтвердите действие, если приложение просит согласие или Face ID.</li></ol></dd>
-</dl>
-</div>
+<div class="screen-copy"><p>«Удалить ваши данные?».</p></div>
 <figure class="shot shot-placeholder">
 <img class="shot-img" src="../assets/screens/placeholder.svg" alt="Экран OrroFi: Подтверждение удаления" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg">
-<figcaption>Место под кадр: файл появится после съёмки (см. site_report.txt).</figcaption>
+<figcaption>Кадр появится позже.</figcaption>
 </figure>
 </article><article class="screen-block" id="sh-export">
 <header>
 <h3>Скачать мои данные</h3>
-<p class="screen-id">Экран <code>sh-export</code> · Приватность</p>
 </header>
-<div class="screen-meta">
-<dl>
-<dt>Что делает</dt>
-<dd><p>На экране «Выгрузка по запросу на почту» собрана часть сценария «Приватность». Интерфейс приложения на испанском или английском; здесь — смысл на русском.</p></dd>
-<dt>Как пользоваться</dt>
-<dd><p>Откройте раздел «Приватность» в приложении и дойдите до экрана с идентификатором sh-export. Следуйте подсказкам на экране.</p></dd>
-<dt>Настройки</dt>
-<dd><p>Отдельного экрана настроек у этого шага нет: значения подтянуты из договора или предыдущих шагов мастера.</p></dd>
-<dt>Пошагово</dt>
-<dd><ol><li>Откройте приложение OrroFi на iPhone.</li><li>Дойдите до экрана «Выгрузка по запросу на почту».</li><li>Прочитайте пояснение и подтвердите действие, если приложение просит согласие или Face ID.</li></ol></dd>
-</dl>
-</div>
+<div class="screen-copy"><p>Выгрузка по запросу на почту.</p></div>
 <figure class="shot">
 <picture><source srcset="../assets/screens/export-datos.webp" type="image/webp"><img class="shot-img" src="../assets/screens/export-datos.png" alt="Экран OrroFi: Скачать мои данные" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg"></picture>
-<figcaption>Кадр прототипа приложения (тёмная тема), демонстрационные данные.</figcaption>
+<figcaption>Демонстрационные данные на кадре.</figcaption>
 </figure>
 </article><article class="screen-block" id="rst-17a">
 <header>
-<h3>Сброс Mi red — rst-17a</h3>
-<p class="screen-id">Экран <code>rst-17a</code> · Сброс Mi red</p>
+<h3>Запрос на сброс сети</h3>
 </header>
-<div class="screen-meta">
-<dl>
-<dt>Что делает</dt>
-<dd><p>На экране «Шаг сброса домашней сети: подтверждения, лимит не чаще трёх раз за 30 дней, уведомления участникам» собрана часть сценария «Сброс Mi red». Интерфейс приложения на испанском или английском; здесь — смысл на русском.</p></dd>
-<dt>Как пользоваться</dt>
-<dd><p>Откройте раздел «Сброс Mi red» в приложении и дойдите до экрана с идентификатором rst-17a. Следуйте подсказкам на экране.</p></dd>
-<dt>Настройки</dt>
-<dd><p>Отдельного экрана настроек у этого шага нет: значения подтянуты из договора или предыдущих шагов мастера.</p></dd>
-<dt>Пошагово</dt>
-<dd><ol><li>Откройте приложение OrroFi на iPhone.</li><li>Дойдите до экрана «Шаг сброса домашней сети: подтверждения».</li><li>Прочитайте пояснение и подтвердите действие, если приложение просит согласие или Face ID.</li></ol></dd>
-</dl>
-</div>
+<div class="screen-copy"><p>Приложение просит подтвердить, что вы хотите сбросить сеть.</p></div>
 <figure class="shot">
-<picture><source srcset="../assets/screens/privacidad-red-5-restablecer-solicitud.webp" type="image/webp"><img class="shot-img" src="../assets/screens/privacidad-red-5-restablecer-solicitud.png" alt="Экран OrroFi: Сброс Mi red — rst-17a" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg"></picture>
-<figcaption>Кадр прототипа приложения (тёмная тема), демонстрационные данные.</figcaption>
+<picture><source srcset="../assets/screens/privacidad-red-5-restablecer-solicitud.webp" type="image/webp"><img class="shot-img" src="../assets/screens/privacidad-red-5-restablecer-solicitud.png" alt="Экран OrroFi: Запрос на сброс сети" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg"></picture>
+<figcaption>Демонстрационные данные на кадре.</figcaption>
 </figure>
 </article><article class="screen-block" id="rst-17b">
 <header>
-<h3>Сброс Mi red — rst-17b</h3>
-<p class="screen-id">Экран <code>rst-17b</code> · Сброс Mi red</p>
+<h3>Что изменится после сброса</h3>
 </header>
-<div class="screen-meta">
-<dl>
-<dt>Что делает</dt>
-<dd><p>На экране «Шаг сброса домашней сети: подтверждения, лимит не чаще трёх раз за 30 дней, уведомления участникам» собрана часть сценария «Сброс Mi red». Интерфейс приложения на испанском или английском; здесь — смысл на русском.</p></dd>
-<dt>Как пользоваться</dt>
-<dd><p>Откройте раздел «Сброс Mi red» в приложении и дойдите до экрана с идентификатором rst-17b. Следуйте подсказкам на экране.</p></dd>
-<dt>Настройки</dt>
-<dd><p>Отдельного экрана настроек у этого шага нет: значения подтянуты из договора или предыдущих шагов мастера.</p></dd>
-<dt>Пошагово</dt>
-<dd><ol><li>Откройте приложение OrroFi на iPhone.</li><li>Дойдите до экрана «Шаг сброса домашней сети: подтверждения».</li><li>Прочитайте пояснение и подтвердите действие, если приложение просит согласие или Face ID.</li></ol></dd>
-</dl>
-</div>
+<div class="screen-copy"><p>Кратко объясняет, какие данные Wi‑Fi и устройств исчезнут.</p></div>
 <figure class="shot shot-placeholder">
-<img class="shot-img" src="../assets/screens/placeholder.svg" alt="Экран OrroFi: Сброс Mi red — rst-17b" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg">
-<figcaption>Место под кадр: файл появится после съёмки (см. site_report.txt).</figcaption>
+<img class="shot-img" src="../assets/screens/placeholder.svg" alt="Экран OrroFi: Что изменится после сброса" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg">
+<figcaption>Кадр появится позже.</figcaption>
 </figure>
 </article><article class="screen-block" id="rst-17c">
 <header>
-<h3>Сброс Mi red — rst-17c</h3>
-<p class="screen-id">Экран <code>rst-17c</code> · Сброс Mi red</p>
+<h3>Подтверждение намерения</h3>
 </header>
-<div class="screen-meta">
-<dl>
-<dt>Что делает</dt>
-<dd><p>На экране «Шаг сброса домашней сети: подтверждения, лимит не чаще трёх раз за 30 дней, уведомления участникам» собрана часть сценария «Сброс Mi red». Интерфейс приложения на испанском или английском; здесь — смысл на русском.</p></dd>
-<dt>Как пользоваться</dt>
-<dd><p>Откройте раздел «Сброс Mi red» в приложении и дойдите до экрана с идентификатором rst-17c. Следуйте подсказкам на экране.</p></dd>
-<dt>Настройки</dt>
-<dd><p>Отдельного экрана настроек у этого шага нет: значения подтянуты из договора или предыдущих шагов мастера.</p></dd>
-<dt>Пошагово</dt>
-<dd><ol><li>Откройте приложение OrroFi на iPhone.</li><li>Дойдите до экрана «Шаг сброса домашней сети: подтверждения».</li><li>Прочитайте пояснение и подтвердите действие, если приложение просит согласие или Face ID.</li></ol></dd>
-</dl>
-</div>
+<div class="screen-copy"><p>Повторное подтверждение перед серьёзным шагом.</p></div>
 <figure class="shot shot-placeholder">
-<img class="shot-img" src="../assets/screens/placeholder.svg" alt="Экран OrroFi: Сброс Mi red — rst-17c" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg">
-<figcaption>Место под кадр: файл появится после съёмки (см. site_report.txt).</figcaption>
+<img class="shot-img" src="../assets/screens/placeholder.svg" alt="Экран OrroFi: Подтверждение намерения" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg">
+<figcaption>Кадр появится позже.</figcaption>
 </figure>
 </article><article class="screen-block" id="rst-17d">
 <header>
-<h3>Сброс Mi red — rst-17d</h3>
-<p class="screen-id">Экран <code>rst-17d</code> · Сброс Mi red</p>
+<h3>Код из SMS</h3>
 </header>
-<div class="screen-meta">
-<dl>
-<dt>Что делает</dt>
-<dd><p>На экране «Шаг сброса домашней сети: подтверждения, лимит не чаще трёх раз за 30 дней, уведомления участникам» собрана часть сценария «Сброс Mi red». Интерфейс приложения на испанском или английском; здесь — смысл на русском.</p></dd>
-<dt>Как пользоваться</dt>
-<dd><p>Откройте раздел «Сброс Mi red» в приложении и дойдите до экрана с идентификатором rst-17d. Следуйте подсказкам на экране.</p></dd>
-<dt>Настройки</dt>
-<dd><p>Отдельного экрана настроек у этого шага нет: значения подтянуты из договора или предыдущих шагов мастера.</p></dd>
-<dt>Пошагово</dt>
-<dd><ol><li>Откройте приложение OrroFi на iPhone.</li><li>Дойдите до экрана «Шаг сброса домашней сети: подтверждения».</li><li>Прочитайте пояснение и подтвердите действие, если приложение просит согласие или Face ID.</li></ol></dd>
-</dl>
-</div>
+<div class="screen-copy"><p>Ввод одноразового кода из SMS.</p></div>
 <figure class="shot shot-placeholder">
-<img class="shot-img" src="../assets/screens/placeholder.svg" alt="Экран OrroFi: Сброс Mi red — rst-17d" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg">
-<figcaption>Место под кадр: файл появится после съёмки (см. site_report.txt).</figcaption>
+<img class="shot-img" src="../assets/screens/placeholder.svg" alt="Экран OrroFi: Код из SMS" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg">
+<figcaption>Кадр появится позже.</figcaption>
 </figure>
 </article><article class="screen-block" id="rst-17e">
 <header>
-<h3>Сброс Mi red — rst-17e</h3>
-<p class="screen-id">Экран <code>rst-17e</code> · Сброс Mi red</p>
+<h3>Сброс запланирован</h3>
 </header>
-<div class="screen-meta">
-<dl>
-<dt>Что делает</dt>
-<dd><p>На экране «Шаг сброса домашней сети: подтверждения, лимит не чаще трёх раз за 30 дней, уведомления участникам» собрана часть сценария «Сброс Mi red». Интерфейс приложения на испанском или английском; здесь — смысл на русском.</p></dd>
-<dt>Как пользоваться</dt>
-<dd><p>Откройте раздел «Сброс Mi red» в приложении и дойдите до экрана с идентификатором rst-17e. Следуйте подсказкам на экране.</p></dd>
-<dt>Настройки</dt>
-<dd><p>Отдельного экрана настроек у этого шага нет: значения подтянуты из договора или предыдущих шагов мастера.</p></dd>
-<dt>Пошагово</dt>
-<dd><ol><li>Откройте приложение OrroFi на iPhone.</li><li>Дойдите до экрана «Шаг сброса домашней сети: подтверждения».</li><li>Прочитайте пояснение и подтвердите действие, если приложение просит согласие или Face ID.</li></ol></dd>
-</dl>
-</div>
+<div class="screen-copy"><p>Сброс назначен на время; до него можно передумать.</p></div>
 <figure class="shot">
-<picture><source srcset="../assets/screens/privacidad-red-8-restablecer-aviso.webp" type="image/webp"><img class="shot-img" src="../assets/screens/privacidad-red-8-restablecer-aviso.png" alt="Экран OrroFi: Сброс Mi red — rst-17e" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg"></picture>
-<figcaption>Кадр прототипа приложения (тёмная тема), демонстрационные данные.</figcaption>
+<picture><source srcset="../assets/screens/privacidad-red-8-restablecer-aviso.webp" type="image/webp"><img class="shot-img" src="../assets/screens/privacidad-red-8-restablecer-aviso.png" alt="Экран OrroFi: Сброс запланирован" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg"></picture>
+<figcaption>Демонстрационные данные на кадре.</figcaption>
 </figure>
 </article><article class="screen-block" id="rst-17f">
 <header>
-<h3>Сброс Mi red — rst-17f</h3>
-<p class="screen-id">Экран <code>rst-17f</code> · Сброс Mi red</p>
+<h3>Письмо участникам сети</h3>
 </header>
-<div class="screen-meta">
-<dl>
-<dt>Что делает</dt>
-<dd><p>На экране «Шаг сброса домашней сети: подтверждения, лимит не чаще трёх раз за 30 дней, уведомления участникам» собрана часть сценария «Сброс Mi red». Интерфейс приложения на испанском или английском; здесь — смысл на русском.</p></dd>
-<dt>Как пользоваться</dt>
-<dd><p>Откройте раздел «Сброс Mi red» в приложении и дойдите до экрана с идентификатором rst-17f. Следуйте подсказкам на экране.</p></dd>
-<dt>Настройки</dt>
-<dd><p>Отдельного экрана настроек у этого шага нет: значения подтянуты из договора или предыдущих шагов мастера.</p></dd>
-<dt>Пошагово</dt>
-<dd><ol><li>Откройте приложение OrroFi на iPhone.</li><li>Дойдите до экрана «Шаг сброса домашней сети: подтверждения».</li><li>Прочитайте пояснение и подтвердите действие, если приложение просит согласие или Face ID.</li></ol></dd>
-</dl>
-</div>
+<div class="screen-copy"><p>Участникам сети уходит письмо о предстоящем сбросе.</p></div>
 <figure class="shot shot-placeholder">
-<img class="shot-img" src="../assets/screens/placeholder.svg" alt="Экран OrroFi: Сброс Mi red — rst-17f" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg">
-<figcaption>Место под кадр: файл появится после съёмки (см. site_report.txt).</figcaption>
+<img class="shot-img" src="../assets/screens/placeholder.svg" alt="Экран OrroFi: Письмо участникам сети" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg">
+<figcaption>Кадр появится позже.</figcaption>
 </figure>
 </article><article class="screen-block" id="rst-17g">
 <header>
-<h3>Сброс Mi red — rst-17g</h3>
-<p class="screen-id">Экран <code>rst-17g</code> · Сброс Mi red</p>
+<h3>Напоминание перед сбросом</h3>
 </header>
-<div class="screen-meta">
-<dl>
-<dt>Что делает</dt>
-<dd><p>На экране «Шаг сброса домашней сети: подтверждения, лимит не чаще трёх раз за 30 дней, уведомления участникам» собрана часть сценария «Сброс Mi red». Интерфейс приложения на испанском или английском; здесь — смысл на русском.</p></dd>
-<dt>Как пользоваться</dt>
-<dd><p>Откройте раздел «Сброс Mi red» в приложении и дойдите до экрана с идентификатором rst-17g. Следуйте подсказкам на экране.</p></dd>
-<dt>Настройки</dt>
-<dd><p>Отдельного экрана настроек у этого шага нет: значения подтянуты из договора или предыдущих шагов мастера.</p></dd>
-<dt>Пошагово</dt>
-<dd><ol><li>Откройте приложение OrroFi на iPhone.</li><li>Дойдите до экрана «Шаг сброса домашней сети: подтверждения».</li><li>Прочитайте пояснение и подтвердите действие, если приложение просит согласие или Face ID.</li></ol></dd>
-</dl>
-</div>
+<div class="screen-copy"><p>Напоминание, что сброс скоро начнётся.</p></div>
 <figure class="shot shot-placeholder">
-<img class="shot-img" src="../assets/screens/placeholder.svg" alt="Экран OrroFi: Сброс Mi red — rst-17g" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg">
-<figcaption>Место под кадр: файл появится после съёмки (см. site_report.txt).</figcaption>
+<img class="shot-img" src="../assets/screens/placeholder.svg" alt="Экран OrroFi: Напоминание перед сбросом" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg">
+<figcaption>Кадр появится позже.</figcaption>
 </figure>
 </article><article class="screen-block" id="rst-17h">
 <header>
-<h3>Сброс Mi red — rst-17h</h3>
-<p class="screen-id">Экран <code>rst-17h</code> · Сброс Mi red</p>
+<h3>Отмена сброса</h3>
 </header>
-<div class="screen-meta">
-<dl>
-<dt>Что делает</dt>
-<dd><p>На экране «Шаг сброса домашней сети: подтверждения, лимит не чаще трёх раз за 30 дней, уведомления участникам» собрана часть сценария «Сброс Mi red». Интерфейс приложения на испанском или английском; здесь — смысл на русском.</p></dd>
-<dt>Как пользоваться</dt>
-<dd><p>Откройте раздел «Сброс Mi red» в приложении и дойдите до экрана с идентификатором rst-17h. Следуйте подсказкам на экране.</p></dd>
-<dt>Настройки</dt>
-<dd><p>Отдельного экрана настроек у этого шага нет: значения подтянуты из договора или предыдущих шагов мастера.</p></dd>
-<dt>Пошагово</dt>
-<dd><ol><li>Откройте приложение OrroFi на iPhone.</li><li>Дойдите до экрана «Шаг сброса домашней сети: подтверждения».</li><li>Прочитайте пояснение и подтвердите действие, если приложение просит согласие или Face ID.</li></ol></dd>
-</dl>
-</div>
+<div class="screen-copy"><p>Владелец отменяет сброс, пока это возможно.</p></div>
 <figure class="shot">
-<picture><source srcset="../assets/screens/privacidad-red-7-restablecer-programado.webp" type="image/webp"><img class="shot-img" src="../assets/screens/privacidad-red-7-restablecer-programado.png" alt="Экран OrroFi: Сброс Mi red — rst-17h" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg"></picture>
-<figcaption>Кадр прототипа приложения (тёмная тема), демонстрационные данные.</figcaption>
+<picture><source srcset="../assets/screens/privacidad-red-7-restablecer-programado.webp" type="image/webp"><img class="shot-img" src="../assets/screens/privacidad-red-7-restablecer-programado.png" alt="Экран OrroFi: Отмена сброса" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg"></picture>
+<figcaption>Демонстрационные данные на кадре.</figcaption>
 </figure>
 </article><article class="screen-block" id="rst-17i">
 <header>
-<h3>Сброс Mi red — rst-17i</h3>
-<p class="screen-id">Экран <code>rst-17i</code> · Сброс Mi red</p>
+<h3>Сброс отменён</h3>
 </header>
-<div class="screen-meta">
-<dl>
-<dt>Что делает</dt>
-<dd><p>На экране «Шаг сброса домашней сети: подтверждения, лимит не чаще трёх раз за 30 дней, уведомления участникам» собрана часть сценария «Сброс Mi red». Интерфейс приложения на испанском или английском; здесь — смысл на русском.</p></dd>
-<dt>Как пользоваться</dt>
-<dd><p>Откройте раздел «Сброс Mi red» в приложении и дойдите до экрана с идентификатором rst-17i. Следуйте подсказкам на экране.</p></dd>
-<dt>Настройки</dt>
-<dd><p>Отдельного экрана настроек у этого шага нет: значения подтянуты из договора или предыдущих шагов мастера.</p></dd>
-<dt>Пошагово</dt>
-<dd><ol><li>Откройте приложение OrroFi на iPhone.</li><li>Дойдите до экрана «Шаг сброса домашней сети: подтверждения».</li><li>Прочитайте пояснение и подтвердите действие, если приложение просит согласие или Face ID.</li></ol></dd>
-</dl>
-</div>
+<div class="screen-copy"><p>Сброс снят, сеть работает как раньше.</p></div>
 <figure class="shot shot-placeholder">
-<img class="shot-img" src="../assets/screens/placeholder.svg" alt="Экран OrroFi: Сброс Mi red — rst-17i" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg">
-<figcaption>Место под кадр: файл появится после съёмки (см. site_report.txt).</figcaption>
+<img class="shot-img" src="../assets/screens/placeholder.svg" alt="Экран OrroFi: Сброс отменён" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg">
+<figcaption>Кадр появится позже.</figcaption>
 </figure>
 </article><article class="screen-block" id="rst-17j">
 <header>
-<h3>Сброс Mi red — rst-17j</h3>
-<p class="screen-id">Экран <code>rst-17j</code> · Сброс Mi red</p>
+<h3>Слишком частые сбросы</h3>
 </header>
-<div class="screen-meta">
-<dl>
-<dt>Что делает</dt>
-<dd><p>На экране «Шаг сброса домашней сети: подтверждения, лимит не чаще трёх раз за 30 дней, уведомления участникам» собрана часть сценария «Сброс Mi red». Интерфейс приложения на испанском или английском; здесь — смысл на русском.</p></dd>
-<dt>Как пользоваться</dt>
-<dd><p>Откройте раздел «Сброс Mi red» в приложении и дойдите до экрана с идентификатором rst-17j. Следуйте подсказкам на экране.</p></dd>
-<dt>Настройки</dt>
-<dd><p>Отдельного экрана настроек у этого шага нет: значения подтянуты из договора или предыдущих шагов мастера.</p></dd>
-<dt>Пошагово</dt>
-<dd><ol><li>Откройте приложение OrroFi на iPhone.</li><li>Дойдите до экрана «Шаг сброса домашней сети: подтверждения».</li><li>Прочитайте пояснение и подтвердите действие, если приложение просит согласие или Face ID.</li></ol></dd>
-</dl>
-</div>
+<div class="screen-copy"><p>Если сбросов слишком много подряд, приложение попросит подождать.</p></div>
 <figure class="shot shot-placeholder">
-<img class="shot-img" src="../assets/screens/placeholder.svg" alt="Экран OrroFi: Сброс Mi red — rst-17j" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg">
-<figcaption>Место под кадр: файл появится после съёмки (см. site_report.txt).</figcaption>
+<img class="shot-img" src="../assets/screens/placeholder.svg" alt="Экран OrroFi: Слишком частые сбросы" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg">
+<figcaption>Кадр появится позже.</figcaption>
 </figure>
 </article><article class="screen-block" id="rst-17k">
 <header>
-<h3>Сброс Mi red — rst-17k</h3>
-<p class="screen-id">Экран <code>rst-17k</code> · Сброс Mi red</p>
+<h3>Сброс выполняется</h3>
 </header>
-<div class="screen-meta">
-<dl>
-<dt>Что делает</dt>
-<dd><p>На экране «Шаг сброса домашней сети: подтверждения, лимит не чаще трёх раз за 30 дней, уведомления участникам» собрана часть сценария «Сброс Mi red». Интерфейс приложения на испанском или английском; здесь — смысл на русском.</p></dd>
-<dt>Как пользоваться</dt>
-<dd><p>Откройте раздел «Сброс Mi red» в приложении и дойдите до экрана с идентификатором rst-17k. Следуйте подсказкам на экране.</p></dd>
-<dt>Настройки</dt>
-<dd><p>Отдельного экрана настроек у этого шага нет: значения подтянуты из договора или предыдущих шагов мастера.</p></dd>
-<dt>Пошагово</dt>
-<dd><ol><li>Откройте приложение OrroFi на iPhone.</li><li>Дойдите до экрана «Шаг сброса домашней сети: подтверждения».</li><li>Прочитайте пояснение и подтвердите действие, если приложение просит согласие или Face ID.</li></ol></dd>
-</dl>
-</div>
+<div class="screen-copy"><p>Идёт сброс: подождите, не закрывая экран.</p></div>
 <figure class="shot shot-placeholder">
-<img class="shot-img" src="../assets/screens/placeholder.svg" alt="Экран OrroFi: Сброс Mi red — rst-17k" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg">
-<figcaption>Место под кадр: файл появится после съёмки (см. site_report.txt).</figcaption>
+<img class="shot-img" src="../assets/screens/placeholder.svg" alt="Экран OrroFi: Сброс выполняется" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg">
+<figcaption>Кадр появится позже.</figcaption>
 </figure>
 </article><article class="screen-block" id="rst-17l">
 <header>
-<h3>Сброс Mi red — rst-17l</h3>
-<p class="screen-id">Экран <code>rst-17l</code> · Сброс Mi red</p>
+<h3>Сеть сброшена</h3>
 </header>
-<div class="screen-meta">
-<dl>
-<dt>Что делает</dt>
-<dd><p>На экране «Шаг сброса домашней сети: подтверждения, лимит не чаще трёх раз за 30 дней, уведомления участникам» собрана часть сценария «Сброс Mi red». Интерфейс приложения на испанском или английском; здесь — смысл на русском.</p></dd>
-<dt>Как пользоваться</dt>
-<dd><p>Откройте раздел «Сброс Mi red» в приложении и дойдите до экрана с идентификатором rst-17l. Следуйте подсказкам на экране.</p></dd>
-<dt>Настройки</dt>
-<dd><p>Отдельного экрана настроек у этого шага нет: значения подтянуты из договора или предыдущих шагов мастера.</p></dd>
-<dt>Пошагово</dt>
-<dd><ol><li>Откройте приложение OrroFi на iPhone.</li><li>Дойдите до экрана «Шаг сброса домашней сети: подтверждения».</li><li>Прочитайте пояснение и подтвердите действие, если приложение просит согласие или Face ID.</li></ol></dd>
-</dl>
-</div>
+<div class="screen-copy"><p>Сеть сброшена; дальше — заново подключить роутер и устройства.</p></div>
 <figure class="shot shot-placeholder">
-<img class="shot-img" src="../assets/screens/placeholder.svg" alt="Экран OrroFi: Сброс Mi red — rst-17l" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg">
-<figcaption>Место под кадр: файл появится после съёмки (см. site_report.txt).</figcaption>
+<img class="shot-img" src="../assets/screens/placeholder.svg" alt="Экран OrroFi: Сеть сброшена" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg">
+<figcaption>Кадр появится позже.</figcaption>
 </figure>
 </article><article class="screen-block" id="rst-17m">
 <header>
 <h3>Причина сброса</h3>
-<p class="screen-id">Экран <code>rst-17m</code> · Сброс Mi red</p>
 </header>
-<div class="screen-meta">
-<dl>
-<dt>Что делает</dt>
-<dd><p>На экране «Шаг сброса домашней сети: подтверждения, лимит не чаще трёх раз за 30 дней, уведомления участникам» собрана часть сценария «Сброс Mi red». Интерфейс приложения на испанском или английском; здесь — смысл на русском.</p></dd>
-<dt>Как пользоваться</dt>
-<dd><p>Откройте раздел «Сброс Mi red» в приложении и дойдите до экрана с идентификатором rst-17m. Следуйте подсказкам на экране.</p></dd>
-<dt>Настройки</dt>
-<dd><p>Отдельного экрана настроек у этого шага нет: значения подтянуты из договора или предыдущих шагов мастера.</p></dd>
-<dt>Пошагово</dt>
-<dd><ol><li>Откройте приложение OrroFi на iPhone.</li><li>Дойдите до экрана «Шаг сброса домашней сети: подтверждения».</li><li>Прочитайте пояснение и подтвердите действие, если приложение просит согласие или Face ID.</li></ol></dd>
-</dl>
-</div>
+<div class="screen-copy"><p>Выберите причину: смена роутера, продажа дома или другое.</p></div>
 <figure class="shot shot-placeholder">
 <img class="shot-img" src="../assets/screens/placeholder.svg" alt="Экран OrroFi: Причина сброса" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg">
-<figcaption>Место под кадр: файл появится после съёмки (см. site_report.txt).</figcaption>
+<figcaption>Кадр появится позже.</figcaption>
 </figure>
 </article><article class="screen-block" id="rst-entry">
 <header>
-<h3>Сброс Mi red — вход</h3>
-<p class="screen-id">Экран <code>rst-entry</code> · Сброс Mi red</p>
+<h3>Сброс домашней сети — вход</h3>
 </header>
-<div class="screen-meta">
-<dl>
-<dt>Что делает</dt>
-<dd><p>На экране «Шаг сброса домашней сети: подтверждения, лимит не чаще трёх раз за 30 дней, уведомления участникам» собрана часть сценария «Сброс Mi red». Интерфейс приложения на испанском или английском; здесь — смысл на русском.</p></dd>
-<dt>Как пользоваться</dt>
-<dd><p>Откройте раздел «Сброс Mi red» в приложении и дойдите до экрана с идентификатором rst-entry. Следуйте подсказкам на экране.</p></dd>
-<dt>Настройки</dt>
-<dd><p>Отдельного экрана настроек у этого шага нет: значения подтянуты из договора или предыдущих шагов мастера.</p></dd>
-<dt>Пошагово</dt>
-<dd><ol><li>Откройте приложение OrroFi на iPhone.</li><li>Дойдите до экрана «Шаг сброса домашней сети: подтверждения».</li><li>Прочитайте пояснение и подтвердите действие, если приложение просит согласие или Face ID.</li></ol></dd>
-</dl>
-</div>
+<div class="screen-copy"><p>Начало цепочки сброса домашней сети Mi red.</p></div>
 <figure class="shot shot-placeholder">
-<img class="shot-img" src="../assets/screens/placeholder.svg" alt="Экран OrroFi: Сброс Mi red — вход" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg">
-<figcaption>Место под кадр: файл появится после съёмки (см. site_report.txt).</figcaption>
+<img class="shot-img" src="../assets/screens/placeholder.svg" alt="Экран OrroFi: Сброс домашней сети — вход" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg">
+<figcaption>Кадр появится позже.</figcaption>
 </figure>
 </article><article class="screen-block" id="rst-owner">
 <header>
 <h3>Сброс доступен только владельцу</h3>
-<p class="screen-id">Экран <code>rst-owner</code> · Сброс Mi red</p>
 </header>
-<div class="screen-meta">
-<dl>
-<dt>Что делает</dt>
-<dd><p>На экране «Шаг сброса домашней сети: подтверждения, лимит не чаще трёх раз за 30 дней, уведомления участникам» собрана часть сценария «Сброс Mi red». Интерфейс приложения на испанском или английском; здесь — смысл на русском.</p></dd>
-<dt>Как пользоваться</dt>
-<dd><p>Откройте раздел «Сброс Mi red» в приложении и дойдите до экрана с идентификатором rst-owner. Следуйте подсказкам на экране.</p></dd>
-<dt>Настройки</dt>
-<dd><p>Отдельного экрана настроек у этого шага нет: значения подтянуты из договора или предыдущих шагов мастера.</p></dd>
-<dt>Пошагово</dt>
-<dd><ol><li>Откройте приложение OrroFi на iPhone.</li><li>Дойдите до экрана «Шаг сброса домашней сети: подтверждения».</li><li>Прочитайте пояснение и подтвердите действие, если приложение просит согласие или Face ID.</li></ol></dd>
-</dl>
-</div>
+<div class="screen-copy"><p>Если вы не владелец, сброс недоступен — так защищают чужую сеть.</p></div>
 <figure class="shot shot-placeholder">
 <img class="shot-img" src="../assets/screens/placeholder.svg" alt="Экран OrroFi: Сброс доступен только владельцу" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg">
-<figcaption>Место под кадр: файл появится после съёмки (см. site_report.txt).</figcaption>
+<figcaption>Кадр появится позже.</figcaption>
 </figure>
 </article><article class="screen-block" id="rst-sh-bio">
 <header>
 <h3>Face ID для сброса</h3>
-<p class="screen-id">Экран <code>rst-sh-bio</code> · Сброс Mi red</p>
 </header>
-<div class="screen-meta">
-<dl>
-<dt>Что делает</dt>
-<dd><p>На экране «Шаг сброса домашней сети: подтверждения, лимит не чаще трёх раз за 30 дней, уведомления участникам» собрана часть сценария «Сброс Mi red». Интерфейс приложения на испанском или английском; здесь — смысл на русском.</p></dd>
-<dt>Как пользоваться</dt>
-<dd><p>Откройте раздел «Сброс Mi red» в приложении и дойдите до экрана с идентификатором rst-sh-bio. Следуйте подсказкам на экране.</p></dd>
-<dt>Настройки</dt>
-<dd><p>Отдельного экрана настроек у этого шага нет: значения подтянуты из договора или предыдущих шагов мастера.</p></dd>
-<dt>Пошагово</dt>
-<dd><ol><li>Откройте приложение OrroFi на iPhone.</li><li>Дойдите до экрана «Шаг сброса домашней сети: подтверждения».</li><li>Прочитайте пояснение и подтвердите действие, если приложение просит согласие или Face ID.</li></ol></dd>
-</dl>
-</div>
+<div class="screen-copy"><p>Система просит Face ID, чтобы никто другой не сбросил сеть.</p></div>
 <figure class="shot shot-placeholder">
 <img class="shot-img" src="../assets/screens/placeholder.svg" alt="Экран OrroFi: Face ID для сброса" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg">
-<figcaption>Место под кадр: файл появится после съёмки (см. site_report.txt).</figcaption>
+<figcaption>Кадр появится позже.</figcaption>
 </figure>
 </article><article class="screen-block" id="rst-sh-bio-c">
 <header>
 <h3>Повтор Face ID при сбросе</h3>
-<p class="screen-id">Экран <code>rst-sh-bio-c</code> · Сброс Mi red</p>
 </header>
-<div class="screen-meta">
-<dl>
-<dt>Что делает</dt>
-<dd><p>На экране «Шаг сброса домашней сети: подтверждения, лимит не чаще трёх раз за 30 дней, уведомления участникам» собрана часть сценария «Сброс Mi red». Интерфейс приложения на испанском или английском; здесь — смысл на русском.</p></dd>
-<dt>Как пользоваться</dt>
-<dd><p>Откройте раздел «Сброс Mi red» в приложении и дойдите до экрана с идентификатором rst-sh-bio-c. Следуйте подсказкам на экране.</p></dd>
-<dt>Настройки</dt>
-<dd><p>Отдельного экрана настроек у этого шага нет: значения подтянуты из договора или предыдущих шагов мастера.</p></dd>
-<dt>Пошагово</dt>
-<dd><ol><li>Откройте приложение OrroFi на iPhone.</li><li>Дойдите до экрана «Шаг сброса домашней сети: подтверждения».</li><li>Прочитайте пояснение и подтвердите действие, если приложение просит согласие или Face ID.</li></ol></dd>
-</dl>
-</div>
+<div class="screen-copy"><p>Повтор Face ID, если первое подтверждение не прошло.</p></div>
 <figure class="shot">
 <picture><source srcset="../assets/screens/privacidad-red-6-restablecer-faceid.webp" type="image/webp"><img class="shot-img" src="../assets/screens/privacidad-red-6-restablecer-faceid.png" alt="Экран OrroFi: Повтор Face ID при сбросе" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg"></picture>
-<figcaption>Кадр прототипа приложения (тёмная тема), демонстрационные данные.</figcaption>
+<figcaption>Демонстрационные данные на кадре.</figcaption>
 </figure>
 </article><article class="screen-block" id="rst-sms">
 <header>
 <h3>Подтверждение по SMS</h3>
-<p class="screen-id">Экран <code>rst-sms</code> · Сброс Mi red</p>
 </header>
-<div class="screen-meta">
-<dl>
-<dt>Что делает</dt>
-<dd><p>На экране «Шаг сброса домашней сети: подтверждения, лимит не чаще трёх раз за 30 дней, уведомления участникам» собрана часть сценария «Сброс Mi red». Интерфейс приложения на испанском или английском; здесь — смысл на русском.</p></dd>
-<dt>Как пользоваться</dt>
-<dd><p>Откройте раздел «Сброс Mi red» в приложении и дойдите до экрана с идентификатором rst-sms. Следуйте подсказкам на экране.</p></dd>
-<dt>Настройки</dt>
-<dd><p>Отдельного экрана настроек у этого шага нет: значения подтянуты из договора или предыдущих шагов мастера.</p></dd>
-<dt>Пошагово</dt>
-<dd><ol><li>Откройте приложение OrroFi на iPhone.</li><li>Дойдите до экрана «Шаг сброса домашней сети: подтверждения».</li><li>Прочитайте пояснение и подтвердите действие, если приложение просит согласие или Face ID.</li></ol></dd>
-</dl>
-</div>
+<div class="screen-copy"><p>Подтверждение по SMS, что сброс запрашивает именно владелец.</p></div>
 <figure class="shot shot-placeholder">
 <img class="shot-img" src="../assets/screens/placeholder.svg" alt="Экран OrroFi: Подтверждение по SMS" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg">
-<figcaption>Место под кадр: файл появится после съёмки (см. site_report.txt).</figcaption>
+<figcaption>Кадр появится позже.</figcaption>
 </figure>
 </article><article class="screen-block" id="rp-18a">
 <header>
 <h3>«Вы видели то, чего не делали?»</h3>
-<p class="screen-id">Экран <code>rp-18a</code> · Сигнал о чужих действиях</p>
 </header>
-<div class="screen-meta">
-<dl>
-<dt>Что делает</dt>
-<dd><p>На экране «Сообщите в OrroFi, если в журнале сети появилось действие, которого вы не совершали» собрана часть сценария «Сигнал о чужих действиях». Интерфейс приложения на испанском или английском; здесь — смысл на русском.</p></dd>
-<dt>Как пользоваться</dt>
-<dd><p>Откройте раздел «Сигнал о чужих действиях» в приложении и дойдите до экрана с идентификатором rp-18a. Следуйте подсказкам на экране.</p></dd>
-<dt>Настройки</dt>
-<dd><p>Отдельного экрана настроек у этого шага нет: значения подтянуты из договора или предыдущих шагов мастера.</p></dd>
-<dt>Пошагово</dt>
-<dd><ol><li>Откройте приложение OrroFi на iPhone.</li><li>Дойдите до экрана «Сообщите в OrroFi».</li><li>Прочитайте пояснение и подтвердите действие, если приложение просит согласие или Face ID.</li></ol></dd>
-</dl>
-</div>
+<div class="screen-copy"><p>Сообщите в OrroFi, если в журнале сети появилось действие, которого вы не совершали.</p><p>Так вы сообщаете о подозрительном действии в аккаунте.</p></div>
 <figure class="shot">
 <picture><source srcset="../assets/screens/nolo-1-alerta.webp" type="image/webp"><img class="shot-img" src="../assets/screens/nolo-1-alerta.png" alt="Экран OrroFi: «Вы видели то, чего не делали?»" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg"></picture>
-<figcaption>Кадр прототипа приложения (тёмная тема), демонстрационные данные.</figcaption>
+<figcaption>Демонстрационные данные на кадре.</figcaption>
 </figure>
 </article><article class="screen-block" id="rp-18b">
 <header>
 <h3>Сигнал принят</h3>
-<p class="screen-id">Экран <code>rp-18b</code> · Сигнал о чужих действиях</p>
 </header>
-<div class="screen-meta">
-<dl>
-<dt>Что делает</dt>
-<dd><p>На экране «Сообщите в OrroFi, если в журнале сети появилось действие, которого вы не совершали» собрана часть сценария «Сигнал о чужих действиях». Интерфейс приложения на испанском или английском; здесь — смысл на русском.</p></dd>
-<dt>Как пользоваться</dt>
-<dd><p>Откройте раздел «Сигнал о чужих действиях» в приложении и дойдите до экрана с идентификатором rp-18b. Следуйте подсказкам на экране.</p></dd>
-<dt>Настройки</dt>
-<dd><p>Отдельного экрана настроек у этого шага нет: значения подтянуты из договора или предыдущих шагов мастера.</p></dd>
-<dt>Пошагово</dt>
-<dd><ol><li>Откройте приложение OrroFi на iPhone.</li><li>Дойдите до экрана «Сообщите в OrroFi».</li><li>Прочитайте пояснение и подтвердите действие, если приложение просит согласие или Face ID.</li></ol></dd>
-</dl>
-</div>
+<div class="screen-copy"><p>Сообщите в OrroFi, если в журнале сети появилось действие, которого вы не совершали.</p></div>
 <figure class="shot">
 <picture><source srcset="../assets/screens/nolo-2-aviso-recibido.webp" type="image/webp"><img class="shot-img" src="../assets/screens/nolo-2-aviso-recibido.png" alt="Экран OrroFi: Сигнал принят" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg"></picture>
-<figcaption>Кадр прототипа приложения (тёмная тема), демонстрационные данные.</figcaption>
+<figcaption>Демонстрационные данные на кадре.</figcaption>
 </figure>
 </article><article class="screen-block" id="del-16a">
 <header>
 <h3>Запрос на удаление данных сети</h3>
-<p class="screen-id">Экран <code>del-16a</code> · Удаление данных Mi red</p>
 </header>
-<div class="screen-meta">
-<dl>
-<dt>Что делает</dt>
-<dd><p>На экране «Шаг удаления данных домашней сети Mi red. Доступно только владельцу» собрана часть сценария «Удаление данных Mi red». Интерфейс приложения на испанском или английском; здесь — смысл на русском.</p></dd>
-<dt>Как пользоваться</dt>
-<dd><p>Откройте раздел «Удаление данных Mi red» в приложении и дойдите до экрана с идентификатором del-16a. Следуйте подсказкам на экране.</p></dd>
-<dt>Настройки</dt>
-<dd><p>Отдельного экрана настроек у этого шага нет: значения подтянуты из договора или предыдущих шагов мастера.</p></dd>
-<dt>Пошагово</dt>
-<dd><ol><li>Откройте приложение OrroFi на iPhone.</li><li>Дойдите до экрана «Шаг удаления данных домашней сети Mi red. Доступно только владельцу.».</li><li>Прочитайте пояснение и подтвердите действие, если приложение просит согласие или Face ID.</li></ol></dd>
-</dl>
-</div>
+<div class="screen-copy"><p>Шаг удаления данных домашней сети Mi red. Доступно только владельцу.</p></div>
 <figure class="shot">
 <picture><source srcset="../assets/screens/privacidad-red-1-borrado-solicitud.webp" type="image/webp"><img class="shot-img" src="../assets/screens/privacidad-red-1-borrado-solicitud.png" alt="Экран OrroFi: Запрос на удаление данных сети" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg"></picture>
-<figcaption>Кадр прототипа приложения (тёмная тема), демонстрационные данные.</figcaption>
+<figcaption>Демонстрационные данные на кадре.</figcaption>
 </figure>
 </article><article class="screen-block" id="del-16a0">
 <header>
 <h3>Почта перед удалением</h3>
-<p class="screen-id">Экран <code>del-16a0</code> · Удаление данных Mi red</p>
 </header>
-<div class="screen-meta">
-<dl>
-<dt>Что делает</dt>
-<dd><p>На экране «Шаг удаления данных домашней сети Mi red. Доступно только владельцу» собрана часть сценария «Удаление данных Mi red». Интерфейс приложения на испанском или английском; здесь — смысл на русском.</p></dd>
-<dt>Как пользоваться</dt>
-<dd><p>Откройте раздел «Удаление данных Mi red» в приложении и дойдите до экрана с идентификатором del-16a0. Следуйте подсказкам на экране.</p></dd>
-<dt>Настройки</dt>
-<dd><p>Отдельного экрана настроек у этого шага нет: значения подтянуты из договора или предыдущих шагов мастера.</p></dd>
-<dt>Пошагово</dt>
-<dd><ol><li>Откройте приложение OrroFi на iPhone.</li><li>Дойдите до экрана «Шаг удаления данных домашней сети Mi red. Доступно только владельцу.».</li><li>Прочитайте пояснение и подтвердите действие, если приложение просит согласие или Face ID.</li></ol></dd>
-</dl>
-</div>
+<div class="screen-copy"><p>Шаг удаления данных домашней сети Mi red. Доступно только владельцу.</p></div>
 <figure class="shot shot-placeholder">
 <img class="shot-img" src="../assets/screens/placeholder.svg" alt="Экран OrroFi: Почта перед удалением" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg">
-<figcaption>Место под кадр: файл появится после съёмки (см. site_report.txt).</figcaption>
+<figcaption>Кадр появится позже.</figcaption>
 </figure>
 </article><article class="screen-block" id="del-16b">
 <header>
 <h3>Подтверждение намерения</h3>
-<p class="screen-id">Экран <code>del-16b</code> · Удаление данных Mi red</p>
 </header>
-<div class="screen-meta">
-<dl>
-<dt>Что делает</dt>
-<dd><p>На экране «Шаг удаления данных домашней сети Mi red. Доступно только владельцу» собрана часть сценария «Удаление данных Mi red». Интерфейс приложения на испанском или английском; здесь — смысл на русском.</p></dd>
-<dt>Как пользоваться</dt>
-<dd><p>Откройте раздел «Удаление данных Mi red» в приложении и дойдите до экрана с идентификатором del-16b. Следуйте подсказкам на экране.</p></dd>
-<dt>Настройки</dt>
-<dd><p>Отдельного экрана настроек у этого шага нет: значения подтянуты из договора или предыдущих шагов мастера.</p></dd>
-<dt>Пошагово</dt>
-<dd><ol><li>Откройте приложение OrroFi на iPhone.</li><li>Дойдите до экрана «Шаг удаления данных домашней сети Mi red. Доступно только владельцу.».</li><li>Прочитайте пояснение и подтвердите действие, если приложение просит согласие или Face ID.</li></ol></dd>
-</dl>
-</div>
+<div class="screen-copy"><p>Шаг удаления данных домашней сети Mi red. Доступно только владельцу.</p></div>
 <figure class="shot shot-placeholder">
 <img class="shot-img" src="../assets/screens/placeholder.svg" alt="Экран OrroFi: Подтверждение намерения" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg">
-<figcaption>Место под кадр: файл появится после съёмки (см. site_report.txt).</figcaption>
+<figcaption>Кадр появится позже.</figcaption>
 </figure>
 </article><article class="screen-block" id="del-16b2">
 <header>
 <h3>Повторное подтверждение</h3>
-<p class="screen-id">Экран <code>del-16b2</code> · Удаление данных Mi red</p>
 </header>
-<div class="screen-meta">
-<dl>
-<dt>Что делает</dt>
-<dd><p>На экране «Шаг удаления данных домашней сети Mi red. Доступно только владельцу» собрана часть сценария «Удаление данных Mi red». Интерфейс приложения на испанском или английском; здесь — смысл на русском.</p></dd>
-<dt>Как пользоваться</dt>
-<dd><p>Откройте раздел «Удаление данных Mi red» в приложении и дойдите до экрана с идентификатором del-16b2. Следуйте подсказкам на экране.</p></dd>
-<dt>Настройки</dt>
-<dd><p>Отдельного экрана настроек у этого шага нет: значения подтянуты из договора или предыдущих шагов мастера.</p></dd>
-<dt>Пошагово</dt>
-<dd><ol><li>Откройте приложение OrroFi на iPhone.</li><li>Дойдите до экрана «Шаг удаления данных домашней сети Mi red. Доступно только владельцу.».</li><li>Прочитайте пояснение и подтвердите действие, если приложение просит согласие или Face ID.</li></ol></dd>
-</dl>
-</div>
+<div class="screen-copy"><p>Шаг удаления данных домашней сети Mi red. Доступно только владельцу.</p></div>
 <figure class="shot shot-placeholder">
 <img class="shot-img" src="../assets/screens/placeholder.svg" alt="Экран OrroFi: Повторное подтверждение" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg">
-<figcaption>Место под кадр: файл появится после съёмки (см. site_report.txt).</figcaption>
+<figcaption>Кадр появится позже.</figcaption>
 </figure>
 </article><article class="screen-block" id="del-16c">
 <header>
 <h3>Проверка Face ID</h3>
-<p class="screen-id">Экран <code>del-16c</code> · Удаление данных Mi red</p>
 </header>
-<div class="screen-meta">
-<dl>
-<dt>Что делает</dt>
-<dd><p>На экране «Шаг удаления данных домашней сети Mi red. Доступно только владельцу» собрана часть сценария «Удаление данных Mi red». Интерфейс приложения на испанском или английском; здесь — смысл на русском.</p></dd>
-<dt>Как пользоваться</dt>
-<dd><p>Откройте раздел «Удаление данных Mi red» в приложении и дойдите до экрана с идентификатором del-16c. Следуйте подсказкам на экране.</p></dd>
-<dt>Настройки</dt>
-<dd><p>Отдельного экрана настроек у этого шага нет: значения подтянуты из договора или предыдущих шагов мастера.</p></dd>
-<dt>Пошагово</dt>
-<dd><ol><li>Откройте приложение OrroFi на iPhone.</li><li>Дойдите до экрана «Шаг удаления данных домашней сети Mi red. Доступно только владельцу.».</li><li>Прочитайте пояснение и подтвердите действие, если приложение просит согласие или Face ID.</li></ol></dd>
-</dl>
-</div>
+<div class="screen-copy"><p>Шаг удаления данных домашней сети Mi red. Доступно только владельцу.</p></div>
 <figure class="shot shot-placeholder">
 <img class="shot-img" src="../assets/screens/placeholder.svg" alt="Экран OrroFi: Проверка Face ID" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg">
-<figcaption>Место под кадр: файл появится после съёмки (см. site_report.txt).</figcaption>
+<figcaption>Кадр появится позже.</figcaption>
 </figure>
 </article><article class="screen-block" id="del-16d">
 <header>
 <h3>Письмо сразу после запроса</h3>
-<p class="screen-id">Экран <code>del-16d</code> · Удаление данных Mi red</p>
 </header>
-<div class="screen-meta">
-<dl>
-<dt>Что делает</dt>
-<dd><p>На экране «Шаг удаления данных домашней сети Mi red. Доступно только владельцу» собрана часть сценария «Удаление данных Mi red». Интерфейс приложения на испанском или английском; здесь — смысл на русском.</p></dd>
-<dt>Как пользоваться</dt>
-<dd><p>Откройте раздел «Удаление данных Mi red» в приложении и дойдите до экрана с идентификатором del-16d. Следуйте подсказкам на экране.</p></dd>
-<dt>Настройки</dt>
-<dd><p>Отдельного экрана настроек у этого шага нет: значения подтянуты из договора или предыдущих шагов мастера.</p></dd>
-<dt>Пошагово</dt>
-<dd><ol><li>Откройте приложение OrroFi на iPhone.</li><li>Дойдите до экрана «Шаг удаления данных домашней сети Mi red. Доступно только владельцу.».</li><li>Прочитайте пояснение и подтвердите действие, если приложение просит согласие или Face ID.</li></ol></dd>
-</dl>
-</div>
+<div class="screen-copy"><p>Шаг удаления данных домашней сети Mi red. Доступно только владельцу.</p></div>
 <figure class="shot">
 <picture><source srcset="../assets/screens/privacidad-red-3-borrado-aviso.webp" type="image/webp"><img class="shot-img" src="../assets/screens/privacidad-red-3-borrado-aviso.png" alt="Экран OrroFi: Письмо сразу после запроса" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg"></picture>
-<figcaption>Кадр прототипа приложения (тёмная тема), демонстрационные данные.</figcaption>
+<figcaption>Демонстрационные данные на кадре.</figcaption>
 </figure>
 </article><article class="screen-block" id="del-16d2">
 <header>
 <h3>Напоминание за 24 часа</h3>
-<p class="screen-id">Экран <code>del-16d2</code> · Удаление данных Mi red</p>
 </header>
-<div class="screen-meta">
-<dl>
-<dt>Что делает</dt>
-<dd><p>На экране «Шаг удаления данных домашней сети Mi red. Доступно только владельцу» собрана часть сценария «Удаление данных Mi red». Интерфейс приложения на испанском или английском; здесь — смысл на русском.</p></dd>
-<dt>Как пользоваться</dt>
-<dd><p>Откройте раздел «Удаление данных Mi red» в приложении и дойдите до экрана с идентификатором del-16d2. Следуйте подсказкам на экране.</p></dd>
-<dt>Настройки</dt>
-<dd><p>Отдельного экрана настроек у этого шага нет: значения подтянуты из договора или предыдущих шагов мастера.</p></dd>
-<dt>Пошагово</dt>
-<dd><ol><li>Откройте приложение OrroFi на iPhone.</li><li>Дойдите до экрана «Шаг удаления данных домашней сети Mi red. Доступно только владельцу.».</li><li>Прочитайте пояснение и подтвердите действие, если приложение просит согласие или Face ID.</li></ol></dd>
-</dl>
-</div>
+<div class="screen-copy"><p>Шаг удаления данных домашней сети Mi red. Доступно только владельцу.</p></div>
 <figure class="shot shot-placeholder">
 <img class="shot-img" src="../assets/screens/placeholder.svg" alt="Экран OrroFi: Напоминание за 24 часа" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg">
-<figcaption>Место под кадр: файл появится после съёмки (см. site_report.txt).</figcaption>
+<figcaption>Кадр появится позже.</figcaption>
 </figure>
 </article><article class="screen-block" id="del-16e">
 <header>
 <h3>Отмена удаления</h3>
-<p class="screen-id">Экран <code>del-16e</code> · Удаление данных Mi red</p>
 </header>
-<div class="screen-meta">
-<dl>
-<dt>Что делает</dt>
-<dd><p>На экране «Шаг удаления данных домашней сети Mi red. Доступно только владельцу» собрана часть сценария «Удаление данных Mi red». Интерфейс приложения на испанском или английском; здесь — смысл на русском.</p></dd>
-<dt>Как пользоваться</dt>
-<dd><p>Откройте раздел «Удаление данных Mi red» в приложении и дойдите до экрана с идентификатором del-16e. Следуйте подсказкам на экране.</p></dd>
-<dt>Настройки</dt>
-<dd><p>Отдельного экрана настроек у этого шага нет: значения подтянуты из договора или предыдущих шагов мастера.</p></dd>
-<dt>Пошагово</dt>
-<dd><ol><li>Откройте приложение OrroFi на iPhone.</li><li>Дойдите до экрана «Шаг удаления данных домашней сети Mi red. Доступно только владельцу.».</li><li>Прочитайте пояснение и подтвердите действие, если приложение просит согласие или Face ID.</li></ol></dd>
-</dl>
-</div>
+<div class="screen-copy"><p>Шаг удаления данных домашней сети Mi red. Доступно только владельцу.</p></div>
 <figure class="shot shot-placeholder">
 <img class="shot-img" src="../assets/screens/placeholder.svg" alt="Экран OrroFi: Отмена удаления" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg">
-<figcaption>Место под кадр: файл появится после съёмки (см. site_report.txt).</figcaption>
+<figcaption>Кадр появится позже.</figcaption>
 </figure>
 </article><article class="screen-block" id="del-16e2">
 <header>
 <h3>Отмена невозможна</h3>
-<p class="screen-id">Экран <code>del-16e2</code> · Удаление данных Mi red</p>
 </header>
-<div class="screen-meta">
-<dl>
-<dt>Что делает</dt>
-<dd><p>На экране «Шаг удаления данных домашней сети Mi red. Доступно только владельцу» собрана часть сценария «Удаление данных Mi red». Интерфейс приложения на испанском или английском; здесь — смысл на русском.</p></dd>
-<dt>Как пользоваться</dt>
-<dd><p>Откройте раздел «Удаление данных Mi red» в приложении и дойдите до экрана с идентификатором del-16e2. Следуйте подсказкам на экране.</p></dd>
-<dt>Настройки</dt>
-<dd><p>Отдельного экрана настроек у этого шага нет: значения подтянуты из договора или предыдущих шагов мастера.</p></dd>
-<dt>Пошагово</dt>
-<dd><ol><li>Откройте приложение OrroFi на iPhone.</li><li>Дойдите до экрана «Шаг удаления данных домашней сети Mi red. Доступно только владельцу.».</li><li>Прочитайте пояснение и подтвердите действие, если приложение просит согласие или Face ID.</li></ol></dd>
-</dl>
-</div>
+<div class="screen-copy"><p>Шаг удаления данных домашней сети Mi red. Доступно только владельцу.</p></div>
 <figure class="shot shot-placeholder">
 <img class="shot-img" src="../assets/screens/placeholder.svg" alt="Экран OrroFi: Отмена невозможна" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg">
-<figcaption>Место под кадр: файл появится после съёмки (см. site_report.txt).</figcaption>
+<figcaption>Кадр появится позже.</figcaption>
 </figure>
 </article><article class="screen-block" id="del-16f">
 <header>
 <h3>Удаление выполнено</h3>
-<p class="screen-id">Экран <code>del-16f</code> · Удаление данных Mi red</p>
 </header>
-<div class="screen-meta">
-<dl>
-<dt>Что делает</dt>
-<dd><p>На экране «Шаг удаления данных домашней сети Mi red. Доступно только владельцу» собрана часть сценария «Удаление данных Mi red». Интерфейс приложения на испанском или английском; здесь — смысл на русском.</p></dd>
-<dt>Как пользоваться</dt>
-<dd><p>Откройте раздел «Удаление данных Mi red» в приложении и дойдите до экрана с идентификатором del-16f. Следуйте подсказкам на экране.</p></dd>
-<dt>Настройки</dt>
-<dd><p>Отдельного экрана настроек у этого шага нет: значения подтянуты из договора или предыдущих шагов мастера.</p></dd>
-<dt>Пошагово</dt>
-<dd><ol><li>Откройте приложение OrroFi на iPhone.</li><li>Дойдите до экрана «Шаг удаления данных домашней сети Mi red. Доступно только владельцу.».</li><li>Прочитайте пояснение и подтвердите действие, если приложение просит согласие или Face ID.</li></ol></dd>
-</dl>
-</div>
+<div class="screen-copy"><p>Шаг удаления данных домашней сети Mi red. Доступно только владельцу.</p></div>
 <figure class="shot shot-placeholder">
 <img class="shot-img" src="../assets/screens/placeholder.svg" alt="Экран OrroFi: Удаление выполнено" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg">
-<figcaption>Место под кадр: файл появится после съёмки (см. site_report.txt).</figcaption>
+<figcaption>Кадр появится позже.</figcaption>
 </figure>
 </article><article class="screen-block" id="del-16g">
 <header>
 <h3>Данные сети стёрты</h3>
-<p class="screen-id">Экран <code>del-16g</code> · Удаление данных Mi red</p>
 </header>
-<div class="screen-meta">
-<dl>
-<dt>Что делает</dt>
-<dd><p>На экране «Шаг удаления данных домашней сети Mi red. Доступно только владельцу» собрана часть сценария «Удаление данных Mi red». Интерфейс приложения на испанском или английском; здесь — смысл на русском.</p></dd>
-<dt>Как пользоваться</dt>
-<dd><p>Откройте раздел «Удаление данных Mi red» в приложении и дойдите до экрана с идентификатором del-16g. Следуйте подсказкам на экране.</p></dd>
-<dt>Настройки</dt>
-<dd><p>Отдельного экрана настроек у этого шага нет: значения подтянуты из договора или предыдущих шагов мастера.</p></dd>
-<dt>Пошагово</dt>
-<dd><ol><li>Откройте приложение OrroFi на iPhone.</li><li>Дойдите до экрана «Шаг удаления данных домашней сети Mi red. Доступно только владельцу.».</li><li>Прочитайте пояснение и подтвердите действие, если приложение просит согласие или Face ID.</li></ol></dd>
-</dl>
-</div>
+<div class="screen-copy"><p>Шаг удаления данных домашней сети Mi red. Доступно только владельцу.</p></div>
 <figure class="shot">
 <picture><source srcset="../assets/screens/privacidad-red-4-borrado-cancelado.webp" type="image/webp"><img class="shot-img" src="../assets/screens/privacidad-red-4-borrado-cancelado.png" alt="Экран OrroFi: Данные сети стёрты" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg"></picture>
-<figcaption>Кадр прототипа приложения (тёмная тема), демонстрационные данные.</figcaption>
+<figcaption>Демонстрационные данные на кадре.</figcaption>
 </figure>
 </article><article class="screen-block" id="del-16h">
 <header>
 <h3>Итог удаления</h3>
-<p class="screen-id">Экран <code>del-16h</code> · Удаление данных Mi red</p>
 </header>
-<div class="screen-meta">
-<dl>
-<dt>Что делает</dt>
-<dd><p>На экране «Шаг удаления данных домашней сети Mi red. Доступно только владельцу» собрана часть сценария «Удаление данных Mi red». Интерфейс приложения на испанском или английском; здесь — смысл на русском.</p></dd>
-<dt>Как пользоваться</dt>
-<dd><p>Откройте раздел «Удаление данных Mi red» в приложении и дойдите до экрана с идентификатором del-16h. Следуйте подсказкам на экране.</p></dd>
-<dt>Настройки</dt>
-<dd><p>Отдельного экрана настроек у этого шага нет: значения подтянуты из договора или предыдущих шагов мастера.</p></dd>
-<dt>Пошагово</dt>
-<dd><ol><li>Откройте приложение OrroFi на iPhone.</li><li>Дойдите до экрана «Шаг удаления данных домашней сети Mi red. Доступно только владельцу.».</li><li>Прочитайте пояснение и подтвердите действие, если приложение просит согласие или Face ID.</li></ol></dd>
-</dl>
-</div>
+<div class="screen-copy"><p>Шаг удаления данных домашней сети Mi red. Доступно только владельцу.</p></div>
 <figure class="shot shot-placeholder">
 <img class="shot-img" src="../assets/screens/placeholder.svg" alt="Экран OrroFi: Итог удаления" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg">
-<figcaption>Место под кадр: файл появится после съёмки (см. site_report.txt).</figcaption>
+<figcaption>Кадр появится позже.</figcaption>
 </figure>
 </article><article class="screen-block" id="del-entry">
 <header>
 <h3>Удаление данных Mi red — вход</h3>
-<p class="screen-id">Экран <code>del-entry</code> · Удаление данных Mi red</p>
 </header>
-<div class="screen-meta">
-<dl>
-<dt>Что делает</dt>
-<dd><p>На экране «Шаг удаления данных домашней сети Mi red. Доступно только владельцу» собрана часть сценария «Удаление данных Mi red». Интерфейс приложения на испанском или английском; здесь — смысл на русском.</p></dd>
-<dt>Как пользоваться</dt>
-<dd><p>Откройте раздел «Удаление данных Mi red» в приложении и дойдите до экрана с идентификатором del-entry. Следуйте подсказкам на экране.</p></dd>
-<dt>Настройки</dt>
-<dd><p>Отдельного экрана настроек у этого шага нет: значения подтянуты из договора или предыдущих шагов мастера.</p></dd>
-<dt>Пошагово</dt>
-<dd><ol><li>Откройте приложение OrroFi на iPhone.</li><li>Дойдите до экрана «Шаг удаления данных домашней сети Mi red. Доступно только владельцу.».</li><li>Прочитайте пояснение и подтвердите действие, если приложение просит согласие или Face ID.</li></ol></dd>
-</dl>
-</div>
+<div class="screen-copy"><p>Шаг удаления данных домашней сети Mi red. Доступно только владельцу.</p></div>
 <figure class="shot shot-placeholder">
 <img class="shot-img" src="../assets/screens/placeholder.svg" alt="Экран OrroFi: Удаление данных Mi red — вход" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg">
-<figcaption>Место под кадр: файл появится после съёмки (см. site_report.txt).</figcaption>
+<figcaption>Кадр появится позже.</figcaption>
 </figure>
 </article><article class="screen-block" id="del-owner">
 <header>
 <h3>Только владелец может удалить данные сети</h3>
-<p class="screen-id">Экран <code>del-owner</code> · Удаление данных Mi red</p>
 </header>
-<div class="screen-meta">
-<dl>
-<dt>Что делает</dt>
-<dd><p>На экране «Шаг удаления данных домашней сети Mi red. Доступно только владельцу» собрана часть сценария «Удаление данных Mi red». Интерфейс приложения на испанском или английском; здесь — смысл на русском.</p></dd>
-<dt>Как пользоваться</dt>
-<dd><p>Откройте раздел «Удаление данных Mi red» в приложении и дойдите до экрана с идентификатором del-owner. Следуйте подсказкам на экране.</p></dd>
-<dt>Настройки</dt>
-<dd><p>Отдельного экрана настроек у этого шага нет: значения подтянуты из договора или предыдущих шагов мастера.</p></dd>
-<dt>Пошагово</dt>
-<dd><ol><li>Откройте приложение OrroFi на iPhone.</li><li>Дойдите до экрана «Шаг удаления данных домашней сети Mi red. Доступно только владельцу.».</li><li>Прочитайте пояснение и подтвердите действие, если приложение просит согласие или Face ID.</li></ol></dd>
-</dl>
-</div>
+<div class="screen-copy"><p>Шаг удаления данных домашней сети Mi red. Доступно только владельцу.</p></div>
 <figure class="shot shot-placeholder">
 <img class="shot-img" src="../assets/screens/placeholder.svg" alt="Экран OrroFi: Только владелец может удалить данные сети" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg">
-<figcaption>Место под кадр: файл появится после съёмки (см. site_report.txt).</figcaption>
+<figcaption>Кадр появится позже.</figcaption>
 </figure>
 </article><article class="screen-block" id="del-sh-bio">
 <header>
 <h3>Системное подтверждение Face ID</h3>
-<p class="screen-id">Экран <code>del-sh-bio</code> · Удаление данных Mi red</p>
 </header>
-<div class="screen-meta">
-<dl>
-<dt>Что делает</dt>
-<dd><p>На экране «Шаг удаления данных домашней сети Mi red. Доступно только владельцу» собрана часть сценария «Удаление данных Mi red». Интерфейс приложения на испанском или английском; здесь — смысл на русском.</p></dd>
-<dt>Как пользоваться</dt>
-<dd><p>Откройте раздел «Удаление данных Mi red» в приложении и дойдите до экрана с идентификатором del-sh-bio. Следуйте подсказкам на экране.</p></dd>
-<dt>Настройки</dt>
-<dd><p>Отдельного экрана настроек у этого шага нет: значения подтянуты из договора или предыдущих шагов мастера.</p></dd>
-<dt>Пошагово</dt>
-<dd><ol><li>Откройте приложение OrroFi на iPhone.</li><li>Дойдите до экрана «Шаг удаления данных домашней сети Mi red. Доступно только владельцу.».</li><li>Прочитайте пояснение и подтвердите действие, если приложение просит согласие или Face ID.</li></ol></dd>
-</dl>
-</div>
+<div class="screen-copy"><p>Шаг удаления данных домашней сети Mi red. Доступно только владельцу.</p></div>
 <figure class="shot">
 <picture><source srcset="../assets/screens/privacidad-red-2-borrado-faceid.webp" type="image/webp"><img class="shot-img" src="../assets/screens/privacidad-red-2-borrado-faceid.png" alt="Экран OrroFi: Системное подтверждение Face ID" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg"></picture>
-<figcaption>Кадр прототипа приложения (тёмная тема), демонстрационные данные.</figcaption>
+<figcaption>Демонстрационные данные на кадре.</figcaption>
 </figure>
 </article></div></section>
 
 </main>
 <footer class="site-footer">
 <div class="wrap">
-<p><strong>OrroFi — бренд PADELADA WORLD SL</strong> (NIF B05783238).</p>
+<p><strong>OrroFi</strong> · PADELADA WORLD SL (NIF B05783238), правообладатель бренда OrroFi.</p>
 <p>Сайт не использует cookies и счётчики посещений.</p>
 <p>
 <a href="../privacidad/index.html">Безопасность и приватность</a>
 <a href="../privacidad/index.html#sitio-privacidad">Приватность этого сайта</a>
 <a href="../contacto/index.html">Контакты</a>
 <a href="mailto:privacidad@orrofi.es">privacidad@orrofi.es</a>
+<a href="mailto:hola@orrofi.es">hola@orrofi.es</a>
 </p>
-<p class="badge-demo">Демонстрационные данные на кадрах приложения. Живая услуга и публикация в магазине — отдельный этап.</p>
+<p class="badge-demo">На кадрах — демонстрационные данные. Живая услуга и публикация в магазине приложений ещё впереди.</p>
 </div>
 </footer>
 <script src="../assets/js/site.js" defer></script>
