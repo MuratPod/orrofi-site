@@ -224,12 +224,12 @@ NAV = [
 EXTRA_SCREENS: list[dict] = []
 
 DEL_IDS = [
-    "del-entry", "del-owner", "del-16a0", "del-16a", "del-16b", "del-16b2", "del-16c",
-    "del-sh-bio", "del-16d", "del-16d2", "del-16e", "del-16e2", "del-16f", "del-16g", "del-16h",
+    "del-owner", "del-16a0", "del-16b", "del-16b2", "del-16c",
+    "del-sh-bio", "del-16e", "del-16e2", "del-16f", "del-16g", "del-16h",
 ]
 RST_IDS = [
     "rst-entry", "rst-owner", "rst-sms", "rst-17m",
-    *[f"rst-17{c}" for c in "abcdefghijkl"], "rst-sh-bio", "rst-sh-bio-c",
+    *[f"rst-17{c}" for c in "bdefghijl"], "rst-sh-bio", "rst-sh-bio-c",
 ]
 RP_IDS = ["rp-18a", "rp-18b"]
 
@@ -581,7 +581,7 @@ def render_screen_block(screen: dict, depth: int, page_slug: str | None = None) 
 
 
 def page_for_screen(sid: str, func: str) -> str:
-    if sid.startswith("net-") or sid == "net-entry" or sid == "net-sh-mac" or sid == "net-sh-bio" or sid == "net-sh-delcopy":
+    if sid.startswith("net-") or sid == "net-entry" or sid == "net-sh-bio" or sid == "net-sh-delcopy":
         return "mi-red"
     if sid.startswith("fam-"):
         return "familia"
@@ -779,7 +779,10 @@ def build_vozmozhnosti(
         flist = functions[func]
         screen = flist[0]
         page = page_for_screen(screen["id"], func)
-        href = rel_href(f"{page}/index.html#{screen['id']}", depth)
+        if func == "Mi red: защита":
+            href = rel_href(f"{page}/index.html", depth)
+        else:
+            href = rel_href(f"{page}/index.html#{screen['id']}", depth)
         label = ru_copy.FUNC_TITLES.get(func, func)
         toc.append(
             f'<li><a href="{html.escape(href)}">{T(polish_display_text(label))}</a></li>'

@@ -104,16 +104,6 @@
       }
     },
     {
-      "file": "login-4-sh-nocode.png",
-      "screenId": "sh-nocode",
-      "function": "login",
-      "titleEs": "¿No recibes el código?",
-      "descRu": "Подсказки, если SMS с кодом не приходит.",
-      "flags": {
-        "session": false
-      }
-    },
-    {
       "file": "login-5-onb.png",
       "screenId": "onb",
       "function": "login",
@@ -143,16 +133,6 @@
         "session": false
       },
       "sanitizePlaceholders": true
-    },
-    {
-      "file": "login-8-onb3.png",
-      "screenId": "onb3",
-      "function": "login",
-      "titleEs": "Solicitud enviada",
-      "descRu": "Подтверждение отправки заявки и контакт с менеджером.",
-      "flags": {
-        "session": false
-      }
     },
     {
       "file": "servicios-1-radio.png",
@@ -284,13 +264,6 @@
       "waitMs": 500
     },
     {
-      "file": "familia-2-cotejo.png",
-      "screenId": "fam-14a",
-      "function": "familia",
-      "titleEs": "Código de verificación",
-      "descRu": "Сверка шестизначного кода между двумя телефонами."
-    },
-    {
       "file": "export-datos.png",
       "screenId": "sh-export",
       "function": "export-datos",
@@ -306,25 +279,11 @@
       "descRu": "Подтверждение отмены удаления через Face ID."
     },
     {
-      "file": "privacidad-red-3-borrado-aviso.png",
-      "screenId": "del-16d",
-      "function": "privacidad-red",
-      "titleEs": "Aviso de borrado",
-      "descRu": "Push-уведомление о запланированном удалении данных сети."
-    },
-    {
       "file": "privacidad-red-4-borrado-cancelado.png",
       "screenId": "del-16g",
       "function": "privacidad-red",
       "titleEs": "Borrado cancelado",
       "descRu": "Результат отмены удаления данных Mi red."
-    },
-    {
-      "file": "privacidad-red-5-restablecer-solicitud.png",
-      "screenId": "rst-17a",
-      "function": "privacidad-red",
-      "titleEs": "Restablecer Mi red",
-      "descRu": "Запрос сброса домашней сети с отложенным выполнением."
     },
     {
       "file": "privacidad-red-6-restablecer-faceid.png",
@@ -412,13 +371,6 @@
       "descRu": "Включение или отключение Face ID для входа."
     },
     {
-      "file": "extras-sh-logout.png",
-      "screenId": "sh-logout",
-      "function": "extras",
-      "titleEs": "Cerrar sesión",
-      "descRu": "Подтверждение выхода из аккаунта."
-    },
-    {
       "file": "net-0a.png",
       "screenId": "net-0a",
       "function": "site-mi-red",
@@ -503,30 +455,11 @@
       }
     },
     {
-      "file": "priv-privacy.png",
-      "screenId": "privacy",
-      "function": "privacidad",
-      "titleEs": "Privacidad",
-      "descRu": "Согласия, выгрузка и удаление учётных данных.",
-      "sanitizePlaceholders": true
-    },
-    {
       "file": "priv-privsched.png",
       "screenId": "privsched",
       "function": "privacidad",
       "titleEs": "Eliminación programada",
       "descRu": "Удаление учётных данных назначено, его ещё можно отменить."
-    },
-    {
-      "file": "priv-sh-deleteok.png",
-      "screenId": "sh-deleteok",
-      "function": "privacidad",
-      "titleEs": "¿Eliminar tus datos?",
-      "descRu": "Подтверждение удаления данных аккаунта.",
-      "flags": {
-        "activeServices": false
-      },
-      "sanitizePlaceholders": true
     },
     {
       "file": "priv-sh-deletecode.png",
@@ -574,13 +507,6 @@
       ]
     },
     {
-      "file": "priv-rst-17c.png",
-      "screenId": "rst-17c",
-      "function": "privacidad-red",
-      "titleEs": "¿Restablecer Mi red?",
-      "descRu": "Повторное подтверждение сброса."
-    },
-    {
       "file": "priv-rst-17d.png",
       "screenId": "rst-17d",
       "function": "privacidad-red",
@@ -614,13 +540,6 @@
       "function": "privacidad-red",
       "titleEs": "Restablecimiento en curso",
       "descRu": "Сброс уже запрошен."
-    },
-    {
-      "file": "priv-rst-17k.png",
-      "screenId": "rst-17k",
-      "function": "privacidad-red",
-      "titleEs": "Límite de solicitudes",
-      "descRu": "Сброс нельзя просить слишком часто."
     },
     {
       "file": "priv-rst-17l.png",
@@ -678,13 +597,6 @@
       "descRu": "Сообщение о дате удаления данных сети."
     },
     {
-      "file": "priv-del-16d2.png",
-      "screenId": "del-16d2",
-      "function": "privacidad-red",
-      "titleEs": "Aviso inmediato (sin derecho)",
-      "descRu": "Уведомление об удалении без права отмены с этого телефона."
-    },
-    {
       "file": "priv-del-16e.png",
       "screenId": "del-16e",
       "function": "privacidad-red",
@@ -723,21 +635,6 @@
       }
     },
     {
-      "file": "priv-del-16a.png",
-      "screenId": "del-16a",
-      "function": "privacidad-red",
-      "titleEs": "¿Borrar los datos de Mi red?",
-      "descRu": "Запрос на удаление данных сети. Фраза про копию ключа убирается при съёмке."
-    },
-    {
-      "file": "priv-del-16a.png",
-      "screenId": "del-entry",
-      "aliasOf": "del-16a",
-      "function": "privacidad-red",
-      "titleEs": "Borrado (acceso)",
-      "descRu": "Вход в удаление открывает запрос del-16a."
-    },
-    {
       "file": "servicios-8-order-date.png",
       "screenId": "order-date",
       "function": "servicios",
@@ -765,13 +662,6 @@
       "titleEs": "QR oculto",
       "descRu": "Код приглашения скрыт, потому что экран записывают или делают снимок.",
       "waitMs": 500
-    },
-    {
-      "file": "familia-4-escanea.png",
-      "screenId": "fam-13b",
-      "function": "familia",
-      "titleEs": "Escanear código",
-      "descRu": "Домашний телефон сканирует QR нового телефона."
     },
     {
       "file": "familia-5-anadir.png",
@@ -948,24 +838,6 @@
       "titleEs": "Router conectado",
       "descRu": "Роутер ответил и подключение готово.",
       "expectText": "Router conectado"
-    },
-    {
-      "file": "net-0e.png",
-      "screenId": "net-0e",
-      "function": "site-mi-red",
-      "titleEs": "Tu red, solo para ti",
-      "descRu": "Почему сеть остаётся только у владельца.",
-      "sanitizePlaceholders": true,
-      "expectText": "Tu red, solo para ti"
-    },
-    {
-      "file": "net-sh-mac.png",
-      "screenId": "net-sh-mac",
-      "function": "site-mi-red",
-      "titleEs": "¿Qué es la dirección MAC?",
-      "descRu": "Справка: что такое MAC-адрес.",
-      "sanitizePlaceholders": true,
-      "expectText": "dirección MAC"
     },
     {
       "file": "net-0g.png",

@@ -1,4 +1,4 @@
-screens_total=132
+screens_total=116
 functions_total=35
 functions_without_committed_shot=0
 functions_missing_any_committed_shot:
