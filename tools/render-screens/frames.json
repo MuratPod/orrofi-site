@@ -861,6 +861,15 @@
       }
     },
     {
+      "file": "servicios-launch.png",
+      "screenId": "launch",
+      "function": "servicios",
+      "titleEs": "Primer arranque",
+      "descRu": "Заставка OrroFi до входа.",
+      "waitMs": 150,
+      "expectText": "OrroFi"
+    },
+    {
       "file": "servicios-fiber.png",
       "screenId": "fiber",
       "function": "servicios",

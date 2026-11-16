@@ -121,6 +121,7 @@ const REDIRECT_GUARD_IDS = new Set([
   'net-00',
   'del-16a',
   'rst-sms',
+  'launch',
 ]);
 
 /** Pantallas retiradas por Security: no capturar ni mapear. */
@@ -470,14 +471,17 @@ async function sanitizePlaceholders(page, mode) {
     const bracketRe = /\[[^\]]+\]/g;
 
     function replaceBrackets(text) {
-      let out = text;
+      const lead = (text.match(/^\s*/) || [''])[0];
+      const trail = (text.match(/\s*$/) || [''])[0];
+      let out = text.trim();
+      if (!out) return text;
       Object.keys(exact)
         .sort((a, b) => b.length - a.length)
         .forEach((key) => {
           out = out.split(key).join(exact[key]);
         });
       out = out.replace(bracketRe, (m) => exact[m] || fallback);
-      return out.trim();
+      return lead + out + trail;
     }
 
     const walker = document.createTreeWalker(phone, NodeFilter.SHOW_TEXT);
@@ -858,6 +862,16 @@ async function renderProtoFrame(page, frame) {
   if (frame.expectText && !text.includes(frame.expectText)) {
     return { status: 'blocked', reason: `No se ve el texto esperado: ${frame.expectText}` };
   }
+  const domText = await page.evaluate(() => document.getElementById('phone')?.innerText || '');
+  const glueRes = [ /:[A-Za-záéíóú]/, /\.[A-Z]/ ];
+  for (const re of glueRes) {
+    const m = domText.match(re);
+    if (m) {
+      const at = m.index || 0;
+      const snippet = domText.slice(Math.max(0, at - 24), at + 28).replace(/\s+/g, ' ');
+      return { status: 'blocked', reason: `Texto pegado ${re}: ${snippet}` };
+    }
+  }
   const leaked = (await securityLeak(page)).toLowerCase();
   for (const needle of ['servidores', 'copia cifrada', 'separada', 'aislad', 'carrer de mar']) {
     const at = leaked.indexOf(needle);
@@ -937,8 +951,14 @@ async function renderOne(page, frame, protoReady) {
 }
 
 async function main() {
-  const onlyArg = process.argv.find((a) => a.startsWith('--only='));
-  const fromArg = onlyArg ? onlyArg.slice('--only='.length).split(',') : [];
+  const onlyEq = process.argv.find((a) => a.startsWith('--only='));
+  const onlyIdx = process.argv.indexOf('--only');
+  const onlyRaw = onlyEq
+    ? onlyEq.slice('--only='.length)
+    : onlyIdx !== -1
+      ? process.argv[onlyIdx + 1] || ''
+      : '';
+  const fromArg = onlyRaw.split(',');
   const fromEnv = (process.env.RENDER_ONLY || '').split(',');
   const only = new Set(
     [...fromArg, ...fromEnv].map((s) => s.trim()).filter(Boolean),

@@ -129,6 +129,7 @@
 | `servicios-fiber.png` | `fiber` | servicios | Fibra | Тариф и статус домашней оптики. |
 | `servicios-order.png` | `order` | servicios | Contratar | Начало заказа: адрес-пример и выбранный тариф оптики. |
 | `servicios-order-sum.png` | `order-sum` | servicios | Resumen del pedido | Сводка заказа: адрес-пример, тариф и окно визита. |
+| `servicios-launch.png` | `launch` | servicios | Primer arranque | Заставка OrroFi до входа. |
 
 ## No incluidos en assets
 
