@@ -1,5 +1,6 @@
 {
   "prototypeUrl": "https://muratpod.github.io/orrofi-proto/",
+  "appIconUrl": "https://muratpod.github.io/orrofi-preview/icons/ios/AppIcon-60.png",
   "viewport": { "width": 430, "height": 932 },
   "deviceScaleFactor": 2,
   "defaultFlags": {
@@ -25,6 +26,37 @@
     "#E8FF2A",
     "#D4F200"
   ],
+  "placeholderSanitize": {
+    "legalBlockSelector": ".b-dp",
+    "legalBlockText": "Consulta nuestra política de privacidad en la app.",
+    "defaultBracketReplacement": "Ver condiciones",
+    "exactReplacements": {
+      "[RESPONSABLE]": "el responsable del tratamiento",
+      "[EMAIL PRIVACIDAD]": "la sección de privacidad en la app",
+      "[URL POLÍTICA]": "la política de privacidad en la app",
+      "[OPERADOR SOCIO / ninguno]": "proveedores autorizados, si corresponde",
+      "[TELÉFONO GRATUITO]": "atención en la app",
+      "[PRINCIPALES SERVICIOS: p. ej. facturas y app accesibles, atención por texto, tarifas especiales]. Más detalles en [ENLACE].": "Servicios de accesibilidad y atención disponibles en la app.",
+      "[MAIN SERVICES]. More details at [LINK].": "Servicios de accesibilidad y atención disponibles en la app.",
+      "[ENLACE]": "Ver condiciones",
+      "[LINK]": "Ver condiciones"
+    },
+    "orderMovilReplacements": {
+      "[RESPONSABLE]": "",
+      "[DIRECCIÓN]": "",
+      "[EMAIL]": "",
+      "[TELÉFONO]": "",
+      "[CONTACTO RECLAMACIONES]": "atención en la app",
+      "[SMS INCLUIDOS]": "SMS incluidos",
+      "[LÍMITE ROAMING UE]": "10",
+      "[QUÉ PASA: velocidad reducida a X / X € por bono de Y GB]": "velocidad reducida al agotar datos",
+      "[PRECIOS]": "tarifas en la app",
+      "[ENLACE TARIFAS]": "la app",
+      "[REMEDIOS SEGÚN CONTRATO: p. ej. resolución sin coste / compensación]": "resolución sin coste o compensación según contrato",
+      "[PRINCIPALES SERVICIOS: p. ej. facturas y app accesibles, atención por texto, tarifas especiales]. Más detalles en [ENLACE].": "Facturas y app accesibles, atención por texto y tarifas especiales. Más detalles en la app.",
+      "[RUTA AJUSTES]": "Ajustes"
+    }
+  },
   "frames": [
     {
       "file": "login-1-login-code.png",
@@ -76,6 +108,15 @@
       "flags": { "session": false }
     },
     {
+      "file": "login-7-onb2.png",
+      "screenId": "onb2",
+      "function": "login",
+      "titleEs": "Solicitud de alta",
+      "descRu": "Форма заявки на подключение с согласиями.",
+      "flags": { "session": false },
+      "sanitizePlaceholders": true
+    },
+    {
       "file": "login-8-onb3.png",
       "screenId": "onb3",
       "function": "login",
@@ -96,6 +137,16 @@
       "function": "servicios",
       "titleEs": "Líneas móviles",
       "descRu": "Обзор мобильных линий и остатка трафика."
+    },
+    {
+      "file": "servicios-3a-order-movil.png",
+      "screenId": "order-movil",
+      "function": "servicios",
+      "titleEs": "Contratar línea móvil",
+      "descRu": "Оформление мобильной линии с резюме договора и согласиями.",
+      "sanitizePlaceholders": "orderMovil",
+      "hideTabs": true,
+      "scrollY": 0
     },
     {
       "file": "servicios-3-order-movil-ok.png",
@@ -163,13 +214,6 @@
       "descRu": "Список открытых обращений в поддержку."
     },
     {
-      "file": "gestor-4-ticket-instalacion.png",
-      "screenId": "install",
-      "function": "gestor",
-      "titleEs": "Ticket instalación",
-      "descRu": "Деталь заявки на установку (открытый тикет #4790)."
-    },
-    {
       "file": "mi-red-1-resumen.png",
       "screenId": "net-1",
       "function": "mi-red",
@@ -217,7 +261,8 @@
       "screenId": "sh-export",
       "function": "export-datos",
       "titleEs": "Descargar mis datos",
-      "descRu": "Запрос выгрузки персональных данных на e-mail."
+      "descRu": "Запрос выгрузки персональных данных на e-mail.",
+      "sanitizePlaceholders": true
     },
     {
       "file": "privacidad-red-1-borrado-solicitud.png",
@@ -259,7 +304,8 @@
       "screenId": "rst-sh-bio-c",
       "function": "privacidad-red",
       "titleEs": "Face ID · restablecer",
-      "descRu": "Подтверждение Face ID перед сбросом Mi red."
+      "descRu": "Подтверждение Face ID перед сбросом Mi red.",
+      "preActions": [{ "setup": "rst-reset-faceid" }]
     },
     {
       "file": "privacidad-red-7-restablecer-programado.png",
@@ -338,19 +384,83 @@
       "function": "extras",
       "titleEs": "Cerrar sesión",
       "descRu": "Подтверждение выхода из аккаунта."
+    },
+    {
+      "file": "net-0a.png",
+      "screenId": "net-0a",
+      "function": "site-mi-red",
+      "titleEs": "Conecta tu router",
+      "descRu": "Подключение роутера Mi red.",
+      "flags": { "routerLinked": false, "localNet": "unknown" }
+    },
+    {
+      "file": "net-0f.png",
+      "screenId": "net-0f",
+      "function": "site-mi-red",
+      "titleEs": "Protege tu router",
+      "descRu": "Защита административного пароля роутера.",
+      "flags": { "routerLinked": false, "localNet": "granted" }
+    },
+    {
+      "file": "net-8.png",
+      "screenId": "net-8",
+      "function": "site-mi-red",
+      "titleEs": "Wi‑Fi casa",
+      "descRu": "Домашняя Wi‑Fi: имя сети и пароль.",
+      "preActions": [{ "setup": "net-8-wifi" }]
+    },
+    {
+      "file": "net-6.png",
+      "screenId": "net-6",
+      "function": "site-mi-red",
+      "titleEs": "Seguridad",
+      "descRu": "Безопасность сети: пароль, WPA3, прошивка."
+    },
+    {
+      "file": "sh-faceid-open.png",
+      "screenId": "sh-faceid-open",
+      "function": "site-auth",
+      "titleEs": "Face ID al abrir",
+      "descRu": "Вход по Face ID при открытии.",
+      "flags": { "session": true, "faceid": true }
+    },
+    {
+      "file": "net-9.png",
+      "screenId": "net-9",
+      "function": "site-mi-red",
+      "titleEs": "Red de invitados",
+      "descRu": "Гостевой Wi‑Fi."
+    },
+    {
+      "file": "net-9b.png",
+      "screenId": "net-9b",
+      "function": "site-mi-red",
+      "titleEs": "Privacidad · claves",
+      "descRu": "Ключи на устройстве."
+    },
+    {
+      "file": "net-12b.png",
+      "screenId": "net-12b",
+      "function": "site-mi-red",
+      "titleEs": "Tu operador firmado",
+      "descRu": "Оператор и договор."
+    },
+    {
+      "file": "net-7.png",
+      "screenId": "net-7",
+      "function": "site-mi-red",
+      "titleEs": "Historial y reinicio",
+      "descRu": "Управление роутером."
+    },
+    {
+      "file": "net-1e.png",
+      "screenId": "net-1e",
+      "function": "site-mi-red",
+      "titleEs": "Pausar internet",
+      "descRu": "Управление сетью: пауза интернета."
     }
   ],
   "skipped": [
-    {
-      "screenId": "onb2",
-      "function": "login",
-      "reason": "Блок «Protección de datos» содержит [RESPONSABLE], [EMAIL PRIVACIDAD], [URL POLÍTICA], [OPERADOR SOCIO]."
-    },
-    {
-      "screenId": "order-movil",
-      "function": "servicios",
-      "reason": "На экране юридические плейсхолдеры [PRINCIPALES SERVICIOS] и [ENLACE] в блоке TRIS."
-    },
     {
       "screenId": "privacy",
       "function": "export-datos",

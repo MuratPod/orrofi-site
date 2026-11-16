@@ -1,59 +1,38 @@
 screens_total=137
 functions_total=36
-functions_without_committed_shot=10
+functions_without_committed_shot=0
 functions_missing_any_committed_shot:
-Mi red: защита
-Mi red: подключение
-Wi‑Fi дома
-Безопасность сети
-Вход по Face ID
-Гостевой Wi‑Fi
-Ключи на устройстве
-Оператор и договор
-Управление роутером
-Управление сетью
 
-missing_image_placeholders=138
+missing_image_placeholders=103
 missing_image_paths:
 order-date: assets/screens/order-date.png
-order-movil: assets/screens/order-movil.png
-onb2: assets/screens/onb2.png
 sh-gb: assets/screens/sh-gb.png
 mgrlimit: assets/screens/mgrlimit.png
 sh-voice: assets/screens/sh-voice.png
 sh-voice-denied: assets/screens/sh-voice-denied.png
 handoffoff: assets/screens/handoffoff.png
 net-0e: assets/screens/net-0e.png
-net-0f: assets/screens/net-0f.png
 net-0g: assets/screens/net-0g.png
 net-0h: assets/screens/net-0h.png
 net-sh-mac: assets/screens/net-sh-mac.png
 net-00: assets/screens/net-00.png
 net-00b: assets/screens/net-00b.png
 net-00c: assets/screens/net-00c.png
-net-0a: assets/screens/net-0a.png
 net-0b: assets/screens/net-0b.png
 net-0c: assets/screens/net-0c.png
 net-0d: assets/screens/net-0d.png
 net-entry: assets/screens/net-entry.png
 net-sys-localnet: assets/screens/net-sys-localnet.png
-net-8: assets/screens/net-8.png
-net-6: assets/screens/net-6.png
 net-sh-bio: assets/screens/net-sh-bio.png
-net-9: assets/screens/net-9.png
-net-9b: assets/screens/net-9b.png
 net-sh-delcopy: assets/screens/net-sh-delcopy.png
 net-1b: assets/screens/net-1b.png
 net-1d: assets/screens/net-1d.png
 net-12: assets/screens/net-12.png
-net-12b: assets/screens/net-12b.png
 net-4b: assets/screens/net-4b.png
 net-4c: assets/screens/net-4c.png
 net-4d: assets/screens/net-4d.png
 net-5: assets/screens/net-5.png
-net-7: assets/screens/net-7.png
 net-7-confirm: assets/screens/net-7-confirm.png
-net-1e: assets/screens/net-1e.png
 net-3: assets/screens/net-3.png
 net-3b: assets/screens/net-3b.png
 fam-13a2: assets/screens/fam-13a2.png
@@ -67,7 +46,6 @@ fam-15b: assets/screens/fam-15b.png
 fam-15c: assets/screens/fam-15c.png
 fam-list: assets/screens/fam-list.png
 billing: assets/screens/billing.png
-sh-faceid-open: assets/screens/sh-faceid-open.png
 privsched: assets/screens/privsched.png
 sh-deletecode: assets/screens/sh-deletecode.png
 sh-deleteok: assets/screens/sh-deleteok.png
@@ -96,7 +74,6 @@ del-16f: assets/screens/del-16f.png
 del-16h: assets/screens/del-16h.png
 del-entry: assets/screens/del-entry.png
 del-owner: assets/screens/del-owner.png
-sh-faceid-open: assets/screens/sh-faceid-open.png
 privsched: assets/screens/privsched.png
 sh-deletecode: assets/screens/sh-deletecode.png
 sh-deleteok: assets/screens/sh-deleteok.png
@@ -126,30 +103,8 @@ del-16h: assets/screens/del-16h.png
 del-entry: assets/screens/del-entry.png
 del-owner: assets/screens/del-owner.png
 net-0e: assets/screens/net-0e.png
-net-0f: assets/screens/net-0f.png
-net-0g: assets/screens/net-0g.png
-net-0h: assets/screens/net-0h.png
-net-sh-mac: assets/screens/net-sh-mac.png
 net-00: assets/screens/net-00.png
 net-00b: assets/screens/net-00b.png
 net-00c: assets/screens/net-00c.png
-net-0a: assets/screens/net-0a.png
-net-0b: assets/screens/net-0b.png
-net-0c: assets/screens/net-0c.png
-net-0d: assets/screens/net-0d.png
-net-entry: assets/screens/net-entry.png
-net-sys-localnet: assets/screens/net-sys-localnet.png
-net-8: assets/screens/net-8.png
-net-6: assets/screens/net-6.png
-net-sh-bio: assets/screens/net-sh-bio.png
-sh-faceid-open: assets/screens/sh-faceid-open.png
-net-9: assets/screens/net-9.png
-net-9b: assets/screens/net-9b.png
-net-sh-delcopy: assets/screens/net-sh-delcopy.png
 net-12: assets/screens/net-12.png
-net-12b: assets/screens/net-12b.png
 billing: assets/screens/billing.png
-net-7: assets/screens/net-7.png
-net-7-confirm: assets/screens/net-7-confirm.png
-net-1e: assets/screens/net-1e.png
-net-3: assets/screens/net-3.png
