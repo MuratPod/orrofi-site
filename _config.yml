@@ -1,6 +1,7 @@
 # GitHub Pages: публикуем только статический сайт-визитку.
 theme: null
 exclude:
+  - showcase
   - scripts
   - scripts/data/screens.md
   - assets/screens/index.md
