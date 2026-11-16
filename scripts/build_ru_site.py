@@ -6,8 +6,12 @@ from __future__ import annotations
 import html
 import json
 import re
+import sys
 from collections import defaultdict
 from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import ru_copy  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[1]
 SCREENS_MD = ROOT / "scripts" / "data" / "screens.md"
@@ -63,30 +67,10 @@ SITE_PRIVACY_TEXT = (
 
 FOOTER_COOKIES_LINE = "Сайт не использует cookies и счётчики посещений."
 
-HOLA_EMAIL = "hola@orrofi.es"
+META_DESCRIPTIONS: dict[str, str] = ru_copy.META
+META_DEFAULT = ru_copy.META_DEFAULT
 
-META_DESCRIPTIONS: dict[str, str] = {
-    "index.html": (
-        "OrroFi — домашний интернет, Wi‑Fi и устройства в одном приложении: "
-        "видно, кто в сети, почему тормозит связь и что со счетами."
-    ),
-    "vozmozhnosti/index.html": "Всё, что умеет OrroFi: разделы приложения, кадры и короткие пояснения.",
-    "uslugi/index.html": (
-        "Оптика, радиодоступ, мобильная связь и Wi‑Fi: заказ, сбои, визит мастера и подключение нового дома."
-    ),
-    "mi-gestor/index.html": "Помощник OrroFi: короткие ответы, голос, разговор с человеком и заявки.",
-    "mi-red/index.html": "Домашняя сеть: роутер, устройства, гости, безопасность и перезапуск.",
-    "familia/index.html": "Как добавить телефон близких в домашнюю сеть — по QR и сверке кода.",
-    "facturas/index.html": "Счета, подробности платежа и банковское поручение SEPA.",
-    "ajustes/index.html": "Профиль, тема, язык, вход по Face ID и уведомления.",
-    "instrukcii/index.html": "Короткие шаги по демонстрации OrroFi.",
-    "privacidad/index.html": "Вход, данные, удаление и сброс домашней сети, сигнал о чужих действиях.",
-    "faq/index.html": "Короткие ответы на частые вопросы об OrroFi.",
-    "contacto/index.html": "Кто стоит за OrroFi и как нам написать.",
-}
-META_DEFAULT = "OrroFi — домашний интернет и Wi‑Fi в одном приложении."
-
-ROUTER_PASSWORD_NEUTRAL = "Пароль защищён при передаче и хранении."
+ROUTER_PASSWORD_NEUTRAL = ru_copy.ROUTER_PASSWORD_NEUTRAL
 
 CSP_POLICY = (
     "default-src 'self'; img-src 'self'; style-src 'self'; script-src 'self'; "
@@ -387,7 +371,7 @@ def pick_shot_file(
             continue
         path = f"assets/screens/ios/{name}"
         if resolve_image(path)[1]:
-            return path, True, "Демонстрационные данные на кадре."
+            return path, True, ru_copy.CAPTION_DEMO
 
     for name in asset_files_for(sid, page_slug):
         path = f"assets/screens/{name}"
@@ -395,18 +379,18 @@ def pick_shot_file(
             return (
                 path,
                 True,
-                "Демонстрационные данные на кадре.",
+                ru_copy.CAPTION_DEMO,
             )
 
     for name in listed:
         if name.startswith("brandbook-"):
             fb = BRANDBOOK_FALLBACK.get(name)
             if fb and resolve_image(fb)[1]:
-                return fb, True, "Демонстрационные данные на кадре."
+                return fb, True, ru_copy.CAPTION_DEMO
 
     legacy = f"assets/screens/{sid}.png"
     if resolve_image(legacy)[1]:
-        return legacy, True, "Демонстрационные данные на кадре."
+        return legacy, True, ru_copy.CAPTION_DEMO
 
     candidates: list[str] = []
     for name in listed:
@@ -420,12 +404,12 @@ def pick_shot_file(
 
     for path in candidates:
         if resolve_image(path)[1]:
-            return path, True, "Демонстрационные данные на кадре."
+            return path, True, ru_copy.CAPTION_DEMO
 
     intended = candidates[0] if candidates else legacy
     if intended != PLACEHOLDER_SRC:
         MISSING_IMAGES.append(f"{sid}: {intended}")
-    return PLACEHOLDER_SRC, True, "Кадр появится позже."
+    return PLACEHOLDER_SRC, True, ru_copy.CAPTION_LATER
 
 
 SCREEN_SECOND_LINE: dict[str, str] = {
@@ -481,25 +465,22 @@ def polish_display_text(text: str) -> str:
     return text
 
 
+def display_title(screen: dict) -> str:
+    raw = ru_copy.TITLES.get(screen["id"], screen["title"])
+    return ru_copy.typograph(sanitize_legal_copy(raw))
+
+
 def screen_copy_html(screen: dict) -> str:
-    title = polish_display_text(screen["title"])
-    what = polish_display_text(screen["what"])
-    func = polish_display_text(screen["function"])
-    sid = screen["id"]
-    lines: list[str] = []
-    primary = what if what else f"{title} — раздел «{func}»."
-    lines.append(primary.rstrip("."))
-    extra = SCREEN_SECOND_LINE.get(sid)
-    if extra:
-        lines.append(sanitize_legal_copy(extra.rstrip(".")))
-    unique: list[str] = []
-    for line in lines:
-        cleaned = line.strip().rstrip(".")
-        if cleaned and cleaned not in unique:
-            unique.append(cleaned)
-    unique = unique[:2]
-    paras = "".join(f"<p>{html.escape(line)}.</p>" for line in unique)
-    return f'<div class="screen-copy">{paras}</div>'
+    parts = ru_copy.BLURBS.get(screen["id"])
+    if not parts:
+        raise SystemExit(f"Нет литературного текста для экрана {screen['id']}")
+    paras: list[str] = []
+    for part in parts[:2]:
+        text = ru_copy.typograph(sanitize_legal_copy(part.strip()))
+        if text and text[-1] not in ".!?…":
+            text += "."
+        paras.append(f"<p>{html.escape(text)}</p>")
+    return f'<div class="screen-copy">{"".join(paras)}</div>'
 
 
 def render_shot(src: str, exists: bool, alt: str, cap: str, depth: int) -> str:
@@ -530,14 +511,14 @@ def render_shot(src: str, exists: bool, alt: str, cap: str, depth: int) -> str:
         img_tag = f"<img {img_attrs}>"
     return f"""<figure class="{cls}">
 {img_tag}
-<figcaption>{html.escape(cap)}</figcaption>
+<figcaption>{html.escape(ru_copy.typograph(cap))}</figcaption>
 </figure>"""
 
 
 def render_screen_block(screen: dict, depth: int, page_slug: str | None = None) -> str:
     src, exists, cap = pick_shot_file(screen["shots_raw"], screen["id"], page_slug)
     anchor = screen["id"]
-    title = polish_display_text(screen["title"])
+    title = display_title(screen)
     return f"""<article class="screen-block" id="{html.escape(anchor)}">
 <header>
 <h3>{html.escape(title)}</h3>
@@ -600,7 +581,8 @@ def rel_href(target: str, depth: int) -> str:
 
 
 def document_title(page_title: str) -> str:
-    if page_title.startswith("OrroFi —"):
+    page_title = ru_copy.typograph(page_title)
+    if page_title.startswith("OrroFi —") or page_title.startswith("OrroFi\u00a0—"):
         return page_title
     return f"{page_title} · OrroFi"
 
@@ -612,7 +594,7 @@ def shell(title: str, body: str, depth: int, current: str) -> str:
         nav_links.append(
             f'<li><a href="{html.escape(rel_href(href, depth))}"'
             + (' aria-current="page"' if href == current else "")
-            + f">{html.escape(label)}</a></li>"
+            + f">{html.escape(ru_copy.typograph(label))}</a></li>"
         )
     css = rel_href("assets/css/site.css", depth)
     js = rel_href("assets/js/site.js", depth)
@@ -623,7 +605,7 @@ def shell(title: str, body: str, depth: int, current: str) -> str:
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="{html.escape(meta_desc)}">
+<meta name="description" content="{html.escape(ru_copy.typograph(meta_desc))}">
 <meta http-equiv="Content-Security-Policy" content="{CSP_POLICY}">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <title>{html.escape(document_title(title))}</title>
@@ -655,9 +637,8 @@ def shell(title: str, body: str, depth: int, current: str) -> str:
 <a href="{rel_href(f'privacidad/index.html#{SITE_PRIVACY_ANCHOR}', depth)}">Приватность этого сайта</a>
 <a href="{rel_href('contacto/index.html', depth)}">Контакты</a>
 <a href="mailto:{html.escape(LEGAL_OWNER['email_privacy'])}">{html.escape(LEGAL_OWNER['email_privacy'])}</a>
-<a href="mailto:{html.escape(HOLA_EMAIL)}">{html.escape(HOLA_EMAIL)}</a>
 </p>
-<p class="badge-demo">На кадрах — демонстрационные данные. Живая услуга и публикация в магазине приложений ещё впереди.</p>
+<p class="badge-demo">{html.escape(ru_copy.typograph(ru_copy.DEMO_BADGE))}</p>
 </div>
 </footer>
 <script src="{js}" defer></script>
@@ -677,15 +658,30 @@ def _gallery_shot(shots_raw: str, sid: str, alt: str, depth: int) -> str:
     return render_shot(src, exists, alt, cap, depth)
 
 
+def T(text: str) -> str:
+    return html.escape(ru_copy.typograph(sanitize_legal_copy(text)))
+
+
 def build_index(depth_content: str) -> str:
     hero_img = pick_shot_file("iOS: `ios-home-es-dark.png`", "home")
     src, exists, cap = hero_img
-    shot = render_shot(src, exists, "Главный экран OrroFi", cap, 0)
+    shot = render_shot(src, exists, ru_copy.SHOT_ALT_HOME, cap, 0)
+    lead = T(ru_copy.LEADS["index"] + " Помощник Mi gestor отвечает на вопросы, а раздел Mi red " + ru_copy.INDEX_AFTER_STRONG)
+    lead = lead.replace("Mi gestor", "<strong>Mi gestor</strong>", 1).replace("Mi red", "<strong>Mi red</strong>", 1)
+    cards = []
+    for tag, title, text, links in ru_copy.HOME_CARDS:
+        anchors = " · ".join(
+            f'<a href="{html.escape(href)}">{T(label)}</a>' for href, label in links
+        )
+        cards.append(
+            f'<div class="card"><p class="tag">{T(tag)}</p><h3>{T(title)}</h3>'
+            f"<p>{T(text)}</p><p>{anchors}</p></div>"
+        )
     return f"""
 <section class="hero"><div class="wrap">
 <p class="tag hero-tag">Приложение OrroFi</p>
-<h1>Весь домашний интернет и домашняя сеть — в одном приложении</h1>
-<p class="lead">OrroFi помогает следить за услугами, счетами и сбоями, писать помощнику <strong>Mi gestor</strong> и управлять домашней сетью в разделе <strong>Mi red</strong> — чаще без звонка в поддержку. Пароль роутера в открытом виде мы не забираем.</p>
+<h1>{T(ru_copy.INDEX_H1)}</h1>
+<p class="lead">{lead}</p>
 <div class="hero-actions">
 <a class="btn btn-primary" href="vozmozhnosti/">Возможности</a>
 <a class="btn btn-secondary" href="instrukcii/">Как начать</a>
@@ -695,21 +691,13 @@ def build_index(depth_content: str) -> str:
 <div class="gallery">{shot}</div>
 </div></section>
 <section><div class="wrap">
-<h2>На чём держится OrroFi</h2>
+<h2>{T(ru_copy.PILLARS_TITLE)}</h2>
 <div class="grid-3">
-<div class="card"><p class="tag">Услуги</p><h3>Оптика, радиодоступ, мобильная связь и Wi‑Fi</h3>
-<p>Скорость и состояние связи, заказ подключения, сбой и визит мастера — без прикрас.</p>
-<p><a href="uslugi/">Услуги и подключение</a></p></div>
-<div class="card"><p class="tag">Помощник</p><h3>Mi gestor</h3>
-<p>Помощник сразу говорит, что он искусственный интеллект, отвечает коротко и в рабочие часы может передать разговор человеку.</p>
-<p><a href="mi-gestor/">Подробнее о Mi gestor</a></p></div>
-<div class="card"><p class="tag">Дом</p><h3>Mi red и семья</h3>
-<p>Устройства в сети, пауза интернета, гостевой Wi‑Fi и добавление телефона близких по QR и сверке кода.</p>
-<p><a href="mi-red/">Mi red</a> · <a href="familia/">Семья</a></p></div>
+{''.join(cards)}
 </div>
 </div></section>
 <section><div class="wrap">
-<h2>Кадры приложения</h2>
+<h2>{T(ru_copy.GALLERY_TITLE)}</h2>
 <div class="gallery">
 {_gallery_shot("iOS: `ios-mi-gestor-chat.png`", "manager", "Чат Mi gestor", 0)}
 {_gallery_shot("iOS: `ios-pedido-resumen.png`", "order-sum", "Сводка заказа", 0)}
@@ -718,8 +706,8 @@ def build_index(depth_content: str) -> str:
 </div>
 </div></section>
 <section><div class="wrap status-banner">
-<h2>Честный статус</h2>
-<p>Сейчас это демонстрация OrroFi с вымышленными данными. Живые счета, связь с оператором и публикация в App Store ещё впереди — после закрытой беты. Мы не обещаем того, чего пока нет.</p>
+<h2>{T(ru_copy.STATUS_TITLE)}</h2>
+<p>{T(ru_copy.STATUS_BODY)}</p>
 </div></section>
 {depth_content}
 """
@@ -729,19 +717,10 @@ def build_vozmozhnosti(
     screens_by_page: dict, functions: dict[str, list[dict]], depth: int = 1
 ) -> str:
     cards = []
-    links = [
-        ("uslugi/index.html", "uslugi", "Вход, услуги, заказ, сбои", "Оптика, радиодоступ, мобильная связь, Wi‑Fi, визит мастера."),
-        ("mi-gestor/index.html", "mi-gestor", "Mi gestor", "Чат с помощником, голос, разговор с человеком, заявки."),
-        ("mi-red/index.html", "mi-red", "Mi red", "Роутер, устройства, гости, безопасность, перезапуск."),
-        ("familia/index.html", "familia", "Семья", "QR, сверка кода, добавление и удаление телефона."),
-        ("facturas/index.html", "facturas", "Счета и оплата", "Счета, подробности платежа и SEPA."),
-        ("ajustes/index.html", "ajustes", "Настройки", "Тема, язык (испанский и английский), вход по Face ID, уведомления."),
-        ("privacidad/index.html", "privacidad", "Безопасность и приватность", "Вход, защита данных, выгрузка и удаление."),
-    ]
-    for page_href, _slug, title, desc in links:
+    for page_href, title, desc in ru_copy.FEATURE_CARDS:
         cards.append(
-            f'<div class="card"><h3>{html.escape(title)}</h3><p>{html.escape(desc)}</p>'
-            f'<p><a href="{rel_href(page_href, depth)}">Подробнее</a></p></div>'
+            f'<div class="card"><h3>{T(title)}</h3><p>{T(desc)}</p>'
+            f'<p><a href="{rel_href(page_href, depth)}">{T(ru_copy.MORE)}</a></p></div>'
         )
     toc = []
     for func in sorted(functions):
@@ -749,17 +728,18 @@ def build_vozmozhnosti(
         screen = flist[0]
         page = page_for_screen(screen["id"], func)
         href = rel_href(f"{page}/index.html#{screen['id']}", depth)
+        label = ru_copy.FUNC_TITLES.get(func, func)
         toc.append(
-            f'<li><a href="{html.escape(href)}">{html.escape(polish_display_text(func))}</a></li>'
+            f'<li><a href="{html.escape(href)}">{T(polish_display_text(label))}</a></li>'
         )
     return f"""
 <section class="hero"><div class="wrap">
 <h1>Возможности OrroFi</h1>
-<p class="lead">Всё, что умеет OrroFi: разделы приложения, кадры и короткие пояснения.</p>
+<p class="lead">{T(ru_copy.LEADS["vozmozhnosti"])}</p>
 </div></section>
-<section><div class="wrap"><h2>Разделы сайта</h2><div class="grid-3">{''.join(cards)}</div></div></section>
-<section><div class="wrap"><h2>Функции по алфавиту</h2><ul class="toc">{''.join(toc)}</ul>
-<p class="note">Ниже — все возможности, о которых рассказывает этот сайт.</p>
+<section><div class="wrap"><h2>{T(ru_copy.SECTIONS_TITLE)}</h2><div class="grid-3">{''.join(cards)}</div></div></section>
+<section><div class="wrap"><h2>{T(ru_copy.ALPHA_TITLE)}</h2><ul class="toc">{''.join(toc)}</ul>
+<p class="note">{T(ru_copy.TOC_NOTE)}</p>
 </div></section>
 """
 
@@ -768,12 +748,12 @@ def build_topic_screens(screens: list[dict], page_slug: str) -> str:
     depth = 1
     blocks = "".join(render_screen_block(s, depth, page_slug) for s in screens)
     toc = "".join(
-        f'<li><a href="#{html.escape(s["id"])}">{html.escape(polish_display_text(s["title"]))}</a></li>'
+        f'<li><a href="#{html.escape(s["id"])}">{html.escape(display_title(s))}</a></li>'
         for s in screens
     )
     return f"""
 <section><div class="wrap">
-<nav aria-label="Экраны на странице"><h2>Содержание</h2><ul class="toc">{toc}</ul></nav>
+<nav aria-label="Экраны на странице"><h2>{T(ru_copy.TOPIC_TOC)}</h2><ul class="toc">{toc}</ul></nav>
 </div></section>
 <section><div class="wrap">{blocks}</div></section>
 """
@@ -782,126 +762,42 @@ def build_topic_screens(screens: list[dict], page_slug: str) -> str:
 def build_topic_page(title: str, lead: str, screens: list[dict], page_slug: str) -> str:
     return f"""
 <section class="hero"><div class="wrap">
-<h1>{html.escape(title)}</h1>
-<p class="lead">{lead}</p>
+<h1>{T(title)}</h1>
+<p class="lead">{T(lead)}</p>
 </div></section>
 {build_topic_screens(screens, page_slug)}
 """
 
 
-INSTRUKCII = [
-    ("Вход по телефону и SMS", "privacidad/index.html#login", [
-        "Откройте OrroFi и введите номер телефона, привязанный к договору.",
-        "Запросите код. Код из SMS действует недолго; если ошибиться несколько раз, вход на время закрывается.",
-        "Если код не приходит — откройте подсказку «Не приходит код» и проверьте сеть.",
-    ]),
-    ("Заказ услуги и визит мастера", "uslugi/index.html#order-sum", [
-        "На главной выберите услугу или «Оформить» («Contratar»).",
-        "Укажите тариф, дату визита и проверьте адрес в сводке.",
-        "Подтвердите согласия на обработку данных.",
-        "Чтобы перенести визит, откройте экран визита мастера и отправьте заявку; её подтвердит человек.",
-    ]),
-    ("Что делать при аварии", "uslugi/index.html#outage", [
-        "На главной появится карточка аварии со статусом.",
-        "Следите за этапами: обнаружена → техники в пути → устранена.",
-        "Задайте вопрос Mi gestor, если нужны подробности.",
-    ]),
-    ("Счета и способ оплаты", "facturas/index.html", [
-        "Откройте список счетов: суммы в евро; в демонстрации налог IVA уже включён в сумму.",
-        "Откройте карточку счёта для деталей (в демонстрации PDF может отсутствовать).",
-        "В способе оплаты проверьте банковское поручение SEPA.",
-    ]),
-    ("Mi gestor и живой сотрудник", "mi-gestor/index.html#manager", [
-        "Напишите вопрос; помощник сразу говорит, что он искусственный интеллект.",
-        "Нажмите «Поговорить с человеком» («Hablar con una persona») в рабочие часы по мадридскому времени.",
-        "Если сотрудник недоступен, оставьте заявку в чате.",
-    ]),
-    ("Включить Mi red", "mi-red/index.html#net-0b", [
-        "В профиле откройте Mi red и разрешите доступ к локальной сети.",
-        f"Введите пароль роутера. {ROUTER_PASSWORD_NEUTRAL}",
-        "Дождитесь списка устройств и оценки качества сети.",
-    ]),
-    ("Добавить телефон семьи", "familia/index.html#fam-13a", [
-        "На новом телефоне откройте приглашение с QR.",
-        "Существующий телефон дома сканирует код и подтверждает добавление.",
-        "Сверьте шесть цифр. При несовпадении приглашение отменится.",
-    ]),
-    ("Пауза интернета, гости, перезагрузка", "mi-red/index.html#net-1e", [
-        "Пауза временно отключает интернет для выбранных устройств.",
-        "Гостевая сеть отделена от домашней.",
-        "Приложение предупредит, что перезапуск займёт некоторое время.",
-    ]),
-    ("Выгрузка и удаление аккаунта", "privacidad/index.html#privacy", [
-        "В приватности запросите выгрузку данных на почту.",
-        "Удаление аккаунта может быть запрещено при действующих договорах.",
-    ]),
-    ("Удаление или сброс Mi red", "privacidad/index.html#del-entry", [
-        "Только владелец может удалить данные сети или сбросить её.",
-        "Подтвердите Face ID и дождитесь писем с возможностью отмены.",
-        "Если видите чужие действия — откройте «Вы видели то, чего не делали?».",
-    ]),
-]
-
 
 def build_instrukcii() -> str:
     items = []
-    for title, link, steps in INSTRUKCII:
-        sl = "".join(f"<li>{html.escape(sanitize_legal_copy(s))}</li>" for s in steps)
+    for title, link, steps in ru_copy.INSTRUCTIONS:
+        sl = "".join(f"<li>{T(s)}</li>" for s in steps)
         items.append(
-            f'<li><h2 class="step-title">{html.escape(title)}</h2><ol>{sl}</ol>'
-            f'<p><a href="../{html.escape(link)}">Смотреть кадры</a></p></li>'
+            f'<li><h2 class="step-title">{T(title)}</h2><ol>{sl}</ol>'
+            f'<p><a href="../{html.escape(link)}">{T(ru_copy.WATCH)}</a></p></li>'
         )
     return f"""
 <section class="hero"><div class="wrap">
 <h1>Инструкции</h1>
-<p class="lead">Короткие шаги по демонстрации OrroFi.</p>
+<p class="lead">{T(ru_copy.LEADS["instrukcii"])}</p>
 </div></section>
 <section><div class="wrap"><ol class="steps">{''.join(items)}</ol></div></section>
 """
 
 
-FAQ = [
-    (
-        "Это уже готовое приложение или только макет?",
-        "Это демонстрация OrroFi с вымышленными данными. Живая услуга и публикация в магазине приложений ещё впереди.",
-    ),
-    (
-        "На каких языках говорит приложение?",
-        "Само приложение — на испанском и английском. Этот сайт — на русском.",
-    ),
-    (
-        "Нужен ли аккаунт, если я ещё не клиент?",
-        "Можно проверить покрытие и оставить заявку на новый адрес. Если покрытия нет, приложение об этом скажет прямо.",
-    ),
-    ("Видит ли OrroFi пароль моего роутера?", ROUTER_PASSWORD_NEUTRAL),
-    ("Что видят гости Wi‑Fi?", "Гостевая сеть пускает в интернет и отделена от домашней."),
-    ("Можно ли добавить телефон мужа или жены?", "Да, по QR и сверке шести цифр, только с согласия владельца."),
-    (
-        "Что, если я не просил удалить сеть?",
-        "Нажмите «Вы видели то, чего не делали?» — мы разберёмся.",
-    ),
-    (
-        "Когда появится в магазине приложений?",
-        "Планируется закрытая бета на iOS. Точную дату публикации мы не называем, пока её не утвердят.",
-    ),
-    (
-        "Есть ли версия для Android?",
-        "Пока образец приложения — iOS. Про Android расскажем отдельно, когда будет что показать.",
-    ),
-]
-
-
 def build_faq() -> str:
     items = []
-    for q, a in FAQ:
+    for q, a in ru_copy.FAQ:
         items.append(
-            f"<details><summary>{html.escape(q)}</summary>"
-            f"<p>{html.escape(sanitize_legal_copy(a))}</p></details>"
+            f"<details><summary>{T(q)}</summary>"
+            f"<p>{T(a)}</p></details>"
         )
     return f"""
 <section class="hero"><div class="wrap">
 <h1>Вопросы и ответы</h1>
-<p class="lead">Короткие ответы на частые вопросы.</p>
+<p class="lead">{T(ru_copy.LEADS["faq"])}</p>
 </div></section>
 <section><div class="wrap faq">{''.join(items)}</div></section>
 """
@@ -926,10 +822,13 @@ def lssi_owner_es() -> str:
 
 def build_contacto() -> str:
     o = LEGAL_OWNER
+    privacy_link = (
+        f'<a href="../privacidad/index.html#{SITE_PRIVACY_ANCHOR}">«Приватность на этом сайте»</a>'
+    )
     return f"""
 <section class="hero"><div class="wrap">
 <h1>Контакты</h1>
-<p class="lead">Кто стоит за OrroFi и как нам написать.</p>
+<p class="lead">{T(ru_copy.LEADS["contacto"])}</p>
 </div></section>
 <section><div class="wrap">
 <div class="card">
@@ -940,9 +839,8 @@ def build_contacto() -> str:
 <div class="card">
 <h2>OrroFi</h2>
 <p>OrroFi — бренд {html.escape(o['short_name'])}. Ответственный за обработку персональных данных (responsable del tratamiento): {html.escape(o['legal_name'])}, NIF {html.escape(o['nif'])}.</p>
-<p><strong>По вопросам персональных данных:</strong> <a href="mailto:{html.escape(o['email_privacy'])}">{html.escape(o['email_privacy'])}</a></p>
-<p><strong>Общие вопросы:</strong> <a href="mailto:{html.escape(HOLA_EMAIL)}">{html.escape(HOLA_EMAIL)}</a></p>
-<p>Юридический адрес и политика конфиденциальности появятся здесь, когда будут готовы. О политике этого сайта — в разделе <a href="../privacidad/index.html#{SITE_PRIVACY_ANCHOR}">«Приватность на этом сайте»</a>.</p>
+<p><strong>{T("По вопросам персональных данных:")}</strong> <a href="mailto:{html.escape(o['email_privacy'])}">{html.escape(o['email_privacy'])}</a></p>
+<p>{T(ru_copy.CONTACT_BEFORE)} {privacy_link}.</p>
 </div>
 </div></section>
 """
@@ -951,8 +849,8 @@ def build_contacto() -> str:
 def build_privacidad_intro() -> str:
     o = LEGAL_OWNER
     return f"""
-<p class="lead">Вход, данные, удаление и сброс домашней сети, сигнал, если в аккаунте произошло что-то чужое.</p>
-<p>По вопросам данных: <a href="mailto:{html.escape(o['email_privacy'])}">{html.escape(o['email_privacy'])}</a>. При необходимости можно обратиться в испанское агентство по защите данных (AEPD).</p>
+<p class="lead">{T(ru_copy.LEADS["privacidad"])}</p>
+<p>{T("По вопросам данных:")} <a href="mailto:{html.escape(o['email_privacy'])}">{html.escape(o['email_privacy'])}</a>. {T(ru_copy.PRIVACY_AEPD)}</p>
 """
 
 
@@ -1031,6 +929,63 @@ def validate_published_site(anchors: dict[str, set[str]]) -> None:
         raise SystemExit("Site validation failed:\n" + "\n".join(errors[:50]) + (f"\n... +{len(errors)-50}" if len(errors) > 50 else ""))
 
 
+def visible_text(raw: str) -> str:
+    raw = re.sub(r"<script[\s\S]*?</script>", " ", raw)
+    raw = re.sub(r"<style[\s\S]*?</style>", " ", raw)
+    raw = re.sub(r"<[^>]+>", " ", raw)
+    return raw
+
+
+def assert_public_copy() -> None:
+    joined = "\n".join((ROOT / page).read_text(encoding="utf-8") for page in PUBLISHED_PAGES)
+    required = [
+        SITE_PRIVACY_TEXT,
+        FOOTER_COOKIES_LINE,
+        ROUTER_PASSWORD_NEUTRAL,
+        ru_copy.RETENTION_PHRASE,
+        "OrroFi — бренд PADELADA WORLD SL.",
+        "Ответственный за обработку персональных данных (responsable del tratamiento)",
+        LEGAL_OWNER["address"],
+        LEGAL_OWNER["email_privacy"],
+        ru_copy.GUEST_FAQ,
+        ru_copy.GUEST_SPLIT,
+    ]
+    for phrase in required:
+        if phrase not in joined:
+            raise SystemExit("Пропала утвержденная формулировка: " + phrase[:80])
+    banned = (
+        "hola@orrofi.es",
+        "Сайт-визитка",
+        "идентификатор",
+        "появится здесь, когда будут готовы",
+        "в рабочие часы",
+        "9:00",
+        "20:00",
+        "бесплатно",
+        "в открытом виде",
+        "App Store",
+        "бета",
+        "аккаунт",
+        "тикет",
+        "пуш-",
+        "шифр",
+    )
+    for page in PUBLISHED_PAGES:
+        raw = (ROOT / page).read_text(encoding="utf-8")
+        if "hola@orrofi.es" in raw:
+            raise SystemExit(f"{page}: hola@ вернулся")
+        text = visible_text(raw)
+        for word in banned:
+            if word.lower() in text.lower():
+                raise SystemExit(f"{page}: в тексте есть «{word}»")
+        if "assets/screens" in text:
+            raise SystemExit(f"{page}: путь к кадру попал в текст")
+        for match in re.finditer(r"\d[\d\s\u00a0.,]*\s*(?:€|евро)", text, flags=re.I):
+            window = text[max(0, match.start() - 120): match.end() + 120].lower()
+            if "пример" not in window:
+                raise SystemExit(f"{page}: цена без пометки «пример»: {match.group()!r}")
+
+
 def collect_site_anchors(by_page: dict[str, list[dict]]) -> dict[str, set[str]]:
     anchors: dict[str, set[str]] = {p: set() for p in PUBLISHED_PAGES}
     for slug, slist in by_page.items():
@@ -1058,36 +1013,12 @@ def main() -> None:
         functions[s["function"]].append(s)
 
     page_meta = {
-        "uslugi": (
-            "Услуги и подключение",
-            "Оптика, радиодоступ, мобильная связь и Wi‑Fi: заказ, сбои, визит мастера и подключение нового дома.",
-            "uslugi/index.html",
-        ),
-        "mi-gestor": (
-            "Mi gestor",
-            "Помощник: короткие ответы, голос, разговор с человеком и заявки.",
-            "mi-gestor/index.html",
-        ),
-        "mi-red": (
-            "Mi red",
-            "Домашняя сеть: роутер, устройства, гости, безопасность и диагностика.",
-            "mi-red/index.html",
-        ),
-        "familia": (
-            "Семья",
-            "Как добавить телефон близких в домашнюю сеть — по QR и сверке кода.",
-            "familia/index.html",
-        ),
-        "facturas": (
-            "Счета и оплата",
-            "Счета, подробности платежа и банковское поручение SEPA.",
-            "facturas/index.html",
-        ),
-        "ajustes": (
-            "Настройки",
-            "Профиль, тема, язык (испанский и английский), вход по Face ID и уведомления.",
-            "ajustes/index.html",
-        ),
+        "uslugi": ("Услуги и подключение", ru_copy.LEADS["uslugi"], "uslugi/index.html"),
+        "mi-gestor": ("Mi gestor", ru_copy.LEADS["mi-gestor"], "mi-gestor/index.html"),
+        "mi-red": ("Mi red", ru_copy.LEADS["mi-red"], "mi-red/index.html"),
+        "familia": ("Семья", ru_copy.LEADS["familia"], "familia/index.html"),
+        "facturas": ("Счета и оплата", ru_copy.LEADS["facturas"], "facturas/index.html"),
+        "ajustes": ("Настройки", ru_copy.LEADS["ajustes"], "ajustes/index.html"),
         "privacidad": ("Безопасность и приватность", build_privacidad_intro(), "privacidad/index.html"),
     }
 
@@ -1108,7 +1039,7 @@ def main() -> None:
         body = build_topic_page(title, lead if isinstance(lead, str) else str(lead), by_page[slug], slug)
         if slug == "privacidad":
             body = (
-                f'<section class="hero"><div class="wrap"><h1>{html.escape(title)}</h1>'
+                f'<section class="hero"><div class="wrap"><h1>{T(title)}</h1>'
                 f"{build_privacidad_intro()}</div></section>"
                 + build_site_privacy_section()
                 + build_topic_screens(by_page[slug], slug)
@@ -1119,8 +1050,13 @@ def main() -> None:
     write_page("faq/index.html", "Вопросы и ответы", build_faq(), "faq/index.html")
     write_page("contacto/index.html", "Контакты", build_contacto(), "contacto/index.html")
 
+    missing = [s["id"] for s in screens if s["id"] not in ru_copy.BLURBS or s["id"] not in ru_copy.TITLES]
+    if missing:
+        raise SystemExit("Нет текста для экранов: " + ", ".join(missing))
+
     site_anchors = collect_site_anchors(by_page)
     validate_published_site(site_anchors)
+    assert_public_copy()
 
     # Report
     func_no_shot = []

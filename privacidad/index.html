@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Вход, данные, удаление и сброс домашней сети, сигнал о чужих действиях.">
+<meta name="description" content="Вход, ваши данные, удаление и сброс домашней сети, сигнал о чужом действии.">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self'; style-src 'self'; script-src 'self'; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
-<title>Безопасность и приватность · OrroFi</title>
+<title>Безопасность и приватность · OrroFi</title>
 <link rel="icon" type="image/png" href="../icons/ios/AppIcon-60.png">
 <link rel="stylesheet" href="../assets/css/site.css">
 </head>
@@ -24,9 +24,9 @@
 </div>
 </header>
 <main id="main">
-<section class="hero"><div class="wrap"><h1>Безопасность и приватность</h1>
-<p class="lead">Вход, данные, удаление и сброс домашней сети, сигнал, если в аккаунте произошло что-то чужое.</p>
-<p>По вопросам данных: <a href="mailto:privacidad@orrofi.es">privacidad@orrofi.es</a>. При необходимости можно обратиться в испанское агентство по защите данных (AEPD).</p>
+<section class="hero"><div class="wrap"><h1>Безопасность и приватность</h1>
+<p class="lead">Как войти, забрать свои данные, стереть домашнюю сеть или собрать её заново и как сказать нам, если в журнале появилось чужое действие.</p>
+<p>По вопросам данных: <a href="mailto:privacidad@orrofi.es">privacidad@orrofi.es</a>. При необходимости можно обратиться в испанское агентство по защите данных (AEPD).</p>
 </div></section>
 <section id="sitio-privacidad"><div class="wrap">
 <h2>Приватность на этом сайте</h2>
@@ -34,439 +34,439 @@
 </div></section>
 
 <section><div class="wrap">
-<nav aria-label="Экраны на странице"><h2>Содержание</h2><ul class="toc"><li><a href="#sh-faceid-open">Face ID при открытии</a></li><li><a href="#login">Вход</a></li><li><a href="#login-code">Код SMS</a></li><li><a href="#loginerr">Неверный код</a></li><li><a href="#loginexp">Код истёк</a></li><li><a href="#loginlock">Доступ заблокирован</a></li><li><a href="#sh-nocode">Не приходит код</a></li><li><a href="#privacy">Приватность</a></li><li><a href="#privsched">Удаление запланировано</a></li><li><a href="#sh-delete">Удаление запрещено</a></li><li><a href="#sh-deletecode">Код удаления</a></li><li><a href="#sh-deleteok">Подтверждение удаления</a></li><li><a href="#sh-export">Скачать мои данные</a></li><li><a href="#rst-17a">Запрос на сброс сети</a></li><li><a href="#rst-17b">Что изменится после сброса</a></li><li><a href="#rst-17c">Подтверждение намерения</a></li><li><a href="#rst-17d">Код из SMS</a></li><li><a href="#rst-17e">Сброс запланирован</a></li><li><a href="#rst-17f">Письмо участникам сети</a></li><li><a href="#rst-17g">Напоминание перед сбросом</a></li><li><a href="#rst-17h">Отмена сброса</a></li><li><a href="#rst-17i">Сброс отменён</a></li><li><a href="#rst-17j">Слишком частые сбросы</a></li><li><a href="#rst-17k">Сброс выполняется</a></li><li><a href="#rst-17l">Сеть сброшена</a></li><li><a href="#rst-17m">Причина сброса</a></li><li><a href="#rst-entry">Сброс домашней сети — вход</a></li><li><a href="#rst-owner">Сброс доступен только владельцу</a></li><li><a href="#rst-sh-bio">Face ID для сброса</a></li><li><a href="#rst-sh-bio-c">Повтор Face ID при сбросе</a></li><li><a href="#rst-sms">Подтверждение по SMS</a></li><li><a href="#rp-18a">«Вы видели то, чего не делали?»</a></li><li><a href="#rp-18b">Сигнал принят</a></li><li><a href="#del-16a">Запрос на удаление данных сети</a></li><li><a href="#del-16a0">Почта перед удалением</a></li><li><a href="#del-16b">Подтверждение намерения</a></li><li><a href="#del-16b2">Повторное подтверждение</a></li><li><a href="#del-16c">Проверка Face ID</a></li><li><a href="#del-16d">Письмо сразу после запроса</a></li><li><a href="#del-16d2">Напоминание за 24 часа</a></li><li><a href="#del-16e">Отмена удаления</a></li><li><a href="#del-16e2">Отмена невозможна</a></li><li><a href="#del-16f">Удаление выполнено</a></li><li><a href="#del-16g">Данные сети стёрты</a></li><li><a href="#del-16h">Итог удаления</a></li><li><a href="#del-entry">Удаление данных Mi red — вход</a></li><li><a href="#del-owner">Только владелец может удалить данные сети</a></li><li><a href="#del-sh-bio">Системное подтверждение Face ID</a></li></ul></nav>
+<nav aria-label="Экраны на странице"><h2>Содержание</h2><ul class="toc"><li><a href="#sh-faceid-open">Узнаём вас при открытии</a></li><li><a href="#login">Вход по номеру</a></li><li><a href="#login-code">Код из SMS</a></li><li><a href="#loginerr">Код не подошёл</a></li><li><a href="#loginexp">Код устарел</a></li><li><a href="#loginlock">Вход на время закрыт</a></li><li><a href="#sh-nocode">Код не приходит</a></li><li><a href="#privacy">Ваши данные</a></li><li><a href="#privsched">Удаление назначено</a></li><li><a href="#sh-delete">Удаление пока нельзя</a></li><li><a href="#sh-deletecode">Код для удаления</a></li><li><a href="#sh-deleteok">Точно удалить данные?</a></li><li><a href="#sh-export">Забрать копию данных</a></li><li><a href="#rst-17a">Запрос на сброс</a></li><li><a href="#rst-17b">Что пропадёт</a></li><li><a href="#rst-17c">Серьёзный шаг, ещё раз</a></li><li><a href="#rst-17d">Код из SMS</a></li><li><a href="#rst-17e">Напоминания о сбросе</a></li><li><a href="#rst-17f">Письмо остальным в доме</a></li><li><a href="#rst-17g">Срок уже близко</a></li><li><a href="#rst-17h">Сброс назначен</a></li><li><a href="#rst-17i">Сброс снят</a></li><li><a href="#rst-17j">Слишком часто</a></li><li><a href="#rst-17k">Сброс идёт</a></li><li><a href="#rst-17l">Сеть сброшена</a></li><li><a href="#rst-17m">Зачем вам сброс</a></li><li><a href="#rst-entry">Сброс домашней сети</a></li><li><a href="#rst-owner">Сброс только для владельца</a></li><li><a href="#rst-sh-bio">Face ID для сброса</a></li><li><a href="#rst-sh-bio-c">Face ID ещё раз</a></li><li><a href="#rst-sms">Код, что это вы</a></li><li><a href="#rp-18a">«Вы видели то, чего не делали?»</a></li><li><a href="#rp-18b">Сигнал у нас</a></li><li><a href="#del-16a">Что исчезнет из Mi red</a></li><li><a href="#del-16a0">Почта для предупреждений</a></li><li><a href="#del-16b">Вы понимаете последствия?</a></li><li><a href="#del-16b2">Ещё одно «да»</a></li><li><a href="#del-16c">Лицо владельца</a></li><li><a href="#del-16d">Уведомление об удалении</a></li><li><a href="#del-16d2">Напоминание, пока не поздно</a></li><li><a href="#del-16e">Остановить удаление</a></li><li><a href="#del-16e2">Отменить уже нельзя</a></li><li><a href="#del-16f">Удаление завершено</a></li><li><a href="#del-16g">Удаление снято</a></li><li><a href="#del-16h">Чем закончился запрос</a></li><li><a href="#del-entry">Удаление данных сети</a></li><li><a href="#del-owner">Решает только владелец</a></li><li><a href="#del-sh-bio">Face ID, чтобы остановить удаление</a></li></ul></nav>
 </div></section>
 <section><div class="wrap"><article class="screen-block" id="sh-faceid-open">
 <header>
-<h3>Face ID при открытии</h3>
+<h3>Узнаём вас при открытии</h3>
 </header>
-<div class="screen-copy"><p>Системный запрос Face ID, если включена защита входа.</p></div>
+<div class="screen-copy"><p>Если вход защищён, телефон узнаёт лицо раньше, чем откроётся дом. На главную так попадаете только вы.</p></div>
 <figure class="shot">
-<picture><source srcset="../assets/screens/sh-faceid-open.webp" type="image/webp"><img class="shot-img" src="../assets/screens/sh-faceid-open.png" alt="Экран OrroFi: Face ID при открытии" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg"></picture>
-<figcaption>Демонстрационные данные на кадре.</figcaption>
+<picture><source srcset="../assets/screens/sh-faceid-open.webp" type="image/webp"><img class="shot-img" src="../assets/screens/sh-faceid-open.png" alt="Экран OrroFi: Узнаём вас при открытии" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg"></picture>
+<figcaption>Демонстрационные данные на кадре.</figcaption>
 </figure>
 </article><article class="screen-block" id="login">
 <header>
-<h3>Вход</h3>
+<h3>Вход по номеру</h3>
 </header>
-<div class="screen-copy"><p>Ввод телефона и запрос SMS.</p><p>Номер должен совпадать с договором.</p></div>
+<div class="screen-copy"><p>Введите номер из договора и попросите код в SMS. Чужой номер приложение не примет: он должен совпадать с договором.</p></div>
 <figure class="shot">
-<picture><source srcset="../assets/screens/ios/ios-login-es-dark.webp" type="image/webp"><img class="shot-img" src="../assets/screens/ios/ios-login-es-dark.png" alt="Экран OrroFi: Вход" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg"></picture>
-<figcaption>Демонстрационные данные на кадре.</figcaption>
+<picture><source srcset="../assets/screens/ios/ios-login-es-dark.webp" type="image/webp"><img class="shot-img" src="../assets/screens/ios/ios-login-es-dark.png" alt="Экран OrroFi: Вход по номеру" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg"></picture>
+<figcaption>Демонстрационные данные на кадре.</figcaption>
 </figure>
 </article><article class="screen-block" id="login-code">
 <header>
-<h3>Код SMS</h3>
+<h3>Код из SMS</h3>
 </header>
-<div class="screen-copy"><p>Ввод кода, таймер повторной отправки; код из SMS действует недолго.</p></div>
+<div class="screen-copy"><p>Шесть цифр из сообщения. Код живёт недолго; если он погас, запросите новый и не торопитесь перебирать старые.</p></div>
 <figure class="shot">
-<picture><source srcset="../assets/screens/login-1-login-code.webp" type="image/webp"><img class="shot-img" src="../assets/screens/login-1-login-code.png" alt="Экран OrroFi: Код SMS" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg"></picture>
-<figcaption>Демонстрационные данные на кадре.</figcaption>
+<picture><source srcset="../assets/screens/login-1-login-code.webp" type="image/webp"><img class="shot-img" src="../assets/screens/login-1-login-code.png" alt="Экран OrroFi: Код из SMS" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg"></picture>
+<figcaption>Демонстрационные данные на кадре.</figcaption>
 </figure>
 </article><article class="screen-block" id="loginerr">
 <header>
-<h3>Неверный код</h3>
+<h3>Код не подошёл</h3>
 </header>
-<div class="screen-copy"><p>Сообщение об ошибке, оставшиеся попытки (всего 5).</p></div>
+<div class="screen-copy"><p>Цифры не те. На экране спокойно сказано, что попытка не зачтена и сколько ещё можно ошибиться.</p></div>
 <figure class="shot">
-<picture><source srcset="../assets/screens/login-2-loginerr.webp" type="image/webp"><img class="shot-img" src="../assets/screens/login-2-loginerr.png" alt="Экран OrroFi: Неверный код" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg"></picture>
-<figcaption>Демонстрационные данные на кадре.</figcaption>
+<picture><source srcset="../assets/screens/login-2-loginerr.webp" type="image/webp"><img class="shot-img" src="../assets/screens/login-2-loginerr.png" alt="Экран OrroFi: Код не подошёл" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg"></picture>
+<figcaption>Демонстрационные данные на кадре.</figcaption>
 </figure>
 </article><article class="screen-block" id="loginexp">
 <header>
-<h3>Код истёк</h3>
+<h3>Код устарел</h3>
 </header>
-<div class="screen-copy"><p>Код просрочен, запросить новый.</p></div>
+<div class="screen-copy"><p>Этот код уже старый. Возьмите новый и введите его, пока он свежий.</p></div>
 <figure class="shot">
-<picture><source srcset="../assets/screens/login-3-loginexp.webp" type="image/webp"><img class="shot-img" src="../assets/screens/login-3-loginexp.png" alt="Экран OrroFi: Код истёк" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg"></picture>
-<figcaption>Демонстрационные данные на кадре.</figcaption>
+<picture><source srcset="../assets/screens/login-3-loginexp.webp" type="image/webp"><img class="shot-img" src="../assets/screens/login-3-loginexp.png" alt="Экран OrroFi: Код устарел" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg"></picture>
+<figcaption>Демонстрационные данные на кадре.</figcaption>
 </figure>
 </article><article class="screen-block" id="loginlock">
 <header>
-<h3>Доступ заблокирован</h3>
+<h3>Вход на время закрыт</h3>
 </header>
-<div class="screen-copy"><p>Вход на время закрывается после нескольких неверных кодов.</p></div>
+<div class="screen-copy"><p>Несколько неверных кодов подряд, и вход на время закрывается. Так номер не перебирают без конца.</p></div>
 <figure class="shot">
-<picture><source srcset="../assets/screens/ios/ios-acceso-bloqueado-otp.webp" type="image/webp"><img class="shot-img" src="../assets/screens/ios/ios-acceso-bloqueado-otp.png" alt="Экран OrroFi: Доступ заблокирован" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg"></picture>
-<figcaption>Демонстрационные данные на кадре.</figcaption>
+<picture><source srcset="../assets/screens/ios/ios-acceso-bloqueado-otp.webp" type="image/webp"><img class="shot-img" src="../assets/screens/ios/ios-acceso-bloqueado-otp.png" alt="Экран OrroFi: Вход на время закрыт" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg"></picture>
+<figcaption>Демонстрационные данные на кадре.</figcaption>
 </figure>
 </article><article class="screen-block" id="sh-nocode">
 <header>
-<h3>Не приходит код</h3>
+<h3>Код не приходит</h3>
 </header>
-<div class="screen-copy"><p>Подсказка, что делать, если SMS нет.</p></div>
+<div class="screen-copy"><p>Сообщение молчит. Здесь короткие проверки: тот ли номер, есть ли сеть, не рано ли просить код снова.</p></div>
 <figure class="shot">
-<picture><source srcset="../assets/screens/login-4-sh-nocode.webp" type="image/webp"><img class="shot-img" src="../assets/screens/login-4-sh-nocode.png" alt="Экран OrroFi: Не приходит код" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg"></picture>
-<figcaption>Демонстрационные данные на кадре.</figcaption>
+<picture><source srcset="../assets/screens/login-4-sh-nocode.webp" type="image/webp"><img class="shot-img" src="../assets/screens/login-4-sh-nocode.png" alt="Экран OrroFi: Код не приходит" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg"></picture>
+<figcaption>Демонстрационные данные на кадре.</figcaption>
 </figure>
 </article><article class="screen-block" id="privacy">
 <header>
-<h3>Приватность</h3>
+<h3>Ваши данные</h3>
 </header>
-<div class="screen-copy"><p>Согласия, выгрузка данных, удаление аккаунта.</p></div>
+<div class="screen-copy"><p>Согласия, копия ваших данных и удаление учётной записи собраны в одном месте. Отсюда не начинают удаление домашней сети: у Mi red свой путь.</p></div>
 <figure class="shot">
-<picture><source srcset="../assets/screens/ios/ios-snapshot-privacidad-iphone-se.webp" type="image/webp"><img class="shot-img" src="../assets/screens/ios/ios-snapshot-privacidad-iphone-se.png" alt="Экран OrroFi: Приватность" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg"></picture>
-<figcaption>Демонстрационные данные на кадре.</figcaption>
+<picture><source srcset="../assets/screens/ios/ios-snapshot-privacidad-iphone-se.webp" type="image/webp"><img class="shot-img" src="../assets/screens/ios/ios-snapshot-privacidad-iphone-se.png" alt="Экран OrroFi: Ваши данные" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg"></picture>
+<figcaption>Демонстрационные данные на кадре.</figcaption>
 </figure>
 </article><article class="screen-block" id="privsched">
 <header>
-<h3>Удаление запланировано</h3>
+<h3>Удаление назначено</h3>
 </header>
-<div class="screen-copy"><p>Отложенное удаление.</p></div>
+<div class="screen-copy"><p>Удаление учётной записи назначено, но ещё не сделано. Пока срок не вышел, решение можно забрать назад.</p></div>
 <figure class="shot shot-placeholder">
-<img class="shot-img" src="../assets/screens/placeholder.svg" alt="Экран OrroFi: Удаление запланировано" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg">
+<img class="shot-img" src="../assets/screens/placeholder.svg" alt="Экран OrroFi: Удаление назначено" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg">
 <figcaption>Кадр появится позже.</figcaption>
 </figure>
 </article><article class="screen-block" id="sh-delete">
 <header>
-<h3>Удаление запрещено</h3>
+<h3>Удаление пока нельзя</h3>
 </header>
-<div class="screen-copy"><p>Нельзя удалить аккаунт, пока действуют договоры.</p></div>
+<div class="screen-copy"><p>Пока договоры действуют, учётную запись удалить нельзя. Экран объясняет это прямо, без тупиковой кнопки.</p></div>
 <figure class="shot">
-<picture><source srcset="../assets/screens/ios/ios-privacidad-eliminar-cuenta.webp" type="image/webp"><img class="shot-img" src="../assets/screens/ios/ios-privacidad-eliminar-cuenta.png" alt="Экран OrroFi: Удаление запрещено" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg"></picture>
-<figcaption>Демонстрационные данные на кадре.</figcaption>
+<picture><source srcset="../assets/screens/ios/ios-privacidad-eliminar-cuenta.webp" type="image/webp"><img class="shot-img" src="../assets/screens/ios/ios-privacidad-eliminar-cuenta.png" alt="Экран OrroFi: Удаление пока нельзя" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg"></picture>
+<figcaption>Демонстрационные данные на кадре.</figcaption>
 </figure>
 </article><article class="screen-block" id="sh-deletecode">
 <header>
-<h3>Код удаления</h3>
+<h3>Код для удаления</h3>
 </header>
-<div class="screen-copy"><p>Подтверждение кодом.</p></div>
+<div class="screen-copy"><p>Код подтверждает, что удаление просите вы. Без него заявка не уходит.</p></div>
 <figure class="shot shot-placeholder">
-<img class="shot-img" src="../assets/screens/placeholder.svg" alt="Экран OrroFi: Код удаления" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg">
+<img class="shot-img" src="../assets/screens/placeholder.svg" alt="Экран OrroFi: Код для удаления" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg">
 <figcaption>Кадр появится позже.</figcaption>
 </figure>
 </article><article class="screen-block" id="sh-deleteok">
 <header>
-<h3>Подтверждение удаления</h3>
+<h3>Точно удалить данные?</h3>
 </header>
-<div class="screen-copy"><p>«Удалить ваши данные?».</p></div>
+<div class="screen-copy"><p>Последний спокойный вопрос: точно стереть ваши данные? Пока вы не подтвердили, ничего не начинается.</p></div>
 <figure class="shot shot-placeholder">
-<img class="shot-img" src="../assets/screens/placeholder.svg" alt="Экран OrroFi: Подтверждение удаления" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg">
+<img class="shot-img" src="../assets/screens/placeholder.svg" alt="Экран OrroFi: Точно удалить данные?" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg">
 <figcaption>Кадр появится позже.</figcaption>
 </figure>
 </article><article class="screen-block" id="sh-export">
 <header>
-<h3>Скачать мои данные</h3>
+<h3>Забрать копию данных</h3>
 </header>
-<div class="screen-copy"><p>Выгрузка по запросу на почту.</p></div>
+<div class="screen-copy"><p>Просите копию данных на почту. Приложение скажет, что запрос принят, и не заставит ждать у открытого экрана.</p></div>
 <figure class="shot">
-<picture><source srcset="../assets/screens/export-datos.webp" type="image/webp"><img class="shot-img" src="../assets/screens/export-datos.png" alt="Экран OrroFi: Скачать мои данные" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg"></picture>
-<figcaption>Демонстрационные данные на кадре.</figcaption>
+<picture><source srcset="../assets/screens/export-datos.webp" type="image/webp"><img class="shot-img" src="../assets/screens/export-datos.png" alt="Экран OrroFi: Забрать копию данных" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg"></picture>
+<figcaption>Демонстрационные данные на кадре.</figcaption>
 </figure>
 </article><article class="screen-block" id="rst-17a">
 <header>
-<h3>Запрос на сброс сети</h3>
+<h3>Запрос на сброс</h3>
 </header>
-<div class="screen-copy"><p>Приложение просит подтвердить, что вы хотите сбросить сеть.</p></div>
+<div class="screen-copy"><p>Сброс уместен, если телефоны дома потеряны или в сеть вошёл незнакомый. Данные Mi red исчезнут не в ту же минуту: пока срок не вышел, отмену может сделать телефон владельца, который уже был привязан.</p></div>
 <figure class="shot">
-<picture><source srcset="../assets/screens/privacidad-red-5-restablecer-solicitud.webp" type="image/webp"><img class="shot-img" src="../assets/screens/privacidad-red-5-restablecer-solicitud.png" alt="Экран OrroFi: Запрос на сброс сети" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg"></picture>
-<figcaption>Демонстрационные данные на кадре.</figcaption>
+<picture><source srcset="../assets/screens/privacidad-red-5-restablecer-solicitud.webp" type="image/webp"><img class="shot-img" src="../assets/screens/privacidad-red-5-restablecer-solicitud.png" alt="Экран OrroFi: Запрос на сброс" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg"></picture>
+<figcaption>Демонстрационные данные на кадре.</figcaption>
 </figure>
 </article><article class="screen-block" id="rst-17b">
 <header>
-<h3>Что изменится после сброса</h3>
+<h3>Что пропадёт</h3>
 </header>
-<div class="screen-copy"><p>Кратко объясняет, какие данные Wi‑Fi и устройств исчезнут.</p></div>
+<div class="screen-copy"><p>Коротко и без смягчений: какие сведения о Wi‑Fi и устройствах пропадут, когда сброс свершится.</p></div>
 <figure class="shot shot-placeholder">
-<img class="shot-img" src="../assets/screens/placeholder.svg" alt="Экран OrroFi: Что изменится после сброса" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg">
+<img class="shot-img" src="../assets/screens/placeholder.svg" alt="Экран OrroFi: Что пропадёт" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg">
 <figcaption>Кадр появится позже.</figcaption>
 </figure>
 </article><article class="screen-block" id="rst-17c">
 <header>
-<h3>Подтверждение намерения</h3>
+<h3>Серьёзный шаг, ещё раз</h3>
 </header>
-<div class="screen-copy"><p>Повторное подтверждение перед серьёзным шагом.</p></div>
+<div class="screen-copy"><p>Повторное согласие. Такой шаг не делается с одного касания.</p></div>
 <figure class="shot shot-placeholder">
-<img class="shot-img" src="../assets/screens/placeholder.svg" alt="Экран OrroFi: Подтверждение намерения" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg">
+<img class="shot-img" src="../assets/screens/placeholder.svg" alt="Экран OrroFi: Серьёзный шаг, ещё раз" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg">
 <figcaption>Кадр появится позже.</figcaption>
 </figure>
 </article><article class="screen-block" id="rst-17d">
 <header>
-<h3>Код из SMS</h3>
+<h3>Код из SMS</h3>
 </header>
-<div class="screen-copy"><p>Ввод одноразового кода из SMS.</p></div>
+<div class="screen-copy"><p>Поле для одноразового кода из SMS. Пока код не введён, сброс не назначается.</p></div>
 <figure class="shot shot-placeholder">
-<img class="shot-img" src="../assets/screens/placeholder.svg" alt="Экран OrroFi: Код из SMS" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg">
+<img class="shot-img" src="../assets/screens/placeholder.svg" alt="Экран OrroFi: Код из SMS" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg">
 <figcaption>Кадр появится позже.</figcaption>
 </figure>
 </article><article class="screen-block" id="rst-17e">
 <header>
-<h3>Сброс запланирован</h3>
+<h3>Напоминания о сбросе</h3>
 </header>
-<div class="screen-copy"><p>Сброс назначен на время; до него можно передумать.</p></div>
+<div class="screen-copy"><p>Уведомления тем, кто в доме: сброс запрошен и скоро начнётся. Если это были не вы, отменить можно прямо из уведомления.</p></div>
 <figure class="shot">
-<picture><source srcset="../assets/screens/privacidad-red-8-restablecer-aviso.webp" type="image/webp"><img class="shot-img" src="../assets/screens/privacidad-red-8-restablecer-aviso.png" alt="Экран OrroFi: Сброс запланирован" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg"></picture>
-<figcaption>Демонстрационные данные на кадре.</figcaption>
+<picture><source srcset="../assets/screens/privacidad-red-8-restablecer-aviso.webp" type="image/webp"><img class="shot-img" src="../assets/screens/privacidad-red-8-restablecer-aviso.png" alt="Экран OrroFi: Напоминания о сбросе" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg"></picture>
+<figcaption>Демонстрационные данные на кадре.</figcaption>
 </figure>
 </article><article class="screen-block" id="rst-17f">
 <header>
-<h3>Письмо участникам сети</h3>
+<h3>Письмо остальным в доме</h3>
 </header>
-<div class="screen-copy"><p>Участникам сети уходит письмо о предстоящем сбросе.</p></div>
+<div class="screen-copy"><p>Остальным в доме уходит письмо: сеть собираются сбросить. Новость не должна застать их врасплох.</p></div>
 <figure class="shot shot-placeholder">
-<img class="shot-img" src="../assets/screens/placeholder.svg" alt="Экран OrroFi: Письмо участникам сети" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg">
+<img class="shot-img" src="../assets/screens/placeholder.svg" alt="Экран OrroFi: Письмо остальным в доме" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg">
 <figcaption>Кадр появится позже.</figcaption>
 </figure>
 </article><article class="screen-block" id="rst-17g">
 <header>
-<h3>Напоминание перед сбросом</h3>
+<h3>Срок уже близко</h3>
 </header>
-<div class="screen-copy"><p>Напоминание, что сброс скоро начнётся.</p></div>
+<div class="screen-copy"><p>Напоминание, что срок близко и отмена ещё открыта. После него времени останется совсем мало.</p></div>
 <figure class="shot shot-placeholder">
-<img class="shot-img" src="../assets/screens/placeholder.svg" alt="Экран OrroFi: Напоминание перед сбросом" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg">
+<img class="shot-img" src="../assets/screens/placeholder.svg" alt="Экран OrroFi: Срок уже близко" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg">
 <figcaption>Кадр появится позже.</figcaption>
 </figure>
 </article><article class="screen-block" id="rst-17h">
 <header>
-<h3>Отмена сброса</h3>
+<h3>Сброс назначен</h3>
 </header>
-<div class="screen-copy"><p>Владелец отменяет сброс, пока это возможно.</p></div>
+<div class="screen-copy"><p>Сброс уже стоит в сроке. До назначенного часа его можно отменить с этого телефона или сказать, что вы его не просили. День и час на кадре вымышлены.</p></div>
 <figure class="shot">
-<picture><source srcset="../assets/screens/privacidad-red-7-restablecer-programado.webp" type="image/webp"><img class="shot-img" src="../assets/screens/privacidad-red-7-restablecer-programado.png" alt="Экран OrroFi: Отмена сброса" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg"></picture>
-<figcaption>Демонстрационные данные на кадре.</figcaption>
+<picture><source srcset="../assets/screens/privacidad-red-7-restablecer-programado.webp" type="image/webp"><img class="shot-img" src="../assets/screens/privacidad-red-7-restablecer-programado.png" alt="Экран OrroFi: Сброс назначен" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg"></picture>
+<figcaption>Демонстрационные данные на кадре.</figcaption>
 </figure>
 </article><article class="screen-block" id="rst-17i">
 <header>
-<h3>Сброс отменён</h3>
+<h3>Сброс снят</h3>
 </header>
-<div class="screen-copy"><p>Сброс снят, сеть работает как раньше.</p></div>
+<div class="screen-copy"><p>Сброс снят. Сеть живёт, как жила, и заново подключать роутер не нужно.</p></div>
 <figure class="shot shot-placeholder">
-<img class="shot-img" src="../assets/screens/placeholder.svg" alt="Экран OrroFi: Сброс отменён" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg">
+<img class="shot-img" src="../assets/screens/placeholder.svg" alt="Экран OrroFi: Сброс снят" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg">
 <figcaption>Кадр появится позже.</figcaption>
 </figure>
 </article><article class="screen-block" id="rst-17j">
 <header>
-<h3>Слишком частые сбросы</h3>
+<h3>Слишком часто</h3>
 </header>
-<div class="screen-copy"><p>Если сбросов слишком много подряд, приложение попросит подождать.</p></div>
+<div class="screen-copy"><p>Сбросов подряд слишком много. Приложение просит подождать и не крутить сеть по кругу.</p></div>
 <figure class="shot shot-placeholder">
-<img class="shot-img" src="../assets/screens/placeholder.svg" alt="Экран OrroFi: Слишком частые сбросы" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg">
+<img class="shot-img" src="../assets/screens/placeholder.svg" alt="Экран OrroFi: Слишком часто" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg">
 <figcaption>Кадр появится позже.</figcaption>
 </figure>
 </article><article class="screen-block" id="rst-17k">
 <header>
-<h3>Сброс выполняется</h3>
+<h3>Сброс идёт</h3>
 </header>
-<div class="screen-copy"><p>Идёт сброс: подождите, не закрывая экран.</p></div>
+<div class="screen-copy"><p>Сброс уже идёт. Подождите на этом экране, пока он не закончится.</p></div>
 <figure class="shot shot-placeholder">
-<img class="shot-img" src="../assets/screens/placeholder.svg" alt="Экран OrroFi: Сброс выполняется" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg">
+<img class="shot-img" src="../assets/screens/placeholder.svg" alt="Экран OrroFi: Сброс идёт" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg">
 <figcaption>Кадр появится позже.</figcaption>
 </figure>
 </article><article class="screen-block" id="rst-17l">
 <header>
 <h3>Сеть сброшена</h3>
 </header>
-<div class="screen-copy"><p>Сеть сброшена; дальше — заново подключить роутер и устройства.</p></div>
+<div class="screen-copy"><p>Сеть сброшена. Дальше роутер и устройства представляют заново, как в первый раз.</p></div>
 <figure class="shot shot-placeholder">
 <img class="shot-img" src="../assets/screens/placeholder.svg" alt="Экран OrroFi: Сеть сброшена" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg">
 <figcaption>Кадр появится позже.</figcaption>
 </figure>
 </article><article class="screen-block" id="rst-17m">
 <header>
-<h3>Причина сброса</h3>
+<h3>Зачем вам сброс</h3>
 </header>
-<div class="screen-copy"><p>Выберите причину: смена роутера, продажа дома или другое.</p></div>
+<div class="screen-copy"><p>Приложение спрашивает причину: меняете роутер, уезжаете из дома или случилось что-то другое.</p></div>
 <figure class="shot shot-placeholder">
-<img class="shot-img" src="../assets/screens/placeholder.svg" alt="Экран OrroFi: Причина сброса" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg">
+<img class="shot-img" src="../assets/screens/placeholder.svg" alt="Экран OrroFi: Зачем вам сброс" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg">
 <figcaption>Кадр появится позже.</figcaption>
 </figure>
 </article><article class="screen-block" id="rst-entry">
 <header>
-<h3>Сброс домашней сети — вход</h3>
+<h3>Сброс домашней сети</h3>
 </header>
-<div class="screen-copy"><p>Начало цепочки сброса домашней сети Mi red.</p></div>
+<div class="screen-copy"><p>Сброс возвращает домашнюю сеть к началу. Здесь владелец только открывает этот путь, само стирание ещё впереди.</p></div>
 <figure class="shot shot-placeholder">
-<img class="shot-img" src="../assets/screens/placeholder.svg" alt="Экран OrroFi: Сброс домашней сети — вход" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg">
+<img class="shot-img" src="../assets/screens/placeholder.svg" alt="Экран OrroFi: Сброс домашней сети" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg">
 <figcaption>Кадр появится позже.</figcaption>
 </figure>
 </article><article class="screen-block" id="rst-owner">
 <header>
-<h3>Сброс доступен только владельцу</h3>
+<h3>Сброс только для владельца</h3>
 </header>
-<div class="screen-copy"><p>Если вы не владелец, сброс недоступен — так защищают чужую сеть.</p></div>
+<div class="screen-copy"><p>Чужую сеть сбросить нельзя. Если дом не ваш, дальше этого экрана хода нет.</p></div>
 <figure class="shot shot-placeholder">
-<img class="shot-img" src="../assets/screens/placeholder.svg" alt="Экран OrroFi: Сброс доступен только владельцу" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg">
+<img class="shot-img" src="../assets/screens/placeholder.svg" alt="Экран OrroFi: Сброс только для владельца" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg">
 <figcaption>Кадр появится позже.</figcaption>
 </figure>
 </article><article class="screen-block" id="rst-sh-bio">
 <header>
-<h3>Face ID для сброса</h3>
+<h3>Face ID для сброса</h3>
 </header>
-<div class="screen-copy"><p>Система просит Face ID, чтобы никто другой не сбросил сеть.</p></div>
+<div class="screen-copy"><p>Face ID, чтобы сброс не запустил кто-то посторонний с вашего телефона.</p></div>
 <figure class="shot shot-placeholder">
-<img class="shot-img" src="../assets/screens/placeholder.svg" alt="Экран OrroFi: Face ID для сброса" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg">
+<img class="shot-img" src="../assets/screens/placeholder.svg" alt="Экран OrroFi: Face ID для сброса" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg">
 <figcaption>Кадр появится позже.</figcaption>
 </figure>
 </article><article class="screen-block" id="rst-sh-bio-c">
 <header>
-<h3>Повтор Face ID при сбросе</h3>
+<h3>Face ID ещё раз</h3>
 </header>
-<div class="screen-copy"><p>Повтор Face ID, если первое подтверждение не прошло.</p></div>
+<div class="screen-copy"><p>Первое подтверждение не вышло. Система просит Face ID ещё раз, и только потом пускает дальше.</p></div>
 <figure class="shot">
-<picture><source srcset="../assets/screens/privacidad-red-6-restablecer-faceid.webp" type="image/webp"><img class="shot-img" src="../assets/screens/privacidad-red-6-restablecer-faceid.png" alt="Экран OrroFi: Повтор Face ID при сбросе" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg"></picture>
-<figcaption>Демонстрационные данные на кадре.</figcaption>
+<picture><source srcset="../assets/screens/privacidad-red-6-restablecer-faceid.webp" type="image/webp"><img class="shot-img" src="../assets/screens/privacidad-red-6-restablecer-faceid.png" alt="Экран OrroFi: Face ID ещё раз" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg"></picture>
+<figcaption>Демонстрационные данные на кадре.</figcaption>
 </figure>
 </article><article class="screen-block" id="rst-sms">
 <header>
-<h3>Подтверждение по SMS</h3>
+<h3>Код, что это вы</h3>
 </header>
-<div class="screen-copy"><p>Подтверждение по SMS, что сброс запрашивает именно владелец.</p></div>
+<div class="screen-copy"><p>Код из SMS подтверждает, что сброс просит сам владелец, а не тот, у кого случайно оказался открытый телефон.</p></div>
 <figure class="shot shot-placeholder">
-<img class="shot-img" src="../assets/screens/placeholder.svg" alt="Экран OrroFi: Подтверждение по SMS" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg">
+<img class="shot-img" src="../assets/screens/placeholder.svg" alt="Экран OrroFi: Код, что это вы" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg">
 <figcaption>Кадр появится позже.</figcaption>
 </figure>
 </article><article class="screen-block" id="rp-18a">
 <header>
-<h3>«Вы видели то, чего не делали?»</h3>
+<h3>«Вы видели то, чего не делали?»</h3>
 </header>
-<div class="screen-copy"><p>Сообщите в OrroFi, если в журнале сети появилось действие, которого вы не совершали.</p><p>Так вы сообщаете о подозрительном действии в аккаунте.</p></div>
+<div class="screen-copy"><p>Если в доме всплыл чужой телефон, удаление или сброс, которого вы не просили, скажите об этом здесь.</p><p>Сигнал сам по себе не останавливает уже идущее удаление. Чтобы остановить, воспользуйтесь отменой на том экране.</p></div>
 <figure class="shot">
-<picture><source srcset="../assets/screens/nolo-1-alerta.webp" type="image/webp"><img class="shot-img" src="../assets/screens/nolo-1-alerta.png" alt="Экран OrroFi: «Вы видели то, чего не делали?»" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg"></picture>
-<figcaption>Демонстрационные данные на кадре.</figcaption>
+<picture><source srcset="../assets/screens/nolo-1-alerta.webp" type="image/webp"><img class="shot-img" src="../assets/screens/nolo-1-alerta.png" alt="Экран OrroFi: «Вы видели то, чего не делали?»" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg"></picture>
+<figcaption>Демонстрационные данные на кадре.</figcaption>
 </figure>
 </article><article class="screen-block" id="rp-18b">
 <header>
-<h3>Сигнал принят</h3>
+<h3>Сигнал у нас</h3>
 </header>
-<div class="screen-copy"><p>Сообщите в OrroFi, если в журнале сети появилось действие, которого вы не совершали.</p></div>
+<div class="screen-copy"><p>Сигнал принят. Второй раз отправлять его не нужно: заявка уже у поддержки.</p></div>
 <figure class="shot">
-<picture><source srcset="../assets/screens/nolo-2-aviso-recibido.webp" type="image/webp"><img class="shot-img" src="../assets/screens/nolo-2-aviso-recibido.png" alt="Экран OrroFi: Сигнал принят" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg"></picture>
-<figcaption>Демонстрационные данные на кадре.</figcaption>
+<picture><source srcset="../assets/screens/nolo-2-aviso-recibido.webp" type="image/webp"><img class="shot-img" src="../assets/screens/nolo-2-aviso-recibido.png" alt="Экран OrroFi: Сигнал у нас" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg"></picture>
+<figcaption>Демонстрационные данные на кадре.</figcaption>
 </figure>
 </article><article class="screen-block" id="del-16a">
 <header>
-<h3>Запрос на удаление данных сети</h3>
+<h3>Что исчезнет из Mi red</h3>
 </header>
-<div class="screen-copy"><p>Шаг удаления данных домашней сети Mi red. Доступно только владельцу.</p></div>
+<div class="screen-copy"><p>Спокойное объяснение, что именно исчезнет из Mi red, если вы не передумаете. Удаление не мгновенное: время на отмену есть.</p></div>
 <figure class="shot">
-<picture><source srcset="../assets/screens/privacidad-red-1-borrado-solicitud.webp" type="image/webp"><img class="shot-img" src="../assets/screens/privacidad-red-1-borrado-solicitud.png" alt="Экран OrroFi: Запрос на удаление данных сети" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg"></picture>
-<figcaption>Демонстрационные данные на кадре.</figcaption>
+<picture><source srcset="../assets/screens/privacidad-red-1-borrado-solicitud.webp" type="image/webp"><img class="shot-img" src="../assets/screens/privacidad-red-1-borrado-solicitud.png" alt="Экран OrroFi: Что исчезнет из Mi red" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg"></picture>
+<figcaption>Демонстрационные данные на кадре.</figcaption>
 </figure>
 </article><article class="screen-block" id="del-16a0">
 <header>
-<h3>Почта перед удалением</h3>
+<h3>Почта для предупреждений</h3>
 </header>
-<div class="screen-copy"><p>Шаг удаления данных домашней сети Mi red. Доступно только владельцу.</p></div>
+<div class="screen-copy"><p>Сначала почта, на которую придут предупреждения. Так новость об удалении не потеряется.</p></div>
 <figure class="shot shot-placeholder">
-<img class="shot-img" src="../assets/screens/placeholder.svg" alt="Экран OrroFi: Почта перед удалением" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg">
+<img class="shot-img" src="../assets/screens/placeholder.svg" alt="Экран OrroFi: Почта для предупреждений" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg">
 <figcaption>Кадр появится позже.</figcaption>
 </figure>
 </article><article class="screen-block" id="del-16b">
 <header>
-<h3>Подтверждение намерения</h3>
+<h3>Вы понимаете последствия?</h3>
 </header>
-<div class="screen-copy"><p>Шаг удаления данных домашней сети Mi red. Доступно только владельцу.</p></div>
+<div class="screen-copy"><p>Короткое согласие перед серьёзным шагом. Случайное касание до удаления не доводит.</p></div>
 <figure class="shot shot-placeholder">
-<img class="shot-img" src="../assets/screens/placeholder.svg" alt="Экран OrroFi: Подтверждение намерения" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg">
+<img class="shot-img" src="../assets/screens/placeholder.svg" alt="Экран OrroFi: Вы понимаете последствия?" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg">
 <figcaption>Кадр появится позже.</figcaption>
 </figure>
 </article><article class="screen-block" id="del-16b2">
 <header>
-<h3>Повторное подтверждение</h3>
+<h3>Ещё одно «да»</h3>
 </header>
-<div class="screen-copy"><p>Шаг удаления данных домашней сети Mi red. Доступно только владельцу.</p></div>
+<div class="screen-copy"><p>Второе подтверждение. Приложение ещё раз спрашивает, точно ли это ваше решение.</p></div>
 <figure class="shot shot-placeholder">
-<img class="shot-img" src="../assets/screens/placeholder.svg" alt="Экран OrroFi: Повторное подтверждение" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg">
+<img class="shot-img" src="../assets/screens/placeholder.svg" alt="Экран OrroFi: Ещё одно «да»" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg">
 <figcaption>Кадр появится позже.</figcaption>
 </figure>
 </article><article class="screen-block" id="del-16c">
 <header>
-<h3>Проверка Face ID</h3>
+<h3>Лицо владельца</h3>
 </header>
-<div class="screen-copy"><p>Шаг удаления данных домашней сети Mi red. Доступно только владельцу.</p></div>
+<div class="screen-copy"><p>Face ID проверяет, что удаление просит человек, чей это телефон.</p></div>
 <figure class="shot shot-placeholder">
-<img class="shot-img" src="../assets/screens/placeholder.svg" alt="Экран OrroFi: Проверка Face ID" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg">
+<img class="shot-img" src="../assets/screens/placeholder.svg" alt="Экран OrroFi: Лицо владельца" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg">
 <figcaption>Кадр появится позже.</figcaption>
 </figure>
 </article><article class="screen-block" id="del-16d">
 <header>
-<h3>Письмо сразу после запроса</h3>
+<h3>Уведомление об удалении</h3>
 </header>
-<div class="screen-copy"><p>Шаг удаления данных домашней сети Mi red. Доступно только владельцу.</p></div>
+<div class="screen-copy"><p>Уведомление тем, кто в доме: запрошено удаление данных Mi red. Если это были не вы, отмените его или нажмите «No lo he pedido yo». Число в уведомлении вымышлено.</p></div>
 <figure class="shot">
-<picture><source srcset="../assets/screens/privacidad-red-3-borrado-aviso.webp" type="image/webp"><img class="shot-img" src="../assets/screens/privacidad-red-3-borrado-aviso.png" alt="Экран OrroFi: Письмо сразу после запроса" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg"></picture>
-<figcaption>Демонстрационные данные на кадре.</figcaption>
+<picture><source srcset="../assets/screens/privacidad-red-3-borrado-aviso.webp" type="image/webp"><img class="shot-img" src="../assets/screens/privacidad-red-3-borrado-aviso.png" alt="Экран OrroFi: Уведомление об удалении" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg"></picture>
+<figcaption>Демонстрационные данные на кадре.</figcaption>
 </figure>
 </article><article class="screen-block" id="del-16d2">
 <header>
-<h3>Напоминание за 24 часа</h3>
+<h3>Напоминание, пока не поздно</h3>
 </header>
-<div class="screen-copy"><p>Шаг удаления данных домашней сети Mi red. Доступно только владельцу.</p></div>
+<div class="screen-copy"><p>Повторное напоминание, пока отмена ещё открыта. Пропустить его значит подойти к сроку вплотную.</p></div>
 <figure class="shot shot-placeholder">
-<img class="shot-img" src="../assets/screens/placeholder.svg" alt="Экран OrroFi: Напоминание за 24 часа" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg">
+<img class="shot-img" src="../assets/screens/placeholder.svg" alt="Экран OrroFi: Напоминание, пока не поздно" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg">
 <figcaption>Кадр появится позже.</figcaption>
 </figure>
 </article><article class="screen-block" id="del-16e">
 <header>
-<h3>Отмена удаления</h3>
+<h3>Остановить удаление</h3>
 </header>
-<div class="screen-copy"><p>Шаг удаления данных домашней сети Mi red. Доступно только владельцу.</p></div>
+<div class="screen-copy"><p>Вы останавливаете удаление, пока это ещё позволено. Данные сети остаются.</p></div>
 <figure class="shot shot-placeholder">
-<img class="shot-img" src="../assets/screens/placeholder.svg" alt="Экран OrroFi: Отмена удаления" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg">
+<img class="shot-img" src="../assets/screens/placeholder.svg" alt="Экран OrroFi: Остановить удаление" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg">
 <figcaption>Кадр появится позже.</figcaption>
 </figure>
 </article><article class="screen-block" id="del-16e2">
 <header>
-<h3>Отмена невозможна</h3>
+<h3>Отменить уже нельзя</h3>
 </header>
-<div class="screen-copy"><p>Шаг удаления данных домашней сети Mi red. Доступно только владельцу.</p></div>
+<div class="screen-copy"><p>Иногда отмена уже закрыта. Приложение говорит об этом прямо и не предлагает обходной кнопки.</p></div>
 <figure class="shot shot-placeholder">
-<img class="shot-img" src="../assets/screens/placeholder.svg" alt="Экран OrroFi: Отмена невозможна" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg">
+<img class="shot-img" src="../assets/screens/placeholder.svg" alt="Экран OrroFi: Отменить уже нельзя" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg">
 <figcaption>Кадр появится позже.</figcaption>
 </figure>
 </article><article class="screen-block" id="del-16f">
 <header>
-<h3>Удаление выполнено</h3>
+<h3>Удаление завершено</h3>
 </header>
-<div class="screen-copy"><p>Шаг удаления данных домашней сети Mi red. Доступно только владельцу.</p></div>
+<div class="screen-copy"><p>Удаление дошло до конца. Прежняя картина домашней сети в приложении стёрта.</p></div>
 <figure class="shot shot-placeholder">
-<img class="shot-img" src="../assets/screens/placeholder.svg" alt="Экран OrroFi: Удаление выполнено" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg">
+<img class="shot-img" src="../assets/screens/placeholder.svg" alt="Экран OrroFi: Удаление завершено" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg">
 <figcaption>Кадр появится позже.</figcaption>
 </figure>
 </article><article class="screen-block" id="del-16g">
 <header>
-<h3>Данные сети стёрты</h3>
+<h3>Удаление снято</h3>
 </header>
-<div class="screen-copy"><p>Шаг удаления данных домашней сети Mi red. Доступно только владельцу.</p></div>
+<div class="screen-copy"><p>Удаление снято. На экране совет сменить код телефона и пароли роутера и Wi‑Fi, раз запрос мог быть чужим.</p></div>
 <figure class="shot">
-<picture><source srcset="../assets/screens/privacidad-red-4-borrado-cancelado.webp" type="image/webp"><img class="shot-img" src="../assets/screens/privacidad-red-4-borrado-cancelado.png" alt="Экран OrroFi: Данные сети стёрты" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg"></picture>
-<figcaption>Демонстрационные данные на кадре.</figcaption>
+<picture><source srcset="../assets/screens/privacidad-red-4-borrado-cancelado.webp" type="image/webp"><img class="shot-img" src="../assets/screens/privacidad-red-4-borrado-cancelado.png" alt="Экран OrroFi: Удаление снято" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg"></picture>
+<figcaption>Демонстрационные данные на кадре.</figcaption>
 </figure>
 </article><article class="screen-block" id="del-16h">
 <header>
-<h3>Итог удаления</h3>
+<h3>Чем закончился запрос</h3>
 </header>
-<div class="screen-copy"><p>Шаг удаления данных домашней сети Mi red. Доступно только владельцу.</p></div>
+<div class="screen-copy"><p>Короткий итог: чем закончился запрос и что это значит для телефонов дома.</p></div>
 <figure class="shot shot-placeholder">
-<img class="shot-img" src="../assets/screens/placeholder.svg" alt="Экран OrroFi: Итог удаления" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg">
+<img class="shot-img" src="../assets/screens/placeholder.svg" alt="Экран OrroFi: Чем закончился запрос" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg">
 <figcaption>Кадр появится позже.</figcaption>
 </figure>
 </article><article class="screen-block" id="del-entry">
 <header>
-<h3>Удаление данных Mi red — вход</h3>
+<h3>Удаление данных сети</h3>
 </header>
-<div class="screen-copy"><p>Шаг удаления данных домашней сети Mi red. Доступно только владельцу.</p></div>
+<div class="screen-copy"><p>Отсюда владелец начинает удаление данных домашней сети Mi red. Учётную запись это не стирает: у неё отдельный путь.</p></div>
 <figure class="shot shot-placeholder">
-<img class="shot-img" src="../assets/screens/placeholder.svg" alt="Экран OrroFi: Удаление данных Mi red — вход" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg">
+<img class="shot-img" src="../assets/screens/placeholder.svg" alt="Экран OrroFi: Удаление данных сети" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg">
 <figcaption>Кадр появится позже.</figcaption>
 </figure>
 </article><article class="screen-block" id="del-owner">
 <header>
-<h3>Только владелец может удалить данные сети</h3>
+<h3>Решает только владелец</h3>
 </header>
-<div class="screen-copy"><p>Шаг удаления данных домашней сети Mi red. Доступно только владельцу.</p></div>
+<div class="screen-copy"><p>Чужую сеть удалить нельзя. Если вы не владелец, экран на этом остановится.</p></div>
 <figure class="shot shot-placeholder">
-<img class="shot-img" src="../assets/screens/placeholder.svg" alt="Экран OrroFi: Только владелец может удалить данные сети" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg">
+<img class="shot-img" src="../assets/screens/placeholder.svg" alt="Экран OrroFi: Решает только владелец" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg">
 <figcaption>Кадр появится позже.</figcaption>
 </figure>
 </article><article class="screen-block" id="del-sh-bio">
 <header>
-<h3>Системное подтверждение Face ID</h3>
+<h3>Face ID, чтобы остановить удаление</h3>
 </header>
-<div class="screen-copy"><p>Шаг удаления данных домашней сети Mi red. Доступно только владельцу.</p></div>
+<div class="screen-copy"><p>Удаление уже назначено, данные пока на месте. Чтобы остановить его, подтвердите, что это вы: лицом, отпечатком или кодом телефона. Срок на кадре вымышлен.</p></div>
 <figure class="shot">
-<picture><source srcset="../assets/screens/privacidad-red-2-borrado-faceid.webp" type="image/webp"><img class="shot-img" src="../assets/screens/privacidad-red-2-borrado-faceid.png" alt="Экран OrroFi: Системное подтверждение Face ID" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg"></picture>
-<figcaption>Демонстрационные данные на кадре.</figcaption>
+<picture><source srcset="../assets/screens/privacidad-red-2-borrado-faceid.webp" type="image/webp"><img class="shot-img" src="../assets/screens/privacidad-red-2-borrado-faceid.png" alt="Экран OrroFi: Face ID, чтобы остановить удаление" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg"></picture>
+<figcaption>Демонстрационные данные на кадре.</figcaption>
 </figure>
 </article></div></section>
 
@@ -480,9 +480,8 @@
 <a href="../privacidad/index.html#sitio-privacidad">Приватность этого сайта</a>
 <a href="../contacto/index.html">Контакты</a>
 <a href="mailto:privacidad@orrofi.es">privacidad@orrofi.es</a>
-<a href="mailto:hola@orrofi.es">hola@orrofi.es</a>
 </p>
-<p class="badge-demo">На кадрах — демонстрационные данные. Живая услуга и публикация в магазине приложений ещё впереди.</p>
+<p class="badge-demo">На кадрах — демонстрационные данные. Живая услуга и публикация в магазине приложений ещё впереди.</p>
 </div>
 </footer>
 <script src="../assets/js/site.js" defer></script>
