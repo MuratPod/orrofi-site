@@ -668,7 +668,7 @@ def shell(title: str, body: str, depth: int, current: str) -> str:
 </main>
 <footer class="site-footer">
 <div class="wrap">
-<p><strong>OrroFi</strong> · {html.escape(LEGAL_OWNER["short_name"])} (NIF {html.escape(LEGAL_OWNER["nif"])}), правообладатель бренда OrroFi.</p>
+<p>OrroFi — бренд {html.escape(LEGAL_OWNER["short_name"])} (NIF {html.escape(LEGAL_OWNER["nif"])}).</p>
 <p>{html.escape(FOOTER_COOKIES_LINE)}</p>
 <p>
 <a href="{rel_href('privacidad/index.html', depth)}">Безопасность и приватность</a>
