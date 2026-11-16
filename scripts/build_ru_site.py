@@ -25,8 +25,8 @@ NAV = [
     ("faq/index.html", "Вопросы"),
 ]
 
-# Кадра нет в design/target-v6. Подпись из copy.md остаётся, текста-заглушки нет.
-MISSING_FRAMES = frozenset({"fam-15b"})
+# Кадров без файла в design/target-v6 нет. Подпись из copy.md остаётся, текста-заглушки нет.
+MISSING_FRAMES = frozenset()
 
 # Вторая реплика чата — отдельный кадр, в текстах id тот же (`manager`).
 MANAGER_TICKET = "Заявка на визит мастера создана из чата."
