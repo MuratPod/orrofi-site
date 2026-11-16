@@ -24,7 +24,13 @@
     "\\[TELÉFONO GRATUITO\\]",
     "GhoFi",
     "#E8FF2A",
-    "#D4F200"
+    "#D4F200",
+    "Carrer de Mar",
+    "aislad",
+    "servidores",
+    "separada",
+    "copia cifrada",
+    "instantánea de tu red"
   ],
   "literalReplacements": {
     "Carrer de Mar 12": "Calle Ejemplo 1"
@@ -42,7 +48,8 @@
       "[PRINCIPALES SERVICIOS: p. ej. facturas y app accesibles, atención por texto, tarifas especiales]. Más detalles en [ENLACE].": "Servicios de accesibilidad y atención disponibles en la app.",
       "[MAIN SERVICES]. More details at [LINK].": "Servicios de accesibilidad y atención disponibles en la app.",
       "[ENLACE]": "Ver condiciones",
-      "[LINK]": "Ver condiciones"
+      "[LINK]": "Ver condiciones",
+      "Carrer de Mar 12": "Calle Ejemplo 1"
     },
     "orderMovilReplacements": {
       "[RESPONSABLE]": "",
@@ -669,18 +676,155 @@
       "function": "privacidad-red",
       "titleEs": "Borrado (acceso)",
       "descRu": "Вход в удаление открывает запрос del-16a."
+    },
+    {
+      "file": "servicios-8-order-date.png",
+      "screenId": "order-date",
+      "function": "servicios",
+      "titleEs": "Fecha de instalación",
+      "descRu": "Выбор окна визита техника при заказе оптики."
+    },
+    {
+      "file": "servicios-9-sh-gb.png",
+      "screenId": "sh-gb",
+      "function": "servicios",
+      "titleEs": "Añadir datos",
+      "descRu": "Докупка разового пакета трафика с подтверждением Face ID."
+    },
+    {
+      "file": "facturas-1-billing.png",
+      "screenId": "billing",
+      "function": "factura",
+      "titleEs": "Facturas",
+      "descRu": "Список счетов, ближайший платёж и способ оплаты."
+    },
+    {
+      "file": "familia-3-qr-oculto.png",
+      "screenId": "fam-13a2",
+      "function": "familia",
+      "titleEs": "QR oculto",
+      "descRu": "Код приглашения скрыт, потому что экран записывают или делают снимок.",
+      "waitMs": 500
+    },
+    {
+      "file": "familia-4-escanea.png",
+      "screenId": "fam-13b",
+      "function": "familia",
+      "titleEs": "Escanear código",
+      "descRu": "Домашний телефон сканирует QR нового телефона."
+    },
+    {
+      "file": "familia-5-anadir.png",
+      "screenId": "fam-13c",
+      "function": "familia",
+      "titleEs": "¿Añadir este teléfono?",
+      "descRu": "Владелец подтверждает, что новый телефон можно пустить в сеть."
+    },
+    {
+      "file": "familia-6-anadido.png",
+      "screenId": "fam-13d",
+      "function": "familia",
+      "titleEs": "Teléfono añadido",
+      "descRu": "Телефон принят в семейную сеть."
+    },
+    {
+      "file": "familia-7-no-coincide.png",
+      "screenId": "fam-13e",
+      "function": "familia",
+      "titleEs": "El código no coincide",
+      "descRu": "Код не сошёлся — приглашение отменено."
+    },
+    {
+      "file": "familia-8-invitacion-anulada.png",
+      "screenId": "fam-14b",
+      "function": "familia",
+      "titleEs": "Invitación anulada",
+      "descRu": "Шесть цифр не совпали, приглашение погашено."
+    },
+    {
+      "file": "familia-9-aviso.png",
+      "screenId": "fam-15",
+      "function": "familia",
+      "titleEs": "Aviso: teléfono añadido",
+      "descRu": "Уведомление владельцу: в доме появился новый телефон."
+    },
+    {
+      "file": "familia-10-quitar.png",
+      "screenId": "fam-15b",
+      "function": "familia",
+      "titleEs": "¿Quitar este teléfono?",
+      "descRu": "Подтверждение удаления телефона из семейной сети."
+    },
+    {
+      "file": "familia-11-quitado.png",
+      "screenId": "fam-15c",
+      "function": "familia",
+      "titleEs": "Teléfono quitado",
+      "descRu": "Телефон больше не в сети, ключ доступа сменён."
+    },
+    {
+      "file": "familia-12-lista.png",
+      "screenId": "fam-list",
+      "function": "familia",
+      "titleEs": "Familia",
+      "descRu": "Телефоны дома: владелец и добавленные, кнопка пригласить."
+    },
+    {
+      "file": "gestor-4-limite.png",
+      "screenId": "mgrlimit",
+      "function": "gestor",
+      "titleEs": "Límite del chat",
+      "descRu": "Сообщение слишком длинное: чат дошёл до лимита."
+    },
+    {
+      "file": "gestor-5-voz.png",
+      "screenId": "sh-voice",
+      "function": "gestor",
+      "titleEs": "Dictado por voz",
+      "descRu": "Запрос разрешения на диктовку: голос обрабатывается на телефоне."
+    },
+    {
+      "file": "gestor-6-voz-denegada.png",
+      "screenId": "sh-voice-denied",
+      "function": "gestor",
+      "titleEs": "Dictado no disponible",
+      "descRu": "Микрофон или распознавание речи выключены — диктовка недоступна."
+    },
+    {
+      "file": "gestor-7-fuera-horario.png",
+      "screenId": "handoffoff",
+      "function": "gestor",
+      "titleEs": "Fuera de horario",
+      "descRu": "Сотрудник сейчас недоступен: можно оставить заявку.",
+      "flags": { "humanHours": false }
+    },
+    {
+      "file": "servicios-fiber.png",
+      "screenId": "fiber",
+      "function": "servicios",
+      "titleEs": "Fibra",
+      "descRu": "Тариф и статус домашней оптики."
+    },
+    {
+      "file": "servicios-order.png",
+      "screenId": "order",
+      "function": "servicios",
+      "titleEs": "Contratar",
+      "descRu": "Начало заказа: адрес-пример и выбранный тариф оптики."
+    },
+    {
+      "file": "servicios-order-sum.png",
+      "screenId": "order-sum",
+      "function": "servicios",
+      "titleEs": "Resumen del pedido",
+      "descRu": "Сводка заказа: адрес-пример, тариф и окно визита."
     }
   ],
-  "skipped": [
+    "skipped": [
     {
       "screenId": "net-9b",
       "function": "export-datos",
       "reason": "Кадр снят: обещание копии ключа на сервере. Экран не публикуем."
-    },
-    {
-      "screenId": "order",
-      "function": "servicios",
-      "reason": "Экран «Contratar» содержит TRIS-плейсхолдеры; для визита используются install/sh-cita."
     }
   ]
 }
