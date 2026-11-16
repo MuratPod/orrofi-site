@@ -1,30 +1,30 @@
 (function () {
   document.documentElement.classList.add("js");
   var toggle = document.querySelector(".nav-toggle");
-  var nav = document.querySelector("nav.primary");
-  if (toggle && nav) {
-    function setMenuOpen(open) {
-      nav.classList.toggle("is-open", open);
-      toggle.setAttribute("aria-expanded", open ? "true" : "false");
-      toggle.textContent = open ? "Закрыть" : "Меню";
-    }
-    toggle.addEventListener("click", function () {
-      setMenuOpen(!nav.classList.contains("is-open"));
-    });
-    nav.querySelectorAll("a").forEach(function (link) {
-      link.addEventListener("click", function () {
-        setMenuOpen(false);
-      });
-    });
+  var nav = document.querySelector("#nav");
+  if (!toggle || !nav) {
+    return;
   }
 
-  document.querySelectorAll("img.shot-img[data-fallback-src]").forEach(function (img) {
-    img.addEventListener("error", function onErr() {
-      img.removeEventListener("error", onErr);
-      var fallback = img.getAttribute("data-fallback-src");
-      if (fallback) {
-        img.src = fallback;
-      }
+  function setOpen(open) {
+    nav.classList.toggle("is-open", open);
+    toggle.setAttribute("aria-expanded", open ? "true" : "false");
+    toggle.textContent = open ? "Закрыть" : "Меню";
+  }
+
+  toggle.addEventListener("click", function () {
+    setOpen(!nav.classList.contains("is-open"));
+  });
+
+  nav.querySelectorAll("a").forEach(function (link) {
+    link.addEventListener("click", function () {
+      setOpen(false);
     });
+  });
+
+  document.addEventListener("keydown", function (event) {
+    if (event.key === "Escape") {
+      setOpen(false);
+    }
   });
 })();
