@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate static Russian OrroFi visitka from _inputs/plan/screens.md."""
+"""Generate static Russian OrroFi marketing site (HTML) from scripts/data/screens.md."""
 
 from __future__ import annotations
 
@@ -10,7 +10,7 @@ from collections import defaultdict
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-SCREENS_MD = ROOT / "_inputs/plan/screens.md"
+SCREENS_MD = ROOT / "scripts" / "data" / "screens.md"
 IOS_SHOTS_DIR = ROOT / "assets" / "screens" / "ios"
 FRAMES_JSON = ROOT / "tools/render-screens/frames.json"
 
@@ -21,6 +21,23 @@ BRANDBOOK_FALLBACK: dict[str, str] = {
     "brandbook-usage-app-mi-red-430x932.png": "assets/screens/mi-red-1-resumen.png",
 }
 _SCREEN_ASSETS: dict[str, list[str]] | None = None
+MISSING_IMAGES: list[str] = []
+PLACEHOLDER_SRC = "assets/screens/placeholder.svg"
+
+PUBLISHED_PAGES = [
+    "index.html",
+    "vozmozhnosti/index.html",
+    "uslugi/index.html",
+    "mi-gestor/index.html",
+    "mi-red/index.html",
+    "familia/index.html",
+    "facturas/index.html",
+    "ajustes/index.html",
+    "instrukcii/index.html",
+    "privacidad/index.html",
+    "faq/index.html",
+    "contacto/index.html",
+]
 
 # Сведения LSSI / контакты (единый источник).
 LEGAL_OWNER = {
@@ -46,25 +63,56 @@ SITE_PRIVACY_TEXT = (
 
 FOOTER_COOKIES_LINE = "Сайт не использует cookies и счётчики посещений."
 
+ROUTER_PASSWORD_NEUTRAL = "Пароль защищён при передаче и хранении."
+
+CSP_POLICY = (
+    "default-src 'self'; img-src 'self'; style-src 'self'; script-src 'self'; "
+    "font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'"
+)
+
 
 def sanitize_legal_copy(text: str) -> str:
-    """Смягчение формулировок по ревью Legal (не меняем материалы в _inputs)."""
+    """Смягчение формулировок по ревью Legal и Security."""
     rules = [
         (
             "Нет в открытом виде. Пароль шифруется на iPhone; на сервер уходит только шифр.",
-            "Пароль Wi‑Fi защищён при передаче и хранении.",
+            ROUTER_PASSWORD_NEUTRAL,
         ),
         (
             "Пароль шифруется на iPhone; на сервер уходит только шифр, не открытый пароль.",
-            "Пароль Wi‑Fi защищён при передаче и хранении.",
+            ROUTER_PASSWORD_NEUTRAL,
         ),
         (
             "Он шифруется на iPhone и на сервер уходит только шифр, не открытый пароль.",
-            "Пароль Wi‑Fi защищён при передаче и хранении.",
+            ROUTER_PASSWORD_NEUTRAL,
         ),
         (
             "Пароль роутера шифруется на телефоне",
+            ROUTER_PASSWORD_NEUTRAL.rstrip("."),
+        ),
+        (
+            "Пароль Wi‑Fi защищён при передаче и хранении.",
+            ROUTER_PASSWORD_NEUTRAL,
+        ),
+        (
             "Пароль Wi‑Fi защищён при передаче и хранении",
+            ROUTER_PASSWORD_NEUTRAL.rstrip("."),
+        ),
+        (
+            "Ввод пароля (секрет остаётся на устройстве)",
+            "Ввод пароля роутера",
+        ),
+        (
+            "секрет остаётся на устройстве",
+            "ввод на устройстве",
+        ),
+        (
+            "секреты роутера при этом не отправляются на сервер в открытом виде",
+            "",
+        ),
+        (
+            "Шаг цепочки удаления данных домашней сети Mi red. Доступно владельцу; .",
+            "Шаг удаления данных домашней сети Mi red. Доступно только владельцу.",
         ),
         (
             "изолирует гостей от ваших устройств",
@@ -93,7 +141,7 @@ def sanitize_legal_copy(text: str) -> str:
         ),
         (
             "Введите пароль роутера — он останется зашифрованным на телефоне.",
-            "Введите пароль роутера. Пароль Wi‑Fi защищён при передаче и хранении.",
+            f"Введите пароль роутера. {ROUTER_PASSWORD_NEUTRAL}",
         ),
         (
             "Передача живому сотруднику в часы Пн–Пт 9:00–20:00 (Europe/Madrid)",
@@ -119,7 +167,7 @@ NAV = [
     ("ajustes/index.html", "Настройки"),
     ("instrukcii/index.html", "Инструкции"),
     ("privacidad/index.html", "Безопасность"),
-    ("faq/index.html", "FAQ"),
+    ("faq/index.html", "Вопросы и ответы"),
     ("contacto/index.html", "Контакты"),
 ]
 
@@ -184,9 +232,9 @@ def parse_table_rows(text: str) -> list[dict]:
         shot_col = parts[4] if len(parts) > 4 else "Нет"
         rows.append(
             {
-                "title": parts[0],
+                "title": sanitize_legal_copy(parts[0]),
                 "id": sid,
-                "what": parts[2],
+                "what": sanitize_legal_copy(parts[2]),
                 "function": parts[3],
                 "shots_raw": shot_col,
             }
@@ -202,7 +250,7 @@ def add_extra_screens(rows: list[dict]) -> None:
                 {
                     "title": DEL_TITLES.get(sid, sid),
                     "id": sid,
-                    "what": "Шаг цепочки удаления данных домашней сети Mi red. Доступно владельцу; секреты роутера при этом не отправляются на сервер в открытом виде.",
+                    "what": "Шаг удаления данных домашней сети Mi red. Доступно только владельцу.",
                     "function": "Удаление данных Mi red",
                     "shots_raw": "Нет",
                 }
@@ -317,9 +365,11 @@ def pick_shot_file(
         if resolve_image(path)[1]:
             return path, True, "Кадр приложения, демонстрационные данные."
 
-    fallback = candidates[0] if candidates else legacy
-    missing = "Место под кадр: ожидается файл в assets/screens/."
-    return fallback, False, missing
+    intended = candidates[0] if candidates else legacy
+    if intended != PLACEHOLDER_SRC:
+        MISSING_IMAGES.append(f"{sid}: {intended}")
+    cap = "Место под кадр: файл появится после съёмки (см. site_report.txt)."
+    return PLACEHOLDER_SRC, True, cap
 
 
 def prose_what(what: str, func: str, sid: str) -> str:
@@ -340,7 +390,7 @@ def prose_usage(what: str, func: str, sid: str) -> str:
             "При необходимости к разговору подключится сотрудник. "
             "История переписки хранится в течение срока, указанного в политике конфиденциальности."
         ),
-        "net-0b": "Введите пароль администратора роутера. Пароль Wi‑Fi защищён при передаче и хранении.",
+        "net-0b": f"Введите пароль администратора роутера. {ROUTER_PASSWORD_NEUTRAL}",
         "fam-14a": "Сверьте шесть цифр с тем, что показывает второй телефон. Так вы убеждаетесь, что приглашаете именно свой дом, а не чужой.",
     }
     text = hints.get(
@@ -373,22 +423,29 @@ def prose_steps(what: str, sid: str) -> str:
 def render_shot(src: str, exists: bool, alt: str, cap: str, depth: int) -> str:
     prefix = "../" * depth
     full_src = prefix + src
-    cls = "shot" if exists else "shot missing"
-    ph = prefix + "assets/screens/placeholder.svg"
+    is_placeholder = src.endswith("placeholder.svg")
+    cls = "shot" + (" shot-placeholder" if is_placeholder else "")
+    ph = prefix + PLACEHOLDER_SRC
     webp_src = None
-    if src.endswith(".png") and exists and (ROOT / src).with_suffix(".webp").is_file():
+    if (
+        src.endswith(".png")
+        and not is_placeholder
+        and exists
+        and (ROOT / src).with_suffix(".webp").is_file()
+    ):
         webp_src = prefix + src[:-4] + ".webp"
+    img_attrs = (
+        f'class="shot-img" src="{html.escape(full_src)}" alt="{html.escape(alt)}" '
+        f'width="390" height="844" loading="lazy" decoding="async" '
+        f'data-fallback-src="{html.escape(ph)}"'
+    )
     if webp_src:
         img_tag = (
             f'<picture><source srcset="{html.escape(webp_src)}" type="image/webp">'
-            f'<img src="{html.escape(full_src)}" alt="{html.escape(alt)}" width="390" height="844" '
-            f'loading="lazy" decoding="async" onerror="this.onerror=null;this.src=\'{html.escape(ph)}\'"></picture>'
+            f"<img {img_attrs}></picture>"
         )
     else:
-        img_tag = (
-            f'<img src="{html.escape(full_src)}" alt="{html.escape(alt)}" width="390" height="844" '
-            f'loading="lazy" decoding="async" onerror="this.onerror=null;this.src=\'{html.escape(ph)}\'">'
-        )
+        img_tag = f"<img {img_attrs}>"
     return f"""<figure class="{cls}">
 {img_tag}
 <figcaption>{html.escape(cap)}</figcaption>
@@ -489,6 +546,8 @@ def shell(title: str, body: str, depth: int, current: str) -> str:
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="OrroFi — домашний интернет и домашняя сеть в одном приложении. Сайт-визитка на русском языке.">
+<meta http-equiv="Content-Security-Policy" content="{CSP_POLICY}">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <title>{html.escape(title)} · OrroFi</title>
 <link rel="icon" type="image/png" href="{rel_href('icons/ios/AppIcon-60.png', depth)}">
 <link rel="stylesheet" href="{css}">
@@ -545,9 +604,9 @@ def build_index(depth_content: str) -> str:
     shot = render_shot(src, exists, "Главный экран OrroFi", cap, 0)
     return f"""
 <section class="hero"><div class="wrap">
-<p class="tag" style="font-weight:800;color:var(--accent);text-transform:uppercase;font-size:14px">Приложение OrroFi</p>
+<p class="tag hero-tag">Приложение OrroFi</p>
 <h1>Весь домашний интернет и домашняя сеть — в одном приложении</h1>
-<p class="lead">OrroFi помогает видеть услуги, счета и аварии, общаться с умным помощником <strong>Mi gestor</strong> и управлять домашней сетью в разделе <strong>Mi red</strong> — без лишних звонков и с заботой о защите пароля Wi‑Fi.</p>
+<p class="lead">OrroFi помогает видеть услуги, счета и аварии, общаться с умным помощником <strong>Mi gestor</strong> и управлять домашней сетью в разделе <strong>Mi red</strong> — без лишних звонков.</p>
 <div class="hero-actions">
 <a class="btn btn-primary" href="vozmozhnosti/">Возможности</a>
 <a class="btn btn-secondary" href="instrukcii/">Как начать</a>
@@ -587,27 +646,33 @@ def build_index(depth_content: str) -> str:
 """
 
 
-def build_vozmozhnosti(screens_by_page: dict, functions: dict) -> str:
+def build_vozmozhnosti(
+    screens_by_page: dict, functions: dict[str, list[dict]], depth: int = 1
+) -> str:
     cards = []
     links = [
-        ("uslugi/", "Вход, услуги, заказ, аварии", "Фибра, радио, мобильная связь, Wi‑Fi, визит мастера."),
-        ("mi-gestor/", "Mi gestor", "Чат с ИИ, голосовой ввод, передача человеку, тикеты."),
-        ("mi-red/", "Mi red", "Роутер, устройства, гости, безопасность, перезапуск."),
-        ("familia/", "Семья", "QR, сверка кода, добавление и удаление телефона."),
-        ("facturas/", "Счета и оплата", "Список счетов, карточка, SEPA."),
-        ("ajustes/", "Настройки", "Тема, язык ES/EN, Face ID, уведомления."),
-        ("privacidad/", "Безопасность и приватность", "Вход, шифрование, выгрузка и удаление данных."),
+        ("uslugi/index.html", "uslugi", "Вход, услуги, заказ, аварии", "Фибра, радио, мобильная связь, Wi‑Fi, визит мастера."),
+        ("mi-gestor/index.html", "mi-gestor", "Mi gestor", "Чат с ИИ, голосовой ввод, передача человеку, тикеты."),
+        ("mi-red/index.html", "mi-red", "Mi red", "Роутер, устройства, гости, безопасность, перезапуск."),
+        ("familia/index.html", "familia", "Семья", "QR, сверка кода, добавление и удаление телефона."),
+        ("facturas/index.html", "facturas", "Счета и оплата", "Список счетов, карточка, SEPA."),
+        ("ajustes/index.html", "ajustes", "Настройки", "Тема, язык ES/EN, Face ID, уведомления."),
+        ("privacidad/index.html", "privacidad", "Безопасность и приватность", "Вход, защита данных, выгрузка и удаление."),
     ]
-    for href, title, desc in links:
-        count = len(screens_by_page.get(href.rstrip("/"), []))
+    for page_href, slug, title, desc in links:
+        count = len(screens_by_page.get(slug, []))
         cards.append(
             f'<div class="card"><h3>{html.escape(title)}</h3><p>{html.escape(desc)}</p>'
             f"<p>На сайте описано экранов: <strong>{count}</strong>.</p>"
-            f'<p><a href="{href}">Подробнее</a></p></div>'
+            f'<p><a href="{rel_href(page_href, depth)}">Подробнее</a></p></div>'
         )
     toc = []
     for func in sorted(functions):
-        toc.append(f"<li><a href=\"#fn-{re.sub(r'[^a-z0-9]+', '-', func.lower())}\">{html.escape(func)}</a></li>")
+        flist = functions[func]
+        screen = flist[0]
+        page = page_for_screen(screen["id"], func)
+        href = rel_href(f"{page}/index.html#{screen['id']}", depth)
+        toc.append(f'<li><a href="{html.escape(href)}">{html.escape(func)}</a></li>')
     return f"""
 <section class="hero"><div class="wrap">
 <h1>Возможности OrroFi</h1>
@@ -645,7 +710,7 @@ def build_topic_page(title: str, lead: str, screens: list[dict], page_slug: str)
 
 
 INSTRUKCII = [
-    ("Вход по телефону и SMS", "uslugi/index.html#login", [
+    ("Вход по телефону и SMS", "privacidad/index.html#login", [
         "Откройте OrroFi и введите номер телефона, привязанный к договору.",
         "Запросите код. SMS действует пять минут; повторная отправка — через 60 секунд.",
         "Если код не приходит — откройте подсказку «Не приходит код» и проверьте сеть.",
@@ -669,12 +734,12 @@ INSTRUKCII = [
     ]),
     ("Mi gestor и живой сотрудник", "mi-gestor/index.html#manager", [
         "Напишите вопрос; помощник представится как ИИ.",
-        "Нажмите «Hablar con una persona» в рабочие часы по Мадриду.",
-        "Вне часов оставьте заявку — приложение честно скажет, когда ответят.",
+        "Нажмите «Hablar con una persona», если нужен сотрудник.",
+        "Если сотрудник недоступен, оставьте заявку в чате.",
     ]),
     ("Включить Mi red", "mi-red/index.html#net-0b", [
         "В профиле откройте Mi red и разрешите доступ к локальной сети iOS.",
-        "Введите пароль роутера — он останется зашифрованным на телефоне.",
+        f"Введите пароль роутера. {ROUTER_PASSWORD_NEUTRAL}",
         "Дождитесь списка устройств и оценки канала.",
     ]),
     ("Добавить телефон семьи", "familia/index.html#fam-13a", [
@@ -704,7 +769,8 @@ def build_instrukcii() -> str:
     for title, link, steps in INSTRUKCII:
         sl = "".join(f"<li>{html.escape(sanitize_legal_copy(s))}</li>" for s in steps)
         items.append(
-            f'<li><h3>{html.escape(title)}</h3><ol>{sl}</ol><p><a href="../{html.escape(link)}">Связанные экраны</a></p></li>'
+            f'<li><h2 class="step-title">{html.escape(title)}</h2><ol>{sl}</ol>'
+            f'<p><a href="../{html.escape(link)}">Связанные экраны</a></p></li>'
         )
     return f"""
 <section class="hero"><div class="wrap">
@@ -719,7 +785,7 @@ FAQ = [
     ("Это уже готовое приложение или только макет?", "Это собранное демо-приложение OrroFi с фиктивными данными. Дизайн и сценарии утверждены; живая услуга и магазин — следующий этап."),
     ("На каких языках говорит приложение?", "Интерфейс — испанский и английский. Этот сайт-визитка — на русском."),
     ("Нужен ли аккаунт, если я ещё не клиент?", "Есть сценарий проверки покрытия и заявки для нового адреса. Без покрытия приложение честно сообщит об этом."),
-    ("Видит ли OrroFi пароль моего роутера?", "Пароль Wi‑Fi защищён при передаче и хранении."),
+    ("Видит ли OrroFi пароль моего роутера?", ROUTER_PASSWORD_NEUTRAL),
     ("Что видят гости Wi‑Fi?", "Гостевая сеть пускает в интернет и отделена от домашней."),
     ("Можно ли добавить телефон мужа или жены?", "Да, по QR и сверке шести цифр, только с согласия владельца."),
     ("Что, если я не просил удалить сеть?", "Используйте сигнал «Я этого не делал» — заявку примут в поддержку."),
@@ -802,11 +868,85 @@ def build_site_privacy_section() -> str:
 
 
 def shot_available_for_screen(screen: dict) -> bool:
-    _, exists, _ = pick_shot_file(screen["shots_raw"], screen["id"])
-    return exists
+    src, _, _ = pick_shot_file(screen["shots_raw"], screen["id"])
+    return src != PLACEHOLDER_SRC and (ROOT / src).is_file()
+
+
+IGNORE_LINK_FRAGMENTS = frozenset({"main", "nav", "top"})
+
+
+def normalize_site_path(path: str) -> str:
+    p = path.strip("/")
+    if p in ("", "."):
+        return "index.html"
+    if not p.endswith((".html", ".css", ".js", ".svg", ".png", ".webp", ".woff2", ".txt")):
+        return f"{p}/index.html" if not p.endswith("/") else f"{p.rstrip('/')}/index.html"
+    return p
+
+
+def resolve_href(from_page: str, href: str) -> tuple[str | None, str | None]:
+    if href.startswith(("mailto:", "http:", "https:", "tel:")):
+        return None, None
+    frag = ""
+    path = href
+    if "#" in href:
+        path, frag = href.split("#", 1)
+    if path.startswith("#") or path == "":
+        target = from_page
+        return target, frag or None
+    base_dir = (ROOT / from_page).parent
+    target = (base_dir / path).resolve().relative_to(ROOT).as_posix()
+    target = normalize_site_path(target)
+    return target, frag or None
+
+
+def validate_published_site(anchors: dict[str, set[str]]) -> None:
+    errors: list[str] = []
+    for page in PUBLISHED_PAGES:
+        p = ROOT / page
+        if not p.is_file():
+            errors.append(f"missing page: {page}")
+            continue
+        text = p.read_text(encoding="utf-8")
+        for href in re.findall(r'href="([^"]+)"', text):
+            target, frag = resolve_href(page, href)
+            if target is None:
+                continue
+            if target not in anchors and not (ROOT / target).is_file():
+                errors.append(f"{page}: broken link {href} -> {target}")
+            elif (
+                frag
+                and frag not in IGNORE_LINK_FRAGMENTS
+                and target in anchors
+                and frag not in anchors[target]
+            ):
+                errors.append(f"{page}: missing anchor #{frag} in {target}")
+        for src in re.findall(r'\b(?:src|srcset)="([^"]+)"', text):
+            for part in re.split(r",\s*", src):
+                url = part.strip().split()[0] if " " in part.strip() else part.strip()
+                if not url or url.startswith("data:"):
+                    continue
+                tp, _ = resolve_href(page, url)
+                if tp and not (ROOT / tp).is_file():
+                    errors.append(f"{page}: missing asset {url} -> {tp}")
+    if errors:
+        raise SystemExit("Site validation failed:\n" + "\n".join(errors[:50]) + (f"\n... +{len(errors)-50}" if len(errors) > 50 else ""))
+
+
+def collect_site_anchors(by_page: dict[str, list[dict]]) -> dict[str, set[str]]:
+    anchors: dict[str, set[str]] = {p: set() for p in PUBLISHED_PAGES}
+    for slug, slist in by_page.items():
+        rel = f"{slug}/index.html"
+        if rel in anchors:
+            anchors[rel] = {s["id"] for s in slist}
+    anchors["contacto/index.html"].add("lssi")
+    anchors["privacidad/index.html"].add(SITE_PRIVACY_ANCHOR)
+    return anchors
 
 
 def main() -> None:
+    global MISSING_IMAGES
+    MISSING_IMAGES = []
     text = SCREENS_MD.read_text(encoding="utf-8")
     screens = parse_table_rows(text)
     add_extra_screens(screens)
@@ -853,8 +993,11 @@ def main() -> None:
         write_page(f"{slug}/index.html", title, body, current)
 
     write_page("instrukcii/index.html", "Инструкции", build_instrukcii(), "instrukcii/index.html")
-    write_page("faq/index.html", "FAQ", build_faq(), "faq/index.html")
+    write_page("faq/index.html", "Вопросы и ответы", build_faq(), "faq/index.html")
     write_page("contacto/index.html", "Контакты", build_contacto(), "contacto/index.html")
+
+    site_anchors = collect_site_anchors(by_page)
+    validate_published_site(site_anchors)
 
     # Report
     func_no_shot = []
@@ -870,6 +1013,10 @@ def main() -> None:
                 f"functions_without_committed_shot={len(func_no_shot)}",
                 "functions_missing_any_committed_shot:",
                 *func_no_shot,
+                "",
+                f"missing_image_placeholders={len(MISSING_IMAGES)}",
+                "missing_image_paths:",
+                *MISSING_IMAGES,
             ]
         ),
         encoding="utf-8",

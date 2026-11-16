@@ -15,7 +15,7 @@
 
 :root {
   --accent: #ffa566;
-  --accent-dim: #b5500f;
+  --accent-dim: #e8945a;
   --bg-deep: #0a0e14;
   --bg: #111a2c;
   --bg-card: #13254a;
@@ -248,7 +248,8 @@ p strong {
   color: var(--text);
 }
 
-.card .tag {
+.card .tag,
+.hero-tag {
   font-size: 13px;
   font-weight: 800;
   color: var(--accent-dim);
@@ -256,11 +257,21 @@ p strong {
   letter-spacing: 0.04em;
 }
 
+.hero-tag {
+  color: var(--accent);
+}
+
 .gallery {
   display: grid;
   gap: 16px;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   margin: 24px 0;
+  justify-items: center;
+}
+
+.gallery .shot {
+  width: 100%;
+  max-width: 360px;
 }
 
 .shot {
@@ -269,11 +280,14 @@ p strong {
   border-radius: var(--radius);
   border: 1px solid var(--border);
   overflow: hidden;
+  max-width: 360px;
 }
 
 .shot img {
   display: block;
   width: 100%;
+  max-width: 360px;
+  margin-inline: auto;
   height: auto;
   aspect-ratio: 390 / 844;
   object-fit: cover;
@@ -315,6 +329,11 @@ p strong {
   padding: 0;
   margin: 0;
   counter-reset: step;
+}
+
+.step-title {
+  font-size: 1.25rem;
+  margin: 0 0 0.5rem;
 }
 
 .steps > li {
@@ -432,18 +451,18 @@ p strong {
   font-weight: 700;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1280px) {
   .nav-toggle {
     display: inline-flex;
     align-items: center;
     justify-content: center;
   }
-  nav.primary {
+  html.js nav.primary {
     display: none;
     width: 100%;
     padding-bottom: 12px;
   }
-  nav.primary.is-open {
+  html.js nav.primary.is-open {
     display: block;
   }
   nav.primary ul {

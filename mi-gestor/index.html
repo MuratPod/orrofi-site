@@ -4,6 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="OrroFi — домашний интернет и домашняя сеть в одном приложении. Сайт-визитка на русском языке.">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self'; style-src 'self'; script-src 'self'; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <title>Mi gestor · OrroFi</title>
 <link rel="icon" type="image/png" href="../icons/ios/AppIcon-60.png">
 <link rel="stylesheet" href="../assets/css/site.css">
@@ -16,7 +18,7 @@
 <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="nav">Меню</button>
 <nav class="primary" id="nav" aria-label="Основное">
 <ul>
-<li><a href="../">Главная</a></li><li><a href="../vozmozhnosti/index.html">Возможности</a></li><li><a href="../uslugi/index.html">Услуги</a></li><li><a href="../mi-gestor/index.html" aria-current="page">Mi gestor</a></li><li><a href="../mi-red/index.html">Mi red</a></li><li><a href="../familia/index.html">Семья</a></li><li><a href="../facturas/index.html">Счета</a></li><li><a href="../ajustes/index.html">Настройки</a></li><li><a href="../instrukcii/index.html">Инструкции</a></li><li><a href="../privacidad/index.html">Безопасность</a></li><li><a href="../faq/index.html">FAQ</a></li><li><a href="../contacto/index.html">Контакты</a></li>
+<li><a href="../">Главная</a></li><li><a href="../vozmozhnosti/index.html">Возможности</a></li><li><a href="../uslugi/index.html">Услуги</a></li><li><a href="../mi-gestor/index.html" aria-current="page">Mi gestor</a></li><li><a href="../mi-red/index.html">Mi red</a></li><li><a href="../familia/index.html">Семья</a></li><li><a href="../facturas/index.html">Счета</a></li><li><a href="../ajustes/index.html">Настройки</a></li><li><a href="../instrukcii/index.html">Инструкции</a></li><li><a href="../privacidad/index.html">Безопасность</a></li><li><a href="../faq/index.html">Вопросы и ответы</a></li><li><a href="../contacto/index.html">Контакты</a></li>
 </ul>
 </nav>
 </div>
@@ -49,7 +51,7 @@
 </dl>
 </div>
 <figure class="shot">
-<picture><source srcset="../assets/screens/ios/ios-mi-gestor-chat.webp" type="image/webp"><img src="../assets/screens/ios/ios-mi-gestor-chat.png" alt="Экран OrroFi: Чат" width="390" height="844" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='../assets/screens/placeholder.svg'"></picture>
+<picture><source srcset="../assets/screens/ios/ios-mi-gestor-chat.webp" type="image/webp"><img class="shot-img" src="../assets/screens/ios/ios-mi-gestor-chat.png" alt="Экран OrroFi: Чат" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg"></picture>
 <figcaption>Кадр приложения iOS, демонстрационные данные.</figcaption>
 </figure>
 </article><article class="screen-block" id="mgrlimit">
@@ -69,9 +71,9 @@
 <dd><ol><li>Откройте приложение OrroFi на iPhone.</li><li>Дойдите до экрана «Достигнут лимит сообщения».</li><li>Прочитайте пояснение и подтвердите действие, если приложение просит согласие или Face ID.</li></ol></dd>
 </dl>
 </div>
-<figure class="shot missing">
-<img src="../assets/screens/mgrlimit.png" alt="Экран OrroFi: Лимит чата" width="390" height="844" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='../assets/screens/placeholder.svg'">
-<figcaption>Место под кадр: ожидается файл в assets/screens/.</figcaption>
+<figure class="shot shot-placeholder">
+<img class="shot-img" src="../assets/screens/placeholder.svg" alt="Экран OrroFi: Лимит чата" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg">
+<figcaption>Место под кадр: файл появится после съёмки (см. site_report.txt).</figcaption>
 </figure>
 </article><article class="screen-block" id="sh-voice">
 <header>
@@ -90,9 +92,9 @@
 <dd><ol><li>Откройте приложение OrroFi на iPhone.</li><li>Дойдите до экрана «Диктовка только на устройстве».</li><li>Прочитайте пояснение и подтвердите действие, если приложение просит согласие или Face ID.</li></ol></dd>
 </dl>
 </div>
-<figure class="shot missing">
-<img src="../assets/screens/sh-voice.png" alt="Экран OrroFi: Голосовой ввод" width="390" height="844" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='../assets/screens/placeholder.svg'">
-<figcaption>Место под кадр: ожидается файл в assets/screens/.</figcaption>
+<figure class="shot shot-placeholder">
+<img class="shot-img" src="../assets/screens/placeholder.svg" alt="Экран OrroFi: Голосовой ввод" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg">
+<figcaption>Место под кадр: файл появится после съёмки (см. site_report.txt).</figcaption>
 </figure>
 </article><article class="screen-block" id="sh-voice-denied">
 <header>
@@ -111,9 +113,9 @@
 <dd><ol><li>Откройте приложение OrroFi на iPhone.</li><li>Дойдите до экрана «Микрофон не дан — голосовой ввод скрыт».</li><li>Прочитайте пояснение и подтвердите действие, если приложение просит согласие или Face ID.</li></ol></dd>
 </dl>
 </div>
-<figure class="shot missing">
-<img src="../assets/screens/sh-voice-denied.png" alt="Экран OrroFi: Нет разрешения на микрофон" width="390" height="844" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='../assets/screens/placeholder.svg'">
-<figcaption>Место под кадр: ожидается файл в assets/screens/.</figcaption>
+<figure class="shot shot-placeholder">
+<img class="shot-img" src="../assets/screens/placeholder.svg" alt="Экран OrroFi: Нет разрешения на микрофон" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg">
+<figcaption>Место под кадр: файл появится после съёмки (см. site_report.txt).</figcaption>
 </figure>
 </article><article class="screen-block" id="tickets">
 <header>
@@ -133,7 +135,7 @@
 </dl>
 </div>
 <figure class="shot">
-<picture><source srcset="../assets/screens/gestor-3-tickets.webp" type="image/webp"><img src="../assets/screens/gestor-3-tickets.png" alt="Экран OrroFi: Тикеты" width="390" height="844" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='../assets/screens/placeholder.svg'"></picture>
+<picture><source srcset="../assets/screens/gestor-3-tickets.webp" type="image/webp"><img class="shot-img" src="../assets/screens/gestor-3-tickets.png" alt="Экран OrroFi: Тикеты" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg"></picture>
 <figcaption>Кадр прототипа приложения (тёмная тема), демонстрационные данные.</figcaption>
 </figure>
 </article><article class="screen-block" id="handoff">
@@ -154,7 +156,7 @@
 </dl>
 </div>
 <figure class="shot">
-<picture><source srcset="../assets/screens/gestor-2-handoff.webp" type="image/webp"><img src="../assets/screens/gestor-2-handoff.png" alt="Экран OrroFi: Человек" width="390" height="844" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='../assets/screens/placeholder.svg'"></picture>
+<picture><source srcset="../assets/screens/gestor-2-handoff.webp" type="image/webp"><img class="shot-img" src="../assets/screens/gestor-2-handoff.png" alt="Экран OrroFi: Человек" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg"></picture>
 <figcaption>Кадр прототипа приложения (тёмная тема), демонстрационные данные.</figcaption>
 </figure>
 </article><article class="screen-block" id="handoffoff">
@@ -174,9 +176,9 @@
 <dd><ol><li>Откройте приложение OrroFi на iPhone.</li><li>Дойдите до экрана «Честная заявка».</li><li>Прочитайте пояснение и подтвердите действие, если приложение просит согласие или Face ID.</li></ol></dd>
 </dl>
 </div>
-<figure class="shot missing">
-<img src="../assets/screens/handoffoff.png" alt="Экран OrroFi: Вне часов" width="390" height="844" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='../assets/screens/placeholder.svg'">
-<figcaption>Место под кадр: ожидается файл в assets/screens/.</figcaption>
+<figure class="shot shot-placeholder">
+<img class="shot-img" src="../assets/screens/placeholder.svg" alt="Экран OrroFi: Вне часов" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg">
+<figcaption>Место под кадр: файл появится после съёмки (см. site_report.txt).</figcaption>
 </figure>
 </article><article class="screen-block" id="stempty">
 <header>
@@ -196,7 +198,7 @@
 </dl>
 </div>
 <figure class="shot">
-<picture><source srcset="../assets/screens/extras-1-stempty.webp" type="image/webp"><img src="../assets/screens/extras-1-stempty.png" alt="Экран OrroFi: Пустой список" width="390" height="844" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='../assets/screens/placeholder.svg'"></picture>
+<picture><source srcset="../assets/screens/extras-1-stempty.webp" type="image/webp"><img class="shot-img" src="../assets/screens/extras-1-stempty.png" alt="Экран OrroFi: Пустой список" width="390" height="844" loading="lazy" decoding="async" data-fallback-src="../assets/screens/placeholder.svg"></picture>
 <figcaption>Кадр прототипа приложения (тёмная тема), демонстрационные данные.</figcaption>
 </figure>
 </article></div></section>
