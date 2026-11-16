@@ -20,6 +20,98 @@ const ICON_URL =
   cfg.appIconUrl ||
   'https://muratpod.github.io/orrofi-preview/icons/ios/AppIcon-60.png';
 
+const PHONE_LAYOUT_CSS = `
+  html, body { overflow: hidden !important; margin: 0 !important; }
+  body > .top, body > .mapbtn, body > button.mapbtn, body > button[data-go="all"] {
+    display: none !important;
+    visibility: hidden !important;
+    height: 0 !important;
+    pointer-events: none !important;
+  }
+  body > .stage {
+    position: fixed !important;
+    inset: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    overflow: hidden !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #13254A !important;
+  }
+  #pw {
+    width: 430px !important;
+    height: 932px !important;
+    margin: 0 !important;
+    overflow: hidden !important;
+    flex-shrink: 0 !important;
+  }
+  #phone.phone, #phone {
+    position: relative !important;
+    left: 0 !important;
+    top: 0 !important;
+    transform: none !important;
+    width: 430px !important;
+    height: 932px !important;
+    max-height: 932px !important;
+    margin: 0 !important;
+    overflow: hidden !important;
+    display: flex !important;
+    flex-direction: column !important;
+    box-sizing: border-box !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+  }
+  #phone #screen, #phone .in {
+    display: flex !important;
+    flex-direction: column !important;
+    flex: 1 1 auto !important;
+    min-height: 0 !important;
+    height: 100% !important;
+    max-height: 100% !important;
+    overflow: hidden !important;
+  }
+  #phone .sc:not([aria-hidden="true"]) {
+    flex: 1 1 auto !important;
+    min-height: 0 !important;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+  }
+  #phone .tabs {
+    flex-shrink: 0 !important;
+    padding-top: 2px !important;
+    padding-bottom: 0 !important;
+    margin-bottom: 0 !important;
+    box-sizing: border-box !important;
+    min-height: 0 !important;
+  }
+  #phone .tabs button {
+    line-height: 1 !important;
+    padding-top: 4px !important;
+    padding-bottom: 12px !important;
+    gap: 2px !important;
+  }
+  #phone .tabs button span {
+    display: block !important;
+    font-size: 10px !important;
+    line-height: 1.05 !important;
+    margin-top: 1px !important;
+    margin-bottom: 2px !important;
+    max-height: 12px !important;
+    overflow: visible !important;
+  }
+  #phone .hb {
+    display: block !important;
+    flex-shrink: 0 !important;
+    width: 120px !important;
+    height: 5px !important;
+    margin: 0 auto 8px !important;
+    border-radius: 99px !important;
+    opacity: 1 !important;
+  }
+  #phone .sb { flex-shrink: 0 !important; }
+`;
+
 /** Entry / redirect-only ids — use concrete screens instead (see frames.json). */
 const REDIRECT_GUARD_IDS = new Set([
   'net-entry',
@@ -39,7 +131,7 @@ function buildIndexMd(results, skipped) {
   const lines = [
     '# Кадры OrroFi (prototipo público)',
     '',
-    'Автоматически снято с https://muratpod.github.io/orrofi-proto/ — idioma **es**, tema **Oscuro · HUD**, recorte `#phone` 430×932 @2x.',
+    'Автоматически снято с https://muratpod.github.io/orrofi-proto/ — idioma **es**, tema **Oscuro · HUD**, элемент `#phone` 430×932 (@2x antes de optimize).',
     '',
     '| Archivo | ID pantalla | Función | Título (ES) | Descripción (RU) |',
     '| --- | --- | --- | --- | --- |',
@@ -66,21 +158,30 @@ function buildIndexMd(results, skipped) {
 }
 
 async function layoutPhone(page) {
+  await page.addStyleTag({ content: PHONE_LAYOUT_CSS }).catch(() => {});
   await page.evaluate(() => {
-    const ph = document.getElementById('phone');
+    document.querySelectorAll('body > .top, body > .mapbtn, body > button.mapbtn').forEach((e) =>
+      e.remove(),
+    );
+    document.querySelectorAll('body > button[data-go="all"]').forEach((e) => e.remove());
     const pw = document.getElementById('pw');
+    const ph = document.getElementById('phone');
     if (pw) {
       pw.style.width = '430px';
       pw.style.height = '932px';
       pw.style.margin = '0';
+      pw.style.overflow = 'hidden';
     }
     if (ph) {
-      ph.style.transform = 'translateX(-50%) scale(1)';
+      ph.style.transform = 'none';
       ph.style.position = 'relative';
-      ph.style.left = '50%';
+      ph.style.left = '0';
       ph.style.top = '0';
       ph.style.width = '430px';
       ph.style.height = '932px';
+      ph.style.maxHeight = '932px';
+      ph.style.margin = '0';
+      ph.style.overflow = 'hidden';
       ph.style.boxShadow = 'none';
       ph.style.borderRadius = '0';
     }
@@ -142,23 +243,33 @@ async function protoGo(page, screenId, { blockNestedGo = false } = {}) {
 async function runPreSetup(page, setup) {
   if (setup === 'rst-reset-faceid') {
     await protoGo(page, 'rst-17b');
-    await page.waitForSelector('[data-screen="rst-17b"]', { timeout: 10000 });
-    await page.locator('label.chk.c-opt input[type="radio"]').first().click({ force: true });
+    await page.waitForSelector('#phone [data-screen="rst-17b"]', { timeout: 10000 });
+    await page.locator('#phone label.chk.c-opt').first().click();
+    await page.locator('#phone button[data-go="rst-17c"]').click();
+    await page.waitForSelector('#phone [data-screen="rst-17c"]', { timeout: 8000 });
+    await page.locator('#phone button[data-go="rst-sh-bio-c"]').click();
+    await page.waitForSelector('#phone .sheet:not([hidden])', { timeout: 8000 });
     await page.evaluate(() => {
-      const radio = document.querySelector('label.chk.c-opt input[type="radio"]');
-      if (radio) {
-        radio.checked = true;
-        radio.dispatchEvent(new Event('change', { bubbles: true }));
-        radio.dispatchEvent(new Event('input', { bubbles: true }));
+      const phone = document.getElementById('phone');
+      const sc =
+        phone?.querySelector('.sc[aria-hidden="true"]') || phone?.querySelector('.sc');
+      if (!sc) return;
+      sc.removeAttribute('aria-hidden');
+      sc.hidden = false;
+      const input = sc.querySelector('label.chk.c-opt input[type="radio"]');
+      if (input) {
+        input.checked = true;
+        input.classList.add('c-o2');
+        input.dispatchEvent(new Event('change', { bubbles: true }));
       }
-      document.querySelectorAll('.gate-btn, button[data-go="rst-17c"]').forEach((btn) => {
+      const btn = sc.querySelector('button[data-go="rst-17c"]');
+      if (btn) {
+        btn.disabled = false;
         btn.removeAttribute('disabled');
-        btn.setAttribute('aria-disabled', 'false');
+        btn.removeAttribute('aria-disabled');
         btn.classList.remove('d');
-      });
+      }
     });
-    await page.waitForTimeout(100);
-    await protoGo(page, 'rst-sh-bio-c');
     await page.waitForTimeout(200);
     return;
   }
@@ -192,11 +303,18 @@ async function sanitizePlaceholders(page, mode) {
 
     if (mode === 'orderMovil') {
       phone.querySelectorAll('.cd .sec2').forEach((p) => {
-        if (/Responsable|\[DIRECCIÓN\]|\[EMAIL\]|\[TELÉFONO\]|Reclamaciones:/i.test(p.textContent)) {
+        if (
+          /^Responsable:/i.test(p.textContent.trim()) ||
+          (p.closest('.b-dp') && /\[DIRECCIÓN\]|\[EMAIL\]|\[TELÉFONO\]/i.test(p.textContent))
+        ) {
           p.style.display = 'none';
         }
       });
-      const orderMap = rules.orderMovilReplacements || {};
+      const orderMap = {
+        ...(rules.orderMovilReplacements || {}),
+        '[RESPONSABLE]': 'OrroFi',
+        '[CONTACTO RECLAMACIONES]': 'atención en la app',
+      };
       const walker = document.createTreeWalker(phone, NodeFilter.SHOW_TEXT);
       const nodes = [];
       while (walker.nextNode()) nodes.push(walker.currentNode);
@@ -302,13 +420,40 @@ async function prepareMarketingShot(page, frame) {
         phone.querySelectorAll('.tabs').forEach((t) => (t.style.display = 'none'));
       }
 
-      const sc = phone.querySelector('.sc:not([aria-hidden="true"])');
-      if (sc) {
-        if (typeof frame.scrollY === 'number') sc.scrollTop = frame.scrollY;
-        else if (frame.screenId === 'order-movil') sc.scrollTop = 0;
-      }
     },
     { frame, iconUrl: ICON_URL },
+  );
+
+  await page.evaluate(
+    ({ frame }) => {
+      const phone = document.getElementById('phone');
+      if (!phone) return;
+      const sc = phone.querySelector('.sc:not([aria-hidden="true"])');
+      if (!sc) return;
+      if (typeof frame.scrollY === 'number') {
+        sc.scrollTop = frame.scrollY;
+        return;
+      }
+      if (frame.scrollToText) {
+        const needle = frame.scrollToText;
+        const nodes = [...sc.querySelectorAll('p, li, h2, h3, div, span, .sec2')];
+        const el =
+          nodes.find((e) => e.textContent.trim().startsWith(needle)) ||
+          nodes.find((e) => e.childElementCount === 0 && e.textContent.includes(needle)) ||
+          nodes.find((e) => e.textContent.includes(needle));
+        if (el) {
+          const pad = frame.scrollPadding ?? 56;
+          const top = el.getBoundingClientRect().top - sc.getBoundingClientRect().top + sc.scrollTop;
+          sc.scrollTop = Math.max(0, top - pad);
+        }
+        return;
+      }
+      if (frame.scrollEnd) {
+        const pad = frame.scrollEndPadding ?? 100;
+        sc.scrollTop = Math.max(0, sc.scrollHeight - sc.clientHeight - pad);
+      }
+    },
+    { frame },
   );
 
   await page.evaluate(async (iconUrl) => {
@@ -398,6 +543,13 @@ async function renderProtoFrame(page, frame) {
     }
   }
   if (!text.trim()) return { status: 'empty', reason: 'Pantalla en blanco' };
+
+  await layoutPhone(page);
+  await page.evaluate(() => {
+    document.querySelectorAll('body > .top, body > .mapbtn, body > button.mapbtn').forEach((e) =>
+      e.remove(),
+    );
+  });
 
   const phone = page.locator('#phone');
   const outPath = join(OUT_DIR, frame.file);

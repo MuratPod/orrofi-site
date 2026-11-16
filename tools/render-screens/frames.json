@@ -414,7 +414,9 @@
       "screenId": "net-6",
       "function": "site-mi-red",
       "titleEs": "Seguridad",
-      "descRu": "Безопасность сети: пароль, WPA3, прошивка."
+      "descRu": "Безопасность сети: пароль, WPA3, прошивка.",
+      "scrollToText": "Descargar los datos de mi red",
+      "scrollPadding": 8
     },
     {
       "file": "sh-faceid-open.png",
