@@ -3,14 +3,17 @@
   var toggle = document.querySelector(".nav-toggle");
   var nav = document.querySelector("nav.primary");
   if (toggle && nav) {
-    toggle.addEventListener("click", function () {
-      var open = nav.classList.toggle("is-open");
+    function setMenuOpen(open) {
+      nav.classList.toggle("is-open", open);
       toggle.setAttribute("aria-expanded", open ? "true" : "false");
+      toggle.textContent = open ? "Закрыть" : "Меню";
+    }
+    toggle.addEventListener("click", function () {
+      setMenuOpen(!nav.classList.contains("is-open"));
     });
     nav.querySelectorAll("a").forEach(function (link) {
       link.addEventListener("click", function () {
-        nav.classList.remove("is-open");
-        toggle.setAttribute("aria-expanded", "false");
+        setMenuOpen(false);
       });
     });
   }

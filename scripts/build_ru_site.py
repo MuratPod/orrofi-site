@@ -670,7 +670,7 @@ def shell(title: str, body: str, depth: int, current: str) -> str:
 <a class="skip" href="#main">К содержанию</a>
 <header class="site-header">
 <div class="wrap topbar">
-<a class="logo" href="{home}"><img src="{logo}" alt="OrroFi" width="160" height="36"></a>
+<a class="logo" href="{home}"><img src="{logo}" alt="OrroFi" width="98" height="36"></a>
 <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="nav">Меню</button>
 <nav class="primary" id="nav" aria-label="Основное меню">
 <ul>

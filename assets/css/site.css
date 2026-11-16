@@ -274,11 +274,16 @@ p strong {
   max-width: 360px;
 }
 
+.screen-block,
+:target {
+  scroll-margin-top: 96px;
+}
+
 .shot {
   margin: 0;
   background: var(--bg);
   border-radius: var(--radius);
-  border: 1px solid var(--border);
+  border: 1px solid #9cbdff;
   overflow: hidden;
   max-width: 360px;
 }
@@ -289,8 +294,8 @@ p strong {
   max-width: 360px;
   margin-inline: auto;
   height: auto;
-  aspect-ratio: 390 / 844;
-  object-fit: cover;
+  aspect-ratio: 430 / 932;
+  object-fit: contain;
   object-position: top;
   background: #0d1526;
 }
@@ -451,7 +456,17 @@ p strong {
   font-weight: 700;
 }
 
-@media (max-width: 1280px) {
+@media (min-width: 1441px) {
+  nav.primary ul {
+    flex-wrap: nowrap;
+  }
+  nav.primary a {
+    padding: 0 8px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 1440px) {
   .nav-toggle {
     display: inline-flex;
     align-items: center;
