@@ -410,15 +410,6 @@
       "preActions": [{ "setup": "net-8-wifi" }]
     },
     {
-      "file": "net-6.png",
-      "screenId": "net-6",
-      "function": "site-mi-red",
-      "titleEs": "Seguridad",
-      "descRu": "Безопасность сети: пароль, WPA3, прошивка.",
-      "scrollToText": "Descargar los datos de mi red",
-      "scrollPadding": 8
-    },
-    {
       "file": "sh-faceid-open.png",
       "screenId": "sh-faceid-open",
       "function": "site-auth",
@@ -432,13 +423,6 @@
       "function": "site-mi-red",
       "titleEs": "Red de invitados",
       "descRu": "Гостевой Wi‑Fi."
-    },
-    {
-      "file": "net-9b.png",
-      "screenId": "net-9b",
-      "function": "site-mi-red",
-      "titleEs": "Privacidad · claves",
-      "descRu": "Ключи на устройстве."
     },
     {
       "file": "net-12b.png",
@@ -467,11 +451,6 @@
       "screenId": "privacy",
       "function": "export-datos",
       "reason": "Внизу экрана виден [EMAIL PRIVACIDAD]."
-    },
-    {
-      "screenId": "net-9b",
-      "function": "export-datos",
-      "reason": "Действие «Descargar» — только toast; отдельный экран не открывается."
     },
     {
       "screenId": "order",

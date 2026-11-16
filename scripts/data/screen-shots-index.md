@@ -51,10 +51,8 @@
 | `net-0a.png` | `net-0a` | site-mi-red | Conecta tu router | Подключение роутера Mi red. |
 | `net-0f.png` | `net-0f` | site-mi-red | Protege tu router | Защита административного пароля роутера. |
 | `net-8.png` | `net-8` | site-mi-red | Wi‑Fi casa | Домашняя Wi‑Fi: имя сети и пароль. |
-| `net-6.png` | `net-6` | site-mi-red | Seguridad | Безопасность сети: пароль, WPA3, прошивка. |
 | `sh-faceid-open.png` | `sh-faceid-open` | site-auth | Face ID al abrir | Вход по Face ID при открытии. |
 | `net-9.png` | `net-9` | site-mi-red | Red de invitados | Гостевой Wi‑Fi. |
-| `net-9b.png` | `net-9b` | site-mi-red | Privacidad · claves | Ключи на устройстве. |
 | `net-12b.png` | `net-12b` | site-mi-red | Tu operador firmado | Оператор и договор. |
 | `net-7.png` | `net-7` | site-mi-red | Historial y reinicio | Управление роутером. |
 | `net-1e.png` | `net-1e` | site-mi-red | Pausar internet | Управление сетью: пауза интернета. |
@@ -62,5 +60,4 @@
 ## No incluidos en assets
 
 - **privacy** (export-datos): Внизу экрана виден [EMAIL PRIVACIDAD].
-- **net-9b** (export-datos): Действие «Descargar» — только toast; отдельный экран не открывается.
 - **order** (servicios): Экран «Contratar» содержит TRIS-плейсхолдеры; для визита используются install/sh-cita.
