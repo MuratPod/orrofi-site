@@ -96,17 +96,22 @@ def asset_id(sid: str, caption: str) -> str:
 
 
 def frame_exists(sid: str) -> bool:
-    dark = ROOT / "assets" / "screens" / "v6" / "dark" / f"{sid}.webp"
-    light = ROOT / "assets" / "screens" / "v6" / "light" / f"{sid}.webp"
-    return dark.is_file() and light.is_file()
+    for theme in ("dark", "light"):
+        base = ROOT / "assets" / "screens" / "v6" / theme
+        if not (base / f"{sid}.webp").is_file():
+            return False
+        if not (base / "android" / f"{sid}.webp").is_file():
+            return False
+    return True
 
 
-def picture(prefix: str, sid: str, alt: str, eager: bool) -> str:
+def picture(prefix: str, sid: str, alt: str, eager: bool, platform: str) -> str:
     loading = "eager" if eager else "lazy"
     priority = ' fetchpriority="high"' if eager else ""
-    sizes = "(min-width: 960px) 270px, 78vw"
-    dark = f"{prefix}assets/screens/v6/dark/{sid}"
-    light = f"{prefix}assets/screens/v6/light/{sid}"
+    sizes = "(min-width: 960px) 242px, 70vw"
+    folder = "android/" if platform == "android" else ""
+    dark = f"{prefix}assets/screens/v6/dark/{folder}{sid}"
+    light = f"{prefix}assets/screens/v6/light/{folder}{sid}"
     return (
         "<picture>"
         f'<source media="(prefers-color-scheme: light)" type="image/webp" '
@@ -135,7 +140,8 @@ def phone(prefix: str, sid: str, caption: str, eager: bool) -> str:
         )
     return (
         '<figure class="phone">'
-        f"{picture(prefix, file_id, caption, eager)}"
+        f'<div class="device device--iphone">{picture(prefix, file_id, caption, eager, "ios")}</div>'
+        f'<div class="device device--pixel">{picture(prefix, file_id, caption, eager, "android")}</div>'
         f"<figcaption>{esc(caption)}</figcaption>"
         "</figure>"
     )
@@ -215,6 +221,20 @@ def intro_html(text: str) -> str:
     )
 
 
+def platform_switch() -> str:
+    return (
+        '<div class="platform-bar"><fieldset class="platform-switch">'
+        "<legend>Модель телефона</legend>"
+        '<label class="platform-option">'
+        '<input type="radio" name="platform" value="iphone" checked>'
+        "<span>iPhone</span></label>"
+        '<label class="platform-option">'
+        '<input type="radio" name="platform" value="android">'
+        "<span>Android</span></label>"
+        "</fieldset></div>"
+    )
+
+
 def header(prefix: str, current: str) -> str:
     home = prefix or "./"
     items = []
@@ -232,7 +252,8 @@ def header(prefix: str, current: str) -> str:
         '<button type="button" class="nav-toggle" aria-expanded="false" aria-controls="nav">Меню</button>'
         '<nav class="primary" id="nav" aria-label="Основное меню"><ul>'
         f'{"".join(items)}'
-        "</ul></nav></div></header>"
+        "</ul></nav></div>"
+        f"{platform_switch()}</header>"
     )
 
 
@@ -264,6 +285,7 @@ def document(rel: str, title: str, description: str, main: str, legal: str) -> s
         f"<title>{esc(title)}</title>\n"
         f'<link rel="icon" type="image/png" href="{prefix}icons/ios/AppIcon-60.png">\n'
         f'<link rel="stylesheet" href="{prefix}assets/css/site.css">\n'
+        f'<script src="{prefix}assets/js/platform.js"></script>\n'
         "</head>\n"
         "<body>\n"
         f"{header(prefix, rel)}\n"

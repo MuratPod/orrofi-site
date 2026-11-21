@@ -1,5 +1,45 @@
 (function () {
   document.documentElement.classList.add("js");
+
+  var storageKey = "orrofi-platform";
+
+  function storedPlatform() {
+    try {
+      return localStorage.getItem(storageKey) === "android" ? "android" : "iphone";
+    } catch (err) {
+      return "iphone";
+    }
+  }
+
+  function applyPlatform(platform) {
+    var android = platform === "android";
+    document.documentElement.classList.toggle("platform-android", android);
+    document.querySelectorAll(".platform-switch input").forEach(function (input) {
+      input.checked = input.value === platform;
+    });
+    try {
+      localStorage.setItem(storageKey, platform);
+    } catch (err) {
+      /* ignore */
+    }
+  }
+
+  document.querySelectorAll(".platform-switch input").forEach(function (input) {
+    input.addEventListener("change", function () {
+      if (input.checked) {
+        applyPlatform(input.value);
+      }
+    });
+  });
+
+  window.addEventListener("storage", function (event) {
+    if (event.key === storageKey) {
+      applyPlatform(event.newValue === "android" ? "android" : "iphone");
+    }
+  });
+
+  applyPlatform(storedPlatform());
+
   var toggle = document.querySelector(".nav-toggle");
   var nav = document.querySelector("#nav");
   if (!toggle || !nav) {
