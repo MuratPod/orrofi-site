@@ -144,9 +144,25 @@ a:hover {
 }
 
 .platform-bar {
-  display: flex;
+  display: none;
   justify-content: center;
   padding: 0 0 12px;
+}
+
+html.js .platform-bar {
+  display: flex;
+}
+
+.copy-android {
+  display: none;
+}
+
+html.platform-android .copy-iphone {
+  display: none;
+}
+
+html.platform-android .copy-android {
+  display: revert;
 }
 
 .platform-switch {

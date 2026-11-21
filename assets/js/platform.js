@@ -1,4 +1,5 @@
 (function () {
+  document.documentElement.classList.add("js");
   try {
     if (localStorage.getItem("orrofi-platform") === "android") {
       document.documentElement.classList.add("platform-android");

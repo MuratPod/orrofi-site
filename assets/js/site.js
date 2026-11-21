@@ -17,6 +17,9 @@
     document.querySelectorAll(".platform-switch input").forEach(function (input) {
       input.checked = input.value === platform;
     });
+  }
+
+  function rememberPlatform(platform) {
     try {
       localStorage.setItem(storageKey, platform);
     } catch (err) {
@@ -28,6 +31,7 @@
     input.addEventListener("change", function () {
       if (input.checked) {
         applyPlatform(input.value);
+        rememberPlatform(input.value);
       }
     });
   });

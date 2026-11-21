@@ -105,6 +105,16 @@ def frame_exists(sid: str) -> bool:
     return True
 
 
+def dual(text: str, android: str | None) -> str:
+    """iPhone wording by default; Android wording only under html.platform-android."""
+    if not android:
+        return esc(text)
+    return (
+        f'<span class="copy-iphone">{esc(text)}</span>'
+        f'<span class="copy-android">{esc(android)}</span>'
+    )
+
+
 def picture(prefix: str, sid: str, alt: str, eager: bool, platform: str) -> str:
     loading = "eager" if eager else "lazy"
     priority = ' fetchpriority="high"' if eager else ""
@@ -126,7 +136,7 @@ def picture(prefix: str, sid: str, alt: str, eager: bool, platform: str) -> str:
     )
 
 
-def phone(prefix: str, sid: str, caption: str, eager: bool) -> str:
+def phone(prefix: str, sid: str, caption: str, eager: bool, android: str | None = None) -> str:
     file_id = asset_id(sid, caption)
     if file_id in MISSING_FRAMES or not frame_exists(file_id):
         if file_id not in MISSING_FRAMES:
@@ -141,8 +151,8 @@ def phone(prefix: str, sid: str, caption: str, eager: bool) -> str:
     return (
         '<figure class="phone">'
         f'<div class="device device--iphone">{picture(prefix, file_id, caption, eager, "ios")}</div>'
-        f'<div class="device device--pixel">{picture(prefix, file_id, caption, eager, "android")}</div>'
-        f"<figcaption>{esc(caption)}</figcaption>"
+        f'<div class="device device--pixel">{picture(prefix, file_id, android or caption, eager, "android")}</div>'
+        f"<figcaption>{dual(caption, android)}</figcaption>"
         "</figure>"
     )
 
@@ -162,7 +172,14 @@ def render_nodes(prefix: str, nodes: list, eager_first: bool) -> tuple[str, str,
     for node in nodes:
         kind = node[0]
         if kind == "p":
-            text_parts.append(f"<p>{inline(node[1])}</p>")
+            android = node[2] if len(node) > 2 else None
+            if android:
+                text_parts.append(
+                    f'<p class="copy-iphone">{inline(node[1])}</p>'
+                    f'<p class="copy-android">{inline(android)}</p>'
+                )
+            else:
+                text_parts.append(f"<p>{inline(node[1])}</p>")
         elif kind == "steps":
             items = "".join(f"<li>{inline(step)}</li>" for step in node[1])
             text_parts.append(f'<ol class="steps">{items}</ol>')
@@ -181,7 +198,7 @@ def render_nodes(prefix: str, nodes: list, eager_first: bool) -> tuple[str, str,
             eager = eager_first and not used_eager and not phones
             if eager:
                 used_eager = True
-            phones.append(phone(prefix, node[1], node[2], eager))
+            phones.append(phone(prefix, node[1], node[2], eager, node[3] if len(node) > 3 else None))
         else:
             raise SystemExit(f"Неизвестный узел {kind}")
     return "".join(text_parts), "".join(phones), used_eager
@@ -217,7 +234,7 @@ def intro_html(text: str) -> str:
     body = body.replace(" (ссылка)", "")
     before, after = body.split(target, 1)
     return (
-        f"<p>{esc(before)}<a href=\"#sitio-privacidad\">{esc(target)}</a>{esc(after)}</p>"
+        f"<p>{esc(before)}<a href=\"#politika\">{esc(target)}</a>{esc(after)}</p>"
     )
 
 
@@ -359,6 +376,19 @@ def parse_page(chunk: str) -> dict:
             continue
         if mode != "block" or current is None:
             raise SystemExit(f"Строка вне блока: {line}")
+        android_match = re.fullmatch(r"- android:\s*(.+)", line)
+        if android_match:
+            if current is None or not current["nodes"]:
+                raise SystemExit(f"Вариант Android без фразы: {line}")
+            previous = current["nodes"][-1]
+            variant = android_match.group(1)
+            if previous[0] == "p" and len(previous) == 2:
+                current["nodes"][-1] = ("p", previous[1], variant)
+                continue
+            if previous[0] == "screen" and len(previous) == 3:
+                current["nodes"][-1] = ("screen", previous[1], previous[2], variant)
+                continue
+            raise SystemExit(f"Вариант Android не к абзацу и не к подписи: {line}")
         screen_match = re.fullmatch(r"- `([^`]+)`:\s*(.+)", line)
         if screen_match:
             current["nodes"].append(("screen", screen_match.group(1), screen_match.group(2)))
@@ -394,11 +424,11 @@ def load_pages() -> tuple[str, str, list[dict]]:
     slogan_match = re.search(r"1\. «(.+?)»\. \*\*Выбран", text)
     if not legal_match or not slogan_match:
         raise SystemExit("В copy.md не найдены слоган или текст подвала")
-    body = text.split("## Тексты", 1)[1].split("## Вычитка", 1)[0]
+    body = text.split("## Тексты", 1)[1].split("### Вычитка", 1)[0]
     chunks = re.split(r"(?m)^### Страница ", body)[1:]
     pages = [parse_page(chunk) for chunk in chunks]
-    if len(pages) != 8:
-        raise SystemExit(f"Ожидалось 8 страниц, разобрано {len(pages)}")
+    if len(pages) != 9:
+        raise SystemExit(f"Ожидалось 9 страниц, разобрано {len(pages)}")
     return legal_match.group(1), slogan_match.group(1), pages
 
 
@@ -432,15 +462,20 @@ def render_page(page: dict, legal: str, slogan: str) -> list[tuple[str, str]]:
                 eager = False
             count = sum(1 for node in block["nodes"] if node[0] == "screen")
             layout = "single" if count <= 1 else "many"
-            anchor = "s-" + block["num"].replace(".", "-")
+            anchor = "politika" if block["heading"] == "Политика конфиденциальности сайта" else "s-" + block["num"].replace(".", "-")
             slogan_html = f'<p class="slogan">{esc(slogan)}</p>' if page["num"] == "1" and index == 0 else ""
             hero = " hero" if page["num"] == "1" and index == 0 else ""
+            copy_html = f'<div class="copy">{slogan_html}<{level}>{esc(block["heading"])}</{level}>{text_html}</div>'
+            if phones_html:
+                inner = (
+                    f'<div class="wrap block-grid {layout}">'
+                    f"{copy_html}<div class=\"phones\">{phones_html}</div></div>"
+                )
+            else:
+                inner = f'<div class="wrap">{copy_html}</div>'
             parts.append(
                 f'<section class="block {layout}{hero}" id="{anchor}">'
-                f'<div class="wrap block-grid {layout}">'
-                f'<div class="copy">{slogan_html}<{level}>{esc(block["heading"])}</{level}>{text_html}</div>'
-                f'<div class="phones">{phones_html}</div>'
-                "</div></section>"
+                f"{inner}</section>"
             )
         if page["faq"]:
             parts.append(render_faq(page["faq"]))
