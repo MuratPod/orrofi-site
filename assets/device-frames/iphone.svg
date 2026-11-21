@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-10 -6 480 972" width="480" height="972" fill="none">
+  <title>iPhone frame</title>
+  <desc>Screen well 430×932 at canvas (24, 20), radius 47. No Dynamic Island — it is already in the screenshot.</desc>
+  <defs>
+    <linearGradient id="iphone-metal" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="458" y2="28">
+      <stop offset="0" stop-color="#F5F6F8"/>
+      <stop offset="0.07" stop-color="#C9CDD3"/>
+      <stop offset="0.16" stop-color="#8E939B"/>
+      <stop offset="0.38" stop-color="#B4B8BF"/>
+      <stop offset="0.62" stop-color="#9AA0A8"/>
+      <stop offset="0.84" stop-color="#7A8088"/>
+      <stop offset="0.94" stop-color="#D5D8DC"/>
+      <stop offset="1" stop-color="#F7F8FA"/>
+    </linearGradient>
+    <linearGradient id="iphone-btn-l" gradientUnits="userSpaceOnUse" x1="-8" y1="0" x2="4" y2="0">
+      <stop offset="0" stop-color="#FBFCFD"/>
+      <stop offset="0.45" stop-color="#8B9098"/>
+      <stop offset="1" stop-color="#4E545C"/>
+    </linearGradient>
+    <linearGradient id="iphone-btn-r" gradientUnits="userSpaceOnUse" x1="454" y1="0" x2="466" y2="0">
+      <stop offset="0" stop-color="#4E545C"/>
+      <stop offset="0.55" stop-color="#8B9098"/>
+      <stop offset="1" stop-color="#FBFCFD"/>
+    </linearGradient>
+  </defs>
+  <!-- Side buttons tuck under the chassis. Left: Action, volume up, volume down. Right: power. -->
+  <g stroke="#2A2E33" stroke-width="0.9">
+    <rect x="-8" y="118" width="12" height="28" rx="1.6" fill="url(#iphone-btn-l)"/>
+    <rect x="-8" y="168" width="12" height="56" rx="1.6" fill="url(#iphone-btn-l)"/>
+    <rect x="-8" y="236" width="12" height="56" rx="1.6" fill="url(#iphone-btn-l)"/>
+    <rect x="454" y="176" width="12" height="92" rx="1.6" fill="url(#iphone-btn-r)"/>
+  </g>
+  <path fill="url(#iphone-metal)" stroke="#1C1F24" stroke-opacity="0.55" stroke-width="1.15" fill-rule="evenodd" d="M61 0H397A61 61 0 0 1 458 61V899A61 61 0 0 1 397 960H61A61 61 0 0 1 0 899V61A61 61 0 0 1 61 0ZM61 14H397A47 47 0 0 1 444 61V899A47 47 0 0 1 397 946H61A47 47 0 0 1 14 899V61A47 47 0 0 1 61 14Z"/>
+  <path fill="#07080A" fill-rule="evenodd" d="M61 7H397A54 54 0 0 1 451 61V899A54 54 0 0 1 397 953H61A54 54 0 0 1 7 899V61A54 54 0 0 1 61 7ZM61 14H397A47 47 0 0 1 444 61V899A47 47 0 0 1 397 946H61A47 47 0 0 1 14 899V61A47 47 0 0 1 61 14Z"/>
+  <path stroke="#F4F6F8" stroke-opacity="0.55" stroke-width="1" d="M70 1.2H388"/>
+  <g fill="#3A3E45">
+    <rect x="1" y="96" width="5.2" height="1.6" rx="0.4"/>
+    <rect x="1" y="328" width="5.2" height="1.6" rx="0.4"/>
+    <rect x="451.8" y="148" width="5.2" height="1.6" rx="0.4"/>
+    <rect x="451.8" y="412" width="5.2" height="1.6" rx="0.4"/>
+  </g>
+  <g stroke="#2A2E33" stroke-width="1.5" stroke-linecap="round">
+    <path d="M0 117.2h6M0 146.8h6M0 167.2h6M0 224.8h6M0 235.2h6M0 292.8h6"/>
+    <path d="M452 175.2h6M452 268.8h6"/>
+  </g>
+</svg>
