@@ -5,6 +5,7 @@ exclude:
   - scripts
   - scripts/data/screens.md
   - assets/screens/index.md
+  - assets/screens-v2/README.md
   - tools
   - .github
   - .htmlvalidate.json

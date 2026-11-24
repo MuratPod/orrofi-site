@@ -53,7 +53,9 @@
   function setOpen(open) {
     nav.classList.toggle("is-open", open);
     toggle.setAttribute("aria-expanded", open ? "true" : "false");
-    toggle.textContent = open ? "Закрыть" : "Меню";
+    toggle.textContent = open
+      ? toggle.getAttribute("data-close")
+      : toggle.getAttribute("data-open");
   }
 
   toggle.addEventListener("click", function () {
