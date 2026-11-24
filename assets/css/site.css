@@ -731,6 +731,24 @@ html.platform-android .page-v2 .device--iphone {
   justify-content: center;
 }
 
+.page-v2 .phones.pair {
+  align-items: flex-start;
+}
+
+.page-v2 .phones.pair .phone {
+  width: min(228px, 100%);
+}
+
+.phone-slot figcaption {
+  margin: 0 auto;
+  max-width: 16em;
+  padding-top: 10px;
+  text-align: center;
+  color: var(--ink);
+  font-weight: 800;
+  line-height: 1.3;
+}
+
 @media (min-width: 960px) {
   .page-v2 .block-grid.single,
   .page-v2 .block-grid.many {
@@ -762,6 +780,15 @@ html.platform-android .page-v2 .device--iphone {
 
   .page-v2 .block-grid.many .phone {
     width: min(236px, 46vw);
+  }
+
+  .page-v2 .phones.pair {
+    flex-wrap: nowrap;
+    gap: 16px 22px;
+  }
+
+  .page-v2 .phones.pair .phone {
+    width: min(220px, 28vw);
   }
 }
 

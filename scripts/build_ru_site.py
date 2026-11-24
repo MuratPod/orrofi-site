@@ -134,18 +134,19 @@ def picture(prefix: str, sid: str, alt: str, eager: bool, platform: str) -> str:
     )
 
 
-def slot_phone(prefix: str, sid: str, caption: str, eager: bool) -> str:
-    """Пустая рамка iPhone. Картинка — один файл assets/screens-v2/<id>.png.
+def slot_phone(prefix: str, sid: str, caption: str, eager: bool, label: str = "") -> str:
+    """Рамка iPhone и снимок assets/screens-v2/<id>.png (430×932).
 
-    Пока файл прозрачный, сквозь него виден нейтральный фон и подпись.
-    Непрозрачный снимок того же имени закрывает подпись сам.
+    Подпись «Экран: …» остаётся в alt. Короткая подпись под рамкой — только
+    у пары сравнения на странице операторов.
     """
     path = ROOT / "assets" / "screens-v2" / f"{sid}.png"
     if not path.is_file():
-        raise SystemExit(f"Нет заглушки assets/screens-v2/{sid}.png")
+        raise SystemExit(f"Нет кадра assets/screens-v2/{sid}.png")
     loading = "eager" if eager else "lazy"
     priority = ' fetchpriority="high"' if eager else ""
     src = f"{prefix}assets/screens-v2/{sid}.png"
+    under = f"<figcaption>{esc(label)}</figcaption>" if label else ""
     return (
         '<figure class="phone phone-slot">'
         '<div class="device device--iphone device--slot">'
@@ -153,7 +154,7 @@ def slot_phone(prefix: str, sid: str, caption: str, eager: bool) -> str:
         f'<p class="slot-caption" aria-hidden="true">{esc(caption)}</p>'
         f'<img src="{src}" alt="{esc(caption)}" width="430" height="932" '
         f'loading="{loading}" decoding="async"{priority}>'
-        "</div></div></figure>"
+        f"</div></div>{under}</figure>"
     )
 
 
@@ -267,10 +268,12 @@ def render_nodes(prefix: str, nodes: list, eager_first: bool, lead: bool = False
                 used_eager = True
             phones.append(phone(prefix, node[1], node[2], eager, node[3] if len(node) > 3 else None))
         elif kind == "slot":
-            eager = eager_first and not used_eager and not phones
+            # Все кадры первого блока (герой, в том числе пара рядом) грузятся сразу.
+            eager = bool(eager_first)
             if eager:
                 used_eager = True
-            phones.append(slot_phone(prefix, node[1], node[2], eager))
+            label = node[3] if len(node) > 3 else ""
+            phones.append(slot_phone(prefix, node[1], node[2], eager, label))
         else:
             raise SystemExit(f"Неизвестный узел {kind}")
     flush()
@@ -504,6 +507,13 @@ def parse_page(chunk: str) -> dict:
                 raise SystemExit(f"Не разобрал кадр: {line}")
             current["nodes"].append(("slot", slot_match.group(1), slot_match.group(2)))
             continue
+        if line.startswith("- Под кадром:"):
+            label = line.split(":", 1)[1].strip()
+            if not label or not current["nodes"] or current["nodes"][-1][0] != "slot":
+                raise SystemExit(f"Подпись не к кадру: {line}")
+            prev = current["nodes"][-1]
+            current["nodes"][-1] = (prev[0], prev[1], prev[2], label)
+            continue
         if line.startswith("- Пункт:"):
             current["nodes"].append(("item", line.split(":", 1)[1].strip()))
             continue
@@ -600,10 +610,14 @@ def render_page(page: dict, legal: str, slogan: str) -> list[tuple[str, str]]:
                 f'<div class="copy">{slogan_html}<{level}{hclass}>{esc(block["heading"])}'
                 f"{badge_html}</{level}>{text_html}</div>"
             )
+            pair = any(
+                node[0] == "slot" and len(node) > 3 and node[3] for node in block["nodes"]
+            )
+            phones_class = "phones pair" if pair else "phones"
             if phones_html:
                 inner = (
                     f'<div class="wrap block-grid {layout}{flip}">'
-                    f"{copy_html}<div class=\"phones\">{phones_html}</div></div>"
+                    f"{copy_html}<div class=\"{phones_class}\">{phones_html}</div></div>"
                 )
             else:
                 inner = f'<div class="wrap">{copy_html}</div>'
@@ -632,12 +646,12 @@ def write_slot_index(pages: list[dict]) -> None:
     lines = [
         "# Кадры v2",
         "",
-        "Пустые рамки главной и страницы «Для операторов».",
+        "Кадры главной и страницы «Для операторов».",
+        "Файлы `<id>.png` — испанские экраны приложения, 430×932, без корпуса.",
+        "Рядом лежат `<id>-en.png` для будущего английского сайта; страницы их не показывают.",
+        "Источник: MuratPod/ghofi, design/style-v7/screens, коммит 4f42c81.",
         "Корпус — существующая рамка iPhone (`assets/device-frames/iphone.svg`).",
-        "Нейтральный фон и подпись «Экран: …» рисует страница.",
-        "Чтобы вставить снимок, замените один файл: `assets/screens-v2/<id>.png`.",
-        "Размер кадра — 430×932, без корпуса телефона.",
-        "Прозрачный PNG оставляет подпись видимой; непрозрачный снимок закрывает её.",
+        "На странице операторов `home-hero` стоит рядом с `op-brand`: тот же файл, что на главной.",
         "",
     ]
     seen: set[str] = set()
@@ -653,10 +667,11 @@ def write_slot_index(pages: list[dict]) -> None:
                 if node[0] != "slot":
                     continue
                 sid = node[1]
+                note = ""
                 if sid in seen:
-                    raise SystemExit(f"Повтор id кадра {sid}")
+                    note = " (тот же файл)"
                 seen.add(sid)
-                lines.append(f"| `{sid}` | {node[2]} | {block['heading']} |")
+                lines.append(f"| `{sid}` | {node[2]} | {block['heading']}{note} |")
         lines.append("")
     path = ROOT / "assets" / "screens-v2" / "README.md"
     path.parent.mkdir(parents=True, exist_ok=True)
