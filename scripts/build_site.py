@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Собрать статический сайт-витрину из showcase/copy.md.
+"""Собрать статический сайт-витрину из showcase/copy.es.md и copy.en.md.
 
 Тексты страниц переносятся дословно. Генератор не переписывает их
 и не добавляет неразрывные пробелы.
@@ -12,51 +12,26 @@ import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-COPY = ROOT / "showcase" / "copy.md"
 
-# Кадров без файла в design/target-v6 нет. Подпись из copy.md остаётся, текста-заглушки нет.
+# Кадров без файла в design/target-v6 нет. Подпись из исходника остаётся, текста-заглушки нет.
 MISSING_FRAMES = frozenset()
 
 # Вторая реплика чата — отдельный кадр, в текстах id тот же (`manager`).
 MANAGER_TICKET = "Заявка на визит мастера создана из чата."
-
-LEGACY = [
-    (
-        "vozmozhnosti/index.html",
-        "Возможности",
-        "Возможности приложения собраны на главной.",
-        "index.html",
-        "Главная",
-    ),
-    (
-        "facturas/index.html",
-        "Счета",
-        "Счета собраны на странице «Услуги и счета».",
-        "uslugi/index.html#s-5-7",
-        "Услуги и счета",
-    ),
-    (
-        "ajustes/index.html",
-        "Настройки",
-        "Тема, язык и извещения — на странице «Как начать».",
-        "instrukcii/index.html#s-7-6",
-        "Как начать",
-    ),
-]
 
 CSP = (
     "default-src 'self'; img-src 'self'; style-src 'self'; script-src 'self'; "
     "font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'"
 )
 
-# Публичные страницы есть на трёх языках. Остальные — только по-русски, под /ru/.
+# Публичные страницы: испанский (основной) и английский.
 PUBLIC = {
-    "home": {"es": "/", "en": "/en/", "ru": "/ru/"},
-    "operators": {"es": "/operadores/", "en": "/en/operators/", "ru": "/ru/operadores/"},
-    "privacy": {"es": "/privacidad/", "en": "/en/privacy/", "ru": "/ru/privacidad/"},
-    "faq": {"es": "/faq/", "en": "/en/faq/", "ru": "/ru/faq/"},
-    "contact": {"es": "/contacto/", "en": "/en/contact/", "ru": "/ru/contacto/"},
-    "legal": {"es": "/aviso-legal/", "en": "/en/legal-notice/", "ru": "/ru/aviso-legal/"},
+    "home": {"es": "/", "en": "/en/"},
+    "operators": {"es": "/operadores/", "en": "/en/operators/"},
+    "privacy": {"es": "/privacidad/", "en": "/en/privacy/"},
+    "faq": {"es": "/faq/", "en": "/en/faq/"},
+    "contact": {"es": "/contacto/", "en": "/en/contact/"},
+    "legal": {"es": "/aviso-legal/", "en": "/en/legal-notice/"},
 }
 PAGE_KEYS = {
     "1": "home",
@@ -67,7 +42,7 @@ PAGE_KEYS = {
     "11": "legal",
 }
 MAILS = ("hola@orrofi.com", "privacidad@orrofi.com")
-HREFLANG = {"es": "es-ES", "en": "en", "ru": "ru"}
+HREFLANG = {"es": "es-ES", "en": "en"}
 
 # Сияние фона. glow-b — сильный синий вариант (по умолчанию), glow-a — мягкий.
 # Жёлтого нет. Чтобы переключить весь сайт, замените класс и пересоберите страницы.
@@ -128,36 +103,9 @@ UI = {
             ("en/legal-notice/index.html", "Legal notice"),
         ],
     },
-    "ru": {
-        "html_lang": "ru",
-        "root": "ru/",
-        "screen_suffix": "",
-        "skip": "К содержанию",
-        "menu_open": "Меню",
-        "menu_close": "Закрыть",
-        "nav_label": "Основное меню",
-        "lang_label": "Язык",
-        "faq_heading": "Частые вопросы",
-        "policy_phrase": "политике конфиденциальности сайта",
-        "policy_heading": "Политика конфиденциальности сайта",
-        "legal_link_phrase": "сведениях о владельце",
-        "platform_legend": "Модель телефона",
-        "nav": [
-            ("ru/index.html", "Главная"),
-            ("ru/operadores/index.html", "Для операторов"),
-            ("ru/privacidad/index.html", "Приватность"),
-            ("ru/contacto/index.html", "Контакты"),
-        ],
-        "footer": [
-            ("ru/privacidad/index.html", "Приватность"),
-            ("ru/faq/index.html", "Вопросы"),
-            ("ru/contacto/index.html", "Контакты"),
-            ("ru/aviso-legal/index.html", "Сведения о владельце"),
-        ],
-    },
 }
 
-CTX = UI["ru"]
+CTX = UI["es"]
 
 
 def use_locale(code: str) -> None:
@@ -454,7 +402,7 @@ def platform_switch() -> str:
 
 
 def lang_switch(current_href: str, page_key: str) -> str:
-    labels = (("es", "ES"), ("en", "EN"), ("ru", "RU"))
+    labels = (("es", "ES"), ("en", "EN"))
     links = []
     for code, label in labels:
         if page_key in PUBLIC:
@@ -519,7 +467,7 @@ def alternates(page_key: str) -> str:
     if page_key not in PUBLIC:
         return ""
     lines = []
-    for code in ("es", "en", "ru"):
+    for code in ("es", "en"):
         lines.append(
             f'<link rel="alternate" hreflang="{HREFLANG[code]}" href="{PUBLIC[page_key][code]}">'
         )
@@ -818,7 +766,7 @@ def write_slot_index(pages: list[dict]) -> None:
         "# Кадры v2",
         "",
         "Кадры главной и страницы для операторов.",
-        "Файлы `<id>.png` — испанские экраны, их показывают страницы es и ru.",
+        "Файлы `<id>.png` — испанские экраны, их показывают страницы es.",
         "Файлы `<id>-en.png` показывают английские страницы `/en/`.",
         "Размер 430×932, без корпуса. Источник: MuratPod/ghofi, design/style-v7/screens, коммит edeb1d3fe1c2f3f46437c1e68838618445eb48fb.",
         "Корпус — существующая рамка iPhone (`assets/device-frames/iphone.svg`).",
@@ -849,27 +797,6 @@ def write_slot_index(pages: list[dict]) -> None:
     path.write_text("\n".join(lines).rstrip() + "\n", encoding="utf-8")
 
 
-def render_legacy(legal: str) -> list[tuple[str, str]]:
-    pages = []
-    root = CTX["root"]
-    for rel, title, sentence, target, label in LEGACY:
-        out = root + rel
-        prefix = prefix_for(out)
-        href = nav_href(prefix, root + target)
-        main = (
-            '<section class="hero"><div class="wrap copy">'
-            f"<h1>{esc(title)}</h1>"
-            f"<p>{esc(sentence)}</p>"
-            f'<p class="actions"><a class="text-link" href="{href}">{esc(label)}</a></p>'
-            "</div></section>"
-        )
-        description = sentence
-        pages.append(
-            (out, document(out, f"{title} — OrroFi", description, main, legal, rel.split("/")[0]))
-        )
-    return pages
-
-
 def write_outputs(pairs: list[tuple[str, str]], written: list[str]) -> None:
     for rel, content in pairs:
         if "[ответ уточняется]" in content:
@@ -893,34 +820,19 @@ def main() -> None:
     legal, slogan, pages = load_pages(ROOT / "showcase" / "copy.en.md", 6)
     for page in pages:
         write_outputs(render_page(page, legal, slogan), written)
-    use_locale("ru")
-    legal, slogan, pages = load_pages(COPY, 11)
-    for page in pages:
-        write_outputs(render_page(page, legal, slogan), written)
-    write_outputs(render_legacy(legal), written)
-    stale = [
-        "mi-gestor/index.html",
-        "mi-red/index.html",
-        "familia/index.html",
-        "uslugi/index.html",
-        "instrukcii/index.html",
-        "vozmozhnosti/index.html",
-        "facturas/index.html",
-        "ajustes/index.html",
-    ]
-    for rel in stale:
-        if rel in written:
-            continue
-        path = ROOT / rel
-        if path.is_file():
-            path.unlink()
-        parent = path.parent
-        if parent != ROOT and parent.is_dir() and not any(parent.iterdir()):
-            parent.rmdir()
+    ru_dir = ROOT / "ru"
+    if ru_dir.is_dir():
+        for path in sorted(ru_dir.rglob("*"), reverse=True):
+            if path.is_file():
+                path.unlink()
+            elif path.is_dir():
+                path.rmdir()
     for rel in written:
         text = (ROOT / rel).read_text(encoding="utf-8")
         if "page-v2" in text and "assets/screens/v6" in text:
             raise SystemExit(f"{rel} ссылается на старые кадры")
+        if "/ru/" in text:
+            raise SystemExit(f"{rel} всё ещё ссылается на /ru/")
     print(f"wrote {len(written)} pages")
     for rel in written:
         print(rel)

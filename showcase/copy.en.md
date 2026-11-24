@@ -1,6 +1,6 @@
 # English text
 
-Faithful to the approved Russian. No new claims.
+Faithful to the approved copy. No new claims.
 OrroFi, GhoFi and Mi gestor stay as names.
 
 ## Тексты
