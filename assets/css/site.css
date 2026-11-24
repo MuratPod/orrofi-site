@@ -797,7 +797,7 @@ html.platform-android .page-v2 .device--iphone {
 
 /* Сияние. Статичное, без анимации. Только синий, Cielo и светло-фиолетовый.
    body.glow-b (и страница без класса) — сильный вариант, он же по умолчанию.
-   body.glow-a — мягкий. Класс задаёт scripts/build_ru_site.py (GLOW_CLASS). */
+   body.glow-a — мягкий. Класс задаёт scripts/build_site.py (GLOW_CLASS). */
 :root,
 body.glow-b {
   --wash-strong: 0.5;

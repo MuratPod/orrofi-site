@@ -2,7 +2,7 @@
 
 Español de España. En la portada, tuteo. En la página de operadores, usted.
 Los nombres OrroFi, GhoFi y Mi gestor no se traducen.
-El ruso aprobado es la referencia: no hay afirmaciones nuevas.
+No hay afirmaciones nuevas fuera de los textos aprobados.
 
 ## Тексты
 
