@@ -796,9 +796,20 @@ html.platform-android .page-v2 .device--iphone {
 }
 
 /* Сияние. Статичное, без анимации. Только синий, Cielo и светло-фиолетовый.
-   body.glow-a (и страница без класса) — мягкий вариант, он же по умолчанию.
-   body.glow-b — чуть сильнее. Класс задаёт scripts/build_ru_site.py (GLOW_CLASS). */
+   body.glow-b (и страница без класса) — сильный вариант, он же по умолчанию.
+   body.glow-a — мягкий. Класс задаёт scripts/build_ru_site.py (GLOW_CLASS). */
 :root,
+body.glow-b {
+  --wash-strong: 0.5;
+  --wash-soft: 0.28;
+  --halo-cielo: 1;
+  --halo-blue: 0.8;
+  --halo-violet: 0.58;
+  --card-alpha: 0.78;
+  --glow-blur: 46px;
+  --glow-spread: 2.3;
+}
+
 body.glow-a {
   --wash-strong: 0.2;
   --wash-soft: 0.1;
@@ -808,17 +819,6 @@ body.glow-a {
   --card-alpha: 0.3;
   --glow-blur: 22px;
   --glow-spread: 1.55;
-}
-
-body.glow-b {
-  --wash-strong: 0.28;
-  --wash-soft: 0.14;
-  --halo-cielo: 0.55;
-  --halo-blue: 0.34;
-  --halo-violet: 0.24;
-  --card-alpha: 0.4;
-  --glow-blur: 26px;
-  --glow-spread: 1.7;
 }
 
 html,
@@ -895,13 +895,13 @@ main section:nth-child(3n)::before {
 }
 
 section.hero {
-  --wash-strong: 0.16;
-  --wash-soft: 0.08;
+  --wash-strong: 0.4;
+  --wash-soft: 0.22;
 }
 
-body.glow-b section.hero {
-  --wash-strong: 0.24;
-  --wash-soft: 0.12;
+body.glow-a section.hero {
+  --wash-strong: 0.16;
+  --wash-soft: 0.08;
 }
 
 section.hero::before {
