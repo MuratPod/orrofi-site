@@ -127,10 +127,10 @@ La aplicación se puede cerrar con Face ID, y al abrirla pide confirmar que eres
 Responsable: PADELADA WORLD, S.L. (Sociedad Unipersonal), NIF B05783238, Calle Josep Pla, 8, escalera 1, puerta 1, local, 17252 Calonge i Sant Antoni (Girona). Correo: privacidad@orrofi.com. No tenemos delegado de protección de datos.
 Este sitio no tiene formularios ni cuentas, y no usa cookies ni herramientas de analítica o publicidad.
 Lo que guarda tu navegador: si eliges «iPhone» o «Android», el sitio lo recuerda en el almacenamiento local de tu navegador para mostrarte las pantallas de ese teléfono. No sale de tu navegador y puedes borrarlo desde los ajustes del navegador.
-Alojamiento: el sitio está alojado en GitHub Pages, de GitHub, Inc. Al abrir una página, GitHub registra tu dirección IP por motivos de seguridad, según su declaración de privacidad.
+Alojamiento: el sitio está alojado en GitHub Pages, de GitHub, Inc. (Estados Unidos). Al abrir una página, GitHub registra tu dirección IP por motivos de seguridad, según su declaración de privacidad. Base jurídica: nuestro interés legítimo en mantener el sitio disponible y seguro (art. 6.1.f RGPD). GitHub está adherida al Data Privacy Framework UE-EE. UU.
 Si nos escribes: usamos tu dirección de correo y lo que nos cuentes solo para responderte y, si nos pides ejercer tus derechos, para atender esa petición. Base jurídica: nuestro interés legítimo en responder a quien nos escribe (art. 6.1.f RGPD) y, en las peticiones de derechos, el cumplimiento de una obligación legal (art. 6.1.c RGPD). El correo pasa por Cloudflare Email Routing (Cloudflare, Inc.) y se reenvía a un buzón de Gmail (Google Ireland Ltd. / Google LLC). Estos proveedores pueden transferir los datos a Estados Unidos según el Data Privacy Framework y las cláusulas contractuales tipo. Conservamos el mensaje hasta el cierre de la consulta y 12 meses más. Las solicitudes para ejercer derechos las conservamos el tiempo necesario para acreditar la respuesta, hasta 3 años.
 Tus derechos: puedes pedir acceso, rectificación, supresión, oposición, limitación del tratamiento y portabilidad escribiendo a privacidad@orrofi.com. Si crees que no hemos atendido bien tu petición, puedes reclamar ante la Agencia Española de Protección de Datos (www.aepd.es).
-La aplicación OrroFi tiene su propia política de privacidad, que publicaremos antes de su salida.
+La aplicación OrroFi tendrá su propia política de privacidad, que publicaremos antes de su salida.
 
 ---
 

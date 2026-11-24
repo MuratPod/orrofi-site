@@ -126,10 +126,10 @@ The app can be locked with Face ID, and when you open it, it asks you to confirm
 Controller: PADELADA WORLD, S.L. (Sociedad Unipersonal), Tax ID B05783238, Calle Josep Pla, 8, escalera 1, puerta 1, local, 17252 Calonge i Sant Antoni (Girona), Spain. E-mail: privacidad@orrofi.com. We have no data protection officer.
 This site has no forms or accounts, and it does not use cookies or any analytics or advertising tools.
 What your browser stores: if you choose “iPhone” or “Android”, the site remembers it in your browser's local storage so that it can show you that phone's screens. It does not leave your browser, and you can delete it in your browser settings.
-Hosting: the site is hosted on GitHub Pages, run by GitHub, Inc. When you open a page, GitHub logs your IP address for security purposes, as described in its privacy statement.
+Hosting: the site is hosted on GitHub Pages, run by GitHub, Inc. (United States). When you open a page, GitHub logs your IP address for security purposes, as described in its privacy statement. Legal basis: our legitimate interest in keeping the site available and secure (Art. 6(1)(f) GDPR). GitHub is certified under the EU-U.S. Data Privacy Framework.
 If you write to us: we use your e-mail address and what you tell us only to reply and, if you ask to exercise your rights, to handle that request. Legal basis: our legitimate interest in replying to people who write to us (Art. 6(1)(f) GDPR) and, for rights requests, compliance with a legal obligation (Art. 6(1)(c) GDPR). E-mail passes through Cloudflare Email Routing (Cloudflare, Inc.) and is forwarded to a Gmail mailbox (Google Ireland Ltd. / Google LLC). These providers may transfer the data to the United States under the Data Privacy Framework and standard contractual clauses. We keep the message until the enquiry is closed and for 12 months after that. We keep requests to exercise rights for as long as needed to evidence the reply, and for no more than 3 years.
 Your rights: you can ask for access, rectification, erasure, objection, restriction of processing and portability by writing to privacidad@orrofi.com. If you think we have not handled your request properly, you can complain to the Spanish Data Protection Agency (www.aepd.es).
-The OrroFi app has its own privacy policy, which we will publish before the app is released.
+The OrroFi app will have its own privacy policy, which we will publish before the app is released.
 
 ---
 
