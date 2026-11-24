@@ -6,7 +6,7 @@ El ruso aprobado es la referencia: no hay afirmaciones nuevas.
 
 ## Тексты
 
-В подвале каждой страницы: «Los datos de las pantallas son ficticios y los precios, un ejemplo. OrroFi es una marca de PADELADA WORLD, S.L. (NIF B05783238). Este sitio no usa cookies ni contadores de visitas.»
+В подвале каждой страницы: «Los datos de las pantallas son ficticios y los precios, un ejemplo; no son una oferta. OrroFi es una marca de PADELADA WORLD, S.L. (Sociedad Unipersonal), NIF B05783238. Este sitio no usa cookies ni herramientas de analítica o publicidad.»
 
 ### Слоганы
 
@@ -35,13 +35,13 @@ OrroFi mira qué redes suenan alrededor y en qué canales. Un canal es la franja
 - Кадр: `home-channels`: Pantalla: redes vecinas y canales
 
 **1.4 La nota de la red y el botón «Mejorar»**
-Lo complicado lo redujimos a un número. Abres la aplicación y ves: «Tu Wi‑Fi: 6 de 10». Debajo, en palabras sencillas, qué estorba. Y al lado el botón «Mejorar». Pulsas, esperas unos segundos, y ya son 9 de 10.
+Lo complicado lo redujimos a un número. Abres la aplicación y ves: «Tu Wi‑Fi: 6 de 10». Debajo, en palabras sencillas, qué estorba. Y al lado el botón «Mejorar». Pulsas, esperas unos segundos y ves si la nota ha mejorado. En el ejemplo, sube a 9 de 10; el resultado depende de tu casa.
 - Кадр: `home-score`: Pantalla: nota de la red, 6 de 10
 - Кадр: `home-improve`: Pantalla: antes y después de «Mejorar»
 
 **1.5 Los vecinos con OrroFi no se molestan**
 - Значок: «Pronto»
-Aquí empieza lo que ninguna otra aplicación sabe hacer. Cuando varias familias con OrroFi viven cerca, sus routers se ponen de acuerdo y se reparten canales distintos para no estorbarse. Cuantos más vecinos con OrroFi, más silencioso el aire y más rápido el internet de todos. Una buena red pasa a ser cosa de toda la casa y de toda la calle.
+Esto es lo que estamos preparando. Cuando varias familias con OrroFi viven cerca, sus routers se ponen de acuerdo y se reparten canales distintos para no estorbarse. Cuantos más vecinos con OrroFi, más canales se pueden repartir. Una buena red pasa a ser cosa de toda la casa y de toda la calle.
 - Кадр: `home-neighbors`: Pantalla: vecinos con OrroFi
 
 **1.6 Y esto no es todo**
@@ -61,20 +61,18 @@ Y si algo va lento, pregúntale a Mi gestor. Él mismo verá si es el Wi‑Fi, l
 - Пункт: Facturas y servicios. Tarifa, facturas, líneas móviles y la visita del técnico en un mismo sitio.
 - Кадр: `home-gestor`: Pantalla: Mi gestor
 
-**1.9 Tus datos se quedan contigo**
-La lista de tus dispositivos, sus nombres y direcciones no salen del teléfono. No guardamos las contraseñas del Wi‑Fi. Todo lo que OrroFi sabe de tu casa está solo a tu servicio.
-- Кадр: `home-privacy`: Pantalla: los datos se quedan en el teléfono
+**1.9 Tus datos, con claridad**
+Para mostrarte tu red, guardamos en nuestros servidores los nombres y las direcciones de tus dispositivos. La contraseña del router se guarda cifrada en tu iPhone y no se envía a nuestros servidores. Usamos estos datos solo para mostrarte tu red.
 
 **1.10 Cómo empezar**
 1. Instala OrroFi.
 2. Entra con tu número de teléfono: el código llega por SMS.
 3. En casa, pulsa «Comprobar mi red».
-- Кадр: `home-start`: Pantalla: comprobar mi red
 
 **1.11 Preguntas y respuestas**
 - Вопрос: «Tengo un iPhone, ¿la aplicación verá a los vecinos?» Sí. Las redes vecinas las ve tu router, y la aplicación muestra el panorama y pone orden.
 - Вопрос: «¿Hay que entender de técnica?» No. Te basta un número y un botón.
-- Вопрос: «¿Es seguro?» Los datos de tus dispositivos se quedan en el teléfono, y el router solo cambia los ajustes cuando tú se lo pides.
+- Вопрос: «¿Es seguro?» El router solo cambia los ajustes cuando tú se lo pides. Los nombres y las direcciones de tus dispositivos se guardan en nuestros servidores para mostrarte tu red, y la contraseña del router no se envía a nuestros servidores.
 - Кадр: `home-faq`: Pantalla: preguntas y respuestas
 
 ---
@@ -84,7 +82,7 @@ La lista de tus dispositivos, sus nombres y direcciones no salen del teléfono. 
 - **title:** Privacidad y control — OrroFi
 - **description:** Consentimientos, una copia de tus datos, borrar la cuenta y los datos de la red, restablecer Mi red y el botón «No he sido yo»: lo que puedes hacer tú mismo.
 
-Вступление: Aquí tienes lo que puedes hacer tú mismo en la aplicación. Los detalles legales están en la política de privacidad (ссылка).
+Вступление: Aquí tienes lo que podrás hacer tú mismo en la aplicación. Cómo trata los datos este sitio web lo explicamos en la política de privacidad del sitio, al final de esta página.
 
 **6.1 Tu «sí» se puede retirar**
 Los consentimientos están en un mismo sitio: el chat con Mi gestor, la analítica, las ofertas y las noticias. Cada uno se apaga con el mismo interruptor con el que se encendió.
@@ -126,9 +124,13 @@ La aplicación se puede cerrar con Face ID, y al abrirla pide confirmar que eres
 - android: Huella al abrir la aplicación.
 
 **6.8 Política de privacidad del sitio**
-OrroFi es una marca de PADELADA WORLD, S.L. (NIF B05783238). Los datos de las pantallas son ficticios y los precios, un ejemplo.
-Este sitio no usa cookies ni contadores de visitas.
-Preguntas sobre los datos: privacidad@orrofi.es.
+Responsable: PADELADA WORLD, S.L. (Sociedad Unipersonal), NIF B05783238, Calle Josep Pla, 8, escalera 1, puerta 1, local, 17252 Calonge i Sant Antoni (Girona). Correo: privacidad@orrofi.com. No tenemos delegado de protección de datos.
+Este sitio no tiene formularios ni cuentas, y no usa cookies ni herramientas de analítica o publicidad.
+Lo que guarda tu navegador: si eliges «iPhone» o «Android», el sitio lo recuerda en el almacenamiento local de tu navegador para mostrarte las pantallas de ese teléfono. No sale de tu navegador y puedes borrarlo desde los ajustes del navegador.
+Alojamiento: el sitio está alojado en GitHub Pages, de GitHub, Inc. (Estados Unidos). Al abrir una página, GitHub registra tu dirección IP por motivos de seguridad, según su declaración de privacidad. Base jurídica: nuestro interés legítimo en mantener el sitio disponible y seguro (art. 6.1.f RGPD). GitHub está adherida al Data Privacy Framework UE-EE. UU.
+Si nos escribes: usamos tu dirección de correo y lo que nos cuentes solo para responderte y, si nos pides ejercer tus derechos, para atender esa petición. Base jurídica: nuestro interés legítimo en responder a quien nos escribe (art. 6.1.f RGPD) y, en las peticiones de derechos, el cumplimiento de una obligación legal (art. 6.1.c RGPD). El correo pasa por Cloudflare Email Routing (Cloudflare, Inc.) y se reenvía a un buzón de Gmail (Google Ireland Ltd. / Google LLC). Estos proveedores pueden transferir los datos a Estados Unidos según el Data Privacy Framework y las cláusulas contractuales tipo. Conservamos el mensaje hasta el cierre de la consulta y 12 meses más. Las solicitudes para ejercer derechos las conservamos el tiempo necesario para acreditar la respuesta, hasta 3 años.
+Tus derechos: puedes pedir acceso, rectificación, supresión, oposición, limitación del tratamiento y portabilidad escribiendo a privacidad@orrofi.com. Si crees que no hemos atendido bien tu petición, puedes reclamar ante la Agencia Española de Protección de Datos (www.aepd.es).
+La aplicación OrroFi tendrá su propia política de privacidad, que publicaremos antes de su salida.
 
 ---
 
@@ -139,7 +141,7 @@ Preguntas sobre los datos: privacidad@orrofi.es.
 
 **Частые вопросы**
 
-1. **¿Quién puede usar OrroFi?** Los abonados de nuestro operador en la Costa Brava. Si todavía no eres cliente, en la aplicación puedes comprobar la cobertura de tu dirección y dejar una solicitud.
+1. **¿Quién puede usar OrroFi?** Los abonados de GhoFi (ALTANETICA, S.L.) en la Costa Brava. Si todavía no eres cliente, en la aplicación puedes comprobar la cobertura de tu dirección y dejar una solicitud.
 2. **¿Mi gestor es una persona?** No. Es un asistente con inteligencia artificial, y lo dice en el primer mensaje. Si hace falta una persona, pulsa «Hablar con una persona».
 3. **¿Cuándo responden los empleados?** En horario de trabajo. Si en ese momento no hay nadie, la aplicación lo dice: deja tu petición y nos pondremos en contacto contigo.
 4. **¿Hay que entender de técnica?** No. Para Mi red hará falta la contraseña de la pegatina del router; el resto lo explica la aplicación, paso a paso.
@@ -147,7 +149,7 @@ Preguntas sobre los datos: privacidad@orrofi.es.
 6. **¿Se pueden añadir los teléfonos de la familia?** Sí: con un código QR al verse, o cotejando seis cifras por videollamada. El titular puede quitar un teléfono añadido.
 7. **¿Cómo se cambia la hora de la visita del técnico?** Pide otra hora a través de Mi gestor; un empleado confirmará la nueva fecha.
 8. **¿Cómo se pagan las facturas?** Desde la cuenta bancaria, por SEPA. Para cambiar la forma de pago, te ayuda un empleado.
-9. **¿Se puede pedir una copia de los datos o borrar la cuenta?** Sí, en la sección «Privacidad». La cuenta se borra cuando terminan los contratos.
+9. **¿Se puede pedir una copia de los datos o borrar la cuenta?** Sí, en la sección «Privacidad». Mientras tengas contratos en vigor, necesitamos tus datos para prestarlos, así que la cuenta se cierra cuando terminan. Para cualquier duda sobre tus datos, escribe a privacidad@orrofi.com.
 10. **¿En qué idiomas está la aplicación?** En español y en inglés.
 11. **¿Cuándo sale la aplicación?** Estamos preparando la salida en el App Store para iPhone y diremos la fecha. La versión para Android, más adelante.
 12. **¿Por qué hay datos ficticios en el sitio?** Son pantallas de la versión que viene: los nombres, las direcciones y las cantidades están inventados, y los precios son un ejemplo.
@@ -157,11 +159,10 @@ Preguntas sobre los datos: privacidad@orrofi.es.
 ### Страница 9. Contacto `/contacto/`
 
 - **title:** Contacto — OrroFi
-- **description:** Quién publica OrroFi y dónde escribir por cuestiones de datos.
+- **description:** Aviso legal de OrroFi y dónde escribirnos.
 
-**9.1 Quién publica OrroFi**
-OrroFi es una marca de PADELADA WORLD, S.L. (NIF B05783238).
-Preguntas sobre los datos: privacidad@orrofi.es.
+**9.1 Aviso legal**
+Los datos de la empresa están en el aviso legal (ссылка).
 
 ---
 
@@ -177,7 +178,7 @@ OrroFi es una aplicación lista con su marca. Mejora el internet en casa de sus 
 - Кадр: `home-hero`: Pantalla: tu Wi‑Fi en casa
 - Под кадром: OrroFi
 - Кадр: `op-brand`: Pantalla: la aplicación con su marca
-- Под кадром: Con la marca de su operador: GhoFi
+- Под кадром: Con la marca de su operador. Ejemplo: GhoFi, marca de ALTANETICA, S.L., usada con su permiso. Los datos y los precios de las pantallas son ficticios.
 - Письмо: «Contacte con nosotros»
 
 **10.2 Un canal directo con el cliente**
@@ -202,7 +203,7 @@ La aplicación ve cuándo el cliente de verdad necesita más: un bono de datos, 
 - Кадр: `op-offer`: Pantalla: una oferta en el momento justo
 
 **10.7 Una aplicación lista con su marca**
-No necesita un equipo propio de desarrollo ni años de trabajo. OrroFi llega con su nombre y sus colores, con aplicación para iPhone y Android, área web y panel para los empleados. Los datos de los clientes están protegidos según las normas europeas, y la información de sus dispositivos de casa no sale del teléfono.
+No necesita un equipo propio de desarrollo ni años de trabajo. OrroFi llega con su nombre y sus colores, con aplicación para iPhone y Android, área web y panel para los empleados.
 - Кадр: `op-panel`: Pantalla: el panel del empleado
 
 **10.8 Cómo empezar**
@@ -211,3 +212,16 @@ No necesita un equipo propio de desarrollo ni años de trabajo. OrroFi llega con
 3. Sus abonados instalan la aplicación, y usted ve el resultado.
 - Кадр: `op-start`: Pantalla: abonados en la aplicación
 - Письмо: «Contacte con nosotros»
+
+---
+
+### Страница 11. Aviso legal `/aviso-legal/`
+
+- **title:** Aviso legal — OrroFi
+- **description:** Aviso legal de OrroFi y dónde escribirnos.
+
+Вступление: Este sitio web y la marca OrroFi pertenecen a PADELADA WORLD, S.L. (Sociedad Unipersonal).
+Вступление: NIF: B05783238.
+Вступление: Domicilio social: Calle Josep Pla, 8, escalera 1, puerta 1, local, 17252 Calonge i Sant Antoni (Girona), España.
+Вступление: Inscrita en el Registro Mercantil de Girona, hoja GI-80156, inscripción 1.ª.
+Вступление: Correo electrónico: hola@orrofi.com. Protección de datos: privacidad@orrofi.com.
