@@ -799,7 +799,7 @@ def write_slot_index(pages: list[dict]) -> None:
         "Кадры главной и страницы для операторов.",
         "Файлы `<id>.png` — испанские экраны, их показывают страницы es и ru.",
         "Файлы `<id>-en.png` показывают английские страницы `/en/`.",
-        "Размер 430×932, без корпуса. Источник: MuratPod/ghofi, design/style-v7/screens, коммит 4f42c81.",
+        "Размер 430×932, без корпуса. Источник: MuratPod/ghofi, design/style-v7/screens, коммит edeb1d3fe1c2f3f46437c1e68838618445eb48fb.",
         "Корпус — существующая рамка iPhone (`assets/device-frames/iphone.svg`).",
         "На странице операторов `home-hero` стоит рядом с `op-brand`: тот же файл, что на главной.",
         "",
