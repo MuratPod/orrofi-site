@@ -795,36 +795,30 @@ html.platform-android .page-v2 .device--iphone {
   }
 }
 
-/* Сияние. Статичное, без анимации.
-   body.glow-b (и страница без класса) — сильный вариант B, он же по умолчанию.
-   body.glow-a — средний вариант A. Класс задаёт scripts/build_ru_site.py (GLOW_CLASS). */
+/* Сияние. Статичное, без анимации. Только синий, Cielo и светло-фиолетовый.
+   body.glow-a (и страница без класса) — мягкий вариант, он же по умолчанию.
+   body.glow-b — чуть сильнее. Класс задаёт scripts/build_ru_site.py (GLOW_CLASS). */
 :root,
-body.glow-b {
-  --wash-strong: 0.5;
-  --wash-soft: 0.28;
-  --halo-cielo: 1;
-  --halo-blue: 0.8;
-  --halo-violet: 0.58;
-  --yellow-core: 0.96;
-  --yellow-mid: 0.66;
-  --yellow-edge: 0.36;
-  --card-alpha: 0.78;
-  --glow-blur: 46px;
-  --glow-spread: 2.3;
+body.glow-a {
+  --wash-strong: 0.2;
+  --wash-soft: 0.1;
+  --halo-cielo: 0.44;
+  --halo-blue: 0.26;
+  --halo-violet: 0.18;
+  --card-alpha: 0.3;
+  --glow-blur: 22px;
+  --glow-spread: 1.55;
 }
 
-body.glow-a {
-  --wash-strong: 0.24;
-  --wash-soft: 0.13;
-  --halo-cielo: 0.52;
-  --halo-blue: 0.32;
+body.glow-b {
+  --wash-strong: 0.28;
+  --wash-soft: 0.14;
+  --halo-cielo: 0.55;
+  --halo-blue: 0.34;
   --halo-violet: 0.24;
-  --yellow-core: 0.52;
-  --yellow-mid: 0.3;
-  --yellow-edge: 0.16;
-  --card-alpha: 0.38;
+  --card-alpha: 0.4;
   --glow-blur: 26px;
-  --glow-spread: 1.65;
+  --glow-spread: 1.7;
 }
 
 html,
@@ -901,13 +895,13 @@ main section:nth-child(3n)::before {
 }
 
 section.hero {
-  --wash-strong: 0.4;
-  --wash-soft: 0.22;
+  --wash-strong: 0.16;
+  --wash-soft: 0.08;
 }
 
-body.glow-a section.hero {
-  --wash-strong: 0.2;
-  --wash-soft: 0.11;
+body.glow-b section.hero {
+  --wash-strong: 0.24;
+  --wash-soft: 0.12;
 }
 
 section.hero::before {
@@ -970,7 +964,7 @@ section.hero::before {
   z-index: 1;
 }
 
-body:not(.page-operators) main section:nth-child(3n) .phone::before {
+main section:nth-child(3n) .phone::before {
   background: radial-gradient(
     ellipse at 50% 46%,
     rgba(214, 204, 255, var(--halo-cielo)) 0%,
@@ -980,69 +974,13 @@ body:not(.page-operators) main section:nth-child(3n) .phone::before {
   );
 }
 
-body:not(.page-operators) main section:nth-child(3n + 2) .phone::before {
+main section:nth-child(3n + 2) .phone::before {
   background: radial-gradient(
     ellipse at 50% 48%,
     rgba(176, 208, 255, var(--halo-cielo)) 0%,
     rgba(70, 120, 230, var(--halo-blue)) 40%,
     rgba(156, 189, 255, var(--halo-violet)) 60%,
     transparent 76%
-  );
-}
-
-.page-operators main section::before {
-  background:
-    radial-gradient(
-      ellipse 40% 52% at var(--blob-x, 84%) 36%,
-      rgba(255, 236, 150, var(--yellow-mid)) 0%,
-      rgba(255, 210, 0, var(--yellow-edge)) 46%,
-      transparent 72%
-    ),
-    radial-gradient(
-      ellipse 28% 36% at var(--blob-x2, 8%) 12%,
-      rgba(156, 189, 255, var(--wash-soft)) 0%,
-      transparent 70%
-    );
-}
-
-.page-operators section.hero::before {
-  background:
-    radial-gradient(
-      ellipse 22% 48% at 63% 38%,
-      rgba(156, 189, 255, var(--wash-strong)) 0%,
-      rgba(90, 140, 240, var(--wash-soft)) 48%,
-      transparent 72%
-    ),
-    radial-gradient(
-      ellipse 20% 46% at 88% 36%,
-      rgba(255, 244, 180, var(--yellow-core)) 0%,
-      rgba(255, 210, 0, var(--yellow-mid)) 42%,
-      transparent 72%
-    ),
-    radial-gradient(
-      ellipse 34% 34% at 10% 8%,
-      rgba(156, 189, 255, var(--wash-soft)) 0%,
-      transparent 70%
-    );
-}
-
-.page-operators main section .phone::before {
-  background: radial-gradient(
-    ellipse at 50% 44%,
-    rgba(255, 250, 214, var(--yellow-core)) 0%,
-    rgba(255, 210, 0, var(--yellow-mid)) 32%,
-    rgba(255, 232, 130, var(--yellow-edge)) 56%,
-    transparent 78%
-  );
-}
-
-.page-operators .phones.pair > .phone:first-child::before {
-  background: radial-gradient(
-    ellipse at 50% 44%,
-    rgba(214, 230, 255, var(--halo-cielo)) 0%,
-    rgba(132, 172, 255, var(--halo-blue)) 32%,
-    rgba(156, 189, 255, var(--halo-violet)) 56%,
-    transparent 78%
   );
 }
 
