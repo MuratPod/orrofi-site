@@ -5,7 +5,7 @@ OrroFi, GhoFi and Mi gestor stay as names.
 
 ## Тексты
 
-В подвале каждой страницы: «The figures on screen are made up, and the prices are an example. OrroFi is a brand of PADELADA WORLD, S.L. (NIF B05783238). This site does not use cookies or visit counters.»
+В подвале каждой страницы: «The figures on screen are made up, and the prices are an example; they are not an offer. OrroFi is a brand of PADELADA WORLD, S.L. (Sociedad Unipersonal), NIF B05783238. This site does not use cookies or any analytics or advertising tools.»
 
 ### Слоганы
 
@@ -34,13 +34,13 @@ OrroFi looks at which networks are sounding nearby and on which channels. A chan
 - Кадр: `home-channels`: Screen: neighbouring networks and channels
 
 **1.4 The network score and the “Improve” button**
-We reduced the complicated part to one number. You open the app and see: “Your Wi‑Fi: 6 out of 10”. Under the number, in plain words, is what is getting in the way. Next to it is the “Improve” button. You tap, wait a few seconds, and it is already 9 out of 10.
+We reduced the complicated part to one number. You open the app and see: “Your Wi‑Fi: 6 out of 10”. Under the number, in plain words, is what is getting in the way. Next to it is the “Improve” button. You tap, wait a few seconds, and see whether the score has improved. In the example it rises to 9 out of 10; the result depends on your home.
 - Кадр: `home-score`: Screen: network score, 6 out of 10
 - Кадр: `home-improve`: Screen: before and after “Improve”
 
 **1.5 Neighbours with OrroFi do not get in each other's way**
 - Значок: «Soon»
-This is where something begins that no other app can do. When several families with OrroFi live nearby, their routers agree among themselves and spread out onto different channels, so that no one gets in anyone's way. The more neighbours with OrroFi, the quieter the air and the faster the internet for everyone. A good network becomes a shared matter for the whole building and the whole street.
+This is what we are getting ready. When several families with OrroFi live nearby, their routers agree among themselves and spread out onto different channels, so that no one gets in anyone's way. The more neighbours with OrroFi, the more channels can be shared out. A good network becomes a shared matter for the whole building and the whole street.
 - Кадр: `home-neighbors`: Screen: neighbours on OrroFi
 
 **1.6 And that is not all**
@@ -60,20 +60,18 @@ And if something is slow, just ask Mi gestor. He will see for himself whether it
 - Пункт: Bills and services. Plan, bills, mobile lines and the technician's visit, in one place.
 - Кадр: `home-gestor`: Screen: Mi gestor
 
-**1.9 Your data stays with you**
-The list of your devices, their names and addresses do not leave the phone. We do not keep Wi‑Fi passwords. Everything OrroFi learns about your home serves only you.
-- Кадр: `home-privacy`: Screen: data stays on the phone
+**1.9 Your data, clearly**
+To show you your network, we store your devices' names and addresses on our servers. The router password is stored encrypted on your iPhone and is not sent to our servers. We use this data only to show you your network.
 
 **1.10 How to start**
 1. Install OrroFi.
 2. Sign in with your phone number. The code arrives by SMS.
 3. When you are at home, tap “Check my network”.
-- Кадр: `home-start`: Screen: check my network
 
 **1.11 Questions and answers**
 - Вопрос: «I have an iPhone. Will the app see the neighbours?» Yes. Your router sees the neighbouring networks, and the app shows the picture and puts things in order.
 - Вопрос: «Do I need to understand the technology?» No. One number and one button are enough.
-- Вопрос: «Is it safe?» Data about your devices stays on the phone, and the router changes settings only when you tell it to.
+- Вопрос: «Is it safe?» The router changes settings only when you ask it to. Your devices' names and addresses are stored on our servers to show you your network, and the router password is not sent to our servers.
 - Кадр: `home-faq`: Screen: questions and answers
 
 ---
@@ -83,7 +81,7 @@ The list of your devices, their names and addresses do not leave the phone. We d
 - **title:** Privacy and control — OrroFi
 - **description:** Consents, a copy of your data, deleting the account and the network data, resetting Mi red, and the “That wasn't me” button: what you can do yourself.
 
-Вступление: Here is what you can do yourself in the app. The legal details are in the privacy policy (ссылка).
+Вступление: Here is what you will be able to do yourself in the app. How this website handles data is explained in the site privacy policy at the end of this page.
 
 **6.1 You can take your “yes” back**
 Consents are gathered in one place: the chat with Mi gestor, analytics, offers and news. Each one is switched off with the same switch that turned it on.
@@ -125,9 +123,13 @@ The app can be locked with Face ID, and when you open it, it asks you to confirm
 - android: Fingerprint when opening the app.
 
 **6.8 Privacy policy of this site**
-OrroFi is a brand of PADELADA WORLD, S.L. (NIF B05783238). The figures on screen are made up, and the prices are an example.
-This site does not use cookies or visit counters.
-Questions about data: privacidad@orrofi.es.
+Controller: PADELADA WORLD, S.L. (Sociedad Unipersonal), Tax ID B05783238, Calle Josep Pla, 8, escalera 1, puerta 1, local, 17252 Calonge i Sant Antoni (Girona), Spain. E-mail: privacidad@orrofi.com. We have no data protection officer.
+This site has no forms or accounts, and it does not use cookies or any analytics or advertising tools.
+What your browser stores: if you choose “iPhone” or “Android”, the site remembers it in your browser's local storage so that it can show you that phone's screens. It does not leave your browser, and you can delete it in your browser settings.
+Hosting: the site is hosted on GitHub Pages, run by GitHub, Inc. When you open a page, GitHub logs your IP address for security purposes, as described in its privacy statement.
+If you write to us: we use your e-mail address and what you tell us only to reply and, if you ask to exercise your rights, to handle that request. Legal basis: our legitimate interest in replying to people who write to us (Art. 6(1)(f) GDPR) and, for rights requests, compliance with a legal obligation (Art. 6(1)(c) GDPR). E-mail passes through Cloudflare Email Routing (Cloudflare, Inc.) and is forwarded to a Gmail mailbox (Google Ireland Ltd. / Google LLC). These providers may transfer the data to the United States under the Data Privacy Framework and standard contractual clauses. We keep the message until the enquiry is closed and for 12 months after that. We keep requests to exercise rights for as long as needed to evidence the reply, and for no more than 3 years.
+Your rights: you can ask for access, rectification, erasure, objection, restriction of processing and portability by writing to privacidad@orrofi.com. If you think we have not handled your request properly, you can complain to the Spanish Data Protection Agency (www.aepd.es).
+The OrroFi app has its own privacy policy, which we will publish before the app is released.
 
 ---
 
@@ -138,7 +140,7 @@ Questions about data: privacidad@orrofi.es.
 
 **Частые вопросы**
 
-1. **Who can use OrroFi?** Subscribers of our operator on the Costa Brava. If you are not a customer yet, you can check coverage for an address in the app and leave a request.
+1. **Who can use OrroFi?** Subscribers of GhoFi (ALTANETICA, S.L.) on the Costa Brava. If you are not a customer yet, you can check coverage for an address in the app and leave a request.
 2. **Is Mi gestor a person?** No. It is an assistant with artificial intelligence, and it says so in the first message. If you need a person, tap “Talk to a person”.
 3. **When do staff reply?** During working hours. If no one is there now, the app says so: leave your request, and we will get in touch.
 4. **Do I need to understand the technology?** No. For Mi red you will need the password on the sticker on the router. The app explains the rest, step by step.
@@ -146,7 +148,7 @@ Questions about data: privacidad@orrofi.es.
 6. **Can I add the family's phones?** Yes: with a QR code when you meet, or by checking six digits over a video call. The owner can remove a phone that was added.
 7. **How do I change the time of a technician's visit?** Ask for another time through Mi gestor. A member of staff will confirm the new date.
 8. **How are bills paid?** From a bank account, by SEPA. A member of staff can help you change the payment method.
-9. **Can I get a copy of my data or delete the account?** Yes, in the “Privacy” section. The account is deleted after the contracts end.
+9. **Can I get a copy of my data or delete the account?** Yes, in the “Privacy” section. While you have contracts in force, we need your data to provide them, so the account is closed when they end. For any question about your data, write to privacidad@orrofi.com.
 10. **Which languages is the app in?** Spanish and English.
 11. **When will the app be released?** We are preparing the release on the App Store for iPhone and will announce the date. The Android version comes later.
 12. **Why does the site use made-up data?** These are screens of the coming version: the names, addresses and amounts on them are invented, and the prices are an example.
@@ -156,11 +158,10 @@ Questions about data: privacidad@orrofi.es.
 ### Страница 9. Contact `/en/contact/`
 
 - **title:** Contact — OrroFi
-- **description:** Who publishes OrroFi, and where to write about data.
+- **description:** OrroFi legal notice and how to reach us.
 
-**9.1 Who publishes OrroFi**
-OrroFi is a brand of PADELADA WORLD, S.L. (NIF B05783238).
-Questions about data: privacidad@orrofi.es.
+**9.1 Legal notice**
+The company details are in the legal notice (ссылка).
 
 ---
 
@@ -176,7 +177,7 @@ OrroFi is a ready-made app under your brand. It makes your customers' home inter
 - Кадр: `home-hero`: Screen: your Wi‑Fi at home
 - Под кадром: OrroFi
 - Кадр: `op-brand`: Screen: the app under your brand
-- Под кадром: With your operator's brand: GhoFi
+- Под кадром: With your operator's brand. Example: GhoFi, a brand of ALTANETICA, S.L., used with its permission. The figures and prices on screen are made up.
 - Письмо: «Contact us»
 
 **10.2 A direct channel to the customer**
@@ -201,7 +202,7 @@ The app sees when the customer really needs more: a data pack, a faster plan, a 
 - Кадр: `op-offer`: Screen: an offer at the right moment
 
 **10.7 A ready-made app under your brand**
-You do not need your own development team or years of work. OrroFi arrives with your name and your colours, with an app for iPhone and Android, a web account and a panel for staff. Customer data is protected under European rules, and information about their home devices does not leave the phone at all.
+You do not need your own development team or years of work. OrroFi arrives with your name and your colours, with an app for iPhone and Android, a web account and a panel for staff.
 - Кадр: `op-panel`: Screen: the staff panel
 
 **10.8 How to start**
@@ -210,3 +211,16 @@ You do not need your own development team or years of work. OrroFi arrives with 
 3. Your subscribers install the app, and you see the result.
 - Кадр: `op-start`: Screen: subscribers in the app
 - Письмо: «Contact us»
+
+---
+
+### Страница 11. Legal notice `/en/legal-notice/`
+
+- **title:** Legal notice — OrroFi
+- **description:** OrroFi legal notice and how to reach us.
+
+Вступление: This website and the OrroFi brand belong to PADELADA WORLD, S.L. (Sociedad Unipersonal, a single-member limited company).
+Вступление: Tax ID (NIF): B05783238.
+Вступление: Registered office: Calle Josep Pla, 8, escalera 1, puerta 1, local, 17252 Calonge i Sant Antoni (Girona), Spain.
+Вступление: Registered in the Girona Commercial Registry (Registro Mercantil de Girona), sheet GI-80156, entry 1.
+Вступление: E-mail: hola@orrofi.com. Data protection: privacidad@orrofi.com.

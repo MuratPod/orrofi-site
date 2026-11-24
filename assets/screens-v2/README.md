@@ -20,8 +20,6 @@
 | `home-devices` | Pantalla: quién está en la red | Y esto no es todo |
 | `home-mobile` | Pantalla: en casa y en el móvil | En casa y en el móvil, todo es uno |
 | `home-gestor` | Pantalla: Mi gestor | Y esto no es todo |
-| `home-privacy` | Pantalla: los datos se quedan en el teléfono | Tus datos se quedan contigo |
-| `home-start` | Pantalla: comprobar mi red | Cómo empezar |
 | `home-faq` | Pantalla: preguntas y respuestas | Preguntas y respuestas |
 
 ## Para operadores `/operadores/`

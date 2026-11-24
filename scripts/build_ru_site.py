@@ -56,6 +56,7 @@ PUBLIC = {
     "privacy": {"es": "/privacidad/", "en": "/en/privacy/", "ru": "/ru/privacidad/"},
     "faq": {"es": "/faq/", "en": "/en/faq/", "ru": "/ru/faq/"},
     "contact": {"es": "/contacto/", "en": "/en/contact/", "ru": "/ru/contacto/"},
+    "legal": {"es": "/aviso-legal/", "en": "/en/legal-notice/", "ru": "/ru/aviso-legal/"},
 }
 PAGE_KEYS = {
     "1": "home",
@@ -63,7 +64,9 @@ PAGE_KEYS = {
     "8": "faq",
     "9": "contact",
     "10": "operators",
+    "11": "legal",
 }
+MAILS = ("hola@orrofi.com", "privacidad@orrofi.com")
 HREFLANG = {"es": "es-ES", "en": "en", "ru": "ru"}
 
 # Сияние фона. glow-b — сильный синий вариант (по умолчанию), glow-a — мягкий.
@@ -81,8 +84,9 @@ UI = {
         "nav_label": "Menú principal",
         "lang_label": "Idioma",
         "faq_heading": "Preguntas frecuentes",
-        "policy_phrase": "política de privacidad",
+        "policy_phrase": "política de privacidad del sitio",
         "policy_heading": "Política de privacidad del sitio",
+        "legal_link_phrase": "aviso legal",
         "platform_legend": "Modelo de teléfono",
         "nav": [
             ("index.html", "Inicio"),
@@ -94,6 +98,7 @@ UI = {
             ("privacidad/index.html", "Privacidad"),
             ("faq/index.html", "Preguntas"),
             ("contacto/index.html", "Contacto"),
+            ("aviso-legal/index.html", "Aviso legal"),
         ],
     },
     "en": {
@@ -106,8 +111,9 @@ UI = {
         "nav_label": "Main menu",
         "lang_label": "Language",
         "faq_heading": "Frequently asked questions",
-        "policy_phrase": "privacy policy",
+        "policy_phrase": "site privacy policy",
         "policy_heading": "Privacy policy of this site",
+        "legal_link_phrase": "legal notice",
         "platform_legend": "Phone model",
         "nav": [
             ("en/index.html", "Home"),
@@ -119,6 +125,7 @@ UI = {
             ("en/privacy/index.html", "Privacy"),
             ("en/faq/index.html", "Questions"),
             ("en/contact/index.html", "Contact"),
+            ("en/legal-notice/index.html", "Legal notice"),
         ],
     },
     "ru": {
@@ -131,8 +138,9 @@ UI = {
         "nav_label": "Основное меню",
         "lang_label": "Язык",
         "faq_heading": "Частые вопросы",
-        "policy_phrase": "политике конфиденциальности",
+        "policy_phrase": "политике конфиденциальности сайта",
         "policy_heading": "Политика конфиденциальности сайта",
+        "legal_link_phrase": "сведениях о владельце",
         "platform_legend": "Модель телефона",
         "nav": [
             ("ru/index.html", "Главная"),
@@ -144,6 +152,7 @@ UI = {
             ("ru/privacidad/index.html", "Приватность"),
             ("ru/faq/index.html", "Вопросы"),
             ("ru/contacto/index.html", "Контакты"),
+            ("ru/aviso-legal/index.html", "Сведения о владельце"),
         ],
     },
 }
@@ -170,11 +179,25 @@ def esc(text: str) -> str:
 
 
 def inline(text: str) -> str:
+    legal_phrase = CTX.get("legal_link_phrase", "")
+    link_legal = False
+    marker = f"{legal_phrase} (ссылка)"
+    if legal_phrase and marker in text:
+        text = text.replace(marker, legal_phrase, 1)
+        link_legal = True
     rendered = html.escape(text, quote=False)
-    rendered = rendered.replace(
-        "privacidad@orrofi.es",
-        '<a href="mailto:privacidad@orrofi.es">privacidad@orrofi.es</a>',
-    )
+    for addr in MAILS:
+        rendered = rendered.replace(
+            addr,
+            f'<a href="mailto:{addr}">{addr}</a>',
+        )
+    if link_legal:
+        href = PUBLIC["legal"][CTX["code"]]
+        rendered = rendered.replace(
+            html.escape(legal_phrase, quote=False),
+            f'<a href="{esc(href)}">{esc(legal_phrase)}</a>',
+            1,
+        )
     return rendered
 
 
@@ -354,10 +377,8 @@ def render_nodes(prefix: str, nodes: list, eager_first: bool, lead: bool = False
                 f"{esc(node[1])}</button></p>"
             )
         elif kind == "mail":
-            # TODO: адрес для операторов не выбран, временно privacidad@orrofi.es
             text_parts.append(
-                "<!-- TODO: адрес для операторов не выбран, временно mailto:privacidad@orrofi.es -->"
-                '<p class="actions"><a class="btn" href="mailto:privacidad@orrofi.es">'
+                '<p class="actions"><a class="btn" href="mailto:hola@orrofi.com">'
                 f"{esc(node[1])}</a></p>"
             )
         elif kind == "link":
@@ -488,7 +509,7 @@ def footer(prefix: str, legal: str) -> str:
         f'<p id="sitio-privacidad">{esc(legal)}</p>'
         '<p class="footer-links">'
         f'{"".join(links)}'
-        '<a href="mailto:privacidad@orrofi.es">privacidad@orrofi.es</a>'
+        '<a href="mailto:hola@orrofi.com">hola@orrofi.com</a>'
         "</p></div></footer>"
         f'<script src="{prefix}assets/js/site.js" defer></script>'
     )
@@ -864,16 +885,16 @@ def write_outputs(pairs: list[tuple[str, str]], written: list[str]) -> None:
 def main() -> None:
     written: list[str] = []
     use_locale("es")
-    legal, slogan, pages = load_pages(ROOT / "showcase" / "copy.es.md", 5)
+    legal, slogan, pages = load_pages(ROOT / "showcase" / "copy.es.md", 6)
     write_slot_index(pages)
     for page in pages:
         write_outputs(render_page(page, legal, slogan), written)
     use_locale("en")
-    legal, slogan, pages = load_pages(ROOT / "showcase" / "copy.en.md", 5)
+    legal, slogan, pages = load_pages(ROOT / "showcase" / "copy.en.md", 6)
     for page in pages:
         write_outputs(render_page(page, legal, slogan), written)
     use_locale("ru")
-    legal, slogan, pages = load_pages(COPY, 10)
+    legal, slogan, pages = load_pages(COPY, 11)
     for page in pages:
         write_outputs(render_page(page, legal, slogan), written)
     write_outputs(render_legacy(legal), written)
