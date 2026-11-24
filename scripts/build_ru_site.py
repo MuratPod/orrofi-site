@@ -66,8 +66,8 @@ PAGE_KEYS = {
 }
 HREFLANG = {"es": "es-ES", "en": "en", "ru": "ru"}
 
-# Сияние фона. glow-b — сильный вариант (по умолчанию), glow-a — средний.
-# Чтобы переключить весь сайт, замените класс и пересоберите страницы.
+# Сияние фона. glow-b — сильный синий вариант (по умолчанию), glow-a — мягкий.
+# Жёлтого нет. Чтобы переключить весь сайт, замените класс и пересоберите страницы.
 GLOW_CLASS = "glow-b"
 
 UI = {
@@ -778,8 +778,6 @@ def render_page(page: dict, legal: str, slogan: str) -> list[tuple[str, str]]:
         if page["contact"]:
             parts.append(render_contact(page["contact"]))
         classes = "page-v2" if v2 else ""
-        if page["num"] == "10":
-            classes = f"{classes} page-operators".strip()
         html_page = document(
             rel,
             page["title"],
