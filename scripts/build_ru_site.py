@@ -14,15 +14,6 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 COPY = ROOT / "showcase" / "copy.md"
 
-# Старые страницы (Mi gestor, Mi red, Семья, Услуги и счета, Как начать,
-# Вопросы) остаются файлами по прежним адресам и в меню не входят.
-NAV = [
-    ("index.html", "Главная"),
-    ("operadores/index.html", "Для операторов"),
-    ("privacidad/index.html", "Приватность"),
-    ("contacto/index.html", "Контакты"),
-]
-
 # Кадров без файла в design/target-v6 нет. Подпись из copy.md остаётся, текста-заглушки нет.
 MISSING_FRAMES = frozenset()
 
@@ -57,6 +48,117 @@ CSP = (
     "default-src 'self'; img-src 'self'; style-src 'self'; script-src 'self'; "
     "font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'"
 )
+
+# Публичные страницы есть на трёх языках. Остальные — только по-русски, под /ru/.
+PUBLIC = {
+    "home": {"es": "/", "en": "/en/", "ru": "/ru/"},
+    "operators": {"es": "/operadores/", "en": "/en/operators/", "ru": "/ru/operadores/"},
+    "privacy": {"es": "/privacidad/", "en": "/en/privacy/", "ru": "/ru/privacidad/"},
+    "faq": {"es": "/faq/", "en": "/en/faq/", "ru": "/ru/faq/"},
+    "contact": {"es": "/contacto/", "en": "/en/contact/", "ru": "/ru/contacto/"},
+}
+PAGE_KEYS = {
+    "1": "home",
+    "6": "privacy",
+    "8": "faq",
+    "9": "contact",
+    "10": "operators",
+}
+HREFLANG = {"es": "es-ES", "en": "en", "ru": "ru"}
+
+UI = {
+    "es": {
+        "html_lang": "es-ES",
+        "root": "",
+        "screen_suffix": "",
+        "skip": "Al contenido",
+        "menu_open": "Menú",
+        "menu_close": "Cerrar",
+        "nav_label": "Menú principal",
+        "lang_label": "Idioma",
+        "faq_heading": "Preguntas frecuentes",
+        "policy_phrase": "política de privacidad",
+        "policy_heading": "Política de privacidad del sitio",
+        "platform_legend": "Modelo de teléfono",
+        "nav": [
+            ("index.html", "Inicio"),
+            ("operadores/index.html", "Para operadores"),
+            ("privacidad/index.html", "Privacidad"),
+            ("contacto/index.html", "Contacto"),
+        ],
+        "footer": [
+            ("privacidad/index.html", "Privacidad"),
+            ("faq/index.html", "Preguntas"),
+            ("contacto/index.html", "Contacto"),
+        ],
+    },
+    "en": {
+        "html_lang": "en",
+        "root": "",
+        "screen_suffix": "-en",
+        "skip": "Skip to content",
+        "menu_open": "Menu",
+        "menu_close": "Close",
+        "nav_label": "Main menu",
+        "lang_label": "Language",
+        "faq_heading": "Frequently asked questions",
+        "policy_phrase": "privacy policy",
+        "policy_heading": "Privacy policy of this site",
+        "platform_legend": "Phone model",
+        "nav": [
+            ("en/index.html", "Home"),
+            ("en/operators/index.html", "For operators"),
+            ("en/privacy/index.html", "Privacy"),
+            ("en/contact/index.html", "Contact"),
+        ],
+        "footer": [
+            ("en/privacy/index.html", "Privacy"),
+            ("en/faq/index.html", "Questions"),
+            ("en/contact/index.html", "Contact"),
+        ],
+    },
+    "ru": {
+        "html_lang": "ru",
+        "root": "ru/",
+        "screen_suffix": "",
+        "skip": "К содержанию",
+        "menu_open": "Меню",
+        "menu_close": "Закрыть",
+        "nav_label": "Основное меню",
+        "lang_label": "Язык",
+        "faq_heading": "Частые вопросы",
+        "policy_phrase": "политике конфиденциальности",
+        "policy_heading": "Политика конфиденциальности сайта",
+        "platform_legend": "Модель телефона",
+        "nav": [
+            ("ru/index.html", "Главная"),
+            ("ru/operadores/index.html", "Для операторов"),
+            ("ru/privacidad/index.html", "Приватность"),
+            ("ru/contacto/index.html", "Контакты"),
+        ],
+        "footer": [
+            ("ru/privacidad/index.html", "Приватность"),
+            ("ru/faq/index.html", "Вопросы"),
+            ("ru/contacto/index.html", "Контакты"),
+        ],
+    },
+}
+
+CTX = UI["ru"]
+
+
+def use_locale(code: str) -> None:
+    global CTX
+    CTX = UI[code]
+    CTX["code"] = code
+
+
+def site_href(rel: str) -> str:
+    if rel == "index.html":
+        return "/"
+    if rel.endswith("index.html"):
+        return "/" + rel[: -len("index.html")]
+    return "/" + rel
 
 
 def esc(text: str) -> str:
@@ -119,13 +221,8 @@ def picture(prefix: str, sid: str, alt: str, eager: bool, platform: str) -> str:
     sizes = "(min-width: 960px) 242px, 70vw"
     folder = "android/" if platform == "android" else ""
     dark = f"{prefix}assets/screens/v6/dark/{folder}{sid}"
-    light = f"{prefix}assets/screens/v6/light/{folder}{sid}"
     return (
         "<picture>"
-        f'<source media="(prefers-color-scheme: light)" type="image/webp" '
-        f'srcset="{light}-430.webp 430w, {light}.webp 860w" sizes="{sizes}">'
-        f'<source media="(prefers-color-scheme: light)" type="image/png" '
-        f'srcset="{light}.png">'
         f'<source type="image/webp" '
         f'srcset="{dark}-430.webp 430w, {dark}.webp 860w" sizes="{sizes}">'
         f'<img src="{dark}.png" alt="{esc(alt)}" width="430" height="932" '
@@ -140,12 +237,14 @@ def slot_phone(prefix: str, sid: str, caption: str, eager: bool, label: str = ""
     Подпись «Экран: …» остаётся в alt. Короткая подпись под рамкой — только
     у пары сравнения на странице операторов.
     """
-    path = ROOT / "assets" / "screens-v2" / f"{sid}.png"
+    suffix = CTX["screen_suffix"]
+    file_name = f"{sid}{suffix}.png"
+    path = ROOT / "assets" / "screens-v2" / file_name
     if not path.is_file():
-        raise SystemExit(f"Нет кадра assets/screens-v2/{sid}.png")
+        raise SystemExit(f"Нет кадра assets/screens-v2/{file_name}")
     loading = "eager" if eager else "lazy"
     priority = ' fetchpriority="high"' if eager else ""
-    src = f"{prefix}assets/screens-v2/{sid}.png"
+    src = f"{prefix}assets/screens-v2/{file_name}"
     under = f"<figcaption>{esc(label)}</figcaption>" if label else ""
     return (
         '<figure class="phone phone-slot">'
@@ -180,10 +279,11 @@ def phone(prefix: str, sid: str, caption: str, eager: bool, android: str | None 
 
 
 def link_href(prefix: str, label: str) -> str:
+    root = CTX["root"]
     if "Mi gestor" in label:
-        return nav_href(prefix, "mi-gestor/index.html")
+        return nav_href(prefix, f"{root}mi-gestor/index.html")
     if "Mi red" in label:
-        return nav_href(prefix, "mi-red/index.html")
+        return nav_href(prefix, f"{root}mi-red/index.html")
     return prefix or "./"
 
 
@@ -286,7 +386,7 @@ def render_faq(faq: list[tuple[str, str]]) -> str:
         items.append(f"<li><h3>{esc(question)}</h3><p>{inline(answer)}</p></li>")
     return (
         '<section class="block" id="voprosy"><div class="wrap">'
-        "<h2>Частые вопросы</h2>"
+        f"<h2>{esc(CTX['faq_heading'])}</h2>"
         f'<ol class="faq">{"".join(items)}</ol>'
         "</div></section>"
     )
@@ -304,7 +404,7 @@ def render_contact(contact: dict) -> str:
 def intro_html(text: str) -> str:
     """Метка «Вступление:» и пометка «(ссылка)» — указания в исходнике, не текст страницы."""
     body = text
-    target = "политике конфиденциальности"
+    target = CTX["policy_phrase"]
     if target not in body:
         return f"<p>{inline(body)}</p>"
     body = body.replace(" (ссылка)", "")
@@ -317,7 +417,7 @@ def intro_html(text: str) -> str:
 def platform_switch() -> str:
     return (
         '<div class="platform-bar"><fieldset class="platform-switch">'
-        "<legend>Модель телефона</legend>"
+        f"<legend>{esc(CTX['platform_legend'])}</legend>"
         '<label class="platform-option">'
         '<input type="radio" name="platform" value="iphone" checked>'
         "<span>iPhone</span></label>"
@@ -328,23 +428,47 @@ def platform_switch() -> str:
     )
 
 
-def header(prefix: str, current: str, show_platform: bool = True) -> str:
-    home = prefix or "./"
+def lang_switch(current_href: str, page_key: str) -> str:
+    labels = (("es", "ES"), ("en", "EN"), ("ru", "RU"))
+    links = []
+    for code, label in labels:
+        if page_key in PUBLIC:
+            href = PUBLIC[page_key][code]
+        elif code == CTX["code"]:
+            href = current_href
+        else:
+            href = PUBLIC["home"][code]
+        current = ' aria-current="page"' if code == CTX["code"] else ""
+        links.append(
+            f'<a href="{href}" hreflang="{HREFLANG[code]}" lang="{HREFLANG[code]}"{current}>{label}</a>'
+        )
+    return (
+        f'<nav class="lang-switch" aria-label="{esc(CTX["lang_label"])}">'
+        f'{"".join(links)}</nav>'
+    )
+
+
+def header(prefix: str, current: str, page_key: str, show_platform: bool = True) -> str:
+    home = nav_href(prefix, CTX["nav"][0][0])
     items = []
-    for rel, label in NAV:
+    here = site_href(current)
+    for rel, label in CTX["nav"]:
         href = nav_href(prefix, rel)
-        current_attr = ' aria-current="page"' if rel == current else ""
+        current_attr = ' aria-current="page"' if site_href(rel) == here else ""
         items.append(f'<li><a href="{href}"{current_attr}>{esc(label)}</a></li>')
     switch = platform_switch() if show_platform else ""
     return (
-        '<a class="skip" href="#main">К содержанию</a>'
+        f'<a class="skip" href="#main">{esc(CTX["skip"])}</a>'
         '<header class="site-header"><div class="wrap topbar">'
         f'<a class="logo" href="{home}">'
-        f'<img class="logo-on-dark" src="{prefix}logo/lockup-h-dark.svg" alt="OrroFi" width="118" height="44">'
-        f'<img class="logo-on-light" src="{prefix}logo/lockup-h-light.svg" alt="OrroFi" width="118" height="44">'
+        f'<img src="{prefix}logo/lockup-h-dark.svg" alt="OrroFi" width="118" height="44">'
         "</a>"
-        '<button type="button" class="nav-toggle" aria-expanded="false" aria-controls="nav">Меню</button>'
-        '<nav class="primary" id="nav" aria-label="Основное меню"><ul>'
+        '<div class="top-tools">'
+        f"{lang_switch(here, page_key)}"
+        '<button type="button" class="nav-toggle" aria-expanded="false" aria-controls="nav" '
+        f'data-open="{esc(CTX["menu_open"])}" data-close="{esc(CTX["menu_close"])}">'
+        f'{esc(CTX["menu_open"])}</button></div>'
+        f'<nav class="primary" id="nav" aria-label="{esc(CTX["nav_label"])}"><ul>'
         f'{"".join(items)}'
         "</ul></nav></div>"
         f"{switch}</header>"
@@ -352,17 +476,30 @@ def header(prefix: str, current: str, show_platform: bool = True) -> str:
 
 
 def footer(prefix: str, legal: str) -> str:
+    links = []
+    for rel, label in CTX["footer"]:
+        links.append(f'<a href="{nav_href(prefix, rel)}">{esc(label)}</a>')
     return (
         '<footer class="site-footer"><div class="wrap">'
         f'<p id="sitio-privacidad">{esc(legal)}</p>'
         '<p class="footer-links">'
-        f'<a href="{nav_href(prefix, "privacidad/index.html")}">Приватность</a>'
-        f'<a href="{nav_href(prefix, "faq/index.html")}">Вопросы</a>'
-        f'<a href="{nav_href(prefix, "contacto/index.html")}">Контакты</a>'
+        f'{"".join(links)}'
         '<a href="mailto:privacidad@orrofi.es">privacidad@orrofi.es</a>'
         "</p></div></footer>"
         f'<script src="{prefix}assets/js/site.js" defer></script>'
     )
+
+
+def alternates(page_key: str) -> str:
+    if page_key not in PUBLIC:
+        return ""
+    lines = []
+    for code in ("es", "en", "ru"):
+        lines.append(
+            f'<link rel="alternate" hreflang="{HREFLANG[code]}" href="{PUBLIC[page_key][code]}">'
+        )
+    lines.append(f'<link rel="alternate" hreflang="x-default" href="{PUBLIC[page_key]["es"]}">')
+    return "\n".join(lines) + "\n"
 
 
 def document(
@@ -371,6 +508,7 @@ def document(
     description: str,
     main: str,
     legal: str,
+    page_key: str,
     body_class: str = "",
     show_platform: bool = True,
 ) -> str:
@@ -378,7 +516,7 @@ def document(
     body = f'<body class="{esc(body_class)}">\n' if body_class else "<body>\n"
     return (
         "<!DOCTYPE html>\n"
-        '<html lang="ru">\n'
+        f'<html lang="{CTX["html_lang"]}">\n'
         "<head>\n"
         '<meta charset="utf-8">\n'
         '<meta name="viewport" content="width=device-width, initial-scale=1">\n'
@@ -386,12 +524,13 @@ def document(
         f'<meta http-equiv="Content-Security-Policy" content="{CSP}">\n'
         '<meta name="referrer" content="strict-origin-when-cross-origin">\n'
         f"<title>{esc(title)}</title>\n"
+        f"{alternates(page_key)}"
         f'<link rel="icon" type="image/png" href="{prefix}icons/ios/AppIcon-60.png">\n'
         f'<link rel="stylesheet" href="{prefix}assets/css/site.css">\n'
         f'<script src="{prefix}assets/js/platform.js"></script>\n'
         "</head>\n"
         f"{body}"
-        f"{header(prefix, rel, show_platform)}\n"
+        f"{header(prefix, rel, page_key, show_platform)}\n"
         f'<main id="main">\n{main}\n</main>\n'
         f"{footer(prefix, legal)}\n"
         "</body>\n"
@@ -542,17 +681,19 @@ def parse_page(chunk: str) -> dict:
     return page
 
 
-def load_pages() -> tuple[str, str, list[dict]]:
-    text = COPY.read_text(encoding="utf-8")
+def load_pages(copy_path: Path, expected: int) -> tuple[str, str, list[dict]]:
+    text = copy_path.read_text(encoding="utf-8")
     legal_match = re.search(r"В подвале каждой страницы: «(.+?)»", text)
     slogan_match = re.search(r"1\. «(.+?)»\. \*\*Выбран", text)
     if not legal_match or not slogan_match:
-        raise SystemExit("В copy.md не найдены слоган или текст подвала")
-    body = text.split("## Тексты", 1)[1].split("### Вычитка", 1)[0]
+        raise SystemExit(f"В {copy_path.name} не найдены слоган или текст подвала")
+    body = text.split("## Тексты", 1)[1]
+    if "### Вычитка" in body:
+        body = body.split("### Вычитка", 1)[0]
     chunks = re.split(r"(?m)^### Страница ", body)[1:]
     pages = [parse_page(chunk) for chunk in chunks]
-    if len(pages) != 10:
-        raise SystemExit(f"Ожидалось 10 страниц, разобрано {len(pages)}")
+    if len(pages) != expected:
+        raise SystemExit(f"{copy_path.name}: ожидалось {expected} страниц, разобрано {len(pages)}")
     return legal_match.group(1), slogan_match.group(1), pages
 
 
@@ -562,7 +703,7 @@ def render_page(page: dict, legal: str, slogan: str) -> list[tuple[str, str]]:
     for path in page["paths"]:
         slug = path.strip("/")
         rel = "index.html" if not slug else f"{slug}/index.html"
-        files.append(rel)
+        files.append(CTX["root"] + rel)
     v2 = page.get("layout") == "v2"
     for rel in files:
         prefix = prefix_for(rel)
@@ -591,7 +732,11 @@ def render_page(page: dict, legal: str, slogan: str) -> list[tuple[str, str]]:
                 eager = False
             count = sum(1 for node in block["nodes"] if node[0] in ("screen", "slot"))
             layout = "single" if count <= 1 else "many"
-            anchor = "politika" if block["heading"] == "Политика конфиденциальности сайта" else "s-" + block["num"].replace(".", "-")
+            anchor = (
+                "politika"
+                if block["heading"] == CTX["policy_heading"]
+                else "s-" + block["num"].replace(".", "-")
+            )
             slogan_html = (
                 f'<p class="slogan">{esc(slogan)}</p>'
                 if page["num"] == "1" and index == 0 and not v2
@@ -601,9 +746,7 @@ def render_page(page: dict, legal: str, slogan: str) -> list[tuple[str, str]]:
             flip = " flip" if v2 and index % 2 == 1 and phones_html else ""
             badge = block.get("badge")
             badge_html = f' <span class="soon">{esc(badge)}</span>' if badge else ""
-            hidden = (
-                block["heading"] == "И это ещё не всё" and block["heading"] in seen_headings
-            )
+            hidden = block["heading"] in seen_headings
             seen_headings.add(block["heading"])
             hclass = ' class="visually-hidden"' if hidden else ""
             copy_html = (
@@ -635,6 +778,7 @@ def render_page(page: dict, legal: str, slogan: str) -> list[tuple[str, str]]:
             page["description"],
             "\n".join(parts),
             legal,
+            PAGE_KEYS.get(page["num"], rel.split("/")[-2] if "/" in rel else "home"),
             body_class="page-v2" if v2 else "",
             show_platform=not v2,
         )
@@ -646,10 +790,10 @@ def write_slot_index(pages: list[dict]) -> None:
     lines = [
         "# Кадры v2",
         "",
-        "Кадры главной и страницы «Для операторов».",
-        "Файлы `<id>.png` — испанские экраны приложения, 430×932, без корпуса.",
-        "Рядом лежат `<id>-en.png` для будущего английского сайта; страницы их не показывают.",
-        "Источник: MuratPod/ghofi, design/style-v7/screens, коммит 4f42c81.",
+        "Кадры главной и страницы для операторов.",
+        "Файлы `<id>.png` — испанские экраны, их показывают страницы es и ru.",
+        "Файлы `<id>-en.png` показывают английские страницы `/en/`.",
+        "Размер 430×932, без корпуса. Источник: MuratPod/ghofi, design/style-v7/screens, коммит 4f42c81.",
         "Корпус — существующая рамка iPhone (`assets/device-frames/iphone.svg`).",
         "На странице операторов `home-hero` стоит рядом с `op-brand`: тот же файл, что на главной.",
         "",
@@ -680,9 +824,11 @@ def write_slot_index(pages: list[dict]) -> None:
 
 def render_legacy(legal: str) -> list[tuple[str, str]]:
     pages = []
+    root = CTX["root"]
     for rel, title, sentence, target, label in LEGACY:
-        prefix = prefix_for(rel)
-        href = nav_href(prefix, target)
+        out = root + rel
+        prefix = prefix_for(out)
+        href = nav_href(prefix, root + target)
         main = (
             '<section class="hero"><div class="wrap copy">'
             f"<h1>{esc(title)}</h1>"
@@ -691,27 +837,62 @@ def render_legacy(legal: str) -> list[tuple[str, str]]:
             "</div></section>"
         )
         description = sentence
-        pages.append((rel, document(rel, f"{title} — OrroFi", description, main, legal)))
+        pages.append(
+            (out, document(out, f"{title} — OrroFi", description, main, legal, rel.split("/")[0]))
+        )
     return pages
 
 
-def main() -> None:
-    legal, slogan, pages = load_pages()
-    write_slot_index(pages)
-    written: list[str] = []
-    for page in pages:
-        for rel, content in render_page(page, legal, slogan):
-            path = ROOT / rel
-            path.parent.mkdir(parents=True, exist_ok=True)
-            path.write_text(content, encoding="utf-8")
-            written.append(rel)
-    for rel, content in render_legacy(legal):
+def write_outputs(pairs: list[tuple[str, str]], written: list[str]) -> None:
+    for rel, content in pairs:
+        if "[ответ уточняется]" in content:
+            raise SystemExit(f"На странице {rel} остался черновик ответа")
+        if "prefers-color-scheme" in content:
+            raise SystemExit(f"На странице {rel} осталась светлая тема")
         path = ROOT / rel
+        path.parent.mkdir(parents=True, exist_ok=True)
         path.write_text(content, encoding="utf-8")
         written.append(rel)
-    for rel in ("index.html", "operadores/index.html"):
+
+
+def main() -> None:
+    written: list[str] = []
+    use_locale("es")
+    legal, slogan, pages = load_pages(ROOT / "showcase" / "copy.es.md", 5)
+    write_slot_index(pages)
+    for page in pages:
+        write_outputs(render_page(page, legal, slogan), written)
+    use_locale("en")
+    legal, slogan, pages = load_pages(ROOT / "showcase" / "copy.en.md", 5)
+    for page in pages:
+        write_outputs(render_page(page, legal, slogan), written)
+    use_locale("ru")
+    legal, slogan, pages = load_pages(COPY, 10)
+    for page in pages:
+        write_outputs(render_page(page, legal, slogan), written)
+    write_outputs(render_legacy(legal), written)
+    stale = [
+        "mi-gestor/index.html",
+        "mi-red/index.html",
+        "familia/index.html",
+        "uslugi/index.html",
+        "instrukcii/index.html",
+        "vozmozhnosti/index.html",
+        "facturas/index.html",
+        "ajustes/index.html",
+    ]
+    for rel in stale:
+        if rel in written:
+            continue
+        path = ROOT / rel
+        if path.is_file():
+            path.unlink()
+        parent = path.parent
+        if parent != ROOT and parent.is_dir() and not any(parent.iterdir()):
+            parent.rmdir()
+    for rel in written:
         text = (ROOT / rel).read_text(encoding="utf-8")
-        if "assets/screens/v6" in text:
+        if 'class="page-v2"' in text and "assets/screens/v6" in text:
             raise SystemExit(f"{rel} ссылается на старые кадры")
     print(f"wrote {len(written)} pages")
     for rel in written:

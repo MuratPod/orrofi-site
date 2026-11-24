@@ -33,25 +33,6 @@
   --max: 1120px;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color-scheme: light;
-    --bg: #ffffff;
-    --bg-2: #ffffff;
-    --ink: #0b2a6f;
-    --muted: #0b2a6f;
-    --accent: #0b2a6f;
-    --accent-ink: #ffffff;
-    --marker: #0b2a6f;
-    --line: rgba(11, 42, 111, 0.18);
-    --header: #ffffff;
-    --card: #ffffff;
-    --link: #0b2a6f;
-    --gap: rgba(11, 42, 111, 0.06);
-    --slot: #ffffff;
-  }
-}
-
 *,
 *::before,
 *::after {
@@ -142,8 +123,35 @@ a:hover {
   width: auto;
 }
 
-.logo-on-light {
-  display: none;
+.top-tools {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: auto;
+}
+
+.lang-switch {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.lang-switch a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 40px;
+  min-height: 44px;
+  padding: 0 8px;
+  border-radius: 999px;
+  color: var(--ink);
+  font-weight: 800;
+  font-size: 0.92rem;
+  text-decoration: none;
+}
+
+.lang-switch a[aria-current="page"] {
+  background: color-mix(in srgb, var(--ink) 16%, transparent);
 }
 
 .platform-bar {
@@ -225,16 +233,6 @@ html.platform-android .copy-android {
 .platform-option:has(input:focus-visible) {
   outline: 3px solid var(--marker);
   outline-offset: 2px;
-}
-
-@media (prefers-color-scheme: light) {
-  .logo-on-dark {
-    display: none;
-  }
-
-  .logo-on-light {
-    display: block;
-  }
 }
 
 .nav-toggle {
@@ -453,12 +451,6 @@ html.platform-android .device--iphone {
 
 html.platform-android .device--pixel {
   display: block;
-}
-
-@media (prefers-color-scheme: light) {
-  .device {
-    filter: drop-shadow(0 12px 16px rgba(11, 42, 111, 0.16));
-  }
 }
 
 .screen-gap {

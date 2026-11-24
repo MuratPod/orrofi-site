@@ -1,39 +1,39 @@
 # Кадры v2
 
-Кадры главной и страницы «Для операторов».
-Файлы `<id>.png` — испанские экраны приложения, 430×932, без корпуса.
-Рядом лежат `<id>-en.png` для будущего английского сайта; страницы их не показывают.
-Источник: MuratPod/ghofi, design/style-v7/screens, коммит 4f42c81.
+Кадры главной и страницы для операторов.
+Файлы `<id>.png` — испанские экраны, их показывают страницы es и ru.
+Файлы `<id>-en.png` показывают английские страницы `/en/`.
+Размер 430×932, без корпуса. Источник: MuratPod/ghofi, design/style-v7/screens, коммит 4f42c81.
 Корпус — существующая рамка iPhone (`assets/device-frames/iphone.svg`).
 На странице операторов `home-hero` стоит рядом с `op-brand`: тот же файл, что на главной.
 
-## Главная `/`
+## Inicio `/`
 
 | id | подпись | блок |
 | --- | --- | --- |
-| `home-hero` | Экран: ваш Wi‑Fi дома | Ваш Wi‑Fi может работать лучше. OrroFi знает как. |
-| `home-evening` | Экран: тесный эфир вечером | Почему дома тормозит Wi‑Fi |
-| `home-channels` | Экран: соседние сети и каналы | Wi‑Fi без помех |
-| `home-score` | Экран: оценка сети 6 из 10 | Оценка сети и кнопка «Улучшить» |
-| `home-improve` | Экран: до и после «Улучшить» | Оценка сети и кнопка «Улучшить» |
-| `home-neighbors` | Экран: соседи на OrroFi | Соседи с OrroFi не мешают друг другу |
-| `home-devices` | Экран: кто в сети | И это ещё не всё |
-| `home-mobile` | Экран: дома и на мобильном | Дома и на мобильном — одно целое |
-| `home-gestor` | Экран: Mi gestor | И это ещё не всё |
-| `home-privacy` | Экран: данные остаются в телефоне | Ваши данные остаются у вас |
-| `home-start` | Экран: проверить мою сеть | Как начать |
-| `home-faq` | Экран: вопросы и ответы | Вопросы и ответы |
+| `home-hero` | Pantalla: tu Wi‑Fi en casa | Tu Wi‑Fi puede ir mejor. OrroFi sabe cómo. |
+| `home-evening` | Pantalla: el aire saturado al anochecer | Por qué el Wi‑Fi se atasca en casa |
+| `home-channels` | Pantalla: redes vecinas y canales | Wi‑Fi sin interferencias |
+| `home-score` | Pantalla: nota de la red, 6 de 10 | La nota de la red y el botón «Mejorar» |
+| `home-improve` | Pantalla: antes y después de «Mejorar» | La nota de la red y el botón «Mejorar» |
+| `home-neighbors` | Pantalla: vecinos con OrroFi | Los vecinos con OrroFi no se molestan |
+| `home-devices` | Pantalla: quién está en la red | Y esto no es todo |
+| `home-mobile` | Pantalla: en casa y en el móvil | En casa y en el móvil, todo es uno |
+| `home-gestor` | Pantalla: Mi gestor | Y esto no es todo |
+| `home-privacy` | Pantalla: los datos se quedan en el teléfono | Tus datos se quedan contigo |
+| `home-start` | Pantalla: comprobar mi red | Cómo empezar |
+| `home-faq` | Pantalla: preguntas y respuestas | Preguntas y respuestas |
 
-## Для операторов `/operadores/`
+## Para operadores `/operadores/`
 
 | id | подпись | блок |
 | --- | --- | --- |
-| `home-hero` | Экран: ваш Wi‑Fi дома | Ваши абоненты довольны. Ваша поддержка обходится дешевле. (тот же файл) |
-| `op-brand` | Экран: приложение под вашим брендом | Ваши абоненты довольны. Ваша поддержка обходится дешевле. |
-| `op-outage` | Экран: уведомление об аварии | Прямой канал к клиенту |
-| `op-assistant` | Экран: помощник вместо очереди | Помощник вместо очереди на линии |
-| `op-mobile` | Экран: мобильная связь и дом в одном окне | Мобильная связь и домашний интернет в одном окне |
-| `op-quiet` | Экран: причина найдена до звонка | Меньше звонков, выездов и ушедших клиентов |
-| `op-offer` | Экран: предложение в нужный момент | Продажи по делу |
-| `op-panel` | Экран: панель сотрудника | Готовое приложение под вашим брендом |
-| `op-start` | Экран: абоненты в приложении | Как подключиться |
+| `home-hero` | Pantalla: tu Wi‑Fi en casa | Sus abonados están contentos. Su soporte sale más barato. (тот же файл) |
+| `op-brand` | Pantalla: la aplicación con su marca | Sus abonados están contentos. Su soporte sale más barato. |
+| `op-outage` | Pantalla: aviso de una avería | Un canal directo con el cliente |
+| `op-assistant` | Pantalla: un asistente en lugar de la cola | Un asistente en lugar de la cola |
+| `op-mobile` | Pantalla: el móvil y la casa en una sola ventana | La red móvil y el internet de casa en una sola ventana |
+| `op-quiet` | Pantalla: la causa, encontrada antes de la llamada | Menos llamadas, menos salidas y menos clientes que se van |
+| `op-offer` | Pantalla: una oferta en el momento justo | Ventas con sentido |
+| `op-panel` | Pantalla: el panel del empleado | Una aplicación lista con su marca |
+| `op-start` | Pantalla: abonados en la aplicación | Cómo empezar |
