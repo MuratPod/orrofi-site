@@ -48,7 +48,12 @@ body {
   font-family: Nunito, sans-serif;
   font-size: 1.125rem;
   line-height: 1.6;
-  background: var(--bg);
+  background-color: var(--bg);
+  background-image:
+    radial-gradient(ellipse 78% 46% at 96% -8%, rgba(156, 189, 255, var(--wash-soft)), transparent 58%),
+    radial-gradient(ellipse 46% 38% at -6% 22%, rgba(176, 160, 255, var(--wash-soft)), transparent 62%),
+    radial-gradient(ellipse 52% 40% at 108% 84%, rgba(70, 120, 220, var(--wash-soft)), transparent 60%),
+    linear-gradient(180deg, #0a2768 0%, #0b2a6f 36%, #12357f 70%, #0a2768 100%);
   color: var(--ink);
 }
 
@@ -788,4 +793,275 @@ html.platform-android .page-v2 .device--iphone {
   html {
     scroll-behavior: auto;
   }
+}
+
+/* Сияние. Статичное, без анимации.
+   body.glow-b (и страница без класса) — сильный вариант B, он же по умолчанию.
+   body.glow-a — средний вариант A. Класс задаёт scripts/build_ru_site.py (GLOW_CLASS). */
+:root,
+body.glow-b {
+  --wash-strong: 0.5;
+  --wash-soft: 0.28;
+  --halo-cielo: 1;
+  --halo-blue: 0.8;
+  --halo-violet: 0.58;
+  --yellow-core: 0.96;
+  --yellow-mid: 0.66;
+  --yellow-edge: 0.36;
+  --card-alpha: 0.78;
+  --glow-blur: 46px;
+  --glow-spread: 2.3;
+}
+
+body.glow-a {
+  --wash-strong: 0.24;
+  --wash-soft: 0.13;
+  --halo-cielo: 0.52;
+  --halo-blue: 0.32;
+  --halo-violet: 0.24;
+  --yellow-core: 0.52;
+  --yellow-mid: 0.3;
+  --yellow-edge: 0.16;
+  --card-alpha: 0.38;
+  --glow-blur: 26px;
+  --glow-spread: 1.65;
+}
+
+html,
+body {
+  overflow-x: clip;
+}
+
+main section {
+  position: relative;
+  isolation: isolate;
+}
+
+main section::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  pointer-events: none;
+  left: 0;
+  right: 0;
+  top: -4%;
+  bottom: -4%;
+  background:
+    radial-gradient(
+      ellipse 54% 82% at var(--blob-x, 84%) 48%,
+      rgba(156, 189, 255, var(--wash-strong)) 0%,
+      rgba(70, 114, 214, var(--wash-soft)) 42%,
+      transparent 74%
+    ),
+    radial-gradient(
+      ellipse 38% 52% at var(--blob-x2, 8%) 14%,
+      rgba(186, 170, 255, var(--wash-soft)) 0%,
+      transparent 72%
+    );
+}
+
+main section > .wrap {
+  position: relative;
+  z-index: 1;
+}
+
+section.block:has(.block-grid.flip) {
+  --blob-x: 16%;
+  --blob-x2: 90%;
+}
+
+main section:nth-child(3n + 2)::before {
+  background:
+    radial-gradient(
+      ellipse 44% 70% at var(--blob-x, 84%) 46%,
+      rgba(120, 156, 245, var(--wash-strong)) 0%,
+      rgba(40, 78, 180, var(--wash-soft)) 48%,
+      transparent 74%
+    ),
+    radial-gradient(
+      ellipse 30% 42% at var(--blob-x2, 10%) 82%,
+      rgba(156, 189, 255, var(--wash-soft)) 0%,
+      transparent 70%
+    );
+}
+
+main section:nth-child(3n)::before {
+  background:
+    radial-gradient(
+      ellipse 42% 68% at var(--blob-x, 82%) 48%,
+      rgba(186, 170, 255, var(--wash-strong)) 0%,
+      rgba(110, 140, 230, var(--wash-soft)) 46%,
+      transparent 72%
+    ),
+    radial-gradient(
+      ellipse 28% 40% at var(--blob-x2, 12%) 18%,
+      rgba(156, 189, 255, var(--wash-soft)) 0%,
+      transparent 68%
+    );
+}
+
+section.hero {
+  --wash-strong: 0.4;
+  --wash-soft: 0.22;
+}
+
+body.glow-a section.hero {
+  --wash-strong: 0.2;
+  --wash-soft: 0.11;
+}
+
+section.hero::before {
+  top: -8%;
+  bottom: -10%;
+  background:
+    radial-gradient(
+      ellipse 58% 86% at var(--blob-x, 76%) 46%,
+      rgba(156, 189, 255, var(--wash-strong)) 0%,
+      rgba(96, 138, 236, var(--wash-soft)) 40%,
+      transparent 70%
+    ),
+    radial-gradient(
+      ellipse 42% 56% at 18% 6%,
+      rgba(196, 180, 255, var(--wash-soft)) 0%,
+      transparent 68%
+    ),
+    radial-gradient(
+      ellipse 36% 42% at 64% 100%,
+      rgba(48, 92, 196, var(--wash-soft)) 0%,
+      transparent 72%
+    );
+}
+
+.phone {
+  position: relative;
+}
+
+.phone::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  left: 50%;
+  top: 3%;
+  width: calc(var(--glow-spread) * 100%);
+  height: 56%;
+  transform: translateX(-50%);
+  pointer-events: none;
+  border-radius: 50%;
+  background: radial-gradient(
+    ellipse at 50% 44%,
+    rgba(214, 230, 255, var(--halo-cielo)) 0%,
+    rgba(132, 172, 255, var(--halo-blue)) 30%,
+    rgba(176, 154, 255, var(--halo-violet)) 54%,
+    transparent 78%
+  );
+  filter: blur(var(--glow-blur));
+}
+
+.hero .phone::before {
+  top: 0;
+  width: calc((var(--glow-spread) + 0.35) * 100%);
+  height: 62%;
+  filter: blur(calc(var(--glow-blur) + 8px));
+}
+
+.device,
+.phone > figcaption {
+  position: relative;
+  z-index: 1;
+}
+
+body:not(.page-operators) main section:nth-child(3n) .phone::before {
+  background: radial-gradient(
+    ellipse at 50% 46%,
+    rgba(214, 204, 255, var(--halo-cielo)) 0%,
+    rgba(156, 140, 245, var(--halo-violet)) 38%,
+    rgba(120, 160, 255, var(--halo-blue)) 58%,
+    transparent 74%
+  );
+}
+
+body:not(.page-operators) main section:nth-child(3n + 2) .phone::before {
+  background: radial-gradient(
+    ellipse at 50% 48%,
+    rgba(176, 208, 255, var(--halo-cielo)) 0%,
+    rgba(70, 120, 230, var(--halo-blue)) 40%,
+    rgba(156, 189, 255, var(--halo-violet)) 60%,
+    transparent 76%
+  );
+}
+
+.page-operators main section::before {
+  background:
+    radial-gradient(
+      ellipse 40% 52% at var(--blob-x, 84%) 36%,
+      rgba(255, 236, 150, var(--yellow-mid)) 0%,
+      rgba(255, 210, 0, var(--yellow-edge)) 46%,
+      transparent 72%
+    ),
+    radial-gradient(
+      ellipse 28% 36% at var(--blob-x2, 8%) 12%,
+      rgba(156, 189, 255, var(--wash-soft)) 0%,
+      transparent 70%
+    );
+}
+
+.page-operators section.hero::before {
+  background:
+    radial-gradient(
+      ellipse 22% 48% at 63% 38%,
+      rgba(156, 189, 255, var(--wash-strong)) 0%,
+      rgba(90, 140, 240, var(--wash-soft)) 48%,
+      transparent 72%
+    ),
+    radial-gradient(
+      ellipse 20% 46% at 88% 36%,
+      rgba(255, 244, 180, var(--yellow-core)) 0%,
+      rgba(255, 210, 0, var(--yellow-mid)) 42%,
+      transparent 72%
+    ),
+    radial-gradient(
+      ellipse 34% 34% at 10% 8%,
+      rgba(156, 189, 255, var(--wash-soft)) 0%,
+      transparent 70%
+    );
+}
+
+.page-operators main section .phone::before {
+  background: radial-gradient(
+    ellipse at 50% 44%,
+    rgba(255, 250, 214, var(--yellow-core)) 0%,
+    rgba(255, 210, 0, var(--yellow-mid)) 32%,
+    rgba(255, 232, 130, var(--yellow-edge)) 56%,
+    transparent 78%
+  );
+}
+
+.page-operators .phones.pair > .phone:first-child::before {
+  background: radial-gradient(
+    ellipse at 50% 44%,
+    rgba(214, 230, 255, var(--halo-cielo)) 0%,
+    rgba(132, 172, 255, var(--halo-blue)) 32%,
+    rgba(156, 189, 255, var(--halo-violet)) 56%,
+    transparent 78%
+  );
+}
+
+.faq li {
+  position: relative;
+}
+
+.faq li::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: -26px -16px;
+  border-radius: 32px;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse at 50% 42%,
+    rgba(198, 216, 255, var(--card-alpha)) 0%,
+    rgba(176, 160, 255, var(--wash-soft)) 48%,
+    transparent 74%
+  );
+  filter: blur(var(--glow-blur));
 }
