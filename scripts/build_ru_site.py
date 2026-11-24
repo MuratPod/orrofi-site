@@ -66,6 +66,10 @@ PAGE_KEYS = {
 }
 HREFLANG = {"es": "es-ES", "en": "en", "ru": "ru"}
 
+# Сияние фона. glow-b — сильный вариант (по умолчанию), glow-a — средний.
+# Чтобы переключить весь сайт, замените класс и пересоберите страницы.
+GLOW_CLASS = "glow-b"
+
 UI = {
     "es": {
         "html_lang": "es-ES",
@@ -513,7 +517,8 @@ def document(
     show_platform: bool = True,
 ) -> str:
     prefix = prefix_for(rel)
-    body = f'<body class="{esc(body_class)}">\n' if body_class else "<body>\n"
+    classes = " ".join(part for part in (body_class.strip(), GLOW_CLASS) if part)
+    body = f'<body class="{esc(classes)}">\n'
     return (
         "<!DOCTYPE html>\n"
         f'<html lang="{CTX["html_lang"]}">\n'
@@ -772,6 +777,9 @@ def render_page(page: dict, legal: str, slogan: str) -> list[tuple[str, str]]:
             parts.append(render_faq(page["faq"]))
         if page["contact"]:
             parts.append(render_contact(page["contact"]))
+        classes = "page-v2" if v2 else ""
+        if page["num"] == "10":
+            classes = f"{classes} page-operators".strip()
         html_page = document(
             rel,
             page["title"],
@@ -779,7 +787,7 @@ def render_page(page: dict, legal: str, slogan: str) -> list[tuple[str, str]]:
             "\n".join(parts),
             legal,
             PAGE_KEYS.get(page["num"], rel.split("/")[-2] if "/" in rel else "home"),
-            body_class="page-v2" if v2 else "",
+            body_class=classes,
             show_platform=not v2,
         )
         outputs.append((rel, html_page))
@@ -892,7 +900,7 @@ def main() -> None:
             parent.rmdir()
     for rel in written:
         text = (ROOT / rel).read_text(encoding="utf-8")
-        if 'class="page-v2"' in text and "assets/screens/v6" in text:
+        if "page-v2" in text and "assets/screens/v6" in text:
             raise SystemExit(f"{rel} ссылается на старые кадры")
     print(f"wrote {len(written)} pages")
     for rel in written:
