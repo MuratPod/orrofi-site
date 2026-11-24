@@ -14,40 +14,41 @@
   src: url("../fonts/Nunito-Italic-Variable.woff2") format("woff2");
 }
 
+/* Один тёмно-синий #0B2A6F, белый и акцент Cielo #9CBDFF. Оранжевого нет. */
 :root {
   color-scheme: dark;
-  --bg: #0a0e14;
-  --bg-2: #111a2c;
-  --ink: #f6f4ee;
-  --muted: #d5dce8;
-  --accent: #ffa566;
-  --accent-ink: #0d1526;
-  --marker: #ffa566;
-  --line: rgba(246, 244, 238, 0.14);
-  --header: #13254a;
-  --card: #13254a;
-  --link: #ffc08a;
-  --gap: rgba(255, 255, 255, 0.04);
-  --slot: #1b263b;
+  --bg: #0b2a6f;
+  --bg-2: #0b2a6f;
+  --ink: #ffffff;
+  --muted: #ffffff;
+  --accent: #ffffff;
+  --accent-ink: #0b2a6f;
+  --marker: #9cbdff;
+  --line: rgba(255, 255, 255, 0.22);
+  --header: #0b2a6f;
+  --card: #0b2a6f;
+  --link: #9cbdff;
+  --gap: rgba(255, 255, 255, 0.08);
+  --slot: #0b2a6f;
   --max: 1120px;
 }
 
 @media (prefers-color-scheme: light) {
   :root {
     color-scheme: light;
-    --bg: #f6f4ee;
-    --bg-2: #fffdf8;
-    --ink: #13254a;
-    --muted: #3e4c63;
-    --accent: #ffa566;
-    --accent-ink: #0d1526;
-    --marker: #b5500f;
-    --line: #e4d8c8;
-    --header: #f6f4ee;
+    --bg: #ffffff;
+    --bg-2: #ffffff;
+    --ink: #0b2a6f;
+    --muted: #0b2a6f;
+    --accent: #0b2a6f;
+    --accent-ink: #ffffff;
+    --marker: #0b2a6f;
+    --line: rgba(11, 42, 111, 0.18);
+    --header: #ffffff;
     --card: #ffffff;
-    --link: #8c3f0c;
-    --gap: rgba(19, 37, 74, 0.04);
-    --slot: #e8e0d2;
+    --link: #0b2a6f;
+    --gap: rgba(11, 42, 111, 0.06);
+    --slot: #ffffff;
   }
 }
 
@@ -81,7 +82,7 @@ a {
 }
 
 a:hover {
-  color: var(--marker);
+  color: var(--ink);
 }
 
 :focus-visible {
@@ -456,7 +457,7 @@ html.platform-android .device--pixel {
 
 @media (prefers-color-scheme: light) {
   .device {
-    filter: drop-shadow(0 12px 16px rgba(19, 37, 74, 0.16));
+    filter: drop-shadow(0 12px 16px rgba(11, 42, 111, 0.16));
   }
 }
 
@@ -656,7 +657,19 @@ html.platform-android .device--pixel {
   width: 0.48em;
   height: 0.48em;
   border-radius: 50%;
-  background: var(--accent);
+  background: var(--marker);
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 .faq p.pending {

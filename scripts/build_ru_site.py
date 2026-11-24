@@ -571,6 +571,7 @@ def render_page(page: dict, legal: str, slogan: str) -> list[tuple[str, str]]:
                 f'<p class="lead">{inline(page["description"])}</p>'
                 f"{intro}</div></section>"
             )
+        seen_headings: set[str] = set()
         for index, block in enumerate(page["blocks"]):
             level = "h1" if index == 0 and (v2 or page["num"] == "1") else "h2"
             text_html, phones_html, used = render_nodes(
@@ -590,8 +591,13 @@ def render_page(page: dict, legal: str, slogan: str) -> list[tuple[str, str]]:
             flip = " flip" if v2 and index % 2 == 1 and phones_html else ""
             badge = block.get("badge")
             badge_html = f' <span class="soon">{esc(badge)}</span>' if badge else ""
+            hidden = (
+                block["heading"] == "И это ещё не всё" and block["heading"] in seen_headings
+            )
+            seen_headings.add(block["heading"])
+            hclass = ' class="visually-hidden"' if hidden else ""
             copy_html = (
-                f'<div class="copy">{slogan_html}<{level}>{esc(block["heading"])}'
+                f'<div class="copy">{slogan_html}<{level}{hclass}>{esc(block["heading"])}'
                 f"{badge_html}</{level}>{text_html}</div>"
             )
             if phones_html:
